@@ -100,7 +100,7 @@ if (isset($_POST['email'])) {
 
     <link rel="stylesheet" href="css/animate.css">
 
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/estiloVidro.css">
 
     <link rel="stylesheet" href="css/responsivo.css">
 
@@ -113,43 +113,13 @@ if (isset($_POST['email'])) {
         <?php require_once ('conteudo/faixa-topo.php'); ?>
 
     </header>
-
-    <!--LOGO E BANNER DA EMPRESA-->
-    <article class="wow banner animate__animated animate__fadeInUp">
-        
-        <img src="img/fundo.jpg" alt="Banner TOPGLASS" class="bannerImage">
-        <img src="img/logo.svg" alt="Logotipo" class="logoImage">
-
+    
     </article>
 
     <main>
 
-        <!-- SOBRE NOS-->
-        <?php require_once ('conteudo/sobre.php'); ?>
-
         <!-- TITULO VIDRO-->
         <?php require_once ('conteudo/titulo-vidro.php'); ?>
-
-        <!--SERVICOS VIDRO-->
-        <?php require_once ('conteudo/servico-vidro.php'); ?>
-
-        <!-- TITULO ESQUADRIA -->
-        <?php require_once ('conteudo/titulo-esqua.php'); ?>
-
-        <!--SERVICOS ESQUADRIA-->
-        <?php require_once ('conteudo/servico-esqua.php'); ?>
-
-        <!--BANNER ROTATIVO-->
-        <?php require_once ('conteudo/banner-rotativo.php'); ?>
-
-        <!-- LOCALIZAÇÃO -->
-        <?php require_once ("conteudo/cont-map.php"); ?>
-
-        <!-- EMPRESAS -->
-        <?php require_once ("conteudo/marcas.php"); ?>
-
-        <!-- ORÇAMENTO -->
-        <?php require_once ('conteudo/cont-orcamento.php'); ?>
 
         <!--WHATS APP-->
         <?php require_once ('conteudo/wpp.php'); ?>
