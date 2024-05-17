@@ -34,10 +34,6 @@
    /* 0 pra cima e baixo e o auto pra empurrar para o meio da tela */
  }
 
- .pagsVidros div{
-  background: #f5f5f5;
- }
-
  /* ################## FAIXA SUPERIOR ############### */
 
  .barra {
@@ -132,55 +128,6 @@
    background: rgba(31, 62, 76, 0.733) !important;
  }
 
- /* ############################# SETAS ###################################### */
-
- .setaE,
- .setaD {
-   position: absolute;
-   top: 55%;
-   transform: translateY(-50%);
-   display: flex;
-   align-items: center;
-   cursor: pointer;
- }
-
- .setaE {
-   top: 52.9%;
-   left: 11.4%;
-   z-index: 2;
- }
-
- .setaD {
-   top: 52.5%;
-   right: 10%;
- }
-
- .setaE img,
- .setaD img {
-   max-width: 60px;
-   width: 110%;
-   height: auto;
- }
-
- /* ########################### NOSSOS SERVICOS ############################## */
-
- .servicoDegradeV .slick-prev:before,
- .servicoDegradeV .slick-next:before {
-   opacity: 0;
-   font-size: 70px;
- }
-
- .servicoDegradeV .slick-prev {
-   top: 48%;
-   left: -12%;
-   z-index: 2;
- }
-
- .servicoDegradeV .slick-next {
-   top: 48%;
-   right: -10%;
-   z-index: 2;
- }
 
  /* ### IMAGENS 1200x1600 ### */
 
@@ -200,37 +147,32 @@
    position: relative;
  }
 
- .servicoDegradeV {
+ .servicoDegrade {
+   display: flex;
    position: relative;
  }
 
- .servicoDegradeV div {
-  max-width: 45%;
+ .servicoDegrade div {
    position: relative;
    margin: 0 .2%;
  }
 
- .servicoDegradeV span{
-  width: 40%;
+ .servicoDegrade img {
+   width: 100%;
  }
 
- .servicoDegradeV section{
-  display: flex;
-  padding-bottom: 5%;
- }
-
- .servicoDegradeV div span::before {
+ .servicoDegrade div a::before {
    content: "";
    position: absolute;
    top: 24.5%;
    left: 0;
    width: 100%;
-   height: 75%;
+   height: 100%;
    background: linear-gradient(to top, rgba(35, 150, 212, 0.712), transparent);
    z-index: 1;
  }
 
- .servicoDegradeV h2 {
+ .servicoDegrade h2 {
    font-size: 1.5em;
    font-weight: 600;
    position: absolute;
@@ -242,16 +184,220 @@
    z-index: 2;
  }
 
- /* ############################# TEXTO LATERAL ########################### */
-
- .texto p{
-  font-size: 1.5em;
-  color: #ffffff;
-  font-size: 600;
+ .servicoDegrade a {
+   display: block;
+   height: auto;
+   transition: transform 0.3s ease;
+   cursor: pointer;
  }
 
- .texto div{
-  background: #1F3E4C;
+ .servicoDegrade a:hover {
+   transform: scale(1.1);
+ }
+
+ .servicoDegrade h2:hover {
+   display: none;
+ }
+
+ .pservico p {
+   display: none;
+   position: fixed;
+   z-index: 3;
+   bottom: 55px;
+   font-size: 1.2em;
+   text-align: justify;
+   margin: 0 20px;
+   text-transform: uppercase;
+   text-align: start;
+ }
+
+ .servicoDegrade a:hover p {
+   display: block;
+ }
+
+ .servicoDegrade a:hover h2 {
+   display: none;
+ }
+
+ /* ####################### BANNER ROTATIVO ############################ */
+
+ .b {
+   background-color: #f5f5f5;
+   padding: 2% 0;
+   margin: 0 auto;
+   width: 1200px;
+ }
+
+ .bannerR {
+   padding-top: 2%;
+ }
+
+ .bannerR div:nth-child(1) {
+   background: #1F3E4C;
+ }
+
+ .bannerR .slick-prev:before,
+ .bannerR .slick-next:before {
+   opacity: 0;
+   display: none !important;
+ }
+
+ .bannerR .slick-prev {
+   opacity: 0;
+   display: none !important;
+ }
+
+ .bannerR .slick-next {
+   opacity: 0;
+   display: none !important;
+ }
+
+ .pagamento {
+   background-color: #1F3E4C;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 1% 0;
+ }
+
+ .pagamento h2 {
+   color: white;
+   font-size: 1.5em;
+   text-align: center;
+   align-items: center;
+ }
+
+ /* ############################# MAPA ################################# */
+
+ .map div {
+   background: #f5f5f5;
+ }
+
+ .map h2 {
+   color: #2390C1;
+   text-align: center;
+   font-size: 2.5em;
+   padding-bottom: 10px;
+ }
+
+ .map p {
+   color: #2390C1;
+   font-size: 1.2em;
+   margin-left: 8%;
+ }
+
+ .map iframe {
+   margin-left: 8%;
+   border: #2390C1 solid 2px !important;
+ }
+
+ 
+
+ /* ############################# ORÇAMENTO ############################ */
+ .orcamento div {
+   background: #f5f5f5;
+ }
+
+ .orcamento form {
+   display: flex;
+   justify-content: space-around;
+ }
+
+ .orcamento h2 {
+   text-align: center;
+   color: #2390C1;
+   font-size: 2.5em;
+ }
+
+ .orcamento h3 {
+   text-align: center;
+   font-size: 1.5em;
+   margin-top: .5%;
+ }
+
+ .message {
+   opacity: 1;
+   transition: opacity 1s ease-in-out;
+ }
+
+ .message.hidden {
+   opacity: 0;
+ }
+
+ .orcamento p {
+   color: #1F3E4C;
+   font-size: 1.8em;
+ }
+
+ .orcamento a {
+   color: #139ddd;
+   font-size: 1.1em;
+   text-decoration: underline;
+   margin-left: 5.5%;
+ }
+
+ .orcamento form div:nth-child(1) div input {
+   width: 165%;
+   padding: 4% 10% 4% 5px;
+   border: 0px;
+ }
+
+ .orcamento form input {
+   width: 100%;
+   padding: 2% 0 2% 0;
+   border: 0px;
+ }
+
+ .orcamento form textarea {
+   border: 0px;
+   resize: none;
+   font-size: 1em;
+
+ }
+
+ .orcamento form label p {
+   margin-bottom: 5px;
+ }
+
+ .orcamento div div div {
+   margin: 20px;
+ }
+
+ .orcamento form .envio input {
+   cursor: pointer;
+   border: 0px;
+   border-radius: 15px;
+   background: #2390C1;
+   color: #fff;
+   padding: 2%;
+   font-size: 1em;
+   margin-left: 70%;
+   width: 32%;
+ }
+
+ .orcamento select {
+   cursor: pointer;
+   border: 0px;
+   background: #2390C1;
+   color: #fff;
+   padding: 2% 0 2% 0;
+   font-size: 1.2em;
+   margin-right: 8%;
+ }
+
+ .orcamento option {
+   background: #fff;
+   font-size: 0.9em;
+   color: #2390C1;
+ }
+
+ .orcamento option p:hover {
+   background: #fff;
+   font-size: 0.9em;
+ }
+
+ .inputpar {
+   margin: 0px !important;
+   display: flex;
  }
 
  /* ############################# RODA PÉ ################################## */

@@ -121,6 +121,9 @@ if (isset($_POST['email'])) {
         <!-- TITULO VIDRO-->
         <?php require_once ('conteudo/titulo-vidro.php'); ?>
 
+        <!-- CONTEUDO -->
+        <?php require_once('conteudo/pags.php'); ?>
+
         <!--WHATS APP-->
         <?php require_once ('conteudo/wpp.php'); ?>
 
