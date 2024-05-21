@@ -38,130 +38,6 @@
   background: #f5f5f5;
  }
 
- /* ################## FAIXA SUPERIOR ############### */
-
- .barra {
-   background: #1F3E4C;
-   display: flex;
-   border-bottom: #fff solid 1.5px;
- }
-
- .barra div {
-   padding: 3px 0;
- }
-
- .barra div img {
-   width: 30px;
- }
-
- .barra div ul {
-   /* NAO MEXER */
-   display: flex;
- }
-
- .barra div ul li {
-   margin-left: 45px;
- }
-
- .barra div ul li a {
-   display: flex;
-   align-items: center;
-   text-align: center;
-   font-size: 1.8em;
-   font-weight: 400;
-   margin-top: 5px;
- }
-
- .barra div ul li a:hover {
-   text-decoration: underline;
- }
-
- .barra div ul li a span {
-   margin-right: 3px;
- }
-
- .barra div nav ul li:nth-child(5) a:nth-child(1) {
-   margin-left: 240%;
- }
-
- .menu-fixo {
-   position: fixed;
-   width: 100%;
-   z-index: 3;
-   top: 0;
-   background: rgba(31, 62, 76, 0.733);
-   animation: fadeIn 1.2s ease-in-out;
- }
-
- .menu-fixo:hover .subServico {
-   animation: fadeIn 0.5s ease-in-out;
- }
-
- /* ################### SUB SERVICO #################*/
-
- .subServico {
-   display: none !important;
-   position: absolute;
-   background: #1F3E4C;
-   padding-right: 1%;
-   padding-bottom: 1%;
-   border-radius: 10px;
- }
-
- .menu ul li:hover>.subServico {
-   display: block !important;
-   padding-top: 20px;
-   z-index: 3;
- }
-
- .subMenu li {
-   margin-bottom: 20px !important;
- }
-
- .subServico li a {
-   color: #ffffff;
-   font-size: 1.2em;
- }
-
- .subServico li a:hover {
-   text-decoration: underline;
- }
-
- .menu-fixo:hover .subServico {
-   animation: fadeIn 1.5s ease-in-out;
-   background: rgba(31, 62, 76, 0.733) !important;
- }
-
- /* ############################# SETAS ###################################### */
-
- .setaE,
- .setaD {
-   position: absolute;
-   top: 55%;
-   transform: translateY(-50%);
-   display: flex;
-   align-items: center;
-   cursor: pointer;
- }
-
- .setaE {
-   top: 52.9%;
-   left: 11.4%;
-   z-index: 2;
- }
-
- .setaD {
-   top: 52.5%;
-   right: 10%;
- }
-
- .setaE img,
- .setaD img {
-   max-width: 60px;
-   width: 110%;
-   height: auto;
- }
-
  /* ########################### NOSSOS SERVICOS ############################## */
 
  .servicoDegradeV .slick-prev:before,
@@ -200,18 +76,13 @@
    position: relative;
  }
 
- .servicoDegradeV {
+ .servicoDegradeV  {
    position: relative;
  }
 
  .servicoDegradeV div {
-  max-width: 45%;
    position: relative;
    margin: 0 .2%;
- }
-
- .servicoDegradeV span{
-  width: 40%;
  }
 
  .servicoDegradeV section{
@@ -250,9 +121,17 @@
   font-size: 600;
  }
 
- .texto div{
-  background: #1F3E4C;
+ .texto{
+  background-color: #1F3E4C;
  }
+
+ /*BOTÃO*/
+ .envio a {
+  padding: 2%;
+  text-align: center;
+  border-radius: 15px;
+  background: #2390C1;
+}
 
  /* ############################# RODA PÉ ################################## */
 

@@ -56,7 +56,7 @@
                                     </p>
                                 </div>
                                 <div class="envio">
-                                    <input type="submit" value="ORÇAMENTO">
+                                    <a href="">ORÇAMENTO</a>
                                 </div>
                             </div>
                         </section>
@@ -71,10 +71,14 @@
                             <div class="texto">
                                 <div>
                                     <p>
-                                        ABC
+                                        Adicione segurança e requinte ao seu lar com nosso corrimão de vidro,oferecemos
+                                        uma solução
+                                        durável e moderna para escadas e varandas.
                                     </p>
                                 </div>
-                            </div>
+                                <div class="envio">
+                                    <a href="">ORÇAMENTO</a>
+                                </div>
                         </section>
                     </div>
                 </div>
