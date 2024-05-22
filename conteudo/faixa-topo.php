@@ -5,7 +5,7 @@
             <button class="fecharMenu"></button>
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="index.php">
                         <span>
                             <img src="img/home.png" alt="">
                         </span>HOME
@@ -15,8 +15,8 @@
                     <a href="#"><span><img src="img/servicos.svg" alt="#"></span>SERVIÇOS+</a>
                     <ul class="subServico">
                         <div>
-                            <li><a href="./servicoVidro/index.php">VIDROS</a></li>
-                            <li><a href="./servicoAluminio/index.php">ESQUADRIA</a></li>
+                            <li><a href="pagVidro.php">VIDROS</a></li>
+                            <li><a href="pagAluminio.php">ESQUADRIA</a></li>
                         </div>
 
                     </ul>
