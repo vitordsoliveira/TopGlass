@@ -1,5 +1,5 @@
 <div class="titulo">
-    <div class="site">
+    <div class="siteServico">
         <h1>
             SERVIÇOS VIDROS E ESPELHOS
         </h1>
@@ -8,37 +8,38 @@
 
 <div class="wow servicoVidro animate__animated animate__fadeInUp">
 
-    <div class="site">
-        <div class="servicoDegradePV">
-            <span>
-                <img src="imgServicos/CORRIMÃO.svg" alt="">
-                <h2 class="h2servico">CORRIMÃO</h2>
-            </span>
+    <div class="siteServico">
+        <div class="ajusteladoalado">
+            <div class="servicoDegradePV">
+                <span>
+                    <img src="imgServicos/CORRIMÃO.svg" alt="">
+                    <h2 class="h2servico">CORRIMÃO</h2>
+                </span>
+            </div>
+            <div class="textoLateral">
+                <h2>CORRIMÃO</h2>
+                <p>
+                    Adicione segurança e requinte ao seu lar com nosso corrimão de vidro,oferecemos uma solução
+                    durável e moderna para escadas e varandas!<br>
+                    INFO<br>
+                    INFO<br>
+                    INFO<br>
+                    INFO<br>
+                    INFO<br>
+                    INFO<br>
+                </p>
+            </div>
         </div>
-        <div>
-            <p>
-                Adicione segurança e requinte ao seu lar com nosso corrimão de vidro,oferecemos uma solução
-                durável e moderna para escadas e varandas.
-            </p>
+        <div class="botao">
+            <a href="">ORÇAMENTO</a>
         </div>
-
-
-
-        <div class="servicoDegradePV">
-            <span>
-                <img src="imgServicos/BOX.svg" alt="">
-                <h2 class="h2servicoV">BOX</h2>
-            </span>
+        <div class="prox">
+            <img src="./img/setae.png" alt="">
+            <p>PÁGINA ANTERIOR | PRÓXIMA PÁGINA</p>
+            <img src="./img/setad.png" alt="">
         </div>
-        <div>
-            <p>
-                Desfrute de momentos relaxantes e elegantes em seu banheiro com nosso box de vidro,
-                proporcionamos um ambiente sofisticado e
-                garantindo estilo.
-            </p>
-        </div>
-
     </div>
+
 </div>
 
 </article>
