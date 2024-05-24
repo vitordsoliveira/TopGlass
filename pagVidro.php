@@ -122,10 +122,7 @@ if (isset($_POST['email'])) {
         
         <!--SERVICOS VIDRO-->
         <?php require_once ('vidro/pag.php'); ?>
-
-        <!--WHATS APP-->
-        <?php require_once ('conteudo/wpp.php'); ?>
-
+        
     </main>
 
     <!-- RODAPÉ -->

@@ -30,6 +30,29 @@
                 </p>
             </div>
         </div>
+
+                <div class="ajusteladoalado">
+            <div class="servicoDegradePV">
+                <span>
+                    <img src="imgServicos/CORRIMÃO.svg" alt="">
+                    <h2 class="h2servico">CORRIMÃO</h2>
+                </span>
+            </div>
+            <div class="textoLateral">
+                <h2>CORRIMÃO</h2>
+                <p>
+                    Adicione segurança e requinte ao seu lar com nosso corrimão de vidro,oferecemos uma solução
+                    durável e moderna para escadas e varandas!<br>
+                    INFO<br>
+                    INFO<br>
+                    INFO<br>
+                    INFO<br>
+                    INFO<br>
+                    INFO<br>
+                </p>
+            </div>
+        </div>
+
         <div class="botao">
             <a href="">ORÇAMENTO</a>
         </div>
@@ -41,5 +64,11 @@
     </div>
 
 </div>
+
+<section class="wppV animate__animated animate__shakeY animate__slow animate__infinite">
+    <div>
+        <a href=""><img src="./img/whatsapp (1).png" alt=""></a>
+    </div>
+</section>
 
 </article>

@@ -9,11 +9,11 @@
   font-weight: 700;
 }
 
-.siteServico{
+.siteServico {
   max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    background-color: #f5f5f5;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f5f5f5;
 }
 
 /* ########### IMAGENS #########*/
@@ -68,17 +68,17 @@
   text-decoration: underline #1F3E4C;
 }
 
-.botao{
+.botao {
   margin: 0 85%;
   background-color: #f5f5f5;
   padding: 0px 0px 35px 15px;
 }
 
-.botao span{
+.botao span {
   background-color: #f5f5f5;
 }
 
-.botao a{
+.botao a {
   color: #fff;
   background-color: #2390C2;
   font-size: 1.5em;
@@ -93,22 +93,54 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+/*SETAS SLICK*/
+.ajusteladoalado .slick-prev:before,
+.ajusteladoalado .slick-next:before {
+  opacity: 1;
+  font-size: 70px;
+
+}
+
+.ajusteladoalado .slick-prev {
+  top: 55%;
+  left: -9%;
+  z-index: 2;
+}
+
+.ajusteladoalado .slick-next {
+  top: 55%;
+  right: -5%;
+  z-index: 2;
+}
+
 /* ######### PROXIMA ANTERIOR PAGINA ###########*/
 
-.prox{
+.prox {
   align-items: center;
   display: flex;
   padding-bottom: 20px;
+  margin-left: 34%;
 }
 
-.prox p{
+.prox p {
   font-size: 1.5em;
   color: #1F3E4C;
   font-weight: 800;
   text-align: center;
 }
 
-.prox img{
+.prox img {
   width: 3%;
   padding: 10px;
+}
+
+/* WPP */
+.wppV {
+  position: fixed;
+  bottom: 10%;
+  left: 14.2%;
+}
+
+.wppV img {
+  width: 12.5%;
 }
