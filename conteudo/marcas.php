@@ -1,6 +1,6 @@
 <div class="wow marcas animate__ animate__fadeInUp animated">
     <div class="site">
-        <h2>VEJA NOSSAS PARCEIRAS</h2>
+        <h2>VEJA NOSSAS FERRAMENTAS</h2>
 
         <span class="imgM">
             <img src="marcas/3M.png" alt="">

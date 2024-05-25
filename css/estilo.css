@@ -15,6 +15,7 @@
   height: 0;
   color: #1F3E4C;
   cursor: none;
+  display: none;
  }
 
  body {

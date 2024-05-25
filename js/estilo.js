@@ -128,11 +128,11 @@ $('.marcas span').slick({
   ]
 });
 
-$('.ajusteladoalado').slick({
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: none,
+$('.servicosVE').slick({
+  slidesToShow: 2,
+  slidesToScroll: 2,
+  autoplay: false,
+  autoplaySpeed: 200,
   responsive: [
     {
       breakpoint: 900,

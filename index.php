@@ -109,6 +109,7 @@ if (isset($_POST['email'])) {
 <body>
 
     <header> <!-- BARRA MENU-->
+        <h1 class="h1h1">topglass,vidro,esquadria,serviço de vidro,serviço de aluminio,vidraçaria</h1>
 
         <?php require_once ('conteudo/faixa-topo.php'); ?>
 
@@ -116,7 +117,7 @@ if (isset($_POST['email'])) {
 
     <!--LOGO E BANNER DA EMPRESA-->
     <article class="wow banner animate__animated animate__fadeInUp">
-        
+
         <img src="img/fundo.jpg" alt="Banner TOPGLASS" class="bannerImage">
         <img src="img/logo.svg" alt="Logotipo" class="logoImage">
 

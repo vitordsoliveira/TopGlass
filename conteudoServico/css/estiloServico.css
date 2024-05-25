@@ -1,3 +1,12 @@
+.siteServico {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+}
+
+/* ########### SERVICO VE ########### */
+
 /* ########### TITULO ######### */
 
 .titulo h1 {
@@ -7,13 +16,6 @@
   padding: 15px;
   font-size: 2em;
   font-weight: 700;
-}
-
-.siteServico {
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  background-color: #f5f5f5;
 }
 
 /* ########### IMAGENS #########*/
@@ -29,7 +31,7 @@
   top: 24.5%;
   left: 45px;
   width: 80%;
-  height: 75%;
+  height: 76%;
   background: linear-gradient(to top, rgba(35, 150, 212, 0.712), transparent);
   z-index: 1;
 }
@@ -38,6 +40,7 @@
   width: 80%;
   margin-left: 45px;
 }
+
 
 .servicoDegradePV h2 {
   font-size: 1.5em;
@@ -69,9 +72,8 @@
 }
 
 .botao {
-  margin: 0 85%;
   background-color: #f5f5f5;
-  padding: 0px 0px 35px 15px;
+  margin: 2% 0 0 85%;
 }
 
 .botao span {
@@ -86,32 +88,12 @@
   border-radius: 15px;
 }
 
-/* AJUSTE PARA FICAR UM AO LADO DO OUTRO */
-.ajusteladoalado {
+.servicosVE {
   background-color: #f5f5f5;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
 }
 
 /*SETAS SLICK*/
-.ajusteladoalado .slick-prev:before,
-.ajusteladoalado .slick-next:before {
-  opacity: 1;
-  font-size: 70px;
 
-}
-
-.ajusteladoalado .slick-prev {
-  top: 55%;
-  left: -9%;
-  z-index: 2;
-}
-
-.ajusteladoalado .slick-next {
-  top: 55%;
-  right: -5%;
-  z-index: 2;
-}
 
 /* ######### PROXIMA ANTERIOR PAGINA ###########*/
 
@@ -134,10 +116,12 @@
   padding: 10px;
 }
 
+/* ############## FIM SERVICO VE ############ */
+
 /* WPP */
 .wppV {
   position: fixed;
-  bottom: 10%;
+  bottom: 15%;
   left: 14.2%;
 }
 
