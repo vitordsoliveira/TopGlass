@@ -93,7 +93,23 @@
 }
 
 /*SETAS SLICK*/
+.servicosVE .slick-prev:before,
+ .servicosVE  .slick-next:before {
+   opacity: 0;
+   font-size: 30px;
+ }
 
+ .servicosVE .slick-prev {
+  top: 110%;
+  left: 34%;
+  z-index: 2;
+ }
+
+ .servicosVE  .slick-next {
+  top: 110%;
+  right: 31%;
+  z-index: 2;
+ }
 
 /* ######### PROXIMA ANTERIOR PAGINA ###########*/
 
