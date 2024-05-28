@@ -47,7 +47,6 @@
                             alumínio, oferecemos um suporte sólido e
                             contemporâneo.
                         </p>
-
                     </div>
 
                 </a>

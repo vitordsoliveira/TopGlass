@@ -1,4 +1,4 @@
-<div class="titulo">
+<div class="wow titulo animate__animated animate__fadeInUp">
     <div class="siteServico">
         <h1>
             SERVIÇOS VIDROS E ESPELHOS
@@ -6,10 +6,10 @@
     </div>
 </div>
 
-<div class="wow servicoVidro animate__animated animate__fadeInUp">
+<article class="wow servicoVidro animate__animated animate__fadeInUp">
 
     <div class="siteServico">
-        <div class="ajusteladoalado">
+        <div class="servicosVE">
             <div class="servicoDegradePV">
                 <span>
                     <img src="imgServicos/CORRIMÃO.svg" alt="">
@@ -29,17 +29,15 @@
                     INFO<br>
                 </p>
             </div>
-        </div>
 
-                <div class="ajusteladoalado">
             <div class="servicoDegradePV">
                 <span>
-                    <img src="imgServicos/CORRIMÃO.svg" alt="">
-                    <h2 class="h2servico">CORRIMÃO</h2>
+                    <img src="imgServicos/BOX.svg" alt="">
+                    <h2 class="h2servico">BOX</h2>
                 </span>
             </div>
             <div class="textoLateral">
-                <h2>CORRIMÃO</h2>
+                <h2>BOX</h2>
                 <p>
                     Adicione segurança e requinte ao seu lar com nosso corrimão de vidro,oferecemos uma solução
                     durável e moderna para escadas e varandas!<br>
@@ -63,7 +61,7 @@
         </div>
     </div>
 
-</div>
+</article>
 
 <section class="wppV animate__animated animate__shakeY animate__slow animate__infinite">
     <div>

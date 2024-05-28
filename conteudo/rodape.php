@@ -12,13 +12,13 @@
 
                     <li>
                         <a href="">
-                            <p>Numero (11) 95566-9977</p>
+                            <p>Daniel Vidraçaria (11) 9 9895-8131</p>
                         </a>
                     </li>
 
                     <li>
                         <a href="">
-                            <p>Numero (11) 99988-5566</p>
+                            <p>Cristiano Esquadria (11) 9 8114-6907</p>
                         </a>
                     </li>
 
