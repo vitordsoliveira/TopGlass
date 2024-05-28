@@ -19,6 +19,8 @@
 
     <link rel="stylesheet" href="css/animate.css">
 
+    <link rel="stylesheet" href="css/estiloServico.css">
+
     <link rel="stylesheet" href="css/estilo.css">
 
     <link rel="stylesheet" href="css/responsivo.css">
@@ -34,14 +36,9 @@
     </header>
     
     <main>
-        <!-- TITULO ESQUADRIA -->
-        <?php require_once ('conteudo/titulo-esqua.php'); ?>
 
         <!--SERVICOS ESQUADRIA-->
-        <?php require_once ('conteudo/servico-esqua.php'); ?>
-
-        <!--WHATS APP-->
-        <?php require_once ('conteudo/wpp.php'); ?>
+        <?php require_once ('conteudoServico/pagsAluminio.php'); ?>
 
     </main>
 
