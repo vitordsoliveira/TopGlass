@@ -6,7 +6,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-$ok = 0;
+$ok
+ = 0;
 
 if (isset($_POST['email'])) {
 
