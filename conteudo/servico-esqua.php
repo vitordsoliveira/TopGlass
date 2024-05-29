@@ -8,13 +8,13 @@
             </a>
         </div>
 
-        <div class="servicoDegrade">
+        <div class="servicoDegradeA">
 
             <div>
                 <a href="#">
-                    <img src="servicos/porta esquadria.svg" alt="Serviço Porta">
+                    <img src="imgServicos/porta esquadria.svg" alt="Serviço Porta">
                     <h2 class="h2servico">PORTA</h2>
-                    <div class="pservico">
+                    <div class="pservicoA">
                         <p>Com uma instalação prática e
                             durável, proporcionamos uma solução elegante e resistente para sua residência ou
                             espaço comercial.</p>
@@ -26,9 +26,9 @@
 
             <div>
                 <a href="#">
-                    <img src="servicos/janela esquadria.svg" alt="Serviço Janela">
+                    <img src="imgServicos/janela esquadria.svg" alt="Serviço Janela">
                     <h2 class="h2servico">JANELA</h2>
-                    <div class="pservico">
+                    <div class="pservicoA">
                         <p>Além de
                             oferecer iluminação natural, ela proporciona isolamento térmico e acústico, criando
                             um ambiente acolhedor e confortável.</p>
@@ -40,14 +40,13 @@
 
             <div>
                 <a href="#">
-                    <img src="servicos/corrimao esquadria.svg" alt="Serviço Grade">
+                    <img src="imgServicos/corrimao esquadria.svg" alt="Serviço Grade">
                     <h2 class="h2servico">CORRIMÃO</h2>
-                    <div class="pservico">
+                    <div class="pservicoA">
                         <p>Aprimore a segurança e a estética de sua casa ou escritório com nosso corrimão de
                             alumínio, oferecemos um suporte sólido e
                             contemporâneo.
                         </p>
-
                     </div>
 
                 </a>
@@ -55,9 +54,9 @@
 
             <div>
                 <a href="#">
-                    <img src="servicos/porta esquadria.svg" alt="Serviço Porta">
+                    <img src="imgServicos/porta esquadria.svg" alt="Serviço Porta">
                     <h2 class="h2servico">PORTA</h2>
-                    <div class="pservico">
+                    <div class="pservicoA">
                         <p>Com uma instalação prática e
                             durável, proporcionamos uma solução elegante e resistente para sua residência ou
                             espaço comercial.</p>
@@ -69,9 +68,9 @@
 
             <div>
                 <a href="#">
-                    <img src="servicos/janela esquadria.svg" alt="Serviço Janela">
+                    <img src="imgServicos/janela esquadria.svg" alt="Serviço Janela">
                     <h2 class="h2servico">JANELA</h2>
-                    <div class="pservico">
+                    <div class="pservicoA">
                         <p>Além de
                             oferecer iluminação natural, ela proporciona isolamento térmico e acústico, criando
                             um ambiente acolhedor e confortável.</p>
@@ -83,9 +82,9 @@
 
             <div>
                 <a href="#">
-                    <img src="servicos/corrimao esquadria.svg" alt="Serviço Grade">
+                    <img src="imgServicos/corrimao esquadria.svg" alt="Serviço Grade">
                     <h2 class="h2servico">CORRIMÃO</h2>
-                    <div class="pservico">
+                    <div class="pservicoA">
                         <p>Aprimore a segurança e a estética de sua casa ou escritório com nosso corrimão de
                             alumínio, oferecemos um suporte sólido e
                             contemporâneo.

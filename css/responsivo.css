@@ -29,6 +29,9 @@
         display: none;
     }
 
+    .slick-prev, .slick-next {
+        height: 0;
+    }
 
 
     .servicoDegrade .slick-next {
@@ -251,6 +254,10 @@
         display: none !important;
     }
 
+    .slick-prev, .slick-next {
+        height: 0;
+    }
+
     /* SOBRE NOS */
 
     .sobreNos h2 {
@@ -425,7 +432,6 @@
 
     .logoImage {
         width: 45%;
-        position: fixed;
         transform: translate(-55%, -105%);
     }
 
@@ -450,6 +456,10 @@
     .servico {
         padding-top: 20px;
         padding-bottom: 10px;
+    }
+
+    .slick-prev, .slick-next {
+        height: 0;
     }
 
     .sobreNos {
@@ -576,7 +586,7 @@
         margin-left: 23px;
     }
 
-    .pservico {
+    .pservico p {
         display: none;
     }
 

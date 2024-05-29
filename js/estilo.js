@@ -1,4 +1,37 @@
-$('.servicoDegrade').slick({
+$('.servicoDegradeA').slick({
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 10000,
+
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 900,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 700,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+
+$('.servicoDegradeV').slick({
   slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
@@ -82,6 +115,38 @@ $('.marcas span').slick({
       breakpoint: 600,
       settings: {
         slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 380,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+
+$('.servicosVE').slick({
+  slidesToShow: 2,
+  slidesToScroll: 2,
+  autoplay: false,
+  autoplaySpeed: 200,
+  responsive: [
+    {
+      breakpoint: 900,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
         slidesToScroll: 1
       }
     },
