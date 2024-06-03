@@ -100,6 +100,8 @@ if (isset($_POST['email'])) {
 
     <link rel="stylesheet" href="css/animate.css">
 
+    <link rel="stylesheet" href="css/estiloServico.css">
+    
     <link rel="stylesheet" href="css/estilo.css">
 
     <link rel="stylesheet" href="css/responsivo.css">

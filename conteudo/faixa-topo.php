@@ -15,10 +15,9 @@
                     <a href="#"><span><img src="img/servicos.svg" alt="#"></span>SERVIÇOS+</a>
                     <ul class="subServico">
                         <div>
-                            <li><a href="pagVidro.php">VIDROS</a></li>
+                            <li><a href="pagBox.php">VIDROS</a></li>
                             <li><a href="pagAluminio.php">ESQUADRIA</a></li>
                         </div>
-
                     </ul>
                 </li>
 

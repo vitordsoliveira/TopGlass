@@ -765,11 +765,7 @@
  .locserv ul li a:hover {
    color: #2390C1;
  }
-
- .locserv ul li:nth-child(2) {
-   width: 66%;
- }
-
+ 
  .locserv img {
    width: 4%;
    margin-left: 5px;

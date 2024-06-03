@@ -33,13 +33,12 @@ a {
 
 .barraTopo {
     background: #1F3E4C;
-    padding: 5px 0 5px 0;
 }
 
 .barraTopo h1 {
     font-size: 4.5em;
     color: #fff;
-    margin-left: 12%;
+    margin-left: 18.5%;
     font-family: "Sedan", serif;
     font-weight: 400;
     font-style: normal;
@@ -51,12 +50,17 @@ a {
     margin-right: 5%;
 }
 
-.barraTopo ul img {
+.logoadm a {
     width: 10%;
 }
 
 .barraTopo ul {
     display: flex;
+}
+
+.barraTopo ul li a {
+    display: flex;
+    align-items: center;
 }
 
 .barraTopo ul li {
@@ -65,14 +69,14 @@ a {
 }
 
 .barraTopo ul li:nth-child(1) img:nth-child(1) {
-    margin-left: 5%;
+    margin-left: 60%;
 }
 
 .barraTopo ul li:nth-child(1) img:nth-child(2) {
-    margin-left: -10%;
+    margin-left: -97%;
 }
 
-.barraTopo a {
+.login a {
     display: flex;
     align-items: center;
     background: linear-gradient(to right, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
@@ -81,12 +85,12 @@ a {
     margin-left: -80px;
 }
 
-.barraTopo a:hover{
+.login a:hover {
     background: linear-gradient(to right, rgb(1, 165, 253), rgba(35, 150, 212, 0.712));
     transform: 25s ease-in-out;
 }
 
-.barraTopo a img {
+.login a img {
     width: 30%;
 }
 
@@ -116,39 +120,37 @@ a {
     font-size: 2.5em;
 }
 
-.opcoes a:hover{
+.opcoes a:hover {
     background: linear-gradient(to right, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
     padding: 5% 10%;
     border-radius: 20px;
     transition: 0.1s ease-in-out;
 }
 
-.opcoes ul li:nth-child(1) a:nth-child(1){
+.opcoes ul li:nth-child(1) a:nth-child(1) {
     margin-left: 10%;
 }
 
-.opcoes ul li:nth-child(4) a:nth-child(1){
-    margin-left: 5%;  
+.opcoes ul li:nth-child(4) a:nth-child(1) {
+    margin-left: 5%;
 }
 
-.opcoes ul li:nth-child(6) a:nth-child(1){
-    margin-left: 5%;  
+.opcoes ul li:nth-child(6) a:nth-child(1) {
+    margin-left: 5%;
 }
 
 /* ################# RODA PÉ ################### */
 
-.rodape{
+.rodape {
     text-align: center;
     background: linear-gradient(to top, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
 }
 
-.rodape h2{
+.rodape h2 {
     color: #fff;
     font-size: 1.1em;
 }
 
-.rodape p{
+.rodape p {
     color: #fff;
 }
-
-

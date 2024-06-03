@@ -24,14 +24,16 @@
     <header>
         <div class="barraTopo">
             <ul>
-                <li>
+                <li class="logoadm">
+                    <a href="../index.php">
                     <img src="img/circle.png" alt="">
                     <img src="img/logo.png" alt="">
+                    </a>
 
                     <h1>DASHBOARD TOP GLASS</h1>
                 </li>
 
-                <li>
+                <li class="login">
                     <a href="">
                         <h2>USUÁRIO</h2><img src="img/perfil.png" alt="">
                     </a>

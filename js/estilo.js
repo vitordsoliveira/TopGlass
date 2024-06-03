@@ -128,38 +128,6 @@ $('.marcas span').slick({
   ]
 });
 
-$('.servicosVE').slick({
-  slidesToShow: 2,
-  slidesToScroll: 2,
-  autoplay: false,
-  autoplaySpeed: 200,
-  responsive: [
-    {
-      breakpoint: 900,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 380,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-});
-
 /* WOW */
 new WOW().init();
 
