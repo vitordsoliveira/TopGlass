@@ -154,3 +154,7 @@ a {
 .rodape p {
     color: #fff;
 }
+
+.rodape ul{
+    padding: 0 0 5px 0;
+}

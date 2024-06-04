@@ -228,6 +228,7 @@
    max-width: 60px;
    width: 110%;
    height: auto;
+   
  }
 
  /* ########################### SERVICOS VIDROS ############################## */
@@ -620,6 +621,10 @@
    margin-left: 5.5%;
  }
 
+ .orcamento a:hover {
+  color: #1F3E4C;
+}
+
  .orcamento form div:nth-child(1) div input {
    width: 165%;
    padding: 4% 10% 4% 5px;
@@ -658,6 +663,15 @@
    margin-left: 70%;
    width: 32%;
  }
+
+ .orcamento form .envio input:hover {
+  cursor: pointer;
+  background: #1F3E4C;
+  transform: scale(1.1);
+  display: block;
+  height: auto;
+  transition: transform 0.3s ease;
+}
 
  .orcamento select {
    cursor: pointer;
@@ -816,6 +830,10 @@
    text-decoration: underline;
  }
 
+ .login a:hover{
+  color: #1F3E4C;
+}
+
  .login ul li {
    margin-top: 10px;
  }
@@ -848,7 +866,7 @@
  }
 
  .login div div div {
-   margin: 20px 0 20px 0;
+   margin: 21.4px 0 20px 0;
  }
 
  .login form:nth-child(2) .logar input:nth-child(1) {
@@ -865,6 +883,12 @@
    width: 60%;
  }
 
+ .login form:nth-child(2) .logar input:nth-child(1):hover {
+  cursor: pointer;
+  background: #1F3E4C;
+  transform: scale(1.1);
+  transition: ease-in-out .1s;
+}
 
  /* ######################### REGISTRO ########################*/
 

@@ -45,7 +45,7 @@
         <article class="wow servicoVidro animate__animated animate__fadeInUp">
 
             <div class="siteServico">
-                <div class="servicosVE">
+                <div class="ajuste">
                     <div class="servicoDegradePV">
                         <span>
                             <img src="imgServicos/CORRIMÃO.svg" alt="">
@@ -65,17 +65,23 @@
                             INFO<br>
                         </p>
                     </div>
-
-                    <div class="botao">
-                        <a href="">ORÇAMENTO</a>
-                    </div>
-                    <div class="prox">
-                        <a href="pagBox.php"><img src="img/setae.png" alt=""></a>
-                        <p>PÁGINA ANTERIOR | PRÓXIMA PÁGINA</p>
-                        <a href="pagBox.php"><img src="img/setad.png" alt=""></a>
-                    </div>
-
                 </div>
+
+
+                <div class="botao">
+                    <a href="servicos.php">
+                        <input type="submit" value="ORÇAMENTO">
+                    </a>
+                </div>
+                <div class="prox">
+                    <div>
+                        <span><a href="pagBox.php"><img src="img/setae.png" alt=""></a></span>
+                        <p>PÁGINA ANTERIOR | PRÓXIMA PÁGINA</p>
+                        <span><a href="pagBox.php"><img src="img/setad.png" alt=""></a></span>
+                    </div>
+                </div>
+
+
             </div>
 
         </article>
