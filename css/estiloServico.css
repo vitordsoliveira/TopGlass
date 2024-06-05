@@ -90,12 +90,12 @@
   border-radius: 15px;
   border: none;
   padding: 4%;
+  transition: transform ease-in-out .5s;
 }
 
 .botao a input:hover {
   cursor: pointer;
   background: #1F3E4C;
-  transition: ease-in-out 0.2s;
   transform: scale(1.1);
 }
 
@@ -116,6 +116,10 @@
   width: 7%;
 }
 
+.prox a{
+  width: 350%!important;
+}
+
 .prox p {
   font-size: 1.5em;
   color: #1F3E4C;
@@ -124,12 +128,18 @@
 /* ############## FIM SERVICO VE ############ */
 
 /* WPP */
-.wppV {
+.wppServico {
   position: fixed;
   bottom: 20%;
   left: 14.2%;
 }
 
-.wppV img {
+.wppServico img {
   width: 12.5%;
+  display: block;
+  transition: transform 0.5s ease-in-out;
+}
+
+.wppServico img:hover {
+  transform: scale(1.1);
 }

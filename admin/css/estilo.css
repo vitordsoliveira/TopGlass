@@ -94,49 +94,64 @@ a {
     width: 30%;
 }
 
-/* ####################### BARRA VERTICAL DE OPÇÕES ########################## */
+/* ############## MENU LATERAL #################### */
+main {
+    flex: 1;
+    display: flex;
+}
 
-.home {
-    background: linear-gradient(to right, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
-    width: 10%;
+.menu {
+    background-color: #1F3E4C;
+    max-width: 300px;
+    width: 50%;
+}
+
+.menu nav {
+    padding-top: 4.2%;
+    padding-bottom: 4.2%;
+
+}
+
+.menu ul {
+    margin-bottom: none;
+    margin-top: none;
+}
+
+.menu nav ul li {
+    padding: 17.35px 0;
     text-align: center;
-    padding: 2% 6% 1% 3%;
 }
 
-.home h2 {
-    font-size: 3.5em;
-    margin-left: 10%;
-    color: #fff;
-}
-
-.opcoes ul li {
-    background: #1F3E4C;
-    width: 10%;
-    text-align: center;
-    padding: 2% 6% 2% 3%;
-}
-
-.opcoes a {
+.menu ul li a {
     font-size: 2.5em;
+    color: #fff;
+    border-bottom: #fff solid 2px;
+    transition: 300ms;
 }
 
-.opcoes a:hover {
-    background: linear-gradient(to right, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
-    padding: 5% 10%;
-    border-radius: 20px;
-    transition: 0.1s ease-in-out;
+.menu ul li a:hover {
+    padding: 10px 15px 10px 15px;
+    border-radius: 25px 25px;
+    background: linear-gradient(to top, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
+    transition: 300ms;
 }
 
-.opcoes ul li:nth-child(1) a:nth-child(1) {
-    margin-left: 10%;
+.menu ul li:nth-child(1) a:nth-child(1) {
+    background: linear-gradient(to top, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
+    padding: 10px 15px 10px 15px;
+    border-radius: 25px 25px;
 }
 
-.opcoes ul li:nth-child(4) a:nth-child(1) {
-    margin-left: 5%;
+.menu ul li:nth-child(1) a:nth-child(1):hover {
+    background: #fff;
+    color:rgb(1, 165, 253);
 }
 
-.opcoes ul li:nth-child(6) a:nth-child(1) {
-    margin-left: 5%;
+/* ############## BOX DAS PAGINAS #################### */
+.box {
+    width: 100%;
+    background: #f5f5f5;
+    margin: 1%;
 }
 
 /* ################# RODA PÉ ################### */
@@ -155,6 +170,6 @@ a {
     color: #fff;
 }
 
-.rodape ul{
+.rodape ul {
     padding: 0 0 5px 0;
 }

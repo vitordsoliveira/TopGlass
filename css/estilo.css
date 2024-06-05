@@ -349,7 +349,7 @@
  .pservicoV p{
    display: none;
    position: fixed;
-   z-index: 3;
+   z-index: 5;
    bottom: 55px;
    font-size: 1.2em;
    text-align: justify;
@@ -364,6 +364,10 @@
 
  .servicoDegradeV a:hover h2 {
    display: none;
+ }
+ 
+ .gif{
+  display: none;
  }
 
  /* ####################### SERVICO ALUMINIO ########################### */
@@ -682,6 +686,8 @@
    font-size: 1em;
    margin-left: 70%;
    width: 32%;
+   display: block;
+   transition: transform 0.5s ease-in-out;
  }
 
  .orcamento form .envio input:hover {
@@ -690,7 +696,7 @@
   transform: scale(1.1);
   display: block;
   height: auto;
-  transition: transform 0.3s ease;
+  transform: scale(1.1);
 }
 
  .orcamento select {
@@ -822,15 +828,20 @@
  /* ################################ WPP ############################ */
 
  .wpp {
-   position: fixed;
-   bottom: 3%;
-   left: 14.2%;
- }
+  position: fixed;
+  bottom: 3%;
+  left: 14.2%;
+}
 
- .wpp img {
-   width: 12.5%;
- }
+.wpp img {
+  width: 12.5%;
+  display: block;
+  transition: transform 0.5s ease-in-out;
+}
 
+.wpp img:hover {
+  transform: scale(1.1);
+}
  /* ################################ LOGIN ############################ */
 
  .login div {
@@ -906,13 +917,13 @@
    margin-left: 120%;
    font-size: 1em;
    width: 60%;
+   transition: transform ease-in-out .5s;
  }
 
  .login form:nth-child(2) .logar input:nth-child(1):hover {
   cursor: pointer;
   background: #1F3E4C;
   transform: scale(1.1);
-  transition: ease-in-out .1s;
 }
 
  /* ######################### REGISTRO ########################*/

@@ -29,6 +29,11 @@ body {
 ol, ul {
     list-style: none;
 }
+
+dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
 blockquote, q {
     quotes: none;
 }
@@ -41,3 +46,4 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+

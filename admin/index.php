@@ -15,6 +15,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap" rel="stylesheet">
 
+    <!-- BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <link rel="stylesheet" href="css/estilo.css">
 
 </head>
@@ -26,8 +32,8 @@
             <ul>
                 <li class="logoadm">
                     <a href="../index.php">
-                    <img src="img/circle.png" alt="">
-                    <img src="img/logo.png" alt="">
+                        <img src="img/circle.png" alt="">
+                        <img src="img/logo.png" alt="">
                     </a>
 
                     <h1>DASHBOARD TOP GLASS</h1>
@@ -41,24 +47,75 @@
             </ul>
         </div>
     </header>
-    <section>
-        <ul class="home">
-            <li>
-                <h2>OPÇÕES</h2>
-            </li>
-        </ul>
-        <div class="opcoes">
-            <ul>
-                <li><a href="#">SERVIÇOS</a></li>
-                <li><a href="#">ORÇAMENTOS</a></li>
-                <li><a href="#">FUNCIONÁRIOS</a></li>
-                <li><a href="#">CLIENTES</a></li>
-                <li><a href="#">GALERIA</a></li>
-                <li><a href="#">BANNERS</a></li>
-            </ul>
+    <main>
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="index.php?p=dashboard">HOME</a></li>
+                    <li><a href="index.php?p=orcamento">ORÇAMENTOS</a></li>
+                    <li><a href="index.php?p=servico">SERVIÇOS</a></li>
+                    <li><a href="index.php?p=mecanico">FUNCIONÁRIOS</a></li>
+                    <li><a href="index.php?p=cliente">CLIENTES</a></li>
+                    <li><a href="index.php?p=galeria">GALERIA</a></li>
+                    <li><a href="index.php?p=banner">BANNER</a></li>
+                </ul>
+            </nav>
         </div>
 
-    </section>
+        <div class="box">
+            <?php
+            $pagina = @$_GET['p'];
+
+            switch ($pagina) {
+                case 'dashboard':
+                    $titulo = "Dashboard";
+                    require_once ('dashboard/dashboard.php');
+                    break;
+                case 'contato':
+                    $titulo = "contato";
+                    require_once ('contato/contato.php');
+                    break;
+                case 'banner':
+                    $titulo = "Banner";
+                    require_once ('banner/banner.php');
+                    break;
+                case 'galeria':
+                    $titulo = "Galeria";
+                    require_once ('galeria/galeria.php');
+                    break;
+                case 'cliente':
+                    $titulo = "Cliente";
+                    require_once ('cliente/cliente.php');
+                    break;
+                case 'veiculo':
+                    $titulo = "Veiculo";
+                    require_once ('veiculo/veiculo.php');
+                    break;
+                case 'mecanico':
+                    $titulo = "Mecanico";
+                    require_once ('mecanico/mecanico.php');
+                    break;
+                case 'servico':
+                    $titulo = "Serviço";
+                    require_once ('servico/servico.php');
+                    break;
+                case 'servicoexec':
+                    $titulo = "Serviço Executado";
+                    require_once ('servicoexec/servicoexec.php');
+                    break;
+                case 'ajuda':
+                    $titulo = "Ajuda e Suporte";
+                    require_once ('ajuda/ajuda.php');
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+            ?>
+        </div>
+
+    </main>
+
     <footer class="rodape">
         <ul>
             <li>
@@ -68,11 +125,20 @@
             </li>
             <li>
                 <p>
-                DIREITOS DA EMPRESA 
+                    DIREITOS DA EMPRESA
                 </p>
             </li>
         </ul>
     </footer>
+
+    <!--js bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
 
     <script src="js/estilo.js"></script>
 
