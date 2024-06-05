@@ -77,10 +77,14 @@
 
             <div>
                 <a href="#">
+                    <!--  <span class="sumir">
+                        <a href=""> -->
                     <img src="imgServicos/JanelaDeCorrer.svg" alt="">
-                    <span class="gif">
+                    <!--     </a>
+                    </span> -->
+                    <!--<span class="gif">
                         <img src="gifsServicos/videoJanelaVidro.gif" alt="">
-                    </span>
+                    </span> -->
                     <h2 class="h2servico">JANELA</h2>
                     <div class="pservicoV">
                         <p>Com um design durável e fácil de limpar, nossa janela de correr oferece estilo e

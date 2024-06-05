@@ -10,12 +10,12 @@
    color: #fff;
  }
 
- .h1h1{
-  width: 0;
-  height: 0;
-  color: #1F3E4C;
-  cursor: none;
-  display: none;
+ .h1h1 {
+   width: 0;
+   height: 0;
+   color: #1F3E4C;
+   cursor: none;
+   display: none;
  }
 
  body {
@@ -79,34 +79,35 @@
 
  /*animação*/
  .barra a {
-  color: #fff;
-  text-decoration: none;
-  position: relative;
-  padding-bottom: 2px;
-}
+   color: #fff;
+   text-decoration: none;
+   position: relative;
+   padding-bottom: 2px;
+ }
 
-.barra a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: white;
-  transition: width 0.5s;
-}
+ .barra a::after {
+   content: '';
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   width: 0;
+   height: 2px;
+   background: white;
+   transition: width 0.5s;
+ }
 
-.barra a:hover::after {
-  width: 100%;
-}
-/*fim animação*/
+ .barra a:hover::after {
+   width: 100%;
+ }
+
+ /*fim animação*/
 
  .barra span {
    margin-right: 3px;
  }
 
  .barra div nav ul li:nth-child(5) a:nth-child(1) {
-  left: 220%;
+   left: 220%;
  }
 
  .menu-fixo {
@@ -128,8 +129,8 @@
    display: none !important;
    position: absolute;
    background: #1F3E4C;
-   padding-right: 1%!important;
-   padding-bottom: 1%!important;
+   padding-right: 1% !important;
+   padding-bottom: 1% !important;
    border-radius: 10px;
  }
 
@@ -153,7 +154,7 @@
 
  .menu-fixo:hover .subServico {
    animation: fadeIn 1.5s ease-in-out;
-   background: rgba(31, 62, 76, 0.733)!important;
+   background: rgba(31, 62, 76, 0.733) !important;
  }
 
  /* ############### BANNER ################## */
@@ -248,7 +249,7 @@
    max-width: 60px;
    width: 110%;
    height: auto;
-   
+
  }
 
  /* ########################### SERVICOS VIDROS ############################## */
@@ -314,9 +315,9 @@
    z-index: 1;
  }
 
- .servicoDegradeV div:nth-child(8) h2{
-  left: 35%;
-  transform: translate(-30%, -50%);
+ .servicoDegradeV div:nth-child(8) h2 {
+   left: 35%;
+   transform: translate(-30%, -50%);
  }
 
  .servicoDegradeV h2 {
@@ -341,12 +342,11 @@
  .servicoDegradeV a:hover {
    transform: scale(1.1);
  }
-
  .servicoDegradeV h2:hover {
    display: none;
  }
 
- .pservicoV p{
+ .pservicoV p {
    display: none;
    position: fixed;
    z-index: 5;
@@ -365,10 +365,15 @@
  .servicoDegradeV a:hover h2 {
    display: none;
  }
- 
- .gif{
+
+/*  hover gif
+.sumir :hover{
   display: none;
- }
+}
+
+.gif{
+ display: none;
+} */
 
  /* ####################### SERVICO ALUMINIO ########################### */
 
@@ -646,8 +651,8 @@
  }
 
  .orcamento a:hover {
-  color: #1F3E4C;
-}
+   color: #1F3E4C;
+ }
 
  .orcamento form div:nth-child(1) div input {
    width: 165%;
@@ -691,13 +696,13 @@
  }
 
  .orcamento form .envio input:hover {
-  cursor: pointer;
-  background: #1F3E4C;
-  transform: scale(1.1);
-  display: block;
-  height: auto;
-  transform: scale(1.1);
-}
+   cursor: pointer;
+   background: #1F3E4C;
+   transform: scale(1.1);
+   display: block;
+   height: auto;
+   transform: scale(1.1);
+ }
 
  .orcamento select {
    cursor: pointer;
@@ -709,9 +714,9 @@
    margin-right: 8%;
  }
 
- .orcamento select:hover{
-  background-color: #1F3E4C;
-  transition: ease-in-out .5s;
+ .orcamento select:hover {
+   background-color: #1F3E4C;
+   transition: ease-in-out .5s;
  }
 
  .orcamento option {
@@ -810,7 +815,7 @@
  .locserv ul li a:hover {
    color: #2390C1;
  }
- 
+
  .locserv img {
    width: 4%;
    margin-left: 5px;
@@ -828,20 +833,21 @@
  /* ################################ WPP ############################ */
 
  .wpp {
-  position: fixed;
-  bottom: 3%;
-  left: 14.2%;
-}
+   position: fixed;
+   bottom: 3%;
+   left: 14.2%;
+ }
 
-.wpp img {
-  width: 12.5%;
-  display: block;
-  transition: transform 0.5s ease-in-out;
-}
+ .wpp img {
+   width: 12.5%;
+   display: block;
+   transition: transform 0.5s ease-in-out;
+ }
 
-.wpp img:hover {
-  transform: scale(1.1);
-}
+ .wpp img:hover {
+   transform: scale(1.1);
+ }
+
  /* ################################ LOGIN ############################ */
 
  .login div {
@@ -866,9 +872,9 @@
    text-decoration: underline;
  }
 
- .login a:hover{
-  color: #1F3E4C;
-}
+ .login a:hover {
+   color: #1F3E4C;
+ }
 
  .login ul li {
    margin-top: 10px;
@@ -921,10 +927,10 @@
  }
 
  .login form:nth-child(2) .logar input:nth-child(1):hover {
-  cursor: pointer;
-  background: #1F3E4C;
-  transform: scale(1.1);
-}
+   cursor: pointer;
+   background: #1F3E4C;
+   transform: scale(1.1);
+ }
 
  /* ######################### REGISTRO ########################*/
 
