@@ -67,14 +67,6 @@
             $pagina = @$_GET['p'];
 
             switch ($pagina) {
-                case 'dashboard':
-                    $titulo = "Dashboard";
-                    require_once ('dashboard/dashboard.php');
-                    break;
-                case 'contato':
-                    $titulo = "contato";
-                    require_once ('contato/contato.php');
-                    break;
                 case 'banner':
                     $titulo = "Banner";
                     require_once ('banner/banner.php');
@@ -86,26 +78,18 @@
                 case 'cliente':
                     $titulo = "Cliente";
                     require_once ('cliente/cliente.php');
-                    break;
-                case 'veiculo':
-                    $titulo = "Veiculo";
-                    require_once ('veiculo/veiculo.php');
-                    break;
-                case 'mecanico':
-                    $titulo = "Mecanico";
-                    require_once ('mecanico/mecanico.php');
-                    break;
                 case 'servico':
                     $titulo = "Serviço";
                     require_once ('servico/servico.php');
                     break;
-                case 'servicoexec':
-                    $titulo = "Serviço Executado";
-                    require_once ('servicoexec/servicoexec.php');
+                case 'orcamento':
+                    $titulo = "Orçamento";
+                    require_once ('orcamentos/orcamento.php');
                     break;
-                case 'ajuda':
-                    $titulo = "Ajuda e Suporte";
-                    require_once ('ajuda/ajuda.php');
+                    break;
+                case 'funcionario':
+                    $titulo = "Funcionários";
+                    require_once ('funcionarios/funcionarios.php');
                     break;
                 default:
                     # code...

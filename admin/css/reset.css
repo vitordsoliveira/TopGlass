@@ -32,8 +32,9 @@ ol, ul {
 
 dl, ol, ul {
     margin-top: 0;
-    margin-bottom: 0rem;
+    margin-bottom: 0rem!important;
 }
+
 blockquote, q {
     quotes: none;
 }

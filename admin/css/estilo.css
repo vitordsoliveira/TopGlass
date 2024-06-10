@@ -107,19 +107,12 @@ main {
 }
 
 .menu nav {
-    padding-top: 4.2%;
-    padding-bottom: 4.2%;
-
-}
-
-.menu ul {
-    margin-bottom: none;
-    margin-top: none;
+    padding-top: 9.2%;
+    padding-bottom: 34.2%;
 }
 
 .menu nav ul li {
     padding: 17.35px 0;
-    text-align: center;
 }
 
 .menu ul li a {
@@ -159,6 +152,7 @@ main {
 .rodape {
     text-align: center;
     background: linear-gradient(to top, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
+    padding-bottom: .1%;
 }
 
 .rodape h2 {
@@ -168,8 +162,4 @@ main {
 
 .rodape p {
     color: #fff;
-}
-
-.rodape ul {
-    padding: 0 0 5px 0;
 }
