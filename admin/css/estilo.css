@@ -79,15 +79,17 @@ a {
 .login a {
     display: flex;
     align-items: center;
-    background: linear-gradient(to right, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
+    background: linear-gradient(90deg, rgba(35, 150, 212, 0.712) 0%, rgb(1, 165, 253) 100%);
     padding: 5% 0px 5% 60%;
     border-radius: 35px 0px 0px 35px;
     margin-left: -80px;
+    background-size: 200% 100%;
+    background-position: 0% 0%;
+    transition: background-position 0.5s ease;
 }
 
 .login a:hover {
-    background: linear-gradient(to right, rgb(1, 165, 253), rgba(35, 150, 212, 0.712));
-    transform: 25s ease-in-out;
+    background-position: 100% 0%;
 }
 
 .login a img {
