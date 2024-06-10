@@ -53,8 +53,6 @@
                 <ul>
                     <li><a href="index.php?p=dashboard">HOME</a></li>
                     <li><a href="index.php?p=orcamento">ORÇAMENTOS</a></li>
-                    <li><a href="index.php?p=servico">SERVIÇOS</a></li>
-                    <li><a href="index.php?p=mecanico">FUNCIONÁRIOS</a></li>
                     <li><a href="index.php?p=cliente">CLIENTES</a></li>
                     <li><a href="index.php?p=galeria">GALERIA</a></li>
                     <li><a href="index.php?p=banner">BANNER</a></li>
@@ -77,15 +75,14 @@
                     break;
                 case 'cliente':
                     $titulo = "Cliente";
-                    require_once ('cliente/cliente.php');
+                    require_once ('clientes/clientes.php');
                 case 'servico':
                     $titulo = "Serviço";
-                    require_once ('servico/servico.php');
+                    require_once ('servicos/servicos.php');
                     break;
                 case 'orcamento':
                     $titulo = "Orçamento";
-                    require_once ('orcamentos/orcamento.php');
-                    break;
+                    require_once ('orcamentos/orcamentos.php');
                     break;
                 case 'funcionario':
                     $titulo = "Funcionários";

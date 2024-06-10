@@ -7,10 +7,10 @@ class Conexao{
     public static function LigarConexao(){
 
         // Dados de conexão com o banco de dados
-        $host       = 'localHost';        // Host do banco de dados (localhost)
-        $dbname     = 'db_topGlass';        // Nome do banco de dados   
-        $username   = 'root';      // Nome de usuário do banco de dados (root)
-        $password   = '';           // Senha do banco de dados ('')
+        $host       = 'smpsistema.com.br';        // Host do banco de dados (localhost)
+        $dbname     = 'u283879542_ti22_vitor';        // Nome do banco de dados   
+        $username   = 'u283879542_ti22_vitor';      // Nome de usuário do banco de dados (root)
+        $password   = 'Senac@ti22';           // Senha do banco de dados ('')
 
         try {
             // Cria uma nova instância de PDO
