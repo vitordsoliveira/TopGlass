@@ -23,6 +23,8 @@
 
     <link rel="stylesheet" href="css/estilo.css">
 
+    <link rel="stylesheet" href="css/cliente.css">
+
 </head>
 
 <body>
@@ -76,21 +78,11 @@
                 case 'cliente':
                     $titulo = "Cliente";
                     require_once ('clientes/clientes.php');
-                case 'servico':
-                    $titulo = "Serviço";
-                    require_once ('servicos/servicos.php');
-                    break;
                 case 'orcamento':
                     $titulo = "Orçamento";
                     require_once ('orcamentos/orcamentos.php');
                     break;
-                case 'funcionario':
-                    $titulo = "Funcionários";
-                    require_once ('funcionarios/funcionarios.php');
-                    break;
-                default:
-                    # code...
-                    break;
+                    # code...   
             }
             ?>
         </div>

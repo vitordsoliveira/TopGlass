@@ -1,16 +1,12 @@
-<h2>LISTA</h2>
-
 <?php
 require_once ('class/ClassCliente.php');
 
 $cliente = new classCliente();
 $lista = $cliente->Listar();
 
-/* print_r($lista); */
-
 ?>
 
-<h2>PÁGINA DOS CLIENTES:</h2>
+<h2 class="tituloCliente">CLIENTES</h2>
 
 <table class="table">
 
@@ -18,7 +14,7 @@ $lista = $cliente->Listar();
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Nome</th>
+                    <th scope="col"><p>Nome</p></th>
                     <th scope="col">E-mail</th>
                     <th scope="col">Telefone</th>
                     <th scope="col">CPF</th>
