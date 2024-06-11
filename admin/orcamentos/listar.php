@@ -29,7 +29,7 @@ $lista = $orcamento->Listar();
                     <tr>
                         <td scope="col"><?php echo $linha['nomeCliente'] ?></td>
                         <td scope="col"><?php echo $linha['nomeServicos'] ?></td>
-                        <td scope="col"><?php echo $linha['idProduto'] ?></td>
+                        <td scope="col"><?php echo $linha['nomeProduto'] ?></td>
                         <td scope="col"><?php echo $linha['nomeFuncionario'] ?></td>
                         <td scope="col"><?php echo $linha['valorOrcamento'] ?></td>
                         <td scope="col"><?php echo $linha['dataOrcamento'] ?></td>

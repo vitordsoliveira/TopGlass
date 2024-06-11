@@ -78,8 +78,9 @@
                 case 'cliente':
                     $titulo = "cliente";
                     require_once ('clientes/clientes.php');
-                case 'Orcamentos':
-                    $titulo = "Orçamentos";
+                    break;
+                case 'orcamento':
+                    $titulo = "orcamentos";
                     require_once ('orcamentos/orcamentos.php');
                     break;
                     # code...   

@@ -18,8 +18,8 @@ class ClassOrcamento
             $sql = "SELECT 
             tbl_cliente.nomeCliente,
             tbl_servico.nomeServicos AS nomeServicos,
-            tbl_itens.idProduto,
-            tbl_orcamento.dataOrcamento,
+            tbl_produto.nomeProduto,
+            DATE_FORMAT(tbl_orcamento.dataOrcamento, '%d/%m/%Y') AS dataOrcamento,
             tbl_funcionario.nomeFuncionario,
             tbl_orcamento.comentOrcamento,
             tbl_orcamento.valorOrcamento,
@@ -33,8 +33,11 @@ class ClassOrcamento
         INNER JOIN 
             tbl_itens ON tbl_orcamento.idItens = tbl_itens.idItens
         INNER JOIN 
+            tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
+        INNER JOIN 
             tbl_funcionario ON tbl_orcamento.idFuncionario = tbl_funcionario.idFuncionario
-            ORDER BY tbl_orcamento.dataOrcamento DESC;";
+        ORDER BY 
+            tbl_orcamento.dataOrcamento DESC;";
     
             $conn = Conexao::LigarConexao();
     

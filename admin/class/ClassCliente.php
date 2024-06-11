@@ -16,7 +16,20 @@ class classCliente{
 
     // LISTAR
     public function Listar(){
-        $sql = "SELECT * FROM tbl_cliente ORDER BY nomeCliente ASC";
+        $sql = "SELECT 
+        idCliente,
+        nomeCliente,
+        emailCliente,
+        enderecoCliente,
+        numeroCliente,
+        cpfCliente,
+        DATE_FORMAT(dataCadCliente, '%d/%m/%Y') AS dataCadCliente,
+        statusCliente,
+        senhaCliente
+    FROM 
+        tbl_cliente
+    ORDER BY 
+        dataCadCliente DESC;";
 
         $conn = Conexao::LigarConexao();
 
