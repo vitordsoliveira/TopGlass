@@ -53,7 +53,7 @@ class ClassOrcamento
 
     public function Inserir()
     {
-        $sql = "INSERT INT tbl_orcamento 
+        $sql = "INSERT INTO tbl_orcamento 
         (idServicos, 
         idCliente, 
         idServico, 
