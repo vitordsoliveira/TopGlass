@@ -60,9 +60,7 @@ if (isset($_POST['nomeCliente'])) {
     $cliente->senhaCliente = $senhaCliente;
     $cliente->fotoCliente = $fotoCliente;
     $cliente->statusCliente = $statusCliente;
-
     $cliente->Inserir();
-
 
 }
 

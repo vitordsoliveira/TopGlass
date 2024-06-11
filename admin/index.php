@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="css/estilo.css">
 
-    <link rel="stylesheet" href="css/cliente.css">
+    <link rel="stylesheet" href="css/InserirListar.css">
 
 </head>
 
@@ -68,18 +68,18 @@
 
             switch ($pagina) {
                 case 'banner':
-                    $titulo = "Banner";
+                    $titulo = "banner";
                     require_once ('banner/banner.php');
                     break;
                 case 'galeria':
-                    $titulo = "Galeria";
+                    $titulo = "galeria";
                     require_once ('galeria/galeria.php');
                     break;
                 case 'cliente':
-                    $titulo = "Cliente";
+                    $titulo = "cliente";
                     require_once ('clientes/clientes.php');
-                case 'orcamento':
-                    $titulo = "Orçamento";
+                case 'Orcamentos':
+                    $titulo = "Orçamentos";
                     require_once ('orcamentos/orcamentos.php');
                     break;
                     # code...   

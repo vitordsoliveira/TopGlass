@@ -46,5 +46,11 @@ class classCliente{
                                 '". $this->cpfCliente ."' 
                                 '". $this->dataCadCliente ."' 
                                 '". $this->statusCliente ."' )";
+
+                                
+        $connect = Conexao::LigarConexao();
+        $connect->exec($sql);
+
+        echo "<script>document.location'index.php?p=cliente'</script>";
     }
 }
