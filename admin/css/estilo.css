@@ -140,6 +140,7 @@ main {
 .menu ul li:nth-child(1) a:nth-child(1):hover {
     background: #fff;
     color:rgb(1, 165, 253);
+    border-bottom: rgb(1, 165, 253) solid 2px;
 }
 
 /* ############## BOX DAS PAGINAS #################### */
