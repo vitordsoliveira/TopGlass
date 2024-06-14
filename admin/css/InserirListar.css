@@ -1,4 +1,4 @@
-/* ######## CLIENTE ########## */
+/* ######## LISTAR CLIENTE ########## */
 
 .tituloCliente{
     font-size: 3em;
@@ -24,7 +24,7 @@
     transition: ease-in-out .5s;
 }
 
-/* ######## ORÇAMENTO ######## */
+/* ######## LISTAR ORÇAMENTO ######## */
 
 .tituloOrcamento{
     font-size: 3em;
@@ -49,3 +49,33 @@
     display: block;
     transition: ease-in-out .5s;
 }
+
+.options select {
+    cursor: pointer;
+    border: 0px;
+    background: #2390C1;
+    color: #fff;
+    padding: 2% 0 2% 0;
+    font-size: 1.2em;
+    margin-right: 8%;
+  }
+ 
+  .options select:hover {
+    background-color: #1F3E4C;
+    transition: ease-in-out .5s;
+  }
+ 
+  .options option {
+    background: #fff;
+    font-size: 0.9em;
+    color: #2390C1;
+  }
+ 
+  .options option p:hover {
+    background: #fff;
+    font-size: 0.9em;
+  }
+
+  .btnEnviar{
+    margin-bottom: 15px;
+  }

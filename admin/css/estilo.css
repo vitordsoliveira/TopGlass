@@ -131,23 +131,14 @@ main {
     transition: 300ms;
 }
 
-.menu ul li:nth-child(1) a:nth-child(1) {
-    background: linear-gradient(to top, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
-    padding: 10px 15px 10px 15px;
-    border-radius: 25px 25px;
-}
-
-.menu ul li:nth-child(1) a:nth-child(1):hover {
-    background: #fff;
-    color:rgb(1, 165, 253);
-    border-bottom: rgb(1, 165, 253) solid 2px;
-}
-
 /* ############## BOX DAS PAGINAS #################### */
 .box {
     width: 100%;
-    background: #f5f5f5;
     margin: 1%;
+    background: url(../img/background2.jpg);
+    background-size: cover; /* Faz a imagem cobrir toda a área do .box */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
 }
 
 /* ################# RODA PÉ ################### */
@@ -166,3 +157,5 @@ main {
 .rodape p {
     color: #fff;
 }
+
+

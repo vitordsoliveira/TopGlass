@@ -74,11 +74,11 @@ if (isset($_POST['nomeCliente'])) {
 
         <div class="row">
 
-            <div class="col-4">
+<!--             <div class="col-4">
                 <img src="img/semfoto1.jpg" class="img-fluid" id="imgFoto" alt="...">
                 <input type="file" class="form-control" id="fotoCliente" name="fotoCliente" required
                     style="display: none;" required>
-            </div>
+            </div> -->
 
             <div class="col-8">
 

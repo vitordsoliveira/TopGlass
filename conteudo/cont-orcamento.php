@@ -10,6 +10,7 @@
                 }
                  ?>
             </h3>
+
         <form action="#" method="POST">
             <div>
                 <div>
@@ -54,7 +55,7 @@
                             <p>Box de Vidro</p>
                         </option>
                         <option value="Jalena de Vidro">
-                            <p>Jalena de Vidro</p>
+                            <p>Janela de Vidro</p>
                         </option>
                         <option value="Pia de Vidro">
                             <p>Pia de Vidro</p>
@@ -90,7 +91,7 @@
                     <label for="coment">
                         <p>Comentário sobre o Serviço:</p>
                     </label>
-                    <textarea name="coment" id="coment" cols="65" rows="10"
+                    <textarea name="comentOrcamento" id="comentOrcamento" cols="65" rows="10"
                         placeholder="Escrever informações básicas do serviço como medidas (1.20 x 2.04) em metro do serviço, cor do serviço e etc. Podendo fazer perguntas ou apontamentos sobre o serviço."
                         required></textarea>
                 </div>
@@ -101,5 +102,6 @@
             </div>
 
         </form>
+
     </div>
 </section>
