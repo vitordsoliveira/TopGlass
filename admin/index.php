@@ -98,9 +98,9 @@
                 </h2>
             </li>
             <li>
-                <p>
+                <h3>
                     DIREITOS DA EMPRESA
-                </p>
+                </h3>
             </li>
         </ul>
     </footer>

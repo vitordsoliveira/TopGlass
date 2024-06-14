@@ -48,3 +48,11 @@ table {
     border-spacing: 0;
 }
 
+p{
+    margin-bottom: 0rem!important;
+}
+
+h3{
+    font-weight: 800;
+}
+

@@ -79,3 +79,7 @@
   .btnEnviar{
     margin-bottom: 15px;
   }
+
+  label p{
+    font-size: 1.2em;
+  }
