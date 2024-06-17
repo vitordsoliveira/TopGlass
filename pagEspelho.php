@@ -48,15 +48,15 @@
                 <div class="ajuste">
                     <div class="servicoDegradePV">
                         <span>
-                            <img src="imgServicos/corrimaoVidro.svg" alt="">
-                            <h2 class="h1servico">CORRIMÃO</h2>
+                            <img src="imgServicos/EspelhoParede.svg" alt="">
+                            <h2 class="h1servico">ESPELHO</h2>
                         </span>
                     </div>
                     <div class="textoLateral">
-                        <h1>CORRIMÃO</h1>
+                        <h1>ESPELHO</h1>
                         <p>
-                            Adicione segurança e requinte ao seu lar com nosso corrimão de vidro, oferecemos uma solução
-                            durável e moderna para escadas e varandas!<br>
+                            Desfrute da facilidade de manutenção e da sensação de luminosidade que ele proporciona.<br>
+                            Reflita o melhor do seu espaço.<br>
                             INFO<br>
                             INFO<br>
                             INFO<br>
@@ -75,9 +75,10 @@
                 </div>
                 <div class="prox">
                     <div>
-                        <span><a href="pagBox.php"><img src="img/setae.png" alt=""></a></span>
-                        <p>PÁGINA ANTERIOR | PRÓXIMA PÁGINA</p>
-                        <span><a href="pagEspelho.php"><img src="img/setad.png" alt=""></a></span>
+                        <span><a href="pagCorrimao.php"><img src="img/setae.png" alt=""></a></span>
+                        <p>PÁGINA ANTERIOR
+                            |
+                            PRÓXIMA PÁGINA</p><span><a href="pagJanela.php"><img src="img/setad.png" alt=""></a></span>
                     </div>
                 </div>
 
@@ -87,7 +88,7 @@
         </article>
 
         <section class="wppServico">
-            <div class="linkWpp">
+            <div>
                 <a href=""><img src="img/whatsapp (1).png" alt=""></a>
             </div>
         </section>

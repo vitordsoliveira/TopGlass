@@ -11,7 +11,7 @@
 
             <div>
                 <a href="pagCorrimao.php">
-                    <img src="imgServicos/CORRIMÃO.svg" alt="">
+                    <img src="imgServicos/corrimaoVidro.svg" alt="">
                     <h2 class="h2servico">CORRIMÃO</h2>
                     <div class="pservicoV">
                         <p> Adicione segurança e requinte ao seu lar com nosso corrimão de vidro, oferecemos uma solução
@@ -22,7 +22,7 @@
 
             <div>
                 <a href="pagBox.php">
-                    <img src="imgServicos/BOX.svg" alt="">
+                    <img src="imgServicos/boxVidro.svg" alt="">
                     <h2 class="h2servicoV">BOX</h2>
                     <div class="pservicoA">
                         <p>Desfrute de momentos relaxantes e elegantes em seu banheiro com nosso box de vidro,
@@ -33,7 +33,7 @@
 
             <div>
                 <a href="#">
-                    <img src="imgServicos/PIA DE VIDRO.svg" alt="">
+                    <img src="imgServicos/piaVidro.svg" alt="">
                     <h2 class="h2servico">PIA</h2>
                     <div class="pservicoV">
                         <p> Nossa pia de vidro proporciona um toque contemporâneo ao seu banheiro. Desfrute de uma

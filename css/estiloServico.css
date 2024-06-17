@@ -143,3 +143,8 @@
 .wppServico img:hover {
   transform: scale(1.1);
 }
+
+.linkWpp a{
+  width: 15%;
+  display: inline-block;
+}

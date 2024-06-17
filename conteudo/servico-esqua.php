@@ -12,7 +12,7 @@
 
             <div>
                 <a href="#">
-                    <img src="imgServicos/porta esquadria.svg" alt="Serviço Porta">
+                    <img src="imgServicos/portaEsquadria.svg" alt="Serviço Porta">
                     <h2 class="h2servico">PORTA</h2>
                     <div class="pservicoA">
                         <p>Com uma instalação prática e
@@ -26,7 +26,7 @@
 
             <div>
                 <a href="#">
-                    <img src="imgServicos/janela esquadria.svg" alt="Serviço Janela">
+                    <img src="imgServicos/janelaEsquadria.svg" alt="Serviço Janela">
                     <h2 class="h2servico">JANELA</h2>
                     <div class="pservicoA">
                         <p>Além de
@@ -40,7 +40,7 @@
 
             <div>
                 <a href="#">
-                    <img src="imgServicos/corrimao esquadria.svg" alt="Serviço Grade">
+                    <img src="imgServicos/corrimaoEsquadria.svg" alt="Serviço Grade">
                     <h2 class="h2servico">CORRIMÃO</h2>
                     <div class="pservicoA">
                         <p>Aprimore a segurança e a estética de sua casa ou escritório com nosso corrimão de
@@ -54,7 +54,7 @@
 
             <div>
                 <a href="#">
-                    <img src="imgServicos/porta esquadria.svg" alt="Serviço Porta">
+                    <img src="imgServicos/portaEsquadria.svg" alt="Serviço Porta">
                     <h2 class="h2servico">PORTA</h2>
                     <div class="pservicoA">
                         <p>Com uma instalação prática e
@@ -68,7 +68,7 @@
 
             <div>
                 <a href="#">
-                    <img src="imgServicos/janela esquadria.svg" alt="Serviço Janela">
+                    <img src="imgServicos/janelaEsquadria.svg" alt="Serviço Janela">
                     <h2 class="h2servico">JANELA</h2>
                     <div class="pservicoA">
                         <p>Além de
@@ -82,7 +82,7 @@
 
             <div>
                 <a href="#">
-                    <img src="imgServicos/corrimao esquadria.svg" alt="Serviço Grade">
+                    <img src="imgServicos/corrimaoEsquadria.svg" alt="Serviço Grade">
                     <h2 class="h2servico">CORRIMÃO</h2>
                     <div class="pservicoA">
                         <p>Aprimore a segurança e a estética de sua casa ou escritório com nosso corrimão de

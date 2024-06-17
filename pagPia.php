@@ -34,7 +34,7 @@
 
     <main>
 
-        <div class="titulo">
+        <div class="itulo">
             <div class="siteServico">
                 <h2>
                     SERVIÇOS VIDROS E ESPELHOS
@@ -48,7 +48,7 @@
                 <div class="ajuste">
                     <div class="servicoDegradePV">
                         <span>
-                            <img src="imgServicos/corrimaoVidro.svg" alt="">
+                            <img src="imgServicos/CORRIMÃO.svg" alt="">
                             <h2 class="h1servico">CORRIMÃO</h2>
                         </span>
                     </div>
@@ -77,7 +77,7 @@
                     <div>
                         <span><a href="pagBox.php"><img src="img/setae.png" alt=""></a></span>
                         <p>PÁGINA ANTERIOR | PRÓXIMA PÁGINA</p>
-                        <span><a href="pagEspelho.php"><img src="img/setad.png" alt=""></a></span>
+                        <span><a href="pagBox.php"><img src="img/setad.png" alt=""></a></span>
                     </div>
                 </div>
 
@@ -87,7 +87,7 @@
         </article>
 
         <section class="wppServico">
-            <div class="linkWpp">
+            <div>
                 <a href=""><img src="img/whatsapp (1).png" alt=""></a>
             </div>
         </section>

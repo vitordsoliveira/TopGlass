@@ -34,7 +34,7 @@
 
     <main>
 
-        <div class="wow titulo animate__animated animate__fadeInUp">
+        <div class="titulo">
             <div class="siteServico">
                 <h2>
                     SERVIÇOS VIDROS E ESPELHOS
@@ -42,13 +42,13 @@
             </div>
         </div>
 
-        <article class="wow servicoVidro animate__animated animate__fadeInUp">
+        <article class="servicoVidro">
 
             <div class="siteServico">
                 <div class="ajuste">
                     <div class="servicoDegradePV">
                         <span>
-                            <img src="imgServicos/BOX.svg" alt="">
+                            <img src="imgServicos/boxVidro.svg" alt="">
                             <h2 class="h1servico">BOX</h2>
                         </span>
                     </div>
