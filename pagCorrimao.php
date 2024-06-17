@@ -86,11 +86,11 @@
 
         </article>
 
-        <section class="wppServico">
-            <div class="linkWpp">
-                <a href=""><img src="img/whatsapp (1).png" alt=""></a>
-            </div>
-        </section>
+        <div class="wppServico">
+            <a href="" class="wppLink">
+                <img src="img/whatsapp (1).png" alt="">
+            </a>
+        </div>
 
         </article>
 
