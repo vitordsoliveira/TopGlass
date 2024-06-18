@@ -83,3 +83,27 @@
   label p{
     font-size: 1.2em;
   }
+
+  td a{
+    color: #2390C1;
+    text-decoration: underline;
+  }
+
+  td a:hover{
+    color: #1F3E4C;
+  }
+
+  th p{
+    text-transform: uppercase;
+    color: #1F3E4C;
+    font-weight: 800;
+    font-size: 1.2em;
+  }
+
+  .desativar p{
+    color: red;
+  }
+
+  .ativar p{
+    color: #2390C1;
+  }

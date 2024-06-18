@@ -48,7 +48,7 @@
                 <div class="ajuste">
                     <div class="servicoDegradePV">
                         <span>
-                            <img src="imgServicos/CORRIMÃO.svg" alt="">
+                            <img src="imgServicos/janela.svg" alt="">
                             <h2 class="h1servico">CORRIMÃO</h2>
                         </span>
                     </div>

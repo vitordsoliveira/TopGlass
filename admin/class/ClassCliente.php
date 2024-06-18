@@ -2,7 +2,7 @@
 
 require_once('Conexao.php');
 
-class classCliente{
+class ClassCliente{
 
     // ATRIBUTOS 
     public $idCliente;
@@ -28,6 +28,8 @@ class classCliente{
         senhaCliente
     FROM 
         tbl_cliente
+        WHERE
+        statusCliente = 'ATIVO'
     ORDER BY 
         dataCadCliente DESC;";
 
@@ -41,6 +43,21 @@ class classCliente{
 
     }
 
+    //CARREGAR
+    public function Carregar(){
+
+        $sql = "SELECT * FROM tbl_cliente WHERE idCliente = $this->idCliente";
+        $conn = Conexao::LigarConexao();
+        $resultado = $conn->query($sql);
+        $cliente = $resultado->fetch();
+
+        $this->idCliente        =$cliente['idCliente'];
+        $this->nomeCliente      =$cliente['nomeCliente'];
+        $this->enderecoCliente  =$cliente['enderecoCliente'];
+        $this->telefoneCliente  =$cliente['telefoneCliente'];
+        $this->emailCliente     =$cliente['emailCliente'];
+        $this->statusCliente    =$cliente['statusCliente'];
+    }
 
     //INSERIR
     public function Inserir(){
@@ -66,4 +83,32 @@ class classCliente{
 
         echo "<script>document.location'index.php?p=cliente'</script>";
     }
+
+    //ATUALIZAR
+    public function Atualizar(){
+
+        $sql = "UPDATE tbl_cliente SET nomeCliente      = '".$this->nomeCliente."',
+                                       enderecoCliente = '".$this->enderecoCliente."',
+                                       telefoneCliente = '".$this->numeroCliente."',
+                                       emailCliente = '".$this->emailCliente."',
+                                       nomeCliente = '".$this->nomeCliente."',
+                                       statusCliente = '".$this->statusCliente."'
+                WHERE idCliente = $this->idCliente"   ;
+
+        $conn = Conexao::LigarConexao();
+        $conn->exec($sql);
+
+        echo "<script>document.location='index.php?p=cliente'</script>";
+
+    }
+
+    //DESATIVAR
+    public function Desativar($id){
+        $sql = "update tbl_cliente set statusCliente = 'INATIVO' where idCliente = $id";
+        $conn = Conexao::LigarConexao();
+        $resultado = $conn->query($sql);
+
+        echo"<script> document.location='index.php?p=cliente' </script>";
+    }
+
 }
