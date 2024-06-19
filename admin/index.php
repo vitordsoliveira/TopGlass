@@ -57,7 +57,7 @@
                     <li><a href="index.php?p=orcamento">ORÇAMENTOS</a></li>
                     <li><a href="index.php?p=cliente">CLIENTES</a></li>
                     <li><a href="index.php?p=galeria">GALERIA</a></li>
-                    <li><a href="index.php?p=banner">BANNER</a></li>
+                    <li><a href="index.php?p=banner">BANNERS</a></li>
                 </ul>
             </nav>
         </div>

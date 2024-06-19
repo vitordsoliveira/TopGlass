@@ -5,14 +5,14 @@ $id = $_GET['id'];
 $cliente = new ClassCliente($id);
 
 if (isset($_POST['nomeCliente'])) {
+    
     $nomeCliente = $_POST['nomeCliente'];
     $enderecoCliente = $_POST['enderecoCliente'];
     $telefoneCliente = $_POST['telefoneCliente'];
     $emailCliente = $_POST['emailCliente'];
     $senhaCliente = $_POST['senhaCliente'];
-    //$fotoCliente = $_POST['fotoCliente'];             <---- a foto é diferente
-
     $statusCliente = $_POST['statusCliente'];
+
     $cliente->nomeCliente = $nomeCliente;
     $cliente->enderecoCliente = $enderecoCliente;
     $cliente->telefoneCliente = $telefoneCliente;

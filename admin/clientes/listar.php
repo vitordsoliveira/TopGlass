@@ -6,11 +6,11 @@ $lista = $cliente->Listar();
 
 ?>
 
-<h2 class="tituloCliente">CLIENTES</h2>
+<h2 class="tituloDashboard">CLIENTES</h2>
 
 <table class="table">
 
-    <span class="btnCadCliente">
+    <span class="btnDashboard">
         <a href="index.php?p=cliente&cl=inserir"> + Cadastrar Cliente</a>
     </span>
 

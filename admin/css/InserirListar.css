@@ -1,12 +1,12 @@
-/* ######## LISTAR CLIENTE ########## */
+/* ######## LISTAR ########## */
 
-.tituloCliente{
+.tituloDashboard{
     font-size: 3em;
     color: #1F3E4C;
     text-align: center;
 }
 
-.btnCadCliente a{
+.btnDashboard a{
     border-radius: 15px;
     background: #2390C1;
     color: #fff;
@@ -18,33 +18,7 @@
     transition: ease-in-out .5s;
 }
 
-.btnCadCliente a:hover{
-    background: #1F3E4C;  
-    display: block;
-    transition: ease-in-out .5s;
-}
-
-/* ######## LISTAR ORÇAMENTO ######## */
-
-.tituloOrcamento{
-    font-size: 3em;
-    color: #1F3E4C;
-    text-align: center;
-}
-
-.btnCadOrcamento a{
-    border-radius: 15px;
-    background: #2390C1;
-    color: #fff;
-    padding: .5%;
-    font-size: 1.8em;
-    width: 15%;
-    display: block;
-    margin-left: 2%;
-    transition: ease-in-out .5s;
-}
-
-.btnCadOrcamento a:hover{
+.btnDashboard a:hover{
     background: #1F3E4C;  
     display: block;
     transition: ease-in-out .5s;

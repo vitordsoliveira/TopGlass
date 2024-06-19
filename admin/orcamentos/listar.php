@@ -6,9 +6,13 @@ $lista = $orcamento->Listar();
 
 ?>
 
-<h2 class="tituloOrcamento">ORÇAMENTOS</h2>
+<h2 class="tituloDashboard">ORÇAMENTOS</h2>
 
 <table class="table">
+
+<span class="btnDashboard">
+            <a href="index.php?p=orcamento&orc=inserir"> + Fazer Orçamento</a>
+        </span>
 
     <thead>
         <table class="table">
@@ -41,6 +45,3 @@ $lista = $orcamento->Listar();
 
         </table>
 
-        <span class="btnCadOrcamento">
-            <a href="index.php?p=orcamento&orc=inserir"> + Fazer Orçamento</a>
-        </span>
