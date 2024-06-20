@@ -16,6 +16,7 @@
                     <ul class="subServico">
                         <div>
                             <li><a href="pagBox.php">VIDROS</a></li>
+                            <li><a href="pagEspelho.php">ESPELHO</a></li>
                             <li><a href="pagAluminio.php">ESQUADRIA</a></li>
                         </div>
                     </ul>
