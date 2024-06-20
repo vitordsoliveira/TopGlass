@@ -135,8 +135,11 @@
   left: 14.2%;
 }
 
-.wppServico img {
+.wppServico div{
   width: 12.5%;
+}
+
+.wppServico img {
   display: block;
   transition: transform 0.5s ease-in-out;
 }

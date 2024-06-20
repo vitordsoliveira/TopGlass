@@ -1,4 +1,4 @@
-<footer class="wow rodape animate__animated animate__fadeInUp">
+<footer class="rodape">
     <div class="site">
 
         <div class="contato">

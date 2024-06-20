@@ -55,8 +55,8 @@
                     <div class="textoLateral">
                         <h1>ESPELHO</h1>
                         <p>
-                            Desfrute da facilidade de manutenção e da sensação de luminosidade que ele proporciona.<br>
-                            Reflita o melhor do seu espaço.<br>
+                            Desfrute da facilidade de manutenção e da sensação de luminosidade que ele proporciona,
+                            reflita o melhor do seu espaço.<br>
                             INFO<br>
                             INFO<br>
                             INFO<br>

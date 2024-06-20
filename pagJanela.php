@@ -34,7 +34,7 @@
 
     <main>
 
-        <div class="itulo">
+        <div class="titulo">
             <div class="siteServico">
                 <h2>
                     SERVIÇOS VIDROS E ESPELHOS
@@ -48,12 +48,12 @@
                 <div class="ajuste">
                     <div class="servicoDegradePV">
                         <span>
-                            <img src="imgServicos/janela.svg" alt="">
-                            <h2 class="h1servico">CORRIMÃO</h2>
+                            <img src="imgServicos/JanelaDeCorrer.svg" alt="">
+                            <h2 class="h1servico">JANELA</h2>
                         </span>
                     </div>
                     <div class="textoLateral">
-                        <h1>CORRIMÃO</h1>
+                        <h1>JANELA</h1>
                         <p>
                             Adicione segurança e requinte ao seu lar com nosso corrimão de vidro, oferecemos uma solução
                             durável e moderna para escadas e varandas!<br>
