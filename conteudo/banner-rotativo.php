@@ -2,8 +2,8 @@
     <div class="bannerR">
         <div class="site">
             <div class=banners>
-                <img src="banners/banner2.jpg" alt="">
-                <img src="banners/banner1.jpg" alt="">
+                <img src="banners/bannercartao.jpg" alt="">
+                <img src="banners/bannerdesconto.jpg" alt="">
             </div>
 
             <div class="pagamento">

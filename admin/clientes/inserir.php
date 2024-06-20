@@ -10,6 +10,19 @@ if (isset($_POST['nomeCliente'])) {
     $statusCliente = 'ATIVO';
     $altCliente = $nomeCliente;
 
+    $statusCliente = 'ATIVO';
+    $altCliente = 'foto' . $nomeCliente;
+
+    //Recuperar o id
+    require_once('class/Conexao.php');
+    $conexao = Conexao::LigarConexao();
+    $sql = $conexao->query('SELECT idCliente FROM tbl_cliente ORDER BY idCliente DESC LIMIT 1');
+    $resultado = $sql->fetch(PDO::FETCH_ASSOC); // Usar fetch em vez de fetchAll
+
+    if($resultado !== false && isset($resultado['idCliente'])){
+        $novoId = $resultado['idCliente'] + 1;
+    }
+
     require_once ('class/ClassCliente.php');
 
     $cliente = new ClassCliente();

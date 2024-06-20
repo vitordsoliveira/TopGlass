@@ -102,7 +102,7 @@ if (isset($_POST['email'])) {
     <link rel="stylesheet" href="css/animate.css">
 
     <link rel="stylesheet" href="css/estiloServico.css">
-    
+
     <link rel="stylesheet" href="css/estilo.css">
 
     <link rel="stylesheet" href="css/responsivo.css">
@@ -121,7 +121,7 @@ if (isset($_POST['email'])) {
     <!--LOGO E BANNER DA EMPRESA-->
     <article class="wow banner animate__animated animate__fadeInUp">
 
-        <img src="img/fundo.jpg" alt="Banner TOPGLASS" class="bannerImage">
+        <span class="bannerLogo"> <img src="img/fundo.jpg" alt="Banner TOPGLASS" class="bannerImage"></span>
         <img src="img/logo.svg" alt="Logotipo" class="logoImage">
 
     </article>

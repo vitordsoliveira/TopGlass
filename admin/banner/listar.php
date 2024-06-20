@@ -11,7 +11,7 @@ $lista = $banner->Listar();
 <table class="table">
 
     <span class="btnDashboard">
-        <a href="index.php?p=Banner&bn=inserir"> + Cadastrar Banner</a>
+        <a href="index.php?p=banner&bn=inserir"> + Cadastrar Banner</a>
     </span>
 
     <thead>
