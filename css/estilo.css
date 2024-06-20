@@ -834,15 +834,15 @@
    position: fixed;
    bottom: 3%;
    left: 14.2%;
+   width: 3%;
  }
 
- .wpp img {
-   width: 12.5%;
+ .wpp img{
    display: block;
    transition: transform 0.5s ease-in-out;
  }
 
- .wpp img:hover {
+ .wpp img:hover{
    transform: scale(1.1);
  }
 

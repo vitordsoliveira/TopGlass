@@ -48,15 +48,15 @@
                 <div class="ajuste">
                     <div class="servicoDegradePV">
                         <span>
-                            <img src="imgServicos/EspelhoParede.svg" alt="">
-                            <h2 class="h1servico">ESPELHO</h2>
+                            <img src="imgServicos/PortaCorrerVidro.svg" alt="">
+                            <h2 class="h1servico">PORTA DE CORRER</h2>
                         </span>
                     </div>
                     <div class="textoLateral">
-                        <h1>ESPELHO</h1>
+                        <h1>PORTA DE CORRER</h1>
                         <p>
-                            Desfrute da facilidade de manutenção e da sensação de luminosidade que ele proporciona,
-                            reflita o melhor do seu espaço.<br>
+                            Adicione segurança e requinte ao seu lar com nosso corrimão de vidro, oferecemos uma solução
+                            durável e moderna para escadas e varandas!<br>
                             INFO<br>
                             INFO<br>
                             INFO<br>
@@ -76,9 +76,8 @@
                 <div class="prox">
                     <div>
                         <span><a href=""><img src="img/setae.png" alt=""></a></span>
-                        <p>PÁGINA ANTERIOR
-                            |
-                            PRÓXIMA PÁGINA</p><span><a href=""><img src="img/setad.png" alt=""></a></span>
+                        <p>PÁGINA ANTERIOR | PRÓXIMA PÁGINA</p>
+                        <span><a href=""><img src="img/setad.png" alt=""></a></span>
                     </div>
                 </div>
 

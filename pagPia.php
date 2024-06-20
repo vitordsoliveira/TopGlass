@@ -34,7 +34,7 @@
 
     <main>
 
-        <div class="itulo">
+        <div class="titulo">
             <div class="siteServico">
                 <h2>
                     SERVIÇOS VIDROS E ESPELHOS
@@ -48,12 +48,12 @@
                 <div class="ajuste">
                     <div class="servicoDegradePV">
                         <span>
-                            <img src="imgServicos/CORRIMÃO.svg" alt="">
-                            <h2 class="h1servico">CORRIMÃO</h2>
+                            <img src="imgServicos/piaVidro.svg" alt="">
+                            <h2 class="h1servico">PIA</h2>
                         </span>
                     </div>
                     <div class="textoLateral">
-                        <h1>CORRIMÃO</h1>
+                        <h1>PIA</h1>
                         <p>
                             Adicione segurança e requinte ao seu lar com nosso corrimão de vidro, oferecemos uma solução
                             durável e moderna para escadas e varandas!<br>
@@ -75,9 +75,9 @@
                 </div>
                 <div class="prox">
                     <div>
-                        <span><a href="pagBox.php"><img src="img/setae.png" alt=""></a></span>
+                        <span><a href=""><img src="img/setae.png" alt=""></a></span>
                         <p>PÁGINA ANTERIOR | PRÓXIMA PÁGINA</p>
-                        <span><a href="pagBox.php"><img src="img/setad.png" alt=""></a></span>
+                        <span><a href=""><img src="img/setad.png" alt=""></a></span>
                     </div>
                 </div>
 

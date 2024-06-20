@@ -75,9 +75,9 @@
                 </div>
                 <div class="prox">
                     <div>
-                        <span><a href="pagBox.php"><img src="img/setae.png" alt=""></a></span>
+                        <span><a href=""><img src="img/setae.png" alt=""></a></span>
                         <p>PÁGINA ANTERIOR | PRÓXIMA PÁGINA</p>
-                        <span><a href="pagEspelho.php"><img src="img/setad.png" alt=""></a></span>
+                        <span><a href=""><img src="img/setad.png" alt=""></a></span>
                     </div>
                 </div>
 
@@ -86,11 +86,14 @@
 
         </article>
 
-        <div class="wppServico">
-            <a href="" class="wppLink">
-                <img src="img/whatsapp (1).png" alt="">
-            </a>
-        </div>
+        <section class="wppServico">
+            <div>
+                <a href="">
+                    <img src="img/whatsapp (1).png" alt="">
+                </a>
+            </div>
+
+        </section>
 
         </article>
 

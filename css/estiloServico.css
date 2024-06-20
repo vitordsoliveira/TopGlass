@@ -129,7 +129,7 @@
 /* ############## FIM SERVICO VE ############ */
 
 /* WPP */
-.wppServico {
+.wppServico{
   position: fixed;
   bottom: 20%;
   left: 14.2%;
@@ -139,12 +139,12 @@
   width: 12.5%;
 }
 
-.wppServico img {
+.wppServico img{
   display: block;
   transition: transform 0.5s ease-in-out;
 }
 
-.wppServico img:hover {
+.wppServico img:hover{
   transform: scale(1.1);
 }
 
