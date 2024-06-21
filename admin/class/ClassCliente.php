@@ -1,21 +1,34 @@
 <?php
 
-require_once('Conexao.php');
+require_once ('Conexao.php');
 
-class ClassCliente{
+class ClassCliente
+{
 
     // ATRIBUTOS 
     public $idCliente;
     public $nomeCliente;
     public $emailCliente;
-    public $numeroCliente ;
+    public $numeroCliente;
     public $enderecoCliente;
     public $dataCadCliente;
     public $cpfCliente;
     public $statusCliente;
 
+    public function __construct($id = false)
+    {
+        if ($id) {
+
+            $this->idCliente = $id;
+            $this->Carregar();
+
+        }
+
+    }
+
     // LISTAR
-    public function Listar(){
+    public function Listar()
+    {
         $sql = "SELECT 
         idCliente,
         nomeCliente,
@@ -44,23 +57,26 @@ class ClassCliente{
     }
 
     //CARREGAR
-    public function Carregar(){
+    public function Carregar()
+    {
 
         $sql = "SELECT * FROM tbl_cliente WHERE idCliente = $this->idCliente";
         $conn = Conexao::LigarConexao();
         $resultado = $conn->query($sql);
         $cliente = $resultado->fetch();
 
-        $this->idCliente        =$cliente['idCliente'];
-        $this->nomeCliente      =$cliente['nomeCliente'];
-        $this->enderecoCliente  =$cliente['enderecoCliente'];
-        $this->telefoneCliente  =$cliente['telefoneCliente'];
-        $this->emailCliente     =$cliente['emailCliente'];
-        $this->statusCliente    =$cliente['statusCliente'];
+        $this->idCliente = $cliente['idCliente'];
+        $this->nomeCliente = $cliente['nomeCliente'];
+        $this->enderecoCliente = $cliente['enderecoCliente'];
+        $this->numeroCliente = $cliente['numeroCliente'];
+        $this->emailCliente = $cliente['emailCliente'];
+        $this->cpfCliente = $cliente['cpfCliente'];
+        $this->statusCliente = $cliente['statusCliente'];
     }
 
     //INSERIR
-    public function Inserir(){
+    public function Inserir()
+    {
 
         $sql = "INSERT INTO tbl_cliente (nomeCliente, 
                                         emailCliente,
@@ -69,15 +85,15 @@ class ClassCliente{
                                         cpfCliente, 
                                         dataCadCliente, 
                                         statusCliente) 
-                        VALUES ('". $this->nomeCliente ."',
-                                '". $this->emailCliente ."',
-                                '". $this->enderecoCliente ."',
-                                '". $this->numeroCliente ."',
-                                '". $this->cpfCliente ."' 
-                                '". $this->dataCadCliente ."' 
-                                '". $this->statusCliente ."' )";
+                        VALUES ('" . $this->nomeCliente . "',
+                                '" . $this->emailCliente . "',
+                                '" . $this->enderecoCliente . "',
+                                '" . $this->numeroCliente . "',
+                                '" . $this->cpfCliente . "' 
+                                '" . $this->dataCadCliente . "' 
+                                '" . $this->statusCliente . "' )";
 
-                                
+
         $connect = Conexao::LigarConexao();
         $connect->exec($sql);
 
@@ -85,15 +101,16 @@ class ClassCliente{
     }
 
     //ATUALIZAR
-    public function Atualizar(){
+    public function Atualizar()
+    {
 
-        $sql = "UPDATE tbl_cliente SET nomeCliente      = '".$this->nomeCliente."',
-                                       enderecoCliente = '".$this->enderecoCliente."',
-                                       telefoneCliente = '".$this->numeroCliente."',
-                                       emailCliente = '".$this->emailCliente."',
-                                       nomeCliente = '".$this->nomeCliente."',
-                                       statusCliente = '".$this->statusCliente."'
-                WHERE idCliente = $this->idCliente"   ;
+        $sql = "UPDATE tbl_cliente SET nomeCliente      = '" . $this->nomeCliente . "',
+                                       enderecoCliente = '" . $this->enderecoCliente . "',
+                                       numeroCliente = '" . $this->numeroCliente . "',
+                                       emailCliente = '" . $this->emailCliente . "',
+                                       nomeCliente = '" . $this->cpfCliente . "',
+                                       statusCliente = '" . $this->statusCliente . "'
+                WHERE idCliente = $this->idCliente";
 
         $conn = Conexao::LigarConexao();
         $conn->exec($sql);
@@ -103,12 +120,13 @@ class ClassCliente{
     }
 
     //DESATIVAR
-    public function Desativar($id){
+    public function Desativar($id)
+    {
         $sql = "update tbl_cliente set statusCliente = 'INATIVO' where idCliente = $id";
         $conn = Conexao::LigarConexao();
         $resultado = $conn->query($sql);
 
-        echo"<script> document.location='index.php?p=cliente' </script>";
+        echo "<script> document.location='index.php?p=cliente' </script>";
     }
 
 }

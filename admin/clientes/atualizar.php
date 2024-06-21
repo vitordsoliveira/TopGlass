@@ -8,18 +8,16 @@ if (isset($_POST['nomeCliente'])) {
     
     $nomeCliente = $_POST['nomeCliente'];
     $enderecoCliente = $_POST['enderecoCliente'];
-    $telefoneCliente = $_POST['telefoneCliente'];
+    $numeroCliente = $_POST['numeroCliente'];
     $emailCliente = $_POST['emailCliente'];
     $senhaCliente = $_POST['senhaCliente'];
     $statusCliente = $_POST['statusCliente'];
 
     $cliente->nomeCliente = $nomeCliente;
     $cliente->enderecoCliente = $enderecoCliente;
-    $cliente->telefoneCliente = $telefoneCliente;
+    $cliente->numeroCliente = $numeroCliente;
     $cliente->emailCliente = $emailCliente;
-    $cliente->senhaCliente = $senhaCliente;
-    $cliente->fotoCliente = $fotoCliente;
-    $cliente->altCliente = $altCliente;
+    $cliente->cpfCliente = $cpfCliente;
     $cliente->statusCliente = $statusCliente;
 
     $cliente->Atualizar();
@@ -40,7 +38,7 @@ if (isset($_POST['nomeCliente'])) {
 
                 <div class="mb-3">
                     <label for="nomeCliente" class="form-label">Nome Cliente:</label>
-                    <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" required>
+                    <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" required value="<?php echo $cliente->nomeCliente; ?>">
                 </div>
 
                 <div class="row">
@@ -49,14 +47,14 @@ if (isset($_POST['nomeCliente'])) {
                         <div class="mb-3">
                             <label for="enderecoCliente" class="form-label">Endereço Cliente:</label>
                             <input type="text" class="form-control" id="enderecoCliente" name="enderecoCliente"
-                                required>
+                                required value="<?php echo $cliente->enderecoCliente; ?>">
                         </div>
                     </div>
 
                     <div class="col-3">
                         <div class="mb-3">
-                            <label for="telefoneCliente" class="form-label">Telefone Cliente:</label>
-                            <input type="tel" class="form-control" id="telefoneCliente" name="telefoneCliente" required>
+                            <label for="numeroCliente" class="form-label">Número Cliente:</label>
+                            <input type="tel" class="form-control" id="numeroCliente" name="numeroCliente" required value="<?php echo $cliente->numeroCliente; ?>">
                         </div>
                     </div>
 
@@ -66,13 +64,13 @@ if (isset($_POST['nomeCliente'])) {
                     <div class="col-8">
                         <div class="mb-3">
                             <label for="emailCliente" class="form-label">E-mail Cliente:</label>
-                            <input type="email" class="form-control" id="emailCliente" name="emailCliente" required>
+                            <input type="email" class="form-control" id="emailCliente" name="emailCliente" required value="<?php echo $cliente->emailCliente; ?>">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="mb-3">
                             <label for="senhaCliente" class="form-label">CPF Cliente:</label>
-                            <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" required>
+                            <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" required value="<?php echo $cliente->cpfCliente; ?>">
                         </div>
                     </div>
                 </div>

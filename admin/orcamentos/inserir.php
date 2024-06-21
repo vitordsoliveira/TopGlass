@@ -48,22 +48,22 @@
                         <option value="servicoVidro" selected>
                             <p>SERVIÇOS VIDRO</p>
                         </option>
-                        <option value="Box de Vidro">
+                        <option value="Box de Vidro" selected value = optionVidro>
                             <p>Box de Vidro</p>
                         </option>
-                        <option value="Jalena de Vidro">
+                        <option value="Jalena de Vidro" selected value = optionVidro>
                             <p>Janela de Vidro</p>
                         </option>
-                        <option value="Pia de Vidro">
+                        <option value="Pia de Vidro" selected value = optionVidro>
                             <p>Pia de Vidro</p>
                         </option>
-                        <option value="Teto de Vidro">
+                        <option value="Teto de Vidro" selected value = optionVidro>
                             <p>Teto de Vidro</p>
                         </option>
-                        <option value="Porta de Vidro">
+                        <option value="Porta de Vidro" selected value = optionVidro>
                             <p>Porta de Vidro</p>
                         </option>
-                        <option value="Corrimão de Vidro">
+                        <option value="Corrimão de Vidro" selected value = optionVidro>
                             <p>Corrimão de Vidro</p>
                         </option>
                     </select>
@@ -71,16 +71,16 @@
 
                 <div class="options col-3">
                     <select name="servicosEsquadria" id="servicosEsquadria" required>
-                        <option value="servicoEsquadria" selected>
+                        <option value="servicoEsquadria" selected value = optionEsquadria>
                             <p>SERVIÇOS ESQUADRIA</p>
                         </option>
-                        <option value="Porta de alumínio">
+                        <option value="Porta de alumínio" selected  value = optionEsquadria>
                             <p>Porta de alumínio</p>
                         </option>
-                        <option value="Janela de alumínio">
+                        <option value="Janela de alumínio" selected  value = optionEsquadria>
                             <p>Janela de alumínio</p>
                         </option>
-                        <option value="Corrimão de alumínio">
+                        <option value="Corrimão de alumínio" selected  value = optionEsquadria>
                             <p>Corrimão de alumínio</p>
                         </option>
                     </select>
@@ -97,10 +97,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
 
     </form>
     <div>
