@@ -10,6 +10,7 @@ if (isset($_POST['nomeCliente'])) {
     $enderecoCliente = $_POST['enderecoCliente'];
     $numeroCliente = $_POST['numeroCliente'];
     $emailCliente = $_POST['emailCliente'];
+    $cpfCliente = $_POST['cpfCliente'];
     $senhaCliente = $_POST['senhaCliente'];
     $statusCliente = $_POST['statusCliente'];
 
