@@ -1,3 +1,41 @@
+<?php
+
+if(isset($_POST['idOrcamento'])){
+    $idOrcamento = $_POST['idOrcamento'];
+    $enderecoOrcamento = $_POST['enderecoOrcamento'];
+    $telefoneOrcamento = $_POST['telefoneOrcamento'];
+    $emailOrcamento = $_POST['emailOrcamento'];
+    $senhaOrcamento = $_POST['senhaOrcamento'];
+    //$fotoOrcamento = $_POST['fotoOrcamento'];             <---- a foto é diferente
+
+    $statusOrcamento = 'ATIVO';
+    //Recuperar o id
+    require_once('class/Conexao.php');
+    $conexao = Conexao::LigarConexao();
+    $sql = $conexao->query('SELECT idOrcamento FROM tbl_orcamento ORDER BY idOrcamento DESC LIMIT 1');
+    $resultado = $sql->fetch(PDO::FETCH_ASSOC); // Usar fetch em vez de fetchAll
+
+    if($resultado !== false && isset($resultado['idOrcamento'])){
+        $novoId = $resultado['idOrcamento'] + 1;
+    }
+
+    require_once ('class/ClassOrcamento.php');
+    $orcamento = new ClassOrcamento();
+    $orcamento->idOrcamento = $idOrcamento;
+    $orcamento->idServicos = $idServicos;
+    $orcamento->idCliente = $idCliente;
+    $orcamento->idServico = $idServico;
+    $orcamento->idItens = $idItens;
+    $orcamento->idFuncionario = $idFuncionario;
+    $orcamento->valorOrcamento = $valorOrcamento;
+    $orcamento->statusOrcamento = $statusOrcamento;
+    $orcamento->comentOrcamento = $comentOrcamento;
+
+    $orcamento->Inserir();
+}
+
+?>
+
 <div class="container mt-5">
     <form action="index.php?p=orcamento&orc=atualizar&id=<?php echo $id; ?>" method="POST"
         enctype="multipart/form-data">

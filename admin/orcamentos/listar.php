@@ -39,9 +39,6 @@ $lista = $orcamento->Listar();
                 <p>Comentario</p>
             </th>
             <th scope="col">
-                <p>EXECUTADO</p>
-            </th>
-            <th scope="col">
                 <p>Status</p>
             </th>
             <th scope="col" class="ativar">
@@ -63,7 +60,6 @@ $lista = $orcamento->Listar();
                 <td scope="col"><?php echo ($linha['valorOrcamento']); ?></td>
                 <td scope="col"><?php echo ($linha['dataOrcamento']); ?></td>
                 <td scope="col"><?php echo ($linha['comentOrcamento']); ?></td>
-                <td scope="col"><?php echo ($linha['Executado']); ?></td>
                 <td scope="col"><?php echo ($linha['statusOrcamento']); ?></td>
                 <td><a href="index.php?p=orcamento&orc=atualizar&id=<?php echo $linha['idOrcamento']; ?>">Atualizar</a></td>
                 <td><a href="index.php?p=orcamento&orc=desativar&id=<?php echo $linha['idOrcamento']; ?>">Desativar</a></td>
