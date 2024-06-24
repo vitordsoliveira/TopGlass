@@ -78,8 +78,8 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
 ?>
 
 <div class="container mt-5">
-    
-    <form action="index.php?p=orcamento&orc=atualizar&id=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
+    <form action="index.php?p=orcamento&orc=atualizar&id=<?php echo $id; ?>" method="POST"
+        enctype="multipart/form-data">
         <div class="row">
             <h3>EDITAR CLIENTE</h3>
             <div class="row">
@@ -88,7 +88,9 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
                         <label for="cpfCliente" class="form-label">
                             <p>CPF Cliente:</p>
                         </label>
-                        <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" placeholder="DIGITE O CPF " required value="<?php echo htmlspecialchars($orcamentoData->cpfCliente); ?>">
+                        <input type="text" class="form-control" id="cpfCliente" name="cpfCliente"
+                            placeholder="DIGITE O CPF " required
+                            value="<?php echo htmlspecialchars($orcamentoData->cpfCliente); ?>">
                     </div>
                 </div>
                 <div class="col-6">
@@ -96,7 +98,8 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
                         <label for="nomeCliente" class="form-label">
                             <p>Nome Cliente:</p>
                         </label>
-                        <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" required value="<?php echo htmlspecialchars($orcamentoData->nomeCliente); ?>">
+                        <input type="text" class="form-control" id="nomeCliente" name="nomeCliente" required
+                            value="<?php echo htmlspecialchars($orcamentoData->nomeCliente); ?>">
                     </div>
                 </div>
                 <div class="col-2">
@@ -104,7 +107,8 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
                         <label for="telefoneCliente" class="form-label">
                             <p>Telefone Cliente:</p>
                         </label>
-                        <input type="tel" class="form-control" id="telefoneCliente" name="telefoneCliente" required value="<?php echo htmlspecialchars($orcamentoData->numeroCliente); ?>">
+                        <input type="tel" class="form-control" id="telefoneCliente" name="telefoneCliente" required
+                            value="<?php echo htmlspecialchars($orcamentoData->numeroCliente); ?>">
                     </div>
                 </div>
             </div>
@@ -112,7 +116,7 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
             <h3>REFAZER ORÇAMENTO</h3>
             <div class="row">
                 <div class="options col-3">
-                    <select name="idServicos" id="servicosVidro" class="form-select" required>
+                    <select name="servicosVidro" id="servicosVidro" class="form-select" required>
                         <option value="servicoVidro" selected>SERVIÇOS VIDRO</option>
                         <option value="Box de Vidro">Box de Vidro</option>
                         <option value="Janela de Vidro">Janela de Vidro</option>
@@ -123,7 +127,7 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
                     </select>
                 </div>
                 <div class="options col-3">
-                    <select name="idServico" id="servicosEsquadria" class="form-select" required>
+                    <select name="servicosEsquadria" id="servicosEsquadria" class="form-select" required>
                         <option value="servicoEsquadria" selected>SERVIÇOS ESQUADRIA</option>
                         <option value="Porta de alumínio">Porta de alumínio</option>
                         <option value="Janela de alumínio">Janela de alumínio</option>
@@ -155,7 +159,8 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
                         <label for="valorOrcamento" class="form-label">
                             <p>VALOR</p>
                         </label>
-                        <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" required value="<?php echo htmlspecialchars($orcamentoData->valorOrcamento); ?>">
+                        <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" required
+                            value="<?php echo htmlspecialchars($orcamentoData->valorOrcamento); ?>">
                     </div>
                 </div>
                 <div class="col-3">
@@ -164,8 +169,8 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
                             <p>STATUS</p>
                         </label>
                         <select class="form-select" id="statusOrcamento" name="statusOrcamento" required>
-                            <option value="ATIVO" <?php echo ($orcamentoData->statusOrcamento == 'ATIVO') ? 'selected' : ''; ?>>ATIVO</option>
-                            <option value="DESATIVO" <?php echo ($orcamentoData->statusOrcamento == 'DESATIVO') ? 'selected' : ''; ?>>DESATIVO</option>
+                            <option value="statusOrcamento">ATIVO</option>
+                            <option value="statusOrcamento">DESATIVO</option>
                         </select>
                     </div>
                 </div>
@@ -173,4 +178,14 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
             <div class="mb-3">
                 <label for="comentOrcamento" class="form-label">
                     <p>Comentário</p>
-                </label
+                </label>
+                <textarea name="comentOrcamento" id="comentOrcamento" class="form-control" cols="65" rows="10"
+                    placeholder="Escrever informações básicas do serviço como medidas (1.20 x 2.04) em metro do serviço, cor do serviço ou apontamentos sobre o serviço."
+                    required><?php echo htmlspecialchars($orcamentoData->comentOrcamento); ?></textarea>
+            </div>
+            <div class="btnEnviar col-2">
+                <button type="submit" class="btn btn-primary">Editar Orçamento</button>
+            </div>
+        </div>
+    </form>
+</div>
