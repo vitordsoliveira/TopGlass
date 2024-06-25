@@ -1,5 +1,4 @@
 <?php
-
 require_once ('class/ClassCliente.php');
 require_once ('class/ClassOrcamento.php');
 $id = $_GET['id'];
@@ -10,43 +9,54 @@ $clienteId = $orcamento->idCliente;
 $cliente = new ClassCliente($clienteId);
 
 if (isset($_POST['idServicos'])) {
+    // Verificar todos os campos
+    if (
+        isset(
+        $_POST['idCliente'],
+        $_POST['idServico'],
+        $_POST['idItens'],
+        $_POST['idFuncionario'],
+        $_POST['valorOrcamento'],
+        $_POST['statusOrcamento'],
+        $_POST['comentOrcamento']
+    )
+    ) {
+        $idServicos = $_POST['idServicos'];
+        $idCliente = $_POST['idCliente'];
+        $idServico = $_POST['idServico'];
+        $idItens = $_POST['idItens'];
+        $idFuncionario = $_POST['idFuncionario'];
+        $valorOrcamento = $_POST['valorOrcamento'];
+        $statusOrcamento = $_POST['statusOrcamento'];
+        $comentOrcamento = $_POST['comentOrcamento'];
 
-    $idServicos = $_POST['idServicos'];
-    $idCliente = $_POST['idCliente'];
-    $idServico = $_POST['idServico'];
-    $idItens = $_POST['idItens'];
-    $idFuncionario = $_POST['idFuncionario'];
-    $valorOrcamento = $_POST['valorOrcamento'];
-    $statusOrcamento = $_POST['statusOrcamento'];
-    $comentOrcamento = $_POST['comentOrcamento'];
+        $orcamento->idServicos = $idServicos;
+        $orcamento->idCliente = $idCliente;
+        $orcamento->idServico = $idServico;
+        $orcamento->idItens = $idItens;
+        $orcamento->idFuncionario = $idFuncionario;
+        $orcamento->valorOrcamento = $valorOrcamento;
+        $orcamento->statusOrcamento = $statusOrcamento;
+        $orcamento->comentOrcamento = $comentOrcamento;
 
-    $orcamento->idServicos = $idServicos;
-    $orcamento->idCliente = $idCliente;
-    $orcamento->idServico = $idServico;
-    $orcamento->idItens = $idItens;
-    $orcamento->idFuncionario = $idFuncionario;
-    $orcamento->valorOrcamento = $valorOrcamento;
-    $orcamento->statusOrcamento = $statusOrcamento;
-    $orcamento->comentOrcamento = $comentOrcamento;
+        $orcamento->Atualizar();
 
-    $orcamento->Atualizar();
+        if (isset($_POST['nomeCliente'], $_POST['numeroCliente'], $_POST['cpfCliente'])) {
+            $nomeCliente = $_POST['nomeCliente'];
+            $numeroCliente = $_POST['numeroCliente']; // Certifique-se de que é o campo correto
+            $cpfCliente = $_POST['cpfCliente'];
 
-    if (isset($_POST['nomeCliente'])) {
+            $cliente->nomeCliente = $nomeCliente;
+            $cliente->numeroCliente = $numeroCliente; // Certifique-se de que é o campo correto
+            $cliente->cpfCliente = $cpfCliente;
 
-        $nomeCliente = $_POST['nomeCliente'];
-        $numeroCliente = $_POST['numeroCliente'];
-        $cpfCliente = $_POST['cpfCliente'];
-
-        $cliente->nomeCliente = $nomeCliente;
-        $cliente->numeroCliente = $numeroCliente;
-        $cliente->cpfCliente = $cpfCliente;
-
-        $cliente->Atualizar();
+            $cliente->Atualizar();
+        }
     }
 }
 
 $sql = "
-    SELECT 
+    SELECT
         tbl_orcamento.idOrcamento,
         tbl_orcamento.idServicos,
         tbl_orcamento.idCliente,
@@ -75,6 +85,43 @@ $stmt = $conn->prepare($sql);
 $stmt->bindParam(':idOrcamento', $id, PDO::PARAM_INT);
 $stmt->execute();
 $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
+
+function obterServicos()
+{
+    $conn = Conexao::LigarConexao();
+
+    $sql = "SELECT 
+    tbl_servico.idServico, 
+    tbl_servico.nomeServicos, 
+    tbl_tipo_servico.tipoServico 
+FROM 
+    tbl_servico
+INNER JOIN 
+    tbl_tipo_servico ON tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico 
+WHERE 
+    tbl_servico.statusServicos = 'ATIVO' 
+    AND tbl_tipo_servico.statusServico = 'ATIVO';";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $servicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Classificar os serviços por tipo
+    $servicosPorTipo = [
+        'Vidro' => [],
+        'Esquadria' => [],
+    ];
+
+    foreach ($servicos as $servico) {
+        if ($servico['tipoServico'] == 'Vidro') {
+            $servicosPorTipo['Vidro'][] = $servico;
+        } else if ($servico['tipoServico'] == 'Esquadria') {
+            $servicosPorTipo['Esquadria'][] = $servico;
+        }
+    }
+
+    return $servicosPorTipo;
+}
 ?>
 
 <div class="container mt-5">
@@ -104,34 +151,40 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
                 </div>
                 <div class="col-2">
                     <div class="mb-3">
-                        <label for="telefoneCliente" class="form-label">
+                        <label for="numeroCliente" class="form-label">
                             <p>Telefone Cliente:</p>
                         </label>
-                        <input type="tel" class="form-control" id="telefoneCliente" name="telefoneCliente" required
+                        <input type="tel" class="form-control" id="numeroCliente" name="numeroCliente" required
                             value="<?php echo htmlspecialchars($orcamentoData->numeroCliente); ?>">
                     </div>
                 </div>
             </div>
-            <!-- FORM ORC -->
             <h3>REFAZER ORÇAMENTO</h3>
             <div class="row">
                 <div class="options col-3">
-                    <select name="servicosVidro" id="servicosVidro" class="form-select" required>
-                        <option value="servicoVidro" selected>SERVIÇOS VIDRO</option>
-                        <option value="Box de Vidro">Box de Vidro</option>
-                        <option value="Janela de Vidro">Janela de Vidro</option>
-                        <option value="Pia de Vidro">Pia de Vidro</option>
-                        <option value="Teto de Vidro">Teto de Vidro</option>
-                        <option value="Porta de Vidro">Porta de Vidro</option>
-                        <option value="Corrimão de Vidro">Corrimão de Vidro</option>
+                    <label for="servicosVidro" class="form-label">SERVIÇOS VIDRO</label>
+                    <select name="idServicosVidro" id="servicosVidro" class="form-select" required>
+                        <?php if (!empty($servicosPorTipo['Vidro'])): ?>
+                            <?php foreach ($servicosPorTipo['Vidro'] as $servico): ?>
+                                <option value="<?php echo $servico['idServico']; ?>" <?php echo ($servico['idServico'] == $orcamentoData->idServico && $orcamentoData->idServicos == $servico['idServico']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($servico['nomeServicos']); ?></option>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="">Nenhum serviço de vidro disponível</option>
+                        <?php endif; ?>
                     </select>
                 </div>
                 <div class="options col-3">
-                    <select name="servicosEsquadria" id="servicosEsquadria" class="form-select" required>
-                        <option value="servicoEsquadria" selected>SERVIÇOS ESQUADRIA</option>
-                        <option value="Porta de alumínio">Porta de alumínio</option>
-                        <option value="Janela de alumínio">Janela de alumínio</option>
-                        <option value="Corrimão de alumínio">Corrimão de alumínio</option>
+                    <label for="servicosEsquadria" class="form-label">SERVIÇOS ESQUADRIA</label>
+                    <select name="idServicosEsquadria" id="servicosEsquadria" class="form-select" required>
+                        <?php if (!empty($servicosPorTipo['Esquadria'])): ?>
+                            <?php foreach ($servicosPorTipo['Esquadria'] as $servico): ?>
+                                <option value="<?php echo $servico['idServico']; ?>" <?php echo ($servico['idServico'] == $orcamentoData->idServico && $orcamentoData->idServicos == $servico['idServico']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($servico['nomeServicos']); ?></option>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="">Nenhum serviço de esquadria disponível</option>
+                        <?php endif; ?>
                     </select>
                 </div>
             </div>
@@ -141,15 +194,12 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
                     <select name="idFuncionario" id="idFuncionario" class="form-select" required>
                         <option value="">Selecione o Funcionário</option>
                         <?php
-                        // Conexão com o banco e execução da consulta
-                        $conn = Conexao::LigarConexao();
-                        $query = "SELECT idFuncionario, nomeFuncionario FROM tbl_funcionario";
-                        $stmt = $conn->prepare($query);
-                        $stmt->execute();
-                        // Loop para exibir as opções
-                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                            $selected = ($row['idFuncionario'] == $orcamentoData->idFuncionario) ? 'selected' : '';
-                            echo '<option value="' . $row['idFuncionario'] . '" ' . $selected . '>' . htmlspecialchars($row['nomeFuncionario']) . '</option>';
+                        $queryFuncionarios = "SELECT idFuncionario, nomeFuncionario FROM tbl_funcionario";
+                        $stmtFuncionarios = $conn->prepare($queryFuncionarios);
+                        $stmtFuncionarios->execute();
+                        while ($rowFuncionario = $stmtFuncionarios->fetch(PDO::FETCH_ASSOC)) {
+                            $selected = ($rowFuncionario['idFuncionario'] == $orcamentoData->idFuncionario) ? 'selected' : '';
+                            echo '<option value="' . $rowFuncionario['idFuncionario'] . '" ' . $selected . '>' . htmlspecialchars($rowFuncionario['nomeFuncionario']) . '</option>';
                         }
                         ?>
                     </select>
@@ -169,8 +219,8 @@ $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
                             <p>STATUS</p>
                         </label>
                         <select class="form-select" id="statusOrcamento" name="statusOrcamento" required>
-                            <option value="statusOrcamento">ATIVO</option>
-                            <option value="statusOrcamento">DESATIVO</option>
+                            <option value="ATIVO" <?php echo ($orcamentoData->statusOrcamento == 'ATIVO') ? 'selected' : ''; ?>>ATIVO</option>
+                            <option value="DESATIVO" <?php echo ($orcamentoData->statusOrcamento == 'DESATIVO') ? 'selected' : ''; ?>>DESATIVO</option>
                         </select>
                     </div>
                 </div>
