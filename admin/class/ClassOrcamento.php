@@ -127,30 +127,22 @@ class ClassOrcamento
     public function Atualizar()
     {
             $sql = "UPDATE tbl_orcamento 
-                    SET idServicos = :idServicos,
-                        idCliente = :idCliente,
-                        idServico = :idServico,
-                        idItens = :idItens,
-                        idFuncionario = :idFuncionario,
-                        valorOrcamento = :valorOrcamento,
-                        statusOrcamento = :statusOrcamento,
-                        comentOrcamento = :comentOrcamento
-                    WHERE idOrcamento = :idOrcamento";
-        
+                    SET idServicos = '".$this->idServicos."',
+                        idCliente = '".$this->idCliente."',
+                        idServico = '".$this->idServico."',
+                        idFuncionario = '".$this-> idFuncionario."',
+                        valorOrcamento = '".$this-> valorOrcamento."',
+                        statusOrcamento = '".$this->statusOrcamento."',
+                        comentOrcamento = '".$this->comentOrcamento."',
+                    WHERE idOrcamento = $this->idOrcamento";
+    
             $conn = Conexao::LigarConexao();
-            $stmt = $conn->prepare($sql);
-        
-            $stmt->bindParam(':idServicos', $this->idServicos);
-            $stmt->bindParam(':idCliente', $this->idCliente);
-            $stmt->bindParam(':idServico', $this->idServico);
-            $stmt->bindParam(':idItens', $this->idItens);
-            $stmt->bindParam(':idFuncionario', $this->idFuncionario);
-            $stmt->bindParam(':valorOrcamento', $this->valorOrcamento);
-            $stmt->bindParam(':statusOrcamento', $this->statusOrcamento);
-            $stmt->bindParam(':comentOrcamento', $this->comentOrcamento);
-            $stmt->bindParam(':idOrcamento', $this->idOrcamento);
-        
-            $stmt->execute();
+           $conn->exec($sql);
+
+}
+
+        public function mostrarOrcamento(){
+
         }
 
 
