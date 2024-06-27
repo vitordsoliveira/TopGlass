@@ -127,7 +127,7 @@ class ClassOrcamento
     public function Atualizar()
     {
             $sql = "UPDATE tbl_orcamento 
-                    SET idServicos = '".$this->idServicos."',
+                    SET 
                         idCliente = '".$this->idCliente."',
                         idServico = '".$this->idServico."',
                         idFuncionario = '".$this-> idFuncionario."',
@@ -140,11 +140,6 @@ class ClassOrcamento
            $conn->exec($sql);
 
 }
-
-        public function mostrarOrcamento(){
-
-        }
-
 
     //DESATIVAR
     public function Desativar($id)
