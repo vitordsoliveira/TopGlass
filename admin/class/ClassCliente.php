@@ -76,43 +76,39 @@ class ClassCliente
     }
 
     // INSERIR
-    public function Inserir()
-    {
-        $sql = "INSERT INTO tbl_cliente (nomeCliente, emailCliente, enderecoCliente, numeroCliente, cpfCliente, dataCadCliente, statusCliente) 
-                VALUES (:nomeCliente, :emailCliente, :enderecoCliente, :numeroCliente, :cpfCliente, :dataCadCliente, :statusCliente)";
+    public function Inserir(){
+        $sql = "INSERT INTO tbl_cliente (   nomeCliente,
+                                            emailCliente,
+                                            enderecoCliente,
+                                            numeroCliente,
+                                            cpfCliente,
+                                            statusCliente)
+                            VALUES ('$this->nomeCliente',
+                                    '$this->emailCliente',
+                                    '$this->enderecoCliente',
+                                    '$this->numeroCliente',
+                                    '$this->cpfCliente',
+                                    '$this->statusCliente')";
 
-        $connect = Conexao::LigarConexao();
-        $stmt = $connect->prepare($sql);
-        $stmt->bindParam(':nomeCliente', $this->nomeCliente);
-        $stmt->bindParam(':emailCliente', $this->emailCliente);
-        $stmt->bindParam(':enderecoCliente', $this->enderecoCliente);
-        $stmt->bindParam(':numeroCliente', $this->numeroCliente);
-        $stmt->bindParam(':cpfCliente', $this->cpfCliente);
-        $stmt->bindParam(':dataCadCliente', $this->dataCadCliente);
-        $stmt->bindParam(':statusCliente', $this->statusCliente);
-
-        $stmt->execute();
+        $conn = Conexao::LigarConexao();
+        $conn->exec($sql);
 
         echo "<script>document.location='index.php?p=cliente'</script>";
+
     }
 
     // ATUALIZAR
     public function Atualizar()
     {
-        $sql = "UPDATE tbl_cliente SET nomeCliente = :nomeCliente, enderecoCliente = :enderecoCliente, numeroCliente = :numeroCliente, 
-                emailCliente = :emailCliente, cpfCliente = :cpfCliente, statusCliente = :statusCliente WHERE idCliente = :idCliente";
+        $sql = "UPDATE tbl_cliente SET nomeCliente      = '" . $this->nomeCliente . "',
+                                       emailCliente = '" . $this->emailCliente . "',
+                                       enderecoCliente = '" . $this->enderecoCliente . "',
+                                       numeroCliente = '" . $this->numeroCliente . "',
+                                       cpfCliente = '" . $this->cpfCliente . "'
+                WHERE idCliente = $this->idCliente";
 
         $conn = Conexao::LigarConexao();
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':nomeCliente', $this->nomeCliente);
-        $stmt->bindParam(':enderecoCliente', $this->enderecoCliente);
-        $stmt->bindParam(':numeroCliente', $this->numeroCliente);
-        $stmt->bindParam(':emailCliente', $this->emailCliente);
-        $stmt->bindParam(':cpfCliente', $this->cpfCliente);
-        $stmt->bindParam(':statusCliente', $this->statusCliente);
-        $stmt->bindParam(':idCliente', $this->idCliente);
-
-        $stmt->execute();
+        $conn->exec($sql);
 
         echo "<script>document.location='index.php?p=cliente'</script>";
     }

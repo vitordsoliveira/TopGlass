@@ -11,15 +11,12 @@ if (isset($_POST['nomeCliente'])) {
     $numeroCliente = $_POST['numeroCliente'];
     $emailCliente = $_POST['emailCliente'];
     $cpfCliente = $_POST['cpfCliente'];
-    $senhaCliente = $_POST['senhaCliente'];
-    $statusCliente = $_POST['statusCliente'];
 
     $cliente->nomeCliente = $nomeCliente;
     $cliente->enderecoCliente = $enderecoCliente;
     $cliente->numeroCliente = $numeroCliente;
     $cliente->emailCliente = $emailCliente;
     $cliente->cpfCliente = $cpfCliente;
-    $cliente->statusCliente = $statusCliente;
 
     $cliente->Atualizar();
 }
@@ -30,7 +27,7 @@ if (isset($_POST['nomeCliente'])) {
     <h2>Atualizar Cliente</h2>
 
     <!-- --------------------------------------------------- IMPORTANTE ABAIXO -------------------------------------------------- -->
-    <form action="index.php?p=cliente&c=atualizar&id=<?php echo $cliente->idCliente; ?>" method="POST"
+    <form action="index.php?p=cliente&cl=atualizar&id=<?php echo $cliente->idCliente; ?>" method="POST"
         enctype="multipart/form-data">
 
         <div class="row">

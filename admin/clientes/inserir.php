@@ -3,15 +3,12 @@ if (isset($_POST['nomeCliente'])) {
 
     $nomeCliente = $_POST['nomeCliente'];
     $enderecoCliente = $_POST['enderecoCliente'];
-    $telefoneCliente = $_POST['telefoneCliente'];
+    $numeroCliente = $_POST['numeroCliente'];
     $emailCliente = $_POST['emailCliente'];
-    $senhaCliente = $_POST['senhaCliente'];
+    $cpfCliente = $_POST['cpfCliente'];
+    $statusCliente = 'ATIVO';
 
     $statusCliente = 'ATIVO';
-    $altCliente = $nomeCliente;
-
-    $statusCliente = 'ATIVO';
-    $altCliente = 'foto' . $nomeCliente;
 
     //Recuperar o id
     require_once('class/Conexao.php');
@@ -29,10 +26,9 @@ if (isset($_POST['nomeCliente'])) {
 
     $cliente->nomeCliente = $nomeCliente;
     $cliente->enderecoCliente = $enderecoCliente;
-    $cliente->telefoneCliente = $telefoneCliente;
+    $cliente->numeroCliente = $numeroCliente;
     $cliente->emailCliente = $emailCliente;
-    $cliente->senhaCliente = $senhaCliente;
-    $cliente->fotoCliente = $fotoCliente;
+    $cliente->cpfCliente = $cpfCliente;
     $cliente->statusCliente = $statusCliente;
     $cliente->Inserir();
 
@@ -66,8 +62,8 @@ if (isset($_POST['nomeCliente'])) {
 
                     <div class="col-3">
                         <div class="mb-3">
-                            <label for="telefoneCliente" class="form-label">Telefone Cliente:</label>
-                            <input type="tel" class="form-control" id="telefoneCliente" name="telefoneCliente" required>
+                            <label for="numeroCliente" class="form-label">Telefone Cliente:</label>
+                            <input type="tel" class="form-control" id="numeroCliente" name="numeroCliente" required>
                         </div>
                     </div>
 

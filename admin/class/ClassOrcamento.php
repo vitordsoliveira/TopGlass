@@ -55,32 +55,37 @@ class ClassOrcamento
     // LISTAR
     public function Listar()
     {
-        $sql = "        SELECT 
-        tbl_orcamento.idOrcamento,
-        tbl_cliente.nomeCliente,
-        tbl_cliente.cpfCliente,
-        tbl_cliente.numeroCliente,
-        tbl_servico.nomeServicos AS nomeServicos,
-        tbl_produto.nomeProduto,
-        DATE_FORMAT(tbl_orcamento.dataOrcamento, '%d/%m/%Y') AS dataOrcamento,
-        tbl_funcionario.nomeFuncionario,
-        tbl_orcamento.comentOrcamento,
-        tbl_orcamento.valorOrcamento,
-        tbl_orcamento.statusOrcamento
-    FROM 
-        tbl_orcamento
-    INNER JOIN 
-        tbl_cliente ON tbl_orcamento.idCliente = tbl_cliente.idCliente
-    INNER JOIN 
-        tbl_funcionario ON tbl_orcamento.idFuncionario = tbl_funcionario.idFuncionario
-    INNER JOIN 
-        tbl_servico ON tbl_orcamento.idServico = tbl_servico.idServico
-    INNER JOIN 
-        tbl_itens ON tbl_orcamento.idItens = tbl_itens.idItens
-    INNER JOIN 
-        tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
-    ORDER BY 
-        tbl_orcamento.dataOrcamento DESC;";
+        $sql = "            SELECT 
+    tbl_orcamento.idOrcamento,
+    tbl_cliente.nomeCliente,
+    tbl_cliente.cpfCliente,
+    tbl_cliente.numeroCliente,
+    tbl_servico.nomeServicos AS nomeServicos,
+    tbl_produto.nomeProduto,
+    DATE_FORMAT(tbl_orcamento.dataOrcamento, '%d/%m/%Y') AS dataOrcamento,
+    tbl_funcionario.nomeFuncionario,
+    tbl_orcamento.comentOrcamento,
+    tbl_orcamento.valorOrcamento,
+    tbl_orcamento.statusOrcamento
+FROM 
+    tbl_orcamento
+INNER JOIN 
+    tbl_cliente ON tbl_orcamento.idCliente = tbl_cliente.idCliente
+INNER JOIN 
+    tbl_funcionario ON tbl_orcamento.idFuncionario = tbl_funcionario.idFuncionario
+INNER JOIN 
+    tbl_servico ON tbl_orcamento.idServico = tbl_servico.idServico
+INNER JOIN 
+    tbl_itens ON tbl_orcamento.idItens = tbl_itens.idItens
+INNER JOIN 
+    tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
+WHERE 
+    tbl_orcamento.statusOrcamento = 'ATIVO'
+    AND tbl_cliente.statusCliente = 'ATIVO'
+    AND tbl_funcionario.statusFuncionario = 'ATIVO'
+    AND tbl_servico.statusServicos = 'ATIVO'
+ORDER BY 
+    tbl_orcamento.dataOrcamento DESC;";
 
         $conn = Conexao::LigarConexao();
 
@@ -126,20 +131,20 @@ class ClassOrcamento
     //ATUALIZAR
     public function Atualizar()
     {
-            $sql = "UPDATE tbl_orcamento 
+        $sql = "UPDATE tbl_orcamento 
                     SET 
-                        idCliente = '".$this->idCliente."',
-                        idServico = '".$this->idServico."',
-                        idFuncionario = '".$this-> idFuncionario."',
-                        valorOrcamento = '".$this-> valorOrcamento."',
-                        statusOrcamento = '".$this->statusOrcamento."',
-                        comentOrcamento = '".$this->comentOrcamento."',
+                        idCliente = '" . $this->idCliente . "',
+                        idServico = '" . $this->idServico . "',
+                        idFuncionario = '" . $this->idFuncionario . "',
+                        valorOrcamento = '" . $this->valorOrcamento . "',
+                        statusOrcamento = '" . $this->statusOrcamento . "',
+                        comentOrcamento = '" . $this->comentOrcamento . "',
                     WHERE idOrcamento = $this->idOrcamento";
-    
-            $conn = Conexao::LigarConexao();
-           $conn->exec($sql);
 
-}
+        $conn = Conexao::LigarConexao();
+        $conn->exec($sql);
+
+    }
 
     //DESATIVAR
     public function Desativar($id)

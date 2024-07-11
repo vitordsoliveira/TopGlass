@@ -34,7 +34,7 @@
     margin-right: 8%;
     text-align: center;
   }
- 
+  
   .options select:hover {
     background-color: #1F3E4C;
     transition: ease-in-out .5s;

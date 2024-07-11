@@ -1,7 +1,8 @@
 <?php
-require_once ('class/ClassCliente.php');
-require_once ('class/ClassOrcamento.php');
-require_once ('class/Conexao.php');
+
+require_once('class/ClassCliente.php');
+require_once('class/ClassOrcamento.php');
+require_once('class/Conexao.php');
 
 $id = $_GET['id'];
 $orcamento = new ClassOrcamento($id);
@@ -13,8 +14,6 @@ $cliente->Carregar(); // Carregar dados do cliente associado
 
 if (isset($_POST['valorOrcamento'])) {
     $idCliente = $_POST['idCliente'];
-    $idServicoVidro = $_POST['idServicosVidro'];
-    $idServicoEsquadria = $_POST['idServicosEsquadria'];
     $idFuncionario = $_POST['idFuncionario'];
     $valorOrcamento = $_POST['valorOrcamento'];
     $statusOrcamento = $_POST['statusOrcamento'];
@@ -22,19 +21,20 @@ if (isset($_POST['valorOrcamento'])) {
 
     // Atualizar dados do orçamento
     $orcamento->idCliente = $idCliente;
-    $orcamento->idServicoVidro = $idServicoVidro;
-    $orcamento->idServicoEsquadria = $idServicoEsquadria;
     $orcamento->idFuncionario = $idFuncionario;
     $orcamento->valorOrcamento = $valorOrcamento;
     $orcamento->statusOrcamento = $statusOrcamento;
     $orcamento->comentOrcamento = $comentOrcamento;
 
     $orcamento->Atualizar();
-
-    // Carregar dados atualizados do cliente associado
     $cliente->Carregar();
+
+    // Redirecionar para evitar reenvio de formulário ao atualizar
+    header("Location: index.php?p=orcamento&orc=atualizar&id={$id}");
+    exit();
 }
 
+// Conectar ao banco de dados e obter dados do orçamento
 $conn = Conexao::LigarConexao();
 $sql = "SELECT * FROM tbl_orcamento WHERE idOrcamento = :idOrcamento";
 $stmt = $conn->prepare($sql);
@@ -42,21 +42,27 @@ $stmt->bindParam(':idOrcamento', $id, PDO::PARAM_INT);
 $stmt->execute();
 $orcamentoData = $stmt->fetch(PDO::FETCH_OBJ);
 
+// Definir valores padrão caso sejam nulos
+$orcamentoData->idFuncionario = $orcamentoData->idFuncionario ?? '';
+$orcamentoData->valorOrcamento = $orcamentoData->valorOrcamento ?? '';
+$orcamentoData->statusOrcamento = $orcamentoData->statusOrcamento ?? '';
+$orcamentoData->comentOrcamento = $orcamentoData->comentOrcamento ?? '';
+
 function obterServicosPorTipo()
 {
     $conn = Conexao::LigarConexao();
 
     $sql = "SELECT 
-                tbl_servico.idServico, 
-                tbl_servico.nomeServicos, 
-                tbl_tipo_servico.tipoServico 
+                s.idServico, 
+                s.nomeServicos, 
+                ts.tipoServico 
             FROM 
-                tbl_servico
+                tbl_servico s
             INNER JOIN 
-                tbl_tipo_servico ON tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico 
+                tbl_tipo_servico ts ON s.idTipoServico = ts.idTipoServico 
             WHERE 
-                tbl_servico.statusServicos = 'ATIVO' 
-                AND tbl_tipo_servico.statusServico = 'ATIVO';";
+                s.statusServicos = 'ATIVO' 
+                AND ts.statusServico = 'ATIVO';";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -69,18 +75,35 @@ function obterServicosPorTipo()
     ];
 
     foreach ($servicos as $servico) {
-        if ($servico['tipoServico'] == 'VIDRO') {
-            $servicosPorTipo['VIDRO'][] = $servico;
-        } else if ($servico['tipoServico'] == 'ESQUADRIA') {
-            $servicosPorTipo['ESQUADRIA'][] = $servico;
-        } else if ($servico['tipoServico'] == 'ESPELHO') {
-            $servicosPorTipo['ESPELHO'][] = $servico;
+        switch ($servico['tipoServico']) {
+            case 'VIDRO':
+                $servicosPorTipo['VIDRO'][] = [
+                    'idServico' => $servico['idServico'],
+                    'nomeServico' => $servico['nomeServicos']
+                ];
+                break;
+            case 'ESQUADRIA':
+                $servicosPorTipo['ESQUADRIA'][] = [
+                    'idServico' => $servico['idServico'],
+                    'nomeServico' => $servico['nomeServicos']
+                ];
+                break;
+            case 'ESPELHO':
+                $servicosPorTipo['ESPELHO'][] = [
+                    'idServico' => $servico['idServico'],
+                    'nomeServico' => $servico['nomeServicos']
+                ];
+                break;
+            default:
+                // Lidar com outros tipos se necessário
+                break;
         }
     }
 
     return $servicosPorTipo;
 }
 
+// Chamar a função para obter os serviços por tipo
 $servicosPorTipo = obterServicosPorTipo();
 
 function obterClientesAtivos()
@@ -96,6 +119,7 @@ function obterClientesAtivos()
 }
 
 $clientes = obterClientesAtivos();
+
 ?>
 
 <div class="container mt-5">
@@ -120,48 +144,37 @@ $clientes = obterClientesAtivos();
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="cpfCliente" class="form-label">CPF:</label>
-                        <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" readonly
-                            value="<?php echo $cliente->cpfCliente; ?>">
+                        <input type="text" class="form-control" id="cpfCliente" name="cpfCliente"
+                            value="<?php echo htmlspecialchars($cliente->cpfCliente); ?>" readonly>
                     </div>
                 </div>
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="numeroCliente" class="form-label">Número:</label>
-                        <input type="text" class="form-control" id="numeroCliente" name="numeroCliente" readonly
-                            value="<?php echo $cliente->numeroCliente; ?>">
+                        <input type="text" class="form-control" id="numeroCliente" name="numeroCliente"
+                            value="<?php echo htmlspecialchars($cliente->numeroCliente); ?>" readonly>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="options col-3">
-                <label for="idServicosVidro" class="form-label">Serviços Vidro</label>
-                <select name="idServicosVidro" id="idServicosVidro" class="form-select" required>
-                    <?php if (!empty($servicosPorTipo['VIDRO'])): ?>
-                        <?php foreach ($servicosPorTipo['VIDRO'] as $servico): ?>
-                            <option value="<?php echo $servico['idServico']; ?>" <?php echo ($servico['idServico'] == $orcamentoData->idServicoVidro) ? 'selected' : ''; ?>>
-                                <?php echo $servico['nomeServicos']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <option value="">Nenhum serviço de vidro disponível</option>
-                    <?php endif; ?>
-                </select>
-            </div>
-            <div class="options col-3">
-                <label for="idServicosEsquadria" class="form-label">Serviços Esquadria</label>
-                <select name="idServicosEsquadria" id="idServicosEsquadria" class="form-select" required>
-                    <?php if (!empty($servicosPorTipo['ESQUADRIA'])): ?>
-                        <?php foreach ($servicosPorTipo['ESQUADRIA'] as $servico): ?>
-                            <option value="<?php echo $servico['idServico']; ?>" <?php echo ($servico['idServico'] == $orcamentoData->idServicoEsquadria) ? 'selected' : ''; ?>>
-                                <?php echo $servico['nomeServicos']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <option value="">Nenhum serviço de esquadria disponível</option>
-                    <?php endif; ?>
-                </select>
-            </div>
+            <?php foreach ($servicosPorTipo as $tipo => $servicos): ?>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="idServico<?php echo $tipo; ?>" class="form-label">Serviços <?php echo $tipo; ?></label>
+                        <select name="idServico<?php echo $tipo; ?>" id="idServico<?php echo $tipo; ?>" class="form-select"
+                            required <?php echo ($tipo !== 'VIDRO' && $tipo !== 'ESQUADRIA' && $tipo !== 'ESPELHO') ? 'disabled' : ''; ?>>
+                            <option value="">Selecione o Serviço</option>
+                            <?php foreach ($servicos as $servico): ?>
+                                <option value="<?php echo $servico['idServico']; ?>"
+                                    <?php echo (isset($orcamentoData->{'idServico'.$tipo}) && $servico['idServico'] == $orcamentoData->{'idServico'.$tipo}) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($servico['nomeServico']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
         <div class="row">
             <div class="col-6">
@@ -169,31 +182,33 @@ $clientes = obterClientesAtivos();
                 <select name="idFuncionario" id="idFuncionario" class="form-select" required>
                     <option value="">Selecione o Funcionário</option>
                     <?php
-                    $queryFuncionarios = "SELECT idFuncionario, nomeFuncionario FROM tbl_funcionario";
+                    $queryFuncionarios = "SELECT idFuncionario, nomeFuncionario FROM tbl_funcionario WHERE statusFuncionario = 'ATIVO'";
                     $stmtFuncionarios = $conn->prepare($queryFuncionarios);
                     $stmtFuncionarios->execute();
                     while ($rowFuncionario = $stmtFuncionarios->fetch(PDO::FETCH_ASSOC)) {
                         $selected = ($rowFuncionario['idFuncionario'] == $orcamentoData->idFuncionario) ? 'selected' : '';
-                        echo '<option value="' . $rowFuncionario['idFuncionario'] . '" ' . $selected . '>' . $rowFuncionario['nomeFuncionario'] . '</option>';
+                        echo '<option value="' . htmlspecialchars($rowFuncionario['idFuncionario']) . '" ' . $selected . '>' . htmlspecialchars($rowFuncionario['nomeFuncionario']) . '</option>';
                     }
                     ?>
-
-
                 </select>
             </div>
             <div class="col-3">
                 <div class="mb-3">
                     <label for="valorOrcamento" class="form-label">VALOR</label>
-                    <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" required
-                        value="<?php echo ($orcamentoData->valorOrcamento); ?>">
+                    <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento"
+                        value="<?php echo htmlspecialchars($orcamentoData->valorOrcamento); ?>">
                 </div>
             </div>
             <div class="col-3">
                 <div class="mb-3">
                     <label for="statusOrcamento" class="form-label">STATUS</label>
                     <select class="form-select" id="statusOrcamento" name="statusOrcamento" required>
-                        <option value="ATIVO" <?php echo ($orcamentoData->statusOrcamento == 'ATIVO') ? 'selected' : ''; ?>>ATIVO</option>
-                        <option value="DESATIVO" <?php echo ($orcamentoData->statusOrcamento == 'DESATIVO') ? 'selected' : ''; ?>>DESATIVO</option>
+                        <option value="ATIVO" <?php echo ($orcamentoData->statusOrcamento == 'ATIVO') ? 'selected' : ''; ?>>
+                            ATIVO
+                        </option>
+                        <option value="DESATIVO"
+                            <?php echo ($orcamentoData->statusOrcamento == 'DESATIVO') ? 'selected' : ''; ?>>INATIVO
+                        </option>
                     </select>
                 </div>
             </div>
@@ -202,11 +217,54 @@ $clientes = obterClientesAtivos();
             <label for="comentOrcamento" class="form-label">Comentário</label>
             <textarea name="comentOrcamento" id="comentOrcamento" class="form-control" cols="65" rows="10"
                 placeholder="Escrever informações básicas do serviço como medidas (1.20 x 2.04) em metro do serviço, cor do serviço ou apontamentos sobre o serviço."
-                required><?php echo ($orcamentoData->comentOrcamento); ?></textarea>
+                required><?php echo htmlspecialchars($orcamentoData->comentOrcamento); ?></textarea>
         </div>
         <div class="btnEnviar col-2">
             <button type="submit" class="btn btn-primary">Editar Orçamento</button>
         </div>
+    </form>
 </div>
-</form>
-</div>
+
+<!-- JavaScript para lidar com a desativação de outras seleções -->
+<script>
+    function disableAndClearOther(selectedElement, otherElementId) {
+        var otherSelect = document.querySelector(otherElementId);
+        otherSelect.disabled = true;
+        otherSelect.value = '';
+    }
+
+    // Desativar e limpar outras opções de seleção ao selecionar um tipo de serviço
+    document.addEventListener('DOMContentLoaded', function () {
+        var vidroSelect = document.getElementById('idServicoVIDRO');
+        var esquadriaSelect = document.getElementById('idServicoESQUADRIA');
+        var espelhoSelect = document.getElementById('idServicoESPELHO');
+
+        // Verificar qual serviço está selecionado e desativar os outros
+        vidroSelect.addEventListener('change', function () {
+            disableAndClearOther(vidroSelect, '#idServicoESQUADRIA');
+            disableAndClearOther(vidroSelect, '#idServicoESPELHO');
+        });
+
+        esquadriaSelect.addEventListener('change', function () {
+            disableAndClearOther(esquadriaSelect, '#idServicoVIDRO');
+            disableAndClearOther(esquadriaSelect, '#idServicoESPELHO');
+        });
+
+        espelhoSelect.addEventListener('change', function () {
+            disableAndClearOther(espelhoSelect, '#idServicoVIDRO');
+            disableAndClearOther(espelhoSelect, '#idServicoESQUADRIA');
+        });
+
+        // Executar a desativação inicial com base na seleção atual
+        if (vidroSelect.value !== '') {
+            disableAndClearOther(vidroSelect, '#idServicoESQUADRIA');
+            disableAndClearOther(vidroSelect, '#idServicoESPELHO');
+        } else if (esquadriaSelect.value !== '') {
+            disableAndClearOther(esquadriaSelect, '#idServicoVIDRO');
+            disableAndClearOther(esquadriaSelect, '#idServicoESPELHO');
+        } else if (espelhoSelect.value !== '') {
+            disableAndClearOther(espelhoSelect, '#idServicoVIDRO');
+            disableAndClearOther(espelhoSelect, '#idServicoESQUADRIA');
+        }
+    });
+</script>
