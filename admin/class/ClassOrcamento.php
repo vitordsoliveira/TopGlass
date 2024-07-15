@@ -138,12 +138,11 @@ ORDER BY
                         idFuncionario = '" . $this->idFuncionario . "',
                         valorOrcamento = '" . $this->valorOrcamento . "',
                         statusOrcamento = '" . $this->statusOrcamento . "',
-                        comentOrcamento = '" . $this->comentOrcamento . "',
+                        comentOrcamento = '" . $this->comentOrcamento . "'
                     WHERE idOrcamento = $this->idOrcamento";
-
+    
         $conn = Conexao::LigarConexao();
         $conn->exec($sql);
-
     }
 
     //DESATIVAR
