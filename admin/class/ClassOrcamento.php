@@ -102,7 +102,7 @@ ORDER BY
     {
         $sql = "INSERT INTO tbl_orcamento 
         (
-            idServicos, 
+        idServicos, 
         idCliente, 
         idServico, 
         idItens, 

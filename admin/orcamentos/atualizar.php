@@ -1,8 +1,8 @@
 <?php
 
-require_once('class/ClassCliente.php');
-require_once('class/ClassOrcamento.php');
-require_once('class/Conexao.php');
+require_once ('class/ClassCliente.php');
+require_once ('class/ClassOrcamento.php');
+require_once ('class/Conexao.php');
 
 $id = $_GET['id'];
 $orcamento = new ClassOrcamento($id);
@@ -48,22 +48,36 @@ $orcamentoData->valorOrcamento = $orcamentoData->valorOrcamento ?? '';
 $orcamentoData->statusOrcamento = $orcamentoData->statusOrcamento ?? '';
 $orcamentoData->comentOrcamento = $orcamentoData->comentOrcamento ?? '';
 
+// Obter dados de todos os clientes ativos
+$clientesAtivos = obterClientesAtivos();
+
+// Função para obter os dados dos clientes ativos
+function obterClientesAtivos()
+{
+    $conn = Conexao::LigarConexao();
+    $sql = "SELECT idCliente, nomeCliente, cpfCliente, numeroCliente FROM tbl_cliente WHERE statusCliente = 'ATIVO'";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+$clientes = obterClientesAtivos();
+
+// Função para obter os serviços por tipo
 function obterServicosPorTipo()
 {
     $conn = Conexao::LigarConexao();
-
     $sql = "SELECT 
-                s.idServico, 
-                s.nomeServicos, 
-                ts.tipoServico 
-            FROM 
-                tbl_servico s
-            INNER JOIN 
-                tbl_tipo_servico ts ON s.idTipoServico = ts.idTipoServico 
-            WHERE 
-                s.statusServicos = 'ATIVO' 
-                AND ts.statusServico = 'ATIVO';";
-
+    tbl_servico.idServico, 
+    tbl_servico.nomeServicos, 
+    tbl_tipo_servico.tipoServico 
+FROM 
+    tbl_servico
+INNER JOIN 
+    tbl_tipo_servico ON tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico 
+WHERE 
+    tbl_servico.statusServicos = 'ATIVO' 
+    AND tbl_tipo_servico.statusServico = 'ATIVO';";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $servicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -105,21 +119,6 @@ function obterServicosPorTipo()
 
 // Chamar a função para obter os serviços por tipo
 $servicosPorTipo = obterServicosPorTipo();
-
-function obterClientesAtivos()
-{
-    $conn = Conexao::LigarConexao();
-
-    $sql = "SELECT idCliente, nomeCliente FROM tbl_cliente WHERE statusCliente = 'ATIVO'";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    return $clientes;
-}
-
-$clientes = obterClientesAtivos();
-
 ?>
 
 <div class="container mt-5">
@@ -128,53 +127,53 @@ $clientes = obterClientesAtivos();
         <div class="row">
             <h3>EDITAR ORÇAMENTO</h3>
             <div class="row">
-                <div class="col-3">
-                    <div class="mb-3">
-                        <label for="idCliente" class="form-label">Cliente:</label>
-                        <select class="form-select" id="idCliente" name="idCliente" required>
-                            <option value="">Selecione o Cliente</option>
-                            <?php foreach ($clientes as $cli): ?>
-                                <option value="<?php echo $cli['idCliente']; ?>" <?php echo ($cli['idCliente'] == $orcamentoData->idCliente) ? 'selected' : ''; ?>>
-                                    <?php echo $cli['nomeCliente']; ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="mb-3">
-                        <label for="cpfCliente" class="form-label">CPF:</label>
-                        <input type="text" class="form-control" id="cpfCliente" name="cpfCliente"
-                            value="<?php echo htmlspecialchars($cliente->cpfCliente); ?>" readonly>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="mb-3">
-                        <label for="numeroCliente" class="form-label">Número:</label>
-                        <input type="text" class="form-control" id="numeroCliente" name="numeroCliente"
-                            value="<?php echo htmlspecialchars($cliente->numeroCliente); ?>" readonly>
-                    </div>
-                </div>
+            <div class="col-3">
+    <div class="mb-3">
+        <label for="idCliente" class="form-label">Cliente:</label>
+        <select class="form-select" id="idCliente" name="idCliente" required>
+            <option value="">Selecione o Cliente</option>
+            <?php foreach ($clientes as $cli): ?>
+                    <option value="<?php echo $cli['idCliente']; ?>" <?php echo ($cli['idCliente'] == $orcamentoData->idCliente) ? 'selected' : ''; ?>>
+                        <?php echo $cli['nomeCliente']; ?>
+                    </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+</div>
+<div class="col-3">
+    <div class="mb-3">
+        <label for="cpfCliente" class="form-label">CPF:</label>
+        <input type="text" class="form-control" id="cpfCliente" name="cpfCliente"
+            value="<?php echo ($cliente->cpfCliente); ?>" readonly>
+    </div>
+</div>
+<div class="col-3">
+    <div class="mb-3">
+        <label for="numeroCliente" class="form-label">Número:</label>
+        <input type="text" class="form-control" id="numeroCliente" name="numeroCliente"
+            value="<?php echo ($cliente->numeroCliente); ?>" readonly>
+    </div>
+</div>
             </div>
         </div>
         <div class="row">
-            <?php foreach ($servicosPorTipo as $tipo => $servicos): ?>
-                <div class="col-3">
-                    <div class="mb-3">
-                        <label for="idServico<?php echo $tipo; ?>" class="form-label">Serviços <?php echo $tipo; ?></label>
-                        <select name="idServico<?php echo $tipo; ?>" id="idServico<?php echo $tipo; ?>" class="form-select"
-                            required <?php echo ($tipo !== 'VIDRO' && $tipo !== 'ESQUADRIA' && $tipo !== 'ESPELHO') ? 'disabled' : ''; ?>>
-                            <option value="">Selecione o Serviço</option>
-                            <?php foreach ($servicos as $servico): ?>
-                                <option value="<?php echo $servico['idServico']; ?>"
-                                    <?php echo (isset($orcamentoData->{'idServico'.$tipo}) && $servico['idServico'] == $orcamentoData->{'idServico'.$tipo}) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($servico['nomeServico']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-            <?php endforeach; ?>
+        <?php foreach ($servicosPorTipo as $tipo => $servicos): ?>
+    <div class="col-3">
+        <div class="mb-3">
+            <label for="idServico<?php echo $tipo; ?>" class="form-label">Serviços <?php echo $tipo; ?></label>
+            <select name="idServico<?php echo $tipo; ?>" id="idServico<?php echo $tipo; ?>" class="form-select"
+                    required <?php echo ($tipo !== 'VIDRO' && $tipo !== 'ESQUADRIA' && $tipo !== 'ESPELHO') ? 'disabled' : ''; ?>>
+                <option value="">Selecione o Serviço</option>
+                <?php foreach ($servicos as $servico): ?>
+                    <option value="<?php echo $servico['idServico']; ?>"
+                            <?php echo (isset($orcamentoData->{'idServico' . $tipo}) && $servico['idServico'] == $orcamentoData->{'idServico' . $tipo}) ? 'selected' : ''; ?>>
+                        <?php echo ($servico['nomeServico']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+<?php endforeach; ?>
         </div>
         <div class="row">
             <div class="col-6">
@@ -187,7 +186,7 @@ $clientes = obterClientesAtivos();
                     $stmtFuncionarios->execute();
                     while ($rowFuncionario = $stmtFuncionarios->fetch(PDO::FETCH_ASSOC)) {
                         $selected = ($rowFuncionario['idFuncionario'] == $orcamentoData->idFuncionario) ? 'selected' : '';
-                        echo '<option value="' . htmlspecialchars($rowFuncionario['idFuncionario']) . '" ' . $selected . '>' . htmlspecialchars($rowFuncionario['nomeFuncionario']) . '</option>';
+                        echo '<option value="' . ($rowFuncionario['idFuncionario']) . '" ' . $selected . '>' . ($rowFuncionario['nomeFuncionario']) . '</option>';
                     }
                     ?>
                 </select>
@@ -196,7 +195,7 @@ $clientes = obterClientesAtivos();
                 <div class="mb-3">
                     <label for="valorOrcamento" class="form-label">VALOR</label>
                     <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento"
-                        value="<?php echo htmlspecialchars($orcamentoData->valorOrcamento); ?>">
+                        value="<?php echo ($orcamentoData->valorOrcamento); ?>">
                 </div>
             </div>
             <div class="col-3">
@@ -217,7 +216,7 @@ $clientes = obterClientesAtivos();
             <label for="comentOrcamento" class="form-label">Comentário</label>
             <textarea name="comentOrcamento" id="comentOrcamento" class="form-control" cols="65" rows="10"
                 placeholder="Escrever informações básicas do serviço como medidas (1.20 x 2.04) em metro do serviço, cor do serviço ou apontamentos sobre o serviço."
-                required><?php echo htmlspecialchars($orcamentoData->comentOrcamento); ?></textarea>
+                required><?php echo ($orcamentoData->comentOrcamento); ?></textarea>
         </div>
         <div class="btnEnviar col-2">
             <button type="submit" class="btn btn-primary">Editar Orçamento</button>
@@ -227,44 +226,85 @@ $clientes = obterClientesAtivos();
 
 <!-- JavaScript para lidar com a desativação de outras seleções -->
 <script>
-    function disableAndClearOther(selectedElement, otherElementId) {
-        var otherSelect = document.querySelector(otherElementId);
-        otherSelect.disabled = true;
-        otherSelect.value = '';
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var clientes = <?php echo json_encode($clientes); ?>;
+        var clienteSelect = document.getElementById('idCliente');
 
-    // Desativar e limpar outras opções de seleção ao selecionar um tipo de serviço
-    document.addEventListener('DOMContentLoaded', function () {
+        // Função para desativar e limpar outras seleções
+        function disableAndClearOther(selectedElement, otherElementId) {
+            var otherSelect = document.querySelector(otherElementId);
+            otherSelect.disabled = true;
+            otherSelect.value = '';
+        }
+
+        // Função para verificar e desativar outras seleções
+        function handleServiceSelection() {
+            var vidroSelect = document.getElementById('idServicoVIDRO');
+            var esquadriaSelect = document.getElementById('idServicoESQUADRIA');
+            var espelhoSelect = document.getElementById('idServicoESPELHO');
+
+            if (vidroSelect.value !== '') {
+                disableAndClearOther(vidroSelect, '#idServicoESQUADRIA');
+                disableAndClearOther(vidroSelect, '#idServicoESPELHO');
+            } else if (esquadriaSelect.value !== '') {
+                disableAndClearOther(esquadriaSelect, '#idServicoVIDRO');
+                disableAndClearOther(esquadriaSelect, '#idServicoESPELHO');
+            } else if (espelhoSelect.value !== '') {
+                disableAndClearOther(espelhoSelect, '#idServicoVIDRO');
+                disableAndClearOther(espelhoSelect, '#idServicoESQUADRIA');
+            }
+        }
+
+        // Verificar seleção inicial
+        handleServiceSelection();
+
+        // Adicionar eventos de mudança para cada tipo de serviço
         var vidroSelect = document.getElementById('idServicoVIDRO');
         var esquadriaSelect = document.getElementById('idServicoESQUADRIA');
         var espelhoSelect = document.getElementById('idServicoESPELHO');
 
-        // Verificar qual serviço está selecionado e desativar os outros
-        vidroSelect.addEventListener('change', function () {
-            disableAndClearOther(vidroSelect, '#idServicoESQUADRIA');
-            disableAndClearOther(vidroSelect, '#idServicoESPELHO');
-        });
+        vidroSelect.addEventListener('change', handleServiceSelection);
+        esquadriaSelect.addEventListener('change', handleServiceSelection);
+        espelhoSelect.addEventListener('change', handleServiceSelection);
 
-        esquadriaSelect.addEventListener('change', function () {
-            disableAndClearOther(esquadriaSelect, '#idServicoVIDRO');
-            disableAndClearOther(esquadriaSelect, '#idServicoESPELHO');
-        });
+        // Evento para carregar dados do cliente ao selecionar um cliente
+        clienteSelect.addEventListener('change', function() {
+            var idCliente = this.value;
+            var cpfClienteField = document.getElementById('cpfCliente');
+            var numeroClienteField = document.getElementById('numeroCliente');
 
-        espelhoSelect.addEventListener('change', function () {
-            disableAndClearOther(espelhoSelect, '#idServicoVIDRO');
-            disableAndClearOther(espelhoSelect, '#idServicoESQUADRIA');
+            if (idCliente) {
+                var cliente = clientes.find(cli => cli.idCliente == idCliente);
+                cpfClienteField.value = cliente ? cliente.cpfCliente : '';
+                numeroClienteField.value = cliente ? cliente.numeroCliente : '';
+            } else {
+                cpfClienteField.value = '';
+                numeroClienteField.value = '';
+            }
         });
-
-        // Executar a desativação inicial com base na seleção atual
-        if (vidroSelect.value !== '') {
-            disableAndClearOther(vidroSelect, '#idServicoESQUADRIA');
-            disableAndClearOther(vidroSelect, '#idServicoESPELHO');
-        } else if (esquadriaSelect.value !== '') {
-            disableAndClearOther(esquadriaSelect, '#idServicoVIDRO');
-            disableAndClearOther(esquadriaSelect, '#idServicoESPELHO');
-        } else if (espelhoSelect.value !== '') {
-            disableAndClearOther(espelhoSelect, '#idServicoVIDRO');
-            disableAndClearOther(espelhoSelect, '#idServicoESQUADRIA');
-        }
     });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var clientes = <?php echo json_encode($clientes); ?>;
+    var clienteSelect = document.getElementById('idCliente');
+
+    clienteSelect.addEventListener('change', function() {
+        var idCliente = this.value;
+        var cpfClienteField = document.getElementById('cpfCliente');
+        var numeroClienteField = document.getElementById('numeroCliente');
+
+        if (idCliente) {
+            var cliente = clientes.find(cli => cli.idCliente == idCliente);
+            cpfClienteField.value = cliente ? cliente.cpfCliente : '';
+            numeroClienteField.value = cliente ? cliente.numeroCliente : '';
+        } else {
+            cpfClienteField.value = '';
+            numeroClienteField.value = '';
+        }
+    });
+});
+</script>
+
+
