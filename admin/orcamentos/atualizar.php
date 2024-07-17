@@ -29,8 +29,7 @@ if (isset($_POST['valorOrcamento'])) {
     $orcamento->Atualizar();
     $cliente->Carregar();
 
-    // Redirecionar para evitar reenvio de formulário ao atualizar
-    header("Location: index.php?p=orcamento&orc=atualizar&id={$id}");
+    header("Location: index.php?p=orcamento&orc=atualizar&id={$id}&msg=success");
     exit();
 }
 
@@ -119,110 +118,118 @@ WHERE
 
 // Chamar a função para obter os serviços por tipo
 $servicosPorTipo = obterServicosPorTipo();
+
+$msg = isset($_GET['msg']) ? $_GET['msg'] : '';
+
+if ($msg === 'success') {
+    echo '<h2 class="text-success">Orçamento atualizado com sucesso!</h2>';
+
+}
 ?>
 
-<div class="container mt-5">
-    <form action="index.php?p=orcamento&orc=atualizar&id=<?php echo $id; ?>" method="POST"
-        enctype="multipart/form-data">
-        <div class="row">
-            <h3>EDITAR ORÇAMENTO</h3>
+    <div class="container mt-5">
+        <form action="index.php?p=orcamento&orc=atualizar&id=<?php echo $id; ?>" method="POST"
+            enctype="multipart/form-data">
             <div class="row">
-            <div class="col-3">
-    <div class="mb-3">
-        <label for="idCliente" class="form-label">Cliente:</label>
-        <select class="form-select" id="idCliente" name="idCliente" required>
-            <option value="">Selecione o Cliente</option>
-            <?php foreach ($clientes as $cli): ?>
-                    <option value="<?php echo $cli['idCliente']; ?>" <?php echo ($cli['idCliente'] == $orcamentoData->idCliente) ? 'selected' : ''; ?>>
-                        <?php echo $cli['nomeCliente']; ?>
-                    </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
-</div>
-<div class="col-3">
-    <div class="mb-3">
-        <label for="cpfCliente" class="form-label">CPF:</label>
-        <input type="text" class="form-control" id="cpfCliente" name="cpfCliente"
-            value="<?php echo ($cliente->cpfCliente); ?>" readonly>
-    </div>
-</div>
-<div class="col-3">
-    <div class="mb-3">
-        <label for="numeroCliente" class="form-label">Número:</label>
-        <input type="text" class="form-control" id="numeroCliente" name="numeroCliente"
-            value="<?php echo ($cliente->numeroCliente); ?>" readonly>
-    </div>
-</div>
-            </div>
-        </div>
-        <div class="row">
-        <?php foreach ($servicosPorTipo as $tipo => $servicos): ?>
-    <div class="col-3">
-        <div class="mb-3">
-            <label for="idServico<?php echo $tipo; ?>" class="form-label">Serviços <?php echo $tipo; ?></label>
-            <select name="idServico<?php echo $tipo; ?>" id="idServico<?php echo $tipo; ?>" class="form-select"
-                    required <?php echo ($tipo !== 'VIDRO' && $tipo !== 'ESQUADRIA' && $tipo !== 'ESPELHO') ? 'disabled' : ''; ?>>
-                <option value="">Selecione o Serviço</option>
-                <?php foreach ($servicos as $servico): ?>
-                    <option value="<?php echo $servico['idServico']; ?>"
-                            <?php echo (isset($orcamentoData->{'idServico' . $tipo}) && $servico['idServico'] == $orcamentoData->{'idServico' . $tipo}) ? 'selected' : ''; ?>>
-                        <?php echo ($servico['nomeServico']); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-    </div>
-<?php endforeach; ?>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <label for="idFuncionario" class="form-label">Funcionário Responsável</label>
-                <select name="idFuncionario" id="idFuncionario" class="form-select" required>
-                    <option value="">Selecione o Funcionário</option>
-                    <?php
-                    $queryFuncionarios = "SELECT idFuncionario, nomeFuncionario FROM tbl_funcionario WHERE statusFuncionario = 'ATIVO'";
-                    $stmtFuncionarios = $conn->prepare($queryFuncionarios);
-                    $stmtFuncionarios->execute();
-                    while ($rowFuncionario = $stmtFuncionarios->fetch(PDO::FETCH_ASSOC)) {
-                        $selected = ($rowFuncionario['idFuncionario'] == $orcamentoData->idFuncionario) ? 'selected' : '';
-                        echo '<option value="' . ($rowFuncionario['idFuncionario']) . '" ' . $selected . '>' . ($rowFuncionario['nomeFuncionario']) . '</option>';
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="col-3">
-                <div class="mb-3">
-                    <label for="valorOrcamento" class="form-label">VALOR</label>
-                    <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento"
-                        value="<?php echo ($orcamentoData->valorOrcamento); ?>">
+                <h3>EDITAR ORÇAMENTO</h3>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <label for="idCliente" class="form-label">Cliente:</label>
+                            <select class="form-select" id="idCliente" name="idCliente" required>
+                                <option value="">Selecione o Cliente</option>
+                                <?php foreach ($clientes as $cli): ?>
+                                    <option value="<?php echo $cli['idCliente']; ?>" <?php echo ($cli['idCliente'] == $orcamentoData->idCliente) ? 'selected' : ''; ?>>
+                                        <?php echo $cli['nomeCliente']; ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <label for="cpfCliente" class="form-label">CPF:</label>
+                            <input type="text" class="form-control" id="cpfCliente" name="cpfCliente"
+                                value="<?php echo ($cliente->cpfCliente); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <label for="numeroCliente" class="form-label">Número:</label>
+                            <input type="text" class="form-control" id="numeroCliente" name="numeroCliente"
+                                value="<?php echo ($cliente->numeroCliente); ?>" readonly>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="mb-3">
-                    <label for="statusOrcamento" class="form-label">STATUS</label>
-                    <select class="form-select" id="statusOrcamento" name="statusOrcamento" required>
-                        <option value="ATIVO" <?php echo ($orcamentoData->statusOrcamento == 'ATIVO') ? 'selected' : ''; ?>>
-                            ATIVO
-                        </option>
-                        <option value="DESATIVO"
-                            <?php echo ($orcamentoData->statusOrcamento == 'DESATIVO') ? 'selected' : ''; ?>>INATIVO
-                        </option>
+            <div class="row">
+                <?php foreach ($servicosPorTipo as $tipo => $servicos): ?>
+                    <div class="col-3">
+                        <div class="mb-3">
+                            <label for="idServico<?php echo $tipo; ?>" class="form-label">Serviços <?php echo $tipo; ?></label>
+                            <select name="idServico<?php echo $tipo; ?>" id="idServico<?php echo $tipo; ?>" class="form-select">
+                                <option value="">Selecione o Serviço</option>
+                                <?php foreach ($servicos as $servico): ?>
+                                    <option value="<?php echo $servico['idServico']; ?>"
+                                            <?php echo (isset($orcamentoData->{'idServico' . $tipo}) && $servico['idServico'] == $orcamentoData->{'idServico' . $tipo}) ? 'selected' : ''; ?>>
+                                        <?php echo ($servico['nomeServico']); ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label for="idFuncionario" class="form-label">Funcionário Responsável</label>
+                    <select name="idFuncionario" id="idFuncionario" class="form-select" required>
+                        <option value="">Selecione o Funcionário</option>
+                        <?php
+                        $queryFuncionarios = "SELECT idFuncionario, nomeFuncionario FROM tbl_funcionario WHERE statusFuncionario = 'ATIVO'";
+                        $stmtFuncionarios = $conn->prepare($queryFuncionarios);
+                        $stmtFuncionarios->execute();
+                        while ($rowFuncionario = $stmtFuncionarios->fetch(PDO::FETCH_ASSOC)) {
+                            $selected = ($rowFuncionario['idFuncionario'] == $orcamentoData->idFuncionario) ? 'selected' : '';
+                            echo '<option value="' . ($rowFuncionario['idFuncionario']) . '" ' . $selected . '>' . ($rowFuncionario['nomeFuncionario']) . '</option>';
+                        }
+                        ?>
                     </select>
                 </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="valorOrcamento" class="form-label">VALOR</label>
+                        <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento"
+                            value="<?php echo ($orcamentoData->valorOrcamento); ?>">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="statusOrcamento" class="form-label">STATUS</label>
+                        <select class="form-select" id="statusOrcamento" name="statusOrcamento" required>
+                            <option value="ATIVO" <?php echo ($orcamentoData->statusOrcamento == 'ATIVO') ? 'selected' : ''; ?>>
+                                ATIVO
+                            </option>
+                            <option value="DESATIVO"
+                                <?php echo ($orcamentoData->statusOrcamento == 'DESATIVO') ? 'selected' : ''; ?>>DESATIVO
+                            </option>
+                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="mb-3">
-            <label for="comentOrcamento" class="form-label">Comentário</label>
-            <textarea name="comentOrcamento" id="comentOrcamento" class="form-control" cols="65" rows="10"
-                placeholder="Escrever informações básicas do serviço como medidas (1.20 x 2.04) em metro do serviço, cor do serviço ou apontamentos sobre o serviço."
-                required><?php echo ($orcamentoData->comentOrcamento); ?></textarea>
-        </div>
-        <div class="btnEnviar col-2">
-            <button type="submit" class="btn btn-primary">Editar Orçamento</button>
-        </div>
-    </form>
-</div>
+            <div class="mb-3">
+                <label for="comentOrcamento" class="form-label">Comentário</label>
+                <textarea name="comentOrcamento" id="comentOrcamento" class="form-control" cols="65" rows="10"
+                    placeholder="Escrever informações básicas do serviço como medidas (1.20 x 2.04) em metro do serviço, cor do serviço ou apontamentos sobre o serviço."
+                    required><?php echo ($orcamentoData->comentOrcamento); ?></textarea>
+            </div>
+            <div class="btnEnviar col-2">
+                <button type="submit" class="btn btn-primary">Editar Orçamento</button>
+            </div>
+        </form>
+    </div>
+
+
 
 <!-- JavaScript para lidar com a desativação de outras seleções -->
 <script>

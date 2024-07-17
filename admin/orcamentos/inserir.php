@@ -1,14 +1,13 @@
 <?php
-
-require_once ('class/ClassCliente.php');
-require_once ('class/ClassOrcamento.php');
-require_once ('class/Conexao.php');
+require_once 'class/ClassCliente.php';
+require_once 'class/ClassOrcamento.php';
+require_once 'class/Conexao.php';
 
 // Função para obter os dados dos clientes ativos
 function obterClientesAtivos()
 {
     $conn = Conexao::LigarConexao();
-    $sql = "SELECT idCliente, nomeCliente, cpfCliente, numeroCliente FROM tbl_cliente WHERE statusCliente = 'ATIVO'";
+    $sql = "SELECT idCliente, nomeCliente FROM tbl_cliente WHERE statusCliente = 'ATIVO'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -49,6 +48,23 @@ function obterServicosPorTipo()
     return $servicosPorTipo;
 }
 
+function obterItens()
+{
+    $conn = Conexao::LigarConexao();
+    $sql = " SELECT
+        tbl_produto.nomeProduto
+        FROM 
+        tbl_itens 
+        INNER JOIN 
+        tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
+        WHERE
+        statusProduto = 'ATIVO';";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 // Inicializar variáveis
 $idCliente = $idFuncionario = $valorOrcamento = $statusOrcamento = $comentOrcamento = '';
 $servicosPorTipo = obterServicosPorTipo();
@@ -57,6 +73,7 @@ $clientes = obterClientesAtivos();
 // Processar formulário se enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idCliente = $_POST['idCliente'];
+    $idServico = $_POST['idServico'];
     $idFuncionario = $_POST['idFuncionario'];
     $valorOrcamento = $_POST['valorOrcamento'];
     $statusOrcamento = $_POST['statusOrcamento'];
@@ -67,22 +84,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inserir novo orçamento no banco de dados
     $orcamento = new ClassOrcamento();
     $orcamento->idCliente = $idCliente;
+    $orcamento->idServico = $idServico;
     $orcamento->idFuncionario = $idFuncionario;
     $orcamento->valorOrcamento = $valorOrcamento;
     $orcamento->statusOrcamento = $statusOrcamento;
     $orcamento->comentOrcamento = $comentOrcamento;
 
+    // Inserir o orçamento
     $orcamento->Inserir();
 
-    // Redirecionar para evitar reenvio de formulário ao inserir
+    // Redirecionar após a inserção
     header("Location: index.php?p=orcamento&orc=criar");
     exit();
 }
-
 ?>
 
 <div class="container mt-5">
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+    <form action="index.php?p=orcamento&orc=inserir" method="POST" enctype="multipart/form-data">
         <div class="row">
             <h3>CRIAR NOVO ORÇAMENTO</h3>
             <div class="row">
@@ -92,9 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <select class="form-select" id="idCliente" name="idCliente" required>
                             <option value="">Selecione o Cliente</option>
                             <?php foreach ($clientes as $cli): ?>
-                                <option value="<?php echo $cli['idCliente']; ?>">
-                                    <?php echo $cli['nomeCliente']; ?>
-                                </option>
+                                <option value="<?php echo $cli['idCliente']; ?>"><?php echo $cli['nomeCliente']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -142,37 +158,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             <?php endforeach; ?>
         </div>
-
         <div class="row">
-            <div class="col-12">
-                <h4>Itens do Orçamento</h4>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Valor Unitário</th>
-                            <th>Quantidade</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <select class="form-select" name="idProduto[]" required>
-                                    <option value="">Selecione o Produto</option>
-                                    <?php foreach ($produtos as $produto): ?>
-                                        <option value="<?php echo $produto['idProduto']; ?>">
-                                            <?php echo $produto['nomeProduto']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </td>
-                            <td><input type="text" class="form-control" name="valorProduto[]" required></td>
-                            <td><input type="number" class="form-control" name="quantidadeProduto[]" required></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-3">
+                <div class="mb-3">
+                    <label for="idItens" class="form-label">Itens:</label>
+                    <select class="form-select" id="idItens" name="nomeItens" required>
+                        <option value="">Selecione o Produto</option>
+                        <?php
+                        $itens = obterItens();
+                        foreach ($itens as $item) {
+                            echo '<option value="' . $item['idItem'] . '">' . $item['nomeItem'] . '</option>';
+                        }
+                        ?>
+                    </select>
+                </div>
             </div>
         </div>
-
         <div class="col-3">
             <div class="mb-3">
                 <label for="valorOrcamento" class="form-label">Valor:</label>
