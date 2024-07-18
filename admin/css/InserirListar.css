@@ -16,6 +16,7 @@
     display: block;
     margin-left: 2%;
     transition: ease-in-out .5s;
+    margin-bottom: 1%;
 }
 
 .btnDashboard a:hover{

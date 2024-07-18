@@ -102,7 +102,6 @@ ORDER BY
     {
         $sql = "INSERT INTO tbl_orcamento 
         (
-        idServicos, 
         idCliente, 
         idServico, 
         idItens, 
@@ -112,7 +111,6 @@ ORDER BY
         comentOrcamento)
 
         VALUES (
-            '$this->idServicos',
                 '$this->idCliente',
                 '$this->idServico',
                 '$this->idItens',

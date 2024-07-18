@@ -52,13 +52,14 @@ function obterItens()
 {
     $conn = Conexao::LigarConexao();
     $sql = " SELECT
+        tbl_produto.idProduto, 
         tbl_produto.nomeProduto
         FROM 
         tbl_itens 
         INNER JOIN 
         tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
         WHERE
-        statusProduto = 'ATIVO';";
+        tbl_produto.statusProduto = 'ATIVO';";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -74,6 +75,7 @@ $clientes = obterClientesAtivos();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idCliente = $_POST['idCliente'];
     $idServico = $_POST['idServico'];
+    $idItens = $_POST['idItens'];
     $idFuncionario = $_POST['idFuncionario'];
     $valorOrcamento = $_POST['valorOrcamento'];
     $statusOrcamento = $_POST['statusOrcamento'];
@@ -85,6 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $orcamento = new ClassOrcamento();
     $orcamento->idCliente = $idCliente;
     $orcamento->idServico = $idServico;
+    $orcamento->idItens = $idItens;
     $orcamento->idFuncionario = $idFuncionario;
     $orcamento->valorOrcamento = $valorOrcamento;
     $orcamento->statusOrcamento = $statusOrcamento;
@@ -94,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $orcamento->Inserir();
 
     // Redirecionar após a inserção
-    header("Location: index.php?p=orcamento&orc=criar");
+    header("Location: index.php?p=orcamento&orc=inserir");
     exit();
 }
 ?>
@@ -116,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
                 <div class="col-3">
-                    <label for="idFuncionario" class="form-label">Funcionário Responsável:</label>
+                    <label for="idFuncionario" class="form-label">Funcionário Orçamento:</label>
                     <select class="form-select" id="idFuncionario" name="idFuncionario" required>
                         <option value="">Selecione o Funcionário</option>
                         <?php
@@ -147,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="mb-3">
                         <label for="idServico<?php echo $tipo; ?>" class="form-label">Serviços <?php echo $tipo; ?>:</label>
                         <select class="form-select servico-select" id="idServico<?php echo $tipo; ?>"
-                            name="idServico<?php echo $tipo; ?>" required <?php echo ($tipo !== 'VIDRO') ? 'disabled' : ''; ?>>
+                            name="idServico" required <?php echo ($tipo !== 'VIDRO') ? 'disabled' : ''; ?>>
                             <option value="">Selecione o Serviço</option>
                             <?php foreach ($servicos as $servico): ?>
                                 <option value="<?php echo $servico['idServico']; ?>"><?php echo $servico['nomeServico']; ?>
@@ -162,12 +165,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-3">
                 <div class="mb-3">
                     <label for="idItens" class="form-label">Itens:</label>
-                    <select class="form-select" id="idItens" name="nomeItens" required>
+                    <select class="form-select" id="idItens" name="idItens" required>
                         <option value="">Selecione o Produto</option>
                         <?php
                         $itens = obterItens();
                         foreach ($itens as $item) {
-                            echo '<option value="' . $item['idItem'] . '">' . $item['nomeItem'] . '</option>';
+                            echo '<option value="' . $item['idProduto'] . '">' . $item['nomeProduto'] . '</option>';
                         }
                         ?>
                     </select>
@@ -195,6 +198,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </form>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var servicoSelects = document.querySelectorAll('.servico-select');
+
+        servicoSelects.forEach(function (select) {
+            select.addEventListener('change', function () {
+                var selectedValue = this.value;
+                servicoSelects.forEach(function (otherSelect) {
+                    if (otherSelect !== select) {
+                        otherSelect.disabled = (selectedValue !== '');
+                        otherSelect.required = false; // Remover obrigatoriedade se desabilitado
+                    }
+                });
+            });
+        });
+    });
+</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

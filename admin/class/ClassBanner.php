@@ -13,7 +13,7 @@ class ClassBanner{
 
     // LISTAR
     public function Listar(){
-        $sql = "SELECT * FROM tbl_banner ORDER BY nomeBanner DESC;";
+        $sql = "SELECT * FROM tbl_banner WHERE statusBanner = 'ATIVO' ORDER BY nomeBanner DESC;";
 
         $conn = Conexao::LigarConexao();
 
