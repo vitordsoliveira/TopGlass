@@ -1,3 +1,26 @@
+<?php
+
+session_start(); // Inicia uma sessão
+
+
+$tipo = ''; // Inicializa a variável $tipo como uma string vazia
+
+// Verifica se a variável de sessão 'idMecanico' está definida
+if (isset($_SESSION['idFuncionario'])) {
+
+    echo ("deu certo");  // Se 'idMecanico' estiver definida, imprime 'deu certo' na tela
+
+    // Define a variável $tipo como 'Mecanico'
+    $tipo = 'funcionario';
+} else {
+    // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
+    header('location:http://localhost/topglass/');
+
+    // Interrompe a execução do script para garantir que o redirecionamento aconteça imediatamente
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
