@@ -1,8 +1,8 @@
 // Função para manipular o login do administrador
 function LoginAdmin() {
     // Adiciona um ouvinte de eventos de clique ao formulário de login do administrador
-    $("#FormLoginAdmin").click(function () {
-      var formData = $("#FormLoginAdmin").serialize(); // Serializa os dados do formulário em uma string de consulta
+    $("#formLoginAdmin").click(function () {
+      var formData = $("#formLoginAdmin").serialize(); // Serializa os dados do formulário em uma string de consulta
   
       // Envia uma requisição AJAX para o servidor
       $.ajax({
@@ -21,8 +21,8 @@ function LoginAdmin() {
             );
   
             var idFuncionario = data.idFuncionario; // Obtém o ID do funcionario da resposta
-            window.location.href =
-              "location:http://localhost/topglass/admin/index.php?p=dashboard"; // Redireciona para o dashboard do administrador
+            window.location.href = "http://localhost/topglass/admin/index.php?p=dashboard";
+               // Redireciona para o dashboard do administrador
           } else {
             // Exibe uma mensagem de login inválido
             $("#msgInvalido").html(

@@ -7,14 +7,12 @@ $tipo = ''; // Inicializa a variável $tipo como uma string vazia
 
 // Verifica se a variável de sessão 'idMecanico' está definida
 if (isset($_SESSION['idFuncionario'])) {
-
-    echo ("deu certo");  // Se 'idMecanico' estiver definida, imprime 'deu certo' na tela
-
     // Define a variável $tipo como 'Mecanico'
     $tipo = 'funcionario';
+
 } else {
     // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
-    header('location:http://localhost/topglass/');
+    header('location:http://localhost/topglass/admin/login.php');
 
     // Interrompe a execução do script para garantir que o redirecionamento aconteça imediatamente
     exit();
@@ -81,6 +79,7 @@ if (isset($_SESSION['idFuncionario'])) {
                     <li><a href="index.php?p=cliente">CLIENTES</a></li>
                     <li><a href="index.php?p=galeria">GALERIA</a></li>
                     <li><a href="index.php?p=banner">BANNERS</a></li>
+                    <li><a href="sair.php">SAIR</a></li>
                 </ul>
             </nav>
         </div>
@@ -98,11 +97,11 @@ if (isset($_SESSION['idFuncionario'])) {
                     $titulo = "galeria";
                     require_once ('galeria/galeria.php');
                     break;
-                case 'cliente':
-                    $titulo = "cliente";
+                case 'clientes':
+                    $titulo = "clientes";
                     require_once ('clientes/clientes.php');
                     break;
-                case 'orcamento':
+                case 'orcamentos':
                     $titulo = "orcamentos";
                     require_once ('orcamentos/orcamentos.php');
                     break;
@@ -136,7 +135,5 @@ if (isset($_SESSION['idFuncionario'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-
-    <script src="js/estilo.js"></script>
 
 </body>
