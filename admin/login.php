@@ -62,9 +62,6 @@
 
                             </form>
 
-                            <div id="msgLogin"></div>
-                            <div id="msgInvalido"></div>
-
                         </div>
                     </div>
                 </div>

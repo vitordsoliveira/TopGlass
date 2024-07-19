@@ -2,7 +2,7 @@
 
 require_once ('Conexao.php');
 
-class classFuncionario
+class ClassFuncionario
 {
     public $idFuncionario;
     public $nomeFuncionario;
@@ -16,7 +16,6 @@ class classFuncionario
     public $altFotoFuncionario;
     public $fotoFuncionario;
 
-
     public function VerificarLogin()
     {
 
@@ -28,36 +27,75 @@ class classFuncionario
         $resultado = $conn->query($sql);
         $funcionario = $resultado->fetch();
 
-        echo 'Método VerificarLogin foi executado';
-
         if ($funcionario) {
             return $funcionario['idFuncionario'];
             // Adiciona um aviso ao log indicando que o código foi executado
         } else {
             return false;
         }
+
+
+
+    }
+
+    public function __construct($idFuncionario = null) {
+        if ($idFuncionario) {
+            $this->idFuncionario = $idFuncionario;
+            $this->CarregarFuncionario();
+        }
+    }
+
+    public function CarregarFuncionario() {
+        $sql = "SELECT 
+            idFuncionario, 
+            nomeFuncionario, 
+            fotoFuncionario, 
+            altFotoFuncionario 
+        FROM tbl_funcionario 
+        WHERE idFuncionario = :idFuncionario";
+
+        $conn = Conexao::LigarConexao();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idFuncionario', $this->idFuncionario, PDO::PARAM_INT);
+        $stmt->execute();
+        $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($funcionario) {
+            $this->nomeFuncionario = $funcionario['nomeFuncionario'];
+            $this->fotoFuncionario = $funcionario['fotoFuncionario'];
+            $this->altFotoFuncionario = $funcionario['altFotoFuncionario'];
+        }
     }
 }
+
+    if (isset($_POST['email'])) {
+        $funcionario = new ClassFuncionario();
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+
+        $funcionario->emailFuncionario = $email;
+        $funcionario->senhaFuncionario = $senha;
+
+        if ($idFuncionario = $funcionario->VerificarLogin()) {
+
+            session_start(); // Inicia uma sessão
+            $_SESSION['idFuncionario'] = $idFuncionario; // Define a variável de sessão 'idFuncionario' com o valor de $idFuncionario
+
+            //echo 'o ID FUNCIONARIO foi acionado e adicionado a página';
+
+            echo json_encode(['success' => true, 'message' => 'Login OK']);
+
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Login Invalido']);
+        }
+    }
 // Verifica se o formulário foi enviado verificando se a chave 'email' está presente no array $_POST
 
-if (isset($_POST['email'])) {
-    $funcionario = new classFuncionario();
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
 
-    $funcionario->emailFuncionario = $email;
-    $funcionario->senhaFuncionario = $senha;
 
-    if ($idFuncionario = $funcionario->VerificarLogin()) {
 
-        session_start(); // Inicia uma sessão
-        $_SESSION['idFuncionario'] = $idFuncionario; // Define a variável de sessão 'idFuncionario' com o valor de $idFuncionario
 
-        //echo 'o ID FUNCIONARIO foi acionado e adicionado a página';
 
-        echo json_encode(['success' => true, 'message' => 'Login OK']);
 
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Login Invalido']);
-    }
-}
+
+

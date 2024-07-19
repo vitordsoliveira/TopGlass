@@ -1,15 +1,18 @@
 <?php
-
+require_once('class/ClassFuncionario.php');
 session_start(); // Inicia uma sessão
-
-
 $tipo = ''; // Inicializa a variável $tipo como uma string vazia
 
-// Verifica se a variável de sessão 'idMecanico' está definida
+// Verifica se a variável de sessão 'idFuncionario' está definida
 if (isset($_SESSION['idFuncionario'])) {
-    // Define a variável $tipo como 'Mecanico'
+    // Define a variável $tipo como 'funcionario'
     $tipo = 'funcionario';
 
+    // Criar uma instância do ClassFuncionario e obter o nome
+    $funcionario = new ClassFuncionario($_SESSION['idFuncionario']);
+    $nomeFuncionario = $funcionario->nomeFuncionario;
+    $fotoFuncionario = $funcionario->fotoFuncionario;
+    $altFotoFuncionario = $funcionario->altFotoFuncionario;
 } else {
     // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
     header('location:http://localhost/topglass/admin/login.php');
@@ -52,22 +55,7 @@ if (isset($_SESSION['idFuncionario'])) {
 
     <header>
         <div class="barraTopo">
-            <ul>
-                <li class="logoadm">
-                    <a href="../index.php">
-                        <img src="img/circle.png" alt="">
-                        <img src="img/logo.png" alt="">
-                    </a>
-
-                    <h1>DASHBOARD TOP GLASS</h1>
-                </li>
-
-                <li class="login">
-                    <a href="">
-                        <h2>USUÁRIO</h2><img src="img/perfil.png" alt="">
-                    </a>
-                </li>
-            </ul>
+            <h1>TOP GLASS</h1>
         </div>
     </header>
     <main>
