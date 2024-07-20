@@ -51,20 +51,24 @@ function obterServicosPorTipo()
 function obterItens()
 {
     $conn = Conexao::LigarConexao();
-    $sql = " SELECT
-        tbl_produto.idProduto, 
-        tbl_produto.nomeProduto
-        FROM 
-        tbl_itens 
-        INNER JOIN 
-        tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
-        WHERE
-        tbl_produto.statusProduto = 'ATIVO';";
+    $sql = "SELECT 
+                tbl_produto.idProduto, 
+                tbl_produto.nomeProduto,
+                tbl_produto.valorProduto
+            FROM 
+                tbl_itens 
+            INNER JOIN 
+                tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
+            WHERE
+                tbl_produto.statusProduto = 'ATIVO';";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+
+
 
 // Inicializar variáveis
 $idCliente = $idFuncionario = $valorOrcamento = $statusOrcamento = $comentOrcamento = '';
@@ -123,7 +127,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <select class="form-select" id="idFuncionario" name="idFuncionario" required>
                         <option value="">Selecione o Funcionário</option>
                         <?php
-                        // Exemplo de consulta de funcionários ativos (substitua com sua lógica)
                         $conn = Conexao::LigarConexao();
                         $stmt = $conn->prepare("SELECT idFuncionario, nomeFuncionario FROM tbl_funcionario WHERE statusFuncionario = 'ATIVO'");
                         $stmt->execute();
@@ -149,8 +152,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="idServico<?php echo $tipo; ?>" class="form-label">Serviços <?php echo $tipo; ?>:</label>
-                        <select class="form-select servico-select" id="idServico<?php echo $tipo; ?>"
-                            name="idServico" required <?php echo ($tipo !== 'VIDRO') ? 'disabled' : ''; ?>>
+                        <select class="form-select servico-select" id="idServico<?php echo $tipo; ?>" name="idServico"
+                            required <?php echo ($tipo !== 'VIDRO') ? 'disabled' : ''; ?>>
                             <option value="">Selecione o Serviço</option>
                             <?php foreach ($servicos as $servico): ?>
                                 <option value="<?php echo $servico['idServico']; ?>"><?php echo $servico['nomeServico']; ?>
@@ -170,13 +173,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <?php
                         $itens = obterItens();
                         foreach ($itens as $item) {
-                            echo '<option value="' . $item['idProduto'] . '">' . $item['nomeProduto'] . '</option>';
+                            echo '<option value="' . $item['idProduto'] . '" data-valor="' . $item['valorProduto'] . '">' . $item['nomeProduto'] . '</option>';
                         }
                         ?>
                     </select>
                 </div>
             </div>
+            <div class="col-3">
+                <div class="mb-3">
+                    <label for="valorItens" class="form-label">Valor do Item:</label>
+                    <input type="text" class="form-control" id="valorItens" name="valorItens" readonly>
+                </div>
+            </div>
         </div>
+
         <div class="col-3">
             <div class="mb-3">
                 <label for="valorOrcamento" class="form-label">Valor:</label>
@@ -199,6 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 </div>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var servicoSelects = document.querySelectorAll('.servico-select');
@@ -214,8 +225,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 });
             });
         });
+
+        // Adicionar evento para atualizar o valor do item selecionado
+        var itensSelect = document.getElementById('idItens');
+        var valorItensInput = document.getElementById('valorItens');
+
+        itensSelect.addEventListener('change', function () {
+            var selectedOption = itensSelect.options[itensSelect.selectedIndex];
+            var valorItens = selectedOption.getAttribute('data-valor');
+            valorItensInput.value = valorItens;
+        });
+    });
+
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectItens = document.getElementById('idItens');
+        var valorItensInput = document.getElementById('valorItens');
+
+        selectItens.addEventListener('change', function () {
+            var selectedOption = this.options[this.selectedIndex];
+            var valor = selectedOption.getAttribute('data-valor');
+            valorItensInput.value = valor ? valor : '';
+        });
     });
 </script>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

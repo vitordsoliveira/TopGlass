@@ -4,6 +4,6 @@
 
     require_once('class/ClassBanner.php');
     $id = $_GET['id'];
-    $banner = new ClassBanner();
+    $Banner = new ClassBanner();
 
-    $banner->Desativar($id);
+    $Banner->Desativar($id);

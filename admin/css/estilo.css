@@ -33,15 +33,86 @@ a {
 
 .barraTopo {
     background: #1F3E4C;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
 }
 
-.barraTopo h1 {
-    font-size: 4.5em;
+.barraTopo .logo,
+.barraTopo .login {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    position: relative;
+    width: 5%;
+}
+
+.logo-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.circle {
+    position: absolute;
+    z-index: 1;
+    width: 210%;
+    height: auto;
+}
+
+.logoImg {
+    position: relative;
+    z-index: 2;
+    width: 210%;
+    height: auto;
+}
+
+.tituloDashboard {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.tituloDashboard h1 {
+    font-size: 1.8em;
     color: #fff;
-    margin-left: 18.5%;
     font-family: "Sedan", serif;
     font-weight: 400;
     font-style: normal;
+}
+
+.login {
+    text-align: right;
+}
+
+.login ul {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to left, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
+    padding: 10px;
+    border-radius: 30px;
+}
+
+.login li {
+    margin-left: 10px;
+}
+
+.login p {
+    font-size: 1.7em; 
+    color: #fff; 
+    margin: 0;
+    white-space: nowrap; /* evita quebra de linha no login */
+}
+
+.login img {
+    width: 50px; /* largura fixa para a imagem */
+    height: auto;
+    border-radius: 20px;
 }
 
 /* ############## MENU LATERAL #################### */
@@ -82,11 +153,14 @@ main {
 /* ############## BOX DAS PAGINAS #################### */
 .box {
     width: 100%;
-    margin: 1%;
+    margin: .5%;
     background: url(../img/background2.jpg);
-    background-size: cover; /* Faz a imagem cobrir toda a área do .box */
-    background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-size: cover;
+    /* Faz a imagem cobrir toda a área do .box */
+    background-position: center;
+    /* Centraliza a imagem */
+    background-repeat: no-repeat;
+    /* Evita que a imagem se repita */
 }
 
 /* ################# RODA PÉ ################### */
@@ -106,5 +180,3 @@ main {
     color: #fff;
     font-size: 1.1em;
 }
-
-

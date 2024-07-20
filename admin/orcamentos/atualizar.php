@@ -125,6 +125,27 @@ if ($msg === 'success') {
     echo '<h2 class="text-success">Orçamento atualizado com sucesso!</h2>';
 
 }
+
+function obterItens()
+{
+    $conn = Conexao::LigarConexao();
+    $sql = "SELECT 
+                tbl_itens.idItens,
+                tbl_produto.nomeProduto,
+                tbl_produto.valorProduto
+            FROM 
+                tbl_itens 
+            INNER JOIN 
+                tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
+            WHERE
+                tbl_produto.statusProduto = 'ATIVO';";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Obter dados dos itens
+$itens = obterItens();
 ?>
 
     <div class="container mt-5">
@@ -180,6 +201,29 @@ if ($msg === 'success') {
                     </div>
                 <?php endforeach; ?>
             </div>
+            <div class="row">
+            <div class="col-3">
+                <div class="mb-3">
+                    <label for="idItens" class="form-label">Itens:</label>
+                    <select class="form-select" id="idItens" name="idItens" required>
+                        <option value="">Selecione o Item</option>
+                        <?php foreach ($itens as $item): ?>
+                            <option value="<?php echo $item['idItens']; ?>" data-valor="<?php echo $item['valorProduto']; ?>"
+                                <?php echo ($item['idItens'] == $orcamentoData->idItens) ? 'selected' : ''; ?>>
+                                <?php echo $item['nomeProduto']; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="mb-3">
+                    <label for="valorItens" class="form-label">Valor do Item:</label>
+                    <input type="text" class="form-control" id="valorItens" name="valorItens" readonly
+                        value="<?php echo isset($orcamentoData->valorItens) ? $orcamentoData->valorItens : ''; ?>">
+                </div>
+            </div>
+        </div>
             <div class="row">
                 <div class="col-6">
                     <label for="idFuncionario" class="form-label">Funcionário Responsável</label>
@@ -313,5 +357,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var itensSelect = document.getElementById('idItens');
+    var valorItensInput = document.getElementById('valorItens');
+
+    itensSelect.addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var valor = selectedOption.getAttribute('data-valor');
+        valorItensInput.value = valor ? valor : '';
+    });
+});
+</script>
+
 
 

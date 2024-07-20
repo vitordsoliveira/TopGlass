@@ -1,5 +1,5 @@
 <?php
-require_once('class/ClassFuncionario.php');
+require_once ('class/ClassFuncionario.php');
 session_start(); // Inicia uma sessão
 $tipo = ''; // Inicializa a variável $tipo como uma string vazia
 
@@ -54,9 +54,31 @@ if (isset($_SESSION['idFuncionario'])) {
 <body>
 
     <header>
+
         <div class="barraTopo">
+        <div class="logo">
+            <ul>
+                <li class="logo-container">
+                    <img src="img/circle.png" alt="" class="circle">
+                    <img src="img/logo.png" alt="" class="logoImg">
+                </li>
+            </ul>
+        </div>
+        <div class="tituloDashboard">
             <h1>TOP GLASS</h1>
         </div>
+        <div class="login">
+            <ul>
+                <li>
+                    <p><?php echo $nomeFuncionario; ?></p>
+                </li>
+                <li>
+                    <img src="<?php echo $fotoFuncionario; ?>" alt="<?php echo $altFotoFuncionario; ?>" class="perfilImg">
+                </li>
+            </ul>
+        </div>
+    </div>
+
     </header>
     <main>
         <div class="menu">
@@ -85,15 +107,15 @@ if (isset($_SESSION['idFuncionario'])) {
                     $titulo = "galeria";
                     require_once ('galeria/galeria.php');
                     break;
-                case 'clientes':
-                    $titulo = "clientes";
+                case 'cliente':
+                    $titulo = "cliente";
                     require_once ('clientes/clientes.php');
                     break;
-                case 'orcamentos':
-                    $titulo = "orcamentos";
+                case 'orcamento':
+                    $titulo = "orcamento";
                     require_once ('orcamentos/orcamentos.php');
                     break;
-                    # code...   
+                # code...   
             }
             ?>
         </div>

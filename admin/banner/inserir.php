@@ -1,15 +1,15 @@
 <?php
 if (isset($_POST['nomeBanner'])) {
     $nomeBanner = $_POST['nomeBanner'];
+    $caminhoBanner = $_POST['caminhoBanner'];
     $altBanner = $_POST['altBanner'];
     $statusBanner = 'ATIVO';
-    $altBanner = $nomeBanner;
 
     // Recuperar o id
-    require_once('class/Conexao.php');
+    require_once ('class/Conexao.php');
     $conexao = Conexao::LigarConexao();
     $sql = $conexao->query('SELECT idBanner FROM tbl_banner ORDER BY idBanner DESC LIMIT 1');
-    $resultado = $sql->fetch(PDO::FETCH_ASSOC); 
+    $resultado = $sql->fetch(PDO::FETCH_ASSOC);
 
     $novoId = $resultado ? $resultado['idBanner'] + 1 : 1;
 
@@ -21,22 +21,25 @@ if (isset($_POST['nomeBanner'])) {
 
     // Obter a extensão do arquivo e gerar o novo nome
     $extensao = pathinfo($arquivo['name'], PATHINFO_EXTENSION);
+    $nomeBnFoto = str_replace(' ', '', $nomeBanner);
     $nomeBnFoto = strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', str_replace(' ', '', $nomeBanner)));
+    $nomeBnFoto = preg_replace('/[^a-zA-Z0-9]/', '', $nomeBnFoto);
     $novoNome = $novoId . '_' . $nomeBnFoto . '.' . $extensao;
 
     // Mover a imagem
-    $fotoBanner = 'img/banners/' . $novoNome;
-    if (!move_uploaded_file($arquivo['tmp_name'], $fotoBanner)) {
-        throw new Exception('NÃO FOI POSSIVEL REALIZAR O UPLOAD DO BANNER');
+    if (move_uploaded_file($arquivo['tmp_name'], 'banner/img/' . $novoNome)) {
+        $fotoBanner = 'banner/img/' . $novoNome; // Ajuste para armazenar o caminho correto
+    } else {
+        throw new Exception('Nao deu pra subir essa imagem não.');
     }
 
-    require_once('class/ClassBanner.php');
+    require_once ('class/ClassBanner.php');
     $Banner = new ClassBanner();
     $Banner->nomeBanner = $nomeBanner;
     $Banner->caminhoBanner = $fotoBanner;
     $Banner->altBanner = $altBanner;
     $Banner->statusBanner = $statusBanner;
-    $Banner->fotoBanner = $fotoBanner;
+    $Banner->altBanner = $nomeBanner;
     $Banner->Inserir();
 }
 ?>
@@ -85,20 +88,25 @@ if (isset($_POST['nomeBanner'])) {
 </div>
 
 <script>
-    document.getElementById('imgBanner').addEventListener('click', function() {
+    document.getElementById('imgBanner').addEventListener('click', function () {
         document.getElementById('fotoBanner').click();
     });
-    
-    document.getElementById('imgBanner').addEventListener('change', function(event) {
-        const imgBanner = document.getElementById('imgBanner');
-        const arquivo = event.target.files[0];
+
+    document.getElementById('fotoBanner').addEventListener('change', function (event) {
+        let imgBanner= document.getElementById("imgBanner");
+        let arquivo = event.target.files[0];
+
         if (arquivo) {
-            const carregar = new FileReader();
+            let carregar = new FileReader();
+
             carregar.onload = function(e) {
                 imgBanner.src = e.target.result;
-                document.getElementById('caminhoBanner').value = 'img/banners/' + arquivo.name;
             }
             carregar.readAsDataURL(arquivo);
+
+            // Definir automaticamente o caminho do banner no campo de entrada
+            let caminhoBanner = 'banner/img/' + arquivo.name;
+            document.getElementById('caminhoBanner').value = caminhoBanner;
         }
     });
 </script>
