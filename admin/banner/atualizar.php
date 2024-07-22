@@ -5,12 +5,11 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $Banner = new ClassBanner($id);
     
-    if ($Banner->Carregar()) { // Carregar os dados do banner existente
+    if ($Banner->Carregar()) { //carregar os dados do banner
         if (isset($_POST['idBanner'])) {
             $nomeBanner = $_POST['nomeBanner'];
-            $descricaoBanner = $_POST['descricaoBanner'];
             $statusBanner = $_POST['statusBanner'];
-            $altBanner = $nomeBanner;
+            $altBanner = $_POST['altBanner'];
 
             // Verificar se a foto foi modificada
             if (!empty($_FILES['fotoBanner']['name'])) {
@@ -27,7 +26,7 @@ if (isset($_GET['id'])) {
                 $novoNome = $id . '_' . $nomeBnFoto . '.' . $extensao;
 
                 // Mover a imagem
-                if (move_uploaded_file($arquivo['tmp_name'], 'banner/img/' . $novoNome)) {
+                if (move_uploaded_file($arquivo['tmp_name'], 'img/banners' . $novoNome)) {
                     $caminhoBanner = $novoNome;
                 } else {
                     throw new Exception('Não foi possível subir a imagem.');
@@ -45,11 +44,7 @@ if (isset($_GET['id'])) {
             $Banner->Atualizar();
             echo "Banner atualizado com sucesso!";
         }
-    } else {
-        echo "Banner não encontrado!";
     }
-} else {
-    echo "ID do banner não fornecido!";
 }
 ?>
 
