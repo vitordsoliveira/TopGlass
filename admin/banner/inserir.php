@@ -27,8 +27,8 @@ if (isset($_POST['nomeBanner'])) {
     $novoNome = $novoId . '_' . $nomeBnFoto . '.' . $extensao;
 
     // Mover a imagem
-    if (move_uploaded_file($arquivo['tmp_name'], 'banner/img/' . $novoNome)) {
-        $fotoBanner = 'banner/img/' . $novoNome; // Ajuste para armazenar o caminho correto
+    if (move_uploaded_file($arquivo['tmp_name'], 'img/banners/' . $novoNome)) {
+        $fotoBanner = 'img/banners/' . $novoNome; // Ajuste para armazenar o caminho correto
     } else {
         throw new Exception('Nao deu pra subir essa imagem não.');
     }

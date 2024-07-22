@@ -39,7 +39,7 @@ class ClassBanner
     public function Carregar()
     {
 
-        $sql = "SELECT * FROM tbl_banner ORDER BY nomeBanner DESC;= $this->idBanner";
+        $sql = "SELECT * FROM tbl_banner WHERE idBanner = $this->idBanner";
         $conn = Conexao::LigarConexao();
         $resultado = $conn->query($sql);
         $Banner = $resultado->fetch();
