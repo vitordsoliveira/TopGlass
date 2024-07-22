@@ -74,9 +74,9 @@
                                     </form>
 
 
-                                    <a class="small text-muted" href="#!">Forgot password?</a>
-                                    <a href="#!" class="small text-muted">Terms of use.</a>
-                                    <a href="#!" class="small text-muted">Privacy policy</a>
+                                    <a class="small text-muted" href="#!">Esqueceu a senha?</a>
+                                    <a href="#!" class="small text-muted">Termos de Uso.</a>
+                                    <a href="#!" class="small text-muted">Politica de Privacidade</a>
                                     </form>
                                 </div>
                             </div>
