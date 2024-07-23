@@ -1,6 +1,6 @@
 <?php
 
-require_once('Conexao.php');
+require_once ('Conexao.php');
 
 class ClassOrcamento
 {
@@ -13,7 +13,7 @@ class ClassOrcamento
     public $valorOrcamento;
     public $statusOrcamento;
     public $comentOrcamento;
-    public $valorItens;  // Adicionado
+    public $valorItens;
 
     public function __construct($id = false)
     {
@@ -32,7 +32,7 @@ class ClassOrcamento
         $stmt->bindParam(':idOrcamento', $this->idOrcamento, PDO::PARAM_INT);
         $stmt->execute();
         $orcamento = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         if ($orcamento) {
             $this->idOrcamento = $orcamento['idOrcamento'];
             $this->idCliente = $orcamento['idCliente'];
@@ -103,58 +103,35 @@ class ClassOrcamento
                     valorOrcamento, 
                     statusOrcamento,
                     comentOrcamento
-
                 )
-                VALUES (
-                    :idCliente,
-                    :idServico,
-                    :idItens,
-                    :idFuncionario,
-                    :valorOrcamento,
-                    :statusOrcamento,
-                    :comentOrcamento,
-                )";
-
+                 VALUES (           '$this->idCliente',
+                                    '$this->idServico',
+                                    '$this->idItens',
+                                    '$this->idFuncionario',
+                                    '$this->valorOrcamento',
+                                    '$this->statusOrcamento',
+                                    '$this->comentOrcamento')";
         $conn = Conexao::LigarConexao();
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':idCliente', $this->idCliente);
-        $stmt->bindParam(':idServico', $this->idServico);
-        $stmt->bindParam(':idItens', $this->idItens);
-        $stmt->bindParam(':idFuncionario', $this->idFuncionario);
-        $stmt->bindParam(':valorOrcamento', $this->valorOrcamento);
-        $stmt->bindParam(':statusOrcamento', $this->statusOrcamento);
-        $stmt->bindParam(':comentOrcamento', $this->comentOrcamento);
         $stmt->execute();
     }
 
     // ATUALIZAR
-    public function Atualizar() {
-        try {
-            $sql = "UPDATE tbl_orcamento 
-                    SET idCliente = :idCliente, 
-                        idFuncionario = :idFuncionario, 
-                        valorOrcamento = :valorOrcamento, 
-                        statusOrcamento = :statusOrcamento, 
-                        comentOrcamento = :comentOrcamento, 
-                        idItens = :idItens 
-                    WHERE idOrcamento = :idOrcamento";
-            
-            $stmt = Conexao::LigarConexao()->prepare($sql);
-    
-            $stmt->bindParam(':idCliente', $this->idCliente, PDO::PARAM_INT);
-            $stmt->bindParam(':idFuncionario', $this->idFuncionario, PDO::PARAM_INT);
-            $stmt->bindParam(':valorOrcamento', $this->valorOrcamento, PDO::PARAM_STR);
-            $stmt->bindParam(':statusOrcamento', $this->statusOrcamento, PDO::PARAM_STR);
-            $stmt->bindParam(':comentOrcamento', $this->comentOrcamento, PDO::PARAM_STR);
-            $stmt->bindParam(':idItens', $this->idItens, PDO::PARAM_INT);
-            $stmt->bindParam(':idOrcamento', $this->idOrcamento, PDO::PARAM_INT);
-    
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo 'Erro: ' . $e->getMessage();
-        }
+    public function Atualizar()
+    {
+        $sql = "UPDATE tbl_orcamento SET idCliente      = '" . $this->idCliente . "',
+                                       idServico = '" . $this->idServico . "',
+                                       idItens = '" . $this->idItens . "',
+                                       idFuncionario = '" . $this->idFuncionario . "',
+                                       statusOrcamento = '" . $this->statusOrcamento . "',
+                                       comentOrcamento = '" . $this->comentOrcamento . "'
+                WHERE idOrcamento = $this->idOrcamento;";
+
+        $conn = Conexao::LigarConexao();
+        $conn->exec($sql);
+
+        echo "<script>document.location='index.php?p=orcamento'</script>";
     }
-    
 
     // DESATIVAR
     public function Desativar($id)

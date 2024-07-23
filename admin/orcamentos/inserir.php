@@ -1,22 +1,25 @@
 <?php
+// Inclui as classes necessárias para Cliente, Orçamento e Conexão com o banco de dados
 require_once 'class/ClassCliente.php';
 require_once 'class/ClassOrcamento.php';
 require_once 'class/Conexao.php';
 
-// Função para obter os dados dos clientes ativos
+// FUNÇÃO CLIENTES
+// Função para obter clientes ativos do banco de dados
 function obterClientesAtivos()
 {
-    $conn = Conexao::LigarConexao();
-    $sql = "SELECT idCliente, nomeCliente FROM tbl_cliente WHERE statusCliente = 'ATIVO'";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = Conexao::LigarConexao(); // Conecta ao banco de dados
+    $sql = "SELECT idCliente, nomeCliente FROM tbl_cliente WHERE statusCliente = 'ATIVO'"; // SQL para selecionar clientes ativos
+    $stmt = $conn->prepare($sql); // Prepara a consulta
+    $stmt->execute(); // Executa a consulta
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retorna todos os resultados como um array associativo
 }
 
-// Função para obter os serviços por tipo
+// FUNÇÃO SERVIÇOS
+// Função para obter serviços ativos por tipo de serviço
 function obterServicosPorTipo()
 {
-    $conn = Conexao::LigarConexao();
+    $conn = Conexao::LigarConexao(); // Conecta ao banco de dados
     $sql = "SELECT 
                 tbl_servico.idServico, 
                 tbl_servico.nomeServicos, 
@@ -27,17 +30,19 @@ function obterServicosPorTipo()
                 tbl_tipo_servico ON tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico 
             WHERE 
                 tbl_servico.statusServicos = 'ATIVO' 
-                AND tbl_tipo_servico.statusServico = 'ATIVO';";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    $servicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                AND tbl_tipo_servico.statusServico = 'ATIVO';"; // SQL para selecionar serviços ativos e tipos de serviços
+    $stmt = $conn->prepare($sql); // Prepara a consulta
+    $stmt->execute(); // Executa a consulta
+    $servicos = $stmt->fetchAll(PDO::FETCH_ASSOC); // Retorna todos os resultados como um array associativo
 
+    // Inicializa um array para categorizar serviços por tipo
     $servicosPorTipo = [
         'VIDRO' => [],
         'ESQUADRIA' => [],
         'ESPELHO' => [],
     ];
 
+    // Organiza os serviços pelo tipo
     foreach ($servicos as $servico) {
         $servicosPorTipo[$servico['tipoServico']][] = [
             'idServico' => $servico['idServico'],
@@ -45,12 +50,14 @@ function obterServicosPorTipo()
         ];
     }
 
-    return $servicosPorTipo;
+    return $servicosPorTipo; // Retorna o array de serviços organizados por tipo
 }
 
+// FUNÇÃO ITENS
+// Função para obter itens ativos do banco de dados
 function obterItens()
 {
-    $conn = Conexao::LigarConexao();
+    $conn = Conexao::LigarConexao(); // Conecta ao banco de dados
     $sql = "SELECT 
                 tbl_produto.idProduto, 
                 tbl_produto.nomeProduto,
@@ -60,20 +67,17 @@ function obterItens()
             INNER JOIN 
                 tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
             WHERE
-                tbl_produto.statusProduto = 'ATIVO';";
+                tbl_produto.statusProduto = 'ATIVO';"; // SQL para selecionar produtos ativos
 
-    $stmt = $conn->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $conn->prepare($sql); // Prepara a consulta
+    $stmt->execute(); // Executa a consulta
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retorna todos os resultados como um array associativo
 }
 
-
-
-
-// Inicializar variáveis
-$idCliente = $idFuncionario = $valorOrcamento = $statusOrcamento = $comentOrcamento = '';
-$servicosPorTipo = obterServicosPorTipo();
-$clientes = obterClientesAtivos();
+// INICIAR OS MÉTODOS TRANSFORMADOS EM VARIÁVEIS
+$idCliente = $idFuncionario = $valorOrcamento = $statusOrcamento = $comentOrcamento = ''; // Inicializa as variáveis do formulário
+$servicosPorTipo = obterServicosPorTipo(); // Obtém os serviços por tipo
+$clientes = obterClientesAtivos(); // Obtém os clientes ativos
 
 // Processar formulário se enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -84,11 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $valorOrcamento = $_POST['valorOrcamento'];
     $statusOrcamento = $_POST['statusOrcamento'];
     $comentOrcamento = $_POST['comentOrcamento'];
-
-    // Validar dados (adicionar validações específicas conforme necessário)
+    // Valida os dados (adicionar validações específicas conforme necessário)
 
     // Inserir novo orçamento no banco de dados
-    $orcamento = new ClassOrcamento();
+    $orcamento = new ClassOrcamento(); // Cria uma nova instância de ClassOrcamento
     $orcamento->idCliente = $idCliente;
     $orcamento->idServico = $idServico;
     $orcamento->idItens = $idItens;
@@ -102,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Redirecionar após a inserção
     header("Location: index.php?p=orcamento&orc=inserir");
-    exit();
+    exit(); // Certifique-se de parar a execução do script após o redirecionamento
 }
 ?>
 
@@ -171,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <select class="form-select" id="idItens" name="idItens" required>
                         <option value="">Selecione o Produto</option>
                         <?php
-                        $itens = obterItens();
+                        $itens = obterItens(); // Obtém os itens ativos
                         foreach ($itens as $item) {
                             echo '<option value="' . $item['idProduto'] . '" data-valor="' . $item['valorProduto'] . '">' . $item['nomeProduto'] . '</option>';
                         }
@@ -209,24 +212,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
 </div>
 
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var servicoSelects = document.querySelectorAll('.servico-select');
 
+        // Adiciona evento de mudança aos selects de serviços para habilitar/desabilitar conforme seleção
         servicoSelects.forEach(function (select) {
             select.addEventListener('change', function () {
                 var selectedValue = this.value;
                 servicoSelects.forEach(function (otherSelect) {
                     if (otherSelect !== select) {
                         otherSelect.disabled = (selectedValue !== '');
-                        otherSelect.required = false; // Remover obrigatoriedade se desabilitado
+                        otherSelect.required = false; // Remove obrigatoriedade se desabilitado
                     }
                 });
             });
         });
 
-        // Adicionar evento para atualizar o valor do item selecionado
+        // Adiciona evento para atualizar o valor do item selecionado
         var itensSelect = document.getElementById('idItens');
         var valorItensInput = document.getElementById('valorItens');
 
@@ -236,7 +239,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             valorItensInput.value = valorItens;
         });
     });
-
 </script>
 
 <script>
@@ -244,6 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         var selectItens = document.getElementById('idItens');
         var valorItensInput = document.getElementById('valorItens');
 
+        // Atualiza o valor do item selecionado no input readonly
         selectItens.addEventListener('change', function () {
             var selectedOption = this.options[this.selectedIndex];
             var valor = selectedOption.getAttribute('data-valor');
@@ -252,18 +255,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     });
 </script>
 
-
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var servicoSelects = document.querySelectorAll('.servico-select');
 
+        // Reaplica evento de mudança aos selects de serviços
         servicoSelects.forEach(function (select) {
             select.addEventListener('change', function () {
                 var selectedValue = this.value;
                 servicoSelects.forEach(function (otherSelect) {
                     if (otherSelect !== select) {
                         otherSelect.disabled = (selectedValue !== '');
-                        otherSelect.required = false; // Remover obrigatoriedade se desabilitado
+                        otherSelect.required = false; // Remove obrigatoriedade se desabilitado
                     }
                 });
             });
