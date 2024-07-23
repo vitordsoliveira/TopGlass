@@ -8,6 +8,7 @@ class ClassCliente
     public $idCliente;
     public $nomeCliente;
     public $emailCliente;
+    public $senhaCliente;
     public $numeroCliente;
     public $enderecoCliente;
     public $dataCadCliente;
@@ -20,6 +21,24 @@ class ClassCliente
         if ($id) {
             $this->idCliente = $id;
             $this->Carregar();
+        }
+    }
+
+    public function VerificarLogin()
+    {
+        $sql = "SELECT * FROM tbl_cliente WHERE
+            emailCliente = '" . $this->emailCliente . "'
+            and senhaCliente = '" . $this->senhaCliente . "'
+            and statusCliente = 'ATIVO'";
+        $conn = Conexao::LigarConexao();
+        $resultado = $conn->query($sql);
+        $Cliente = $resultado->fetch();
+
+        if ($Cliente) {
+            return $Cliente['idCliente'];
+            // Adiciona um aviso ao log indicando que o código foi executado
+        } else {
+            return false;
         }
     }
 
@@ -125,4 +144,30 @@ class ClassCliente
 
         echo "<script>document.location='index.php?p=cliente'</script>";
     }
+
+    
 }
+
+if (isset($_POST['email'])) {
+    $Cliente = new ClassCliente();
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+
+    $Cliente->emailCliente = $email;
+    $Cliente->senhaCliente = $senha;
+
+    if ($idCliente = $Cliente->VerificarLogin()) {
+
+        session_start(); // Inicia uma sessão
+        $_SESSION['idCliente'] = $idCliente; // Define a variável de sessão 'idCliente' com o valor de $idCliente
+
+        //echo 'o ID Cliente foi acionado e adicionado a página';
+
+        echo json_encode(['success' => true, 'message' => 'Login OK']);
+
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Login Invalido']);
+    }
+}
+
+

@@ -834,7 +834,7 @@
    position: fixed;
    bottom: 3%;
    left: 14.2%;
-   width: 3%;
+   width: 5%;
  }
 
  .wpp img{
@@ -909,7 +909,7 @@
    margin: 21.4px 0 20px 0;
  }
 
- .login form:nth-child(2) .logar input:nth-child(1) {
+ .login form:nth-child(2) .logar button:nth-child(1) {
    cursor: pointer;
    border: 0px;
    border-radius: 15px;
@@ -924,7 +924,7 @@
    transition: transform ease-in-out .5s;
  }
 
- .login form:nth-child(2) .logar input:nth-child(1):hover {
+ .login form:nth-child(2) .logar button:nth-child(1):hover {
    cursor: pointer;
    background: #1F3E4C;
    transform: scale(1.1);

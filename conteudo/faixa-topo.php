@@ -33,7 +33,10 @@
                 </li>
 
                 <li>
-                    <a href="login.php"><span><img src="img/login.svg" alt="#"></span>LOGIN</a>
+                    <a href="login.php"><span><img src="img/login.svg" alt="#"></span><h2>LOGIN</h2></a>
+                </li>
+                <li>
+                    <a href="http://localhost/topglass/admin/sair.php">SAIR</a>
                 </li>
 
             </ul>

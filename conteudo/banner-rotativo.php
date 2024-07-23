@@ -10,7 +10,8 @@ $lista = $Banner->Listar();
     <div class="site">
         <div class="banners">
             <?php foreach ($lista as $linha): ?>
-                <img src="admin/<?php echo ($linha['caminhoBanner']); ?>" alt="admin/<?php echo ($linha['nomeBanner']); ?>">
+                <img src="admin/<?php echo ($linha['caminhoBanner']); ?>"
+                 alt="admin/img/banners/<?php echo ($linha['nomeBanner']); ?>">
             <?php endforeach; ?>
           </div>
         <div class="pagamento">

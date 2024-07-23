@@ -37,26 +37,25 @@
 
         <div class="site">
             <div class="loginTop">
-                <img src="img/login1.svg" alt="">
+                
                 <h2>LOGIN</h2>
             </div>
-            <form action="#" method="POST">
-
+            <form id="formLoginAdmin" action="#" method="POST">
                 <div>
                     <div>
                         <label for="email">
                             <p>Digite seu E-mail:</p>
                         </label>
-                        <input type="text" name="email" placeholder="Digite aqui seu email completo" required>
+                        <input type="text" name="email"
+                        title="email" placeholder="Digite aqui seu email completo" required>
                     </div>
 
                     <div>
                         <label for="senha">
                             <p>Digite sua senha:</p>
                         </label>
-                        <input type="text" name="senha" placeholder="Digite aqui sua senha" required>
+                        <input type="password" name="senha" title="senha" placeholder="Digite aqui sua senha" required>
                     </div>
-
                     <ul>
                         <li>
                             <a href="registro.php">SE REGISTRAR</a>
@@ -65,13 +64,10 @@
                             <a href="">ESQUECI MINHA SENHA</a>
                         </li>
                     </ul>
-
-
                     <div class="logar">
-                        <input type="submit" value="ENTRAR">
+                        <button onclick="LoginAdmin()" type="submit" value="ENTRAR">
                     </div>
                 </div>
-
             </form>
         </div>
 
@@ -90,6 +86,8 @@
 
     <!--meu JS no final-->
     <script src="js/estilo.js"></script>
+
+    <script src="js/login.js"></script>
 
 </body>
 

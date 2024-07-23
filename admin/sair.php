@@ -5,6 +5,6 @@ session_unset();
 
 session_destroy();
 
-header('location:http://localhost/topglass/admin/login.php');
+header('location:http://localhost/topglass/');
 
 exit();

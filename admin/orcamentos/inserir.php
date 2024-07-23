@@ -103,10 +103,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inserir o orçamento
     $orcamento->Inserir();
 
-    // Redirecionar após a inserção
-    header("Location: index.php?p=orcamento&orc=inserir");
-    exit(); // Certifique-se de parar a execução do script após o redirecionamento
+    $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
+
+    if ($msg === 'success') {
+        echo '<h2 class="text-success">Orçamento criado com sucesso!</h2>';
+
+    }
 }
+
+
+
 ?>
 
 <div class="container mt-5">

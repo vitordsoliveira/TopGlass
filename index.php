@@ -77,7 +77,26 @@ if (isset($_POST['email'])) {
         echo "Erro do Mailer: {$mail->ErrorInfo}";
     }
 }
+
+
+require_once ('./admin/class/ClassCliente.php');
+session_start(); // Inicia uma sessão
+$tipo = ''; // Inicializa a variável $tipo como uma string vazia
+
+// Verifica se a variável de sessão 'idFuncionario' está definida
+if (isset($_SESSION['idCliente'])) {
+    // Define a variável $tipo como 'funcionario'
+    $tipo = 'Cliente';
+
+    // Criar uma instância do ClassFuncionario e obter o nome
+    $Cliente = new ClassCliente($_SESSION['idCliente']);
+    $nomeCliente = $Cliente->nomeCliente;
+
+} 
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -173,6 +192,8 @@ if (isset($_POST['email'])) {
 
     <!--meu JS no final-->
     <script src="js/estilo.js"></script>
+
+    <script src="js/login.js"></script>
 
 </body>
 
