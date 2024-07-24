@@ -26,8 +26,5 @@ class Conexao{
             // Se ocorrer um erro, captura a exceção e exibe uma mensagem de erro
             echo "Erro de conexão: " . $e->getMessage();
         }
-
     }
-
-
 }

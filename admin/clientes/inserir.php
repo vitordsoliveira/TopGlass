@@ -8,8 +8,6 @@ if (isset($_POST['nomeCliente'])) {
     $cpfCliente = $_POST['cpfCliente'];
     $statusCliente = 'ATIVO';
 
-    $statusCliente = 'ATIVO';
-
     //Recuperar o id
     require_once('class/Conexao.php');
     $conexao = Conexao::LigarConexao();

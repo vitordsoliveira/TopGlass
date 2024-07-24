@@ -1,4 +1,5 @@
 <?php
+
 require_once ('class/ClassCliente.php');
 
 $cliente = new ClassCliente();

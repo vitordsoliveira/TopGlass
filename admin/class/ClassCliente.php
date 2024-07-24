@@ -23,7 +23,8 @@ class ClassCliente
             $this->Carregar();
         }
     }
-
+   
+    //VERIFICAR LOGIN
     public function VerificarLogin()
     {
         $sql = "SELECT * FROM tbl_cliente WHERE
@@ -41,7 +42,7 @@ class ClassCliente
             return false;
         }
     }
-
+    
     // LISTAR
     public function Listar()
     {
@@ -95,7 +96,8 @@ class ClassCliente
     }
 
     // INSERIR
-    public function Inserir(){
+    public function Inserir()
+    {
         $sql = "INSERT INTO tbl_cliente (   nomeCliente,
                                             emailCliente,
                                             enderecoCliente,
@@ -145,7 +147,7 @@ class ClassCliente
         echo "<script>document.location='index.php?p=cliente'</script>";
     }
 
-    
+
 }
 
 if (isset($_POST['email'])) {

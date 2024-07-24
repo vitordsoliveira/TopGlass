@@ -83,7 +83,7 @@ WHERE
 
     $servicosPorTipo = [
         'VIDRO' => [],
-        'ESQUADRIA' => [],
+        'ALUMINIO' => [],
         'ESPELHO' => [],
     ];
 
@@ -95,8 +95,8 @@ WHERE
                     'nomeServico' => $servico['nomeServicos']
                 ];
                 break;
-            case 'ESQUADRIA':
-                $servicosPorTipo['ESQUADRIA'][] = [
+            case 'ALUMINIO':
+                $servicosPorTipo['ALUMINIO'][] = [
                     'idServico' => $servico['idServico'],
                     'nomeServico' => $servico['nomeServicos']
                 ];
@@ -148,7 +148,7 @@ function obterItens()
 $itens = obterItens();
 ?>
 
-    <div class="container mt-5">
+<div class="container mt-5">
         <form action="index.php?p=orcamento&orc=atualizar&id=<?php echo $id; ?>" method="POST"
             enctype="multipart/form-data">
             <div class="row">
@@ -273,27 +273,38 @@ $itens = obterItens();
         </form>
     </div>
 
-
-
 <!-- JavaScript para lidar com a desativação de outras seleções -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var clientes = <?php echo json_encode($clientes); ?>;
-        var clienteSelect = document.getElementById('idCliente');
+document.addEventListener('DOMContentLoaded', function () {
+    var clientes = <?php echo json_encode($clientes); ?>;
+    var clienteSelect = document.getElementById('idCliente');
 
-        // Função para desativar e limpar outras seleções
-        function disableAndClearOther(selectedElement, otherElementId) {
-            var otherSelect = document.querySelector(otherElementId);
-            otherSelect.disabled = true;
-            otherSelect.value = '';
-        }
+    // Função para desativar e limpar outras seleções
+    function disableAndClearOther(selectedElement, otherElementId) {
+        var otherSelect = document.querySelector(otherElementId);
+        otherSelect.disabled = true;
+        otherSelect.value = '';
+    }
 
-        // Função para verificar e desativar outras seleções
-        function handleServiceSelection() {
-            var vidroSelect = document.getElementById('idServicoVIDRO');
-            var esquadriaSelect = document.getElementById('idServicoESQUADRIA');
-            var espelhoSelect = document.getElementById('idServicoESPELHO');
+    // Função para habilitar todas as seleções
+    function enableAllServices() {
+        var selects = document.querySelectorAll('#idServicoVIDRO, #idServicoESQUADRIA, #idServicoESPELHO');
+        selects.forEach(select => {
+            select.disabled = false;
+        });
+    }
 
+    // Função para verificar e desativar outras seleções
+    function handleServiceSelection() {
+        var vidroSelect = document.getElementById('idServicoVIDRO');
+        var esquadriaSelect = document.getElementById('idServicoESQUADRIA');
+        var espelhoSelect = document.getElementById('idServicoESPELHO');
+
+        // Se a opção padrão estiver selecionada, habilitar todos os serviços
+        if (vidroSelect.value === '' && esquadriaSelect.value === '' && espelhoSelect.value === '') {
+            enableAllServices();
+        } else {
+            // Desativar seletores de serviço quando um serviço é selecionado
             if (vidroSelect.value !== '') {
                 disableAndClearOther(vidroSelect, '#idServicoESQUADRIA');
                 disableAndClearOther(vidroSelect, '#idServicoESPELHO');
@@ -305,35 +316,46 @@ $itens = obterItens();
                 disableAndClearOther(espelhoSelect, '#idServicoESQUADRIA');
             }
         }
+    }
 
-        // Verificar seleção inicial
-        handleServiceSelection();
+    // Verificar seleção inicial
+    handleServiceSelection();
 
-        // Adicionar eventos de mudança para cada tipo de serviço
-        var vidroSelect = document.getElementById('idServicoVIDRO');
-        var esquadriaSelect = document.getElementById('idServicoESQUADRIA');
-        var espelhoSelect = document.getElementById('idServicoESPELHO');
+    // Adicionar eventos de mudança para cada tipo de serviço
+    var vidroSelect = document.getElementById('idServicoVIDRO');
+    var esquadriaSelect = document.getElementById('idServicoESQUADRIA');
+    var espelhoSelect = document.getElementById('idServicoESPELHO');
 
-        vidroSelect.addEventListener('change', handleServiceSelection);
-        esquadriaSelect.addEventListener('change', handleServiceSelection);
-        espelhoSelect.addEventListener('change', handleServiceSelection);
+    vidroSelect.addEventListener('change', handleServiceSelection);
+    esquadriaSelect.addEventListener('change', handleServiceSelection);
+    espelhoSelect.addEventListener('change', handleServiceSelection);
 
-        // Evento para carregar dados do cliente ao selecionar um cliente
-        clienteSelect.addEventListener('change', function() {
-            var idCliente = this.value;
-            var cpfClienteField = document.getElementById('cpfCliente');
-            var numeroClienteField = document.getElementById('numeroCliente');
+    // Evento para carregar dados do cliente ao selecionar um cliente
+    clienteSelect.addEventListener('change', function () {
+        var idCliente = this.value;
+        var cpfClienteField = document.getElementById('cpfCliente');
+        var numeroClienteField = document.getElementById('numeroCliente');
 
-            if (idCliente) {
-                var cliente = clientes.find(cli => cli.idCliente == idCliente);
-                cpfClienteField.value = cliente ? cliente.cpfCliente : '';
-                numeroClienteField.value = cliente ? cliente.numeroCliente : '';
-            } else {
-                cpfClienteField.value = '';
-                numeroClienteField.value = '';
-            }
-        });
+        if (idCliente) {
+            var cliente = clientes.find(cli => cli.idCliente == idCliente);
+            cpfClienteField.value = cliente ? cliente.cpfCliente : '';
+            numeroClienteField.value = cliente ? cliente.numeroCliente : '';
+        } else {
+            cpfClienteField.value = '';
+            numeroClienteField.value = '';
+        }
     });
+
+    // Atualizar o valor do item selecionado
+    var itensSelect = document.getElementById('idItens');
+    var valorItensInput = document.getElementById('valorItens');
+
+    itensSelect.addEventListener('change', function () {
+        var selectedItem = itensSelect.options[itensSelect.selectedIndex];
+        var valor = selectedItem.getAttribute('data-valor');
+        valorItensInput.value = valor;
+    });
+});
 </script>
 
 <script>
@@ -359,16 +381,16 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var itensSelect = document.getElementById('idItens');
-    var valorItensInput = document.getElementById('valorItens');
+    document.addEventListener('DOMContentLoaded', function () {
+        var itensSelect = document.getElementById('idItens');
+        var valorItensInput = document.getElementById('valorItens');
 
-    itensSelect.addEventListener('change', function() {
-        var selectedOption = this.options[this.selectedIndex];
-        var valor = selectedOption.getAttribute('data-valor');
-        valorItensInput.value = valor ? valor : '';
+        itensSelect.addEventListener('change', function () {
+            var selectedItem = itensSelect.options[itensSelect.selectedIndex];
+            var valor = selectedItem.getAttribute('data-valor');
+            valorItensInput.value = valor;
+        });
     });
-});
 </script>
 
 
