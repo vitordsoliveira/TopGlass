@@ -1,15 +1,15 @@
 <?php
-require_once('class/ClassBanner.php');
+require_once('class/ClassGaleria.php');
 
-$banner = new ClassBanner();
-$lista = $banner->ListarDash();
+$Galeria = new ClassGaleria();
+$lista = $Galeria->ListarDash();
 ?>
 
-<h2 class="tituloDashboard">BANNERS</h2>
+<h2 class="tituloDashboard">GaleriaS</h2>
 
 <table class="table">
     <span class="btnDashboard">
-        <a href="index.php?p=banner&bn=inserir"> + Cadastrar Banner</a>
+        <a href="index.php?p=galeria&gl=inserir"> + Cadastrar Galeria</a>
     </span>
 
     <thead>
@@ -42,24 +42,24 @@ $lista = $banner->ListarDash();
             <tr>
                 <!-- Exibindo a imagem -->
                 <td scope="col">
-                    <img src="<?php echo ($linha['caminhoBanner']); ?>"
-                        alt="<?php echo ($linha['nomeBanner']); ?>"
+                    <img src="<?php echo ($linha['caminhoGaleria']); ?>"
+                        alt="<?php echo ($linha['nomeGaleria']); ?>"
                         style="width: 150px; height: auto;">
                 </td>
-                <!-- Exibindo o nome do banner -->
-                <td scope="col"><?php echo ($linha['nomeBanner']); ?></td>
-                <!-- Exibindo o caminho do banner -->
-                <td scope="col"><?php echo ($linha['caminhoBanner']); ?></td>
-                <!-- Exibindo a descrição do banner -->
-                <td scope="col"><?php echo ($linha['altBanner']); ?></td>
-                <!-- Exibindo o status do banner -->
-                <td scope="col"><?php echo ($linha['statusBanner']); ?></td>
+                <!-- Exibindo o nome do Galeria -->
+                <td scope="col"><?php echo ($linha['nomeGaleria']); ?></td>
+                <!-- Exibindo o caminho do Galeria -->
+                <td scope="col"><?php echo ($linha['caminhoGaleria']); ?></td>
+                <!-- Exibindo a descrição do Galeria -->
+                <td scope="col"><?php echo ($linha['altGaleria']); ?></td>
+                <!-- Exibindo o status do Galeria -->
+                <td scope="col"><?php echo ($linha['statusGaleria']); ?></td>
                 <!-- Links para atualizar e desativar -->
                 <td>
-                    <a href="index.php?p=banner&bn=atualizar&id=<?php echo ($linha['idBanner']); ?>">Atualizar</a>
+                    <a href="index.php?p=galeria&gl=atualizar&id=<?php echo ($linha['idGaleria']); ?>">Atualizar</a>
                 </td>
                 <td>
-                    <a href="index.php?p=banner&bn=desativar&id=<?php echo ($linha['idBanner']); ?>">Desativar</a>
+                    <a href="index.php?p=galeria&gl=desativar&id=<?php echo ($linha['idGaleria']); ?>">Desativar</a>
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -34,13 +34,51 @@ class ClassCliente
         $conn = Conexao::LigarConexao();
         $resultado = $conn->query($sql);
         $Cliente = $resultado->fetch();
-
+    
         if ($Cliente) {
             return $Cliente['idCliente'];
-            // Adiciona um aviso ao log indicando que o código foi executado
         } else {
             return false;
         }
+    }
+    
+
+    public function login($email, $senha) {
+        // Conectar ao banco de dados
+        $conn = Conexao::LigarConexao();
+
+        // Prepare a consulta
+        $stmt = $conn->prepare('SELECT idCliente, senhaCliente FROM tbl_cliente WHERE emailCliente = :email');
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        // Verifique se o e-mail existe
+        if ($stmt->rowCount() === 1) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Verifique a senha
+            if (password_verify($senha, $user['senha'])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getIdClienteByEmail($email) {
+        // Conectar ao banco de dados
+        $conn = Conexao::LigarConexao();
+
+        // Prepare a consulta
+        $stmt = $conn->prepare('SELECT idCliente FROM tbl_cliente WHERE emailCliente = :email');
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        // Retorne o ID do cliente
+        if ($stmt->rowCount() === 1) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $user['idCliente'];
+        }
+        return null;
     }
     
     // LISTAR
@@ -146,8 +184,6 @@ class ClassCliente
 
         echo "<script>document.location='index.php?p=cliente'</script>";
     }
-
-
 }
 
 if (isset($_POST['email'])) {

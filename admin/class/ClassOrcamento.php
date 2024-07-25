@@ -136,10 +136,9 @@ class ClassOrcamento
     // DESATIVAR
     public function Desativar($id)
     {
-        $sql = "UPDATE tbl_orcamento SET statusOrcamento = 'INATIVO' WHERE idOrcamento = :idOrcamento";
+        $sql = "UPDATE tbl_orcamento SET statusOrcamento = 'INATIVO' WHERE idOrcamento = '" . $this->idOrcamento . "'";
         $conn = Conexao::LigarConexao();
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':idOrcamento', $id, PDO::PARAM_INT);
         $stmt->execute();
     }
 }

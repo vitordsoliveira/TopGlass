@@ -1,3 +1,5 @@
+<h2>DESATIVADO</h2>
+
 <?php
 
     require_once('class/ClassOrcamento.php');
@@ -5,3 +7,5 @@
     $orcamento = new ClassOrcamento();
 
     $orcamento->Desativar($id);
+?>
+

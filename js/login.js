@@ -6,7 +6,7 @@ function LoginAdmin() {
   
       // Envia uma requisição AJAX para o servidor
       $.ajax({
-        url: "./admin/class/ClassCliente.php",
+        url: "admin/class/ClassCliente.php",
         method: "POST",
         data: formData,
         dataType: "json",

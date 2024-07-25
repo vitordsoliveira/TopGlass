@@ -8,11 +8,13 @@ require_once('class/Conexao.php');
 function obterClientesAtivos()
 {
     $conn = Conexao::LigarConexao();
-    $sql = "SELECT idCliente, nomeCliente FROM tbl_cliente WHERE statusCliente = 'ATIVO'";
+    $sql = "SELECT idCliente, nomeCliente, cpfCliente, numeroCliente FROM tbl_cliente WHERE statusCliente = 'ATIVO'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+$clientes = obterClientesAtivos();
 
 // FUNÇÃO SERVIÇOS
 function obterServicosPorTipo()
@@ -72,7 +74,6 @@ function obterItens()
 // INICIAR OS MÉTODOS TRANSFORMADOS EM VARIÁVEIS
 $idCliente = $idFuncionario = $valorOrcamento = $statusOrcamento = $comentOrcamento = '';
 $servicosPorTipo = obterServicosPorTipo();
-$clientes = obterClientesAtivos();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idCliente = $_POST['idCliente'];
@@ -82,6 +83,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $valorOrcamento = $_POST['valorOrcamento'];
     $statusOrcamento = $_POST['statusOrcamento'];
     $comentOrcamento = $_POST['comentOrcamento'];
+    $cpfCliente = $_POST['cpfCliente'];
+    $numeroCliente = $_POST['numeroCliente'];
 
     $orcamento = new ClassOrcamento();
     $orcamento->idCliente = $idCliente;
@@ -116,7 +119,7 @@ if ($msg === 'success') {
                         <select class="form-select" id="idCliente" name="idCliente" required>
                             <option value="">Selecione o Cliente</option>
                             <?php foreach ($clientes as $cli): ?>
-                                <option value="<?php echo $cli['idCliente']; ?>"><?php echo $cli['nomeCliente']; ?></option>
+                                <option value="<?php echo $cli['idCliente']; ?>" data-cpf="<?php echo $cli['cpfCliente']; ?>" data-numero="<?php echo $cli['numeroCliente']; ?>"><?php echo $cli['nomeCliente']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -163,12 +166,10 @@ if ($msg === 'success') {
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="idServico<?php echo $tipo; ?>" class="form-label">Serviços <?php echo $tipo; ?>:</label>
-                        <select class="form-select servico-select" id="idServico<?php echo $tipo; ?>" name="idServico"
-                            disabled>
+                        <select class="form-select servico-select" id="idServico<?php echo $tipo; ?>" name="idServico">
                             <option value="">Selecione o Serviço</option>
                             <?php foreach ($servicos as $servico): ?>
-                                <option value="<?php echo $servico['idServico']; ?>"><?php echo $servico['nomeServico']; ?>
-                                </option>
+                                <option value="<?php echo $servico['idServico']; ?>"><?php echo $servico['nomeServico']; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -196,12 +197,12 @@ if ($msg === 'success') {
                     <input type="text" class="form-control" id="valorItens" name="valorItens" readonly>
                 </div>
             </div>
-        </div>
 
-        <div class="col-3">
-            <div class="mb-3">
-                <label for="valorOrcamento" class="form-label">Valor:</label>
-                <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" required>
+            <div class="col-3">
+                <div class="mb-3">
+                    <label for="valorOrcamento" class="form-label">Valor:</label>
+                    <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" required>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -224,11 +225,17 @@ if ($msg === 'success') {
     document.addEventListener('DOMContentLoaded', function () {
         var servicoSelects = document.querySelectorAll('.servico-select');
 
-        // Adiciona evento de mudança aos selects de serviços para habilitar/desabilitar conforme seleção
         document.getElementById('idCliente').addEventListener('change', function () {
             servicoSelects.forEach(function (select) {
                 select.disabled = false;
             });
+
+            var selectedOption = this.options[this.selectedIndex];
+            var cpf = selectedOption.getAttribute('data-cpf');
+            var numero = selectedOption.getAttribute('data-numero');
+            
+            document.getElementById('cpfCliente').value = cpf;
+            document.getElementById('numeroCliente').value = numero;
         });
 
         servicoSelects.forEach(function (select) {
@@ -237,13 +244,12 @@ if ($msg === 'success') {
                 servicoSelects.forEach(function (otherSelect) {
                     if (otherSelect !== select) {
                         otherSelect.disabled = (selectedValue !== '');
-                        otherSelect.required = !otherSelect.disabled; // Torna obrigatório apenas se habilitado
+                        otherSelect.required = !otherSelect.disabled;
                     }
                 });
             });
         });
 
-        // Adiciona evento para atualizar o valor do item selecionado
         var itensSelect = document.getElementById('idItens');
         var valorItensInput = document.getElementById('valorItens');
 
@@ -251,32 +257,6 @@ if ($msg === 'success') {
             var selectedOption = itensSelect.options[itensSelect.selectedIndex];
             var valorItens = selectedOption.getAttribute('data-valor');
             valorItensInput.value = valorItens;
-        });
-
-        // Atualiza CPF e número do cliente
-        var clienteSelect = document.getElementById('idCliente');
-        var cpfInput = document.getElementById('cpfCliente');
-        var numeroInput = document.getElementById('numeroCliente');
-
-        clienteSelect.addEventListener('change', function () {
-            var clienteId = this.value;
-
-            // Limpar os campos antes de carregar novos dados
-            cpfInput.value = '';
-            numeroInput.value = '';
-
-            if (clienteId) {
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'obter_dados_cliente.php?id=' + clienteId, true);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
-                        var dadosCliente = JSON.parse(xhr.responseText);
-                        cpfInput.value = dadosCliente.cpfCliente || '';
-                        numeroInput.value = dadosCliente.numeroCliente || '';
-                    }
-                };
-                xhr.send();
-            }
         });
     });
 </script>

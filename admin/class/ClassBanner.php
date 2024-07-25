@@ -22,16 +22,33 @@ class ClassBanner
 
     public function Listar()
     {
-      
-            $sql = "SELECT * FROM tbl_banner WHERE statusBanner = 'ATIVO';";
-            $conn = Conexao::LigarConexao();
-            $stmt = $conn->query($sql);
-            $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-            return $lista;
-  
-}
-    
+
+        $sql = "SELECT * FROM tbl_banner WHERE statusBanner = 'ATIVO';";
+        $conn = Conexao::LigarConexao();
+        $stmt = $conn->query($sql);
+        $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $lista;
+
+    }
+
+    public function ListarDash()
+    {
+        $sql = "SELECT * FROM tbl_banner 
+ORDER BY 
+    CASE 
+        WHEN statusBanner = 'ATIVO' THEN 1 
+        WHEN statusBanner = 'INATIVO' THEN 2 
+        WHEN statusBanner = 'DESATIVADO' THEN 3 
+        ELSE 4 
+    END;";
+        $conn = Conexao::LigarConexao();
+        $stmt = $conn->query($sql);
+        $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $lista;
+    }
+
     //CARREGAR
     public function Carregar()
     {
@@ -39,7 +56,7 @@ class ClassBanner
         $sql = "SELECT * FROM tbl_banner WHERE idBanner = :idBanner";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':idBanner', $this->idBanner, PDO::PARAM_INT);
-    
+
         if ($stmt->execute()) {
             $Banner = $stmt->fetch();
             if ($Banner) {
@@ -49,7 +66,7 @@ class ClassBanner
                 $this->altBanner = $Banner['altBanner'];
                 $this->statusBanner = $Banner['statusBanner'];
                 return true;
-            } 
+            }
         }
     }
 
@@ -75,7 +92,8 @@ class ClassBanner
 
     //ATUALIZAR
     public function Atualizar()
-    {               $sql = " UPDATE tbl_banner SET  
+    {
+        $sql = " UPDATE tbl_banner SET  
                                        nomeBanner      = '" . $this->nomeBanner . "',
                                        caminhoBanner = '" . $this->caminhoBanner . "',
                                        altBanner = '" . $this->altBanner . "',
