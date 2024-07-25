@@ -1,6 +1,4 @@
-<article class="wow servico animate__animated animate__fadeInUp">
-
-
+<article class="wow servico animate__animated animate__fadeInUp">   
     <div class="site">
 
         <div class="setaE">
@@ -77,14 +75,7 @@
 
             <div>
                 <a href="#">
-                    <!--  <span class="sumir">
-                        <a href=""> -->
                     <img src="imgServicos/JanelaDeCorrer.svg" alt="">
-                    <!--     </a>
-                    </span> -->
-                    <!--<span class="gif">
-                        <img src="gifsServicos/videoJanelaVidro.gif" alt="">
-                    </span> -->
                     <h2 class="h2servico">JANELA</h2>
                     <div class="pservicoV">
                         <p>Com um design durável e fácil de limpar, nossa janela de correr oferece estilo e

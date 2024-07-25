@@ -56,28 +56,29 @@ if (isset($_SESSION['idFuncionario'])) {
     <header>
 
         <div class="barraTopo">
-        <div class="logo">
-            <ul>
-                <li class="logo-container">
-                    <img src="img/circle.png" alt="" class="circle">
-                    <img src="img/logo.png" alt="" class="logoImg">
-                </li>
-            </ul>
+            <div class="logo">
+                <ul>
+                    <li class="logo-container">
+                        <img src="img/circle.png" alt="" class="circle">
+                        <img src="img/logo.png" alt="" class="logoImg">
+                    </li>
+                </ul>
+            </div>
+            <div class="tituloDashboard">
+                <h1>TOP GLASS</h1>
+            </div>
+            <div class="login">
+                <ul>
+                    <li>
+                        <p><?php echo $nomeFuncionario; ?></p>
+                    </li>
+                    <li>
+                        <img src="<?php echo $fotoFuncionario; ?>" alt="<?php echo $altFotoFuncionario; ?>"
+                            class="perfilImg">
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="tituloDashboard">
-            <h1>TOP GLASS</h1>
-        </div>
-        <div class="login">
-            <ul>
-                <li>
-                    <p><?php echo $nomeFuncionario; ?></p>
-                </li>
-                <li>
-                    <img src="<?php echo $fotoFuncionario; ?>" alt="<?php echo $altFotoFuncionario; ?>" class="perfilImg">
-                </li>
-            </ul>
-        </div>
-    </div>
 
     </header>
     <main>
@@ -86,6 +87,7 @@ if (isset($_SESSION['idFuncionario'])) {
                 <ul>
                     <li><a href="index.php?p=dashboard">HOME</a></li>
                     <li><a href="index.php?p=orcamento">ORÇAMENTOS</a></li>
+                    <li><a href="index.php?p=servico">SERVIÇOS</a></li>
                     <li><a href="index.php?p=cliente">CLIENTES</a></li>
                     <li><a href="index.php?p=galeria">GALERIA</a></li>
                     <li><a href="index.php?p=banner">BANNERS</a></li>
@@ -114,6 +116,9 @@ if (isset($_SESSION['idFuncionario'])) {
                 case 'orcamento':
                     $titulo = "orcamento";
                     require_once ('orcamentos/orcamentos.php');
+                case 'servico':
+                    $titulo = "servico";
+                    require_once ('servico/servico.php');
                     break;
                 # code...   
             }

@@ -5,7 +5,6 @@ $Banner = new ClassBanner();
 $lista = $Banner->Listar();
 
 ?>
-
 <article class="wow bannerRotativo animate__animated animate__fadeInUp">
     <div class="site">
         <div class="banners">
@@ -17,5 +16,6 @@ $lista = $Banner->Listar();
         <div class="pagamento">
             <h2>PAGAMENTO APÓS O SERVIÇO</h2>
         </div>
+        <div class="b"></div>
     </div>
 </article>
