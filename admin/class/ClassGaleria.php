@@ -32,7 +32,9 @@ class ClassGaleria
 
     public function ListarDash()
     {
-        $sql = "SELECT * FROM tbl_galeria";
+        $sql = "    SELECT * FROM tbl_galeria
+                    WHERE statusGaleria = 'ATIVO'
+                    OR statusGaleria = 'INATIVO'; ";
         $conn = Conexao::LigarConexao();
         $stmt = $conn->query($sql);
         $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
