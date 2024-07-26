@@ -1,8 +1,8 @@
 <?php
 // Inclui as classes necessárias para Cliente, Orçamento e Conexão com o banco de dados
-require_once('class/ClassCliente.php');
-require_once('class/ClassOrcamento.php');
-require_once('class/Conexao.php');
+require_once ('class/ClassCliente.php');
+require_once ('class/ClassOrcamento.php');
+require_once ('class/Conexao.php');
 
 // FUNÇÃO CLIENTES
 function obterClientesAtivos()
@@ -119,7 +119,10 @@ if ($msg === 'success') {
                         <select class="form-select" id="idCliente" name="idCliente" required>
                             <option value="">Selecione o Cliente</option>
                             <?php foreach ($clientes as $cli): ?>
-                                <option value="<?php echo $cli['idCliente']; ?>" data-cpf="<?php echo $cli['cpfCliente']; ?>" data-numero="<?php echo $cli['numeroCliente']; ?>"><?php echo $cli['nomeCliente']; ?></option>
+                                <option value="<?php echo $cli['idCliente']; ?>"
+                                    data-cpf="<?php echo $cli['cpfCliente']; ?>"
+                                    data-numero="<?php echo $cli['numeroCliente']; ?>"><?php echo $cli['nomeCliente']; ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -153,9 +156,18 @@ if ($msg === 'success') {
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="statusOrcamento" class="form-label">Status:</label>
-                        <select class="form-select" id="statusOrcamento" name="statusOrcamento" required>
+                        <select readonly class="form-select" id="statusOrcamento" name="statusOrcamento" required>
                             <option value="ATIVO">ATIVO</option>
-                            <option value="DESATIVO">DESATIVO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label for="situacaoOrcamento" class="form-label">SITUAÇÃO</label>
+                        <select class="form-select" id="situacaoOrcamento" name="situacaoOrcamento" required>
+                            <option value="PENDENTE">PENDENTE</option>
+                            <option value="FEITO">FEITO</option>
+                            <option value="PAGO">PAGO</option>
                         </select>
                     </div>
                 </div>
@@ -169,7 +181,8 @@ if ($msg === 'success') {
                         <select class="form-select servico-select" id="idServico<?php echo $tipo; ?>" name="idServico">
                             <option value="">Selecione o Serviço</option>
                             <?php foreach ($servicos as $servico): ?>
-                                <option value="<?php echo $servico['idServico']; ?>"><?php echo $servico['nomeServico']; ?></option>
+                                <option value="<?php echo $servico['idServico']; ?>"><?php echo $servico['nomeServico']; ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -233,7 +246,7 @@ if ($msg === 'success') {
             var selectedOption = this.options[this.selectedIndex];
             var cpf = selectedOption.getAttribute('data-cpf');
             var numero = selectedOption.getAttribute('data-numero');
-            
+
             document.getElementById('cpfCliente').value = cpf;
             document.getElementById('numeroCliente').value = numero;
         });

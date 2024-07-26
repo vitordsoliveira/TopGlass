@@ -116,6 +116,7 @@ if (isset($_SESSION['idFuncionario'])) {
                 case 'orcamento':
                     $titulo = "orcamento";
                     require_once ('orcamentos/orcamentos.php');
+                    break;
                 case 'servico':
                     $titulo = "servico";
                     require_once ('servico/servico.php');

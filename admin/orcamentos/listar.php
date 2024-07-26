@@ -1,5 +1,5 @@
 <?php
-require_once ('class/ClassOrcamento.php');
+require_once('class/ClassOrcamento.php');
 
 $orcamento = new ClassOrcamento();
 $lista = $orcamento->Listar();
@@ -14,6 +14,9 @@ $lista = $orcamento->Listar();
 <table class="table">
     <thead>
         <tr>
+            <th scope="col">
+                <p></p>
+            </th>
             <th scope="col">
                 <p>Cliente</p>
             </th>
@@ -39,6 +42,9 @@ $lista = $orcamento->Listar();
                 <p>Comentario</p>
             </th>
             <th scope="col">
+                <p>Situação</p>
+            </th>
+            <th scope="col">
                 <p>Status</p>
             </th>
             <th scope="col" class="ativar">
@@ -51,16 +57,35 @@ $lista = $orcamento->Listar();
     </thead>
     <tbody>
         <?php foreach ($lista as $linha): ?>
+            <?php
+            // Define a classe da bolinha com base na situação
+            $bolinhaClasse = '';
+            switch ($linha['situacaoOrcamento']) {
+                case 'PENDENTE':
+                    $bolinhaClasse = 'bolinha-amarela';
+                    break;
+                case 'FEITO':
+                    $bolinhaClasse = 'bolinha-laranja';
+                    break;
+                case 'PAGO':
+                    $bolinhaClasse = 'bolinha-verde';
+                    break;
+            }
+            ?>
             <tr>
-                <td scope="col"><?php echo ($linha['nomeCliente']); ?></td>
-                <td scope="col"><?php echo ($linha['cpfCliente']); ?></td>
-                <td scope="col"><?php echo ($linha['nomeServicos']); ?></td>
-                <td scope="col"><?php echo ($linha['nomeProduto']); ?></td>
-                <td scope="col"><?php echo ($linha['nomeFuncionario']); ?></td>
-                <td scope="col"><?php echo ($linha['valorOrcamento']); ?></td>
-                <td scope="col"><?php echo ($linha['dataOrcamento']); ?></td>
-                <td scope="col"><?php echo ($linha['comentOrcamento']); ?></td>
-                <td scope="col"><?php echo ($linha['statusOrcamento']); ?></td>
+                <td>
+                    <span class="bolinha <?php echo $bolinhaClasse; ?>"></span>
+                </td>
+                <td scope="col"><?php echo htmlspecialchars($linha['nomeCliente']); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($linha['cpfCliente']); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($linha['nomeServicos']); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($linha['nomeProduto']); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($linha['nomeFuncionario']); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($linha['valorOrcamento']); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($linha['dataOrcamento']); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($linha['comentOrcamento']); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($linha['situacaoOrcamento']); ?></td>
+                <td scope="col"><?php echo htmlspecialchars($linha['statusOrcamento']); ?></td>
                 <td><a href="index.php?p=orcamento&orc=atualizar&id=<?php echo $linha['idOrcamento']; ?>">Atualizar</a></td>
                 <td><a href="index.php?p=orcamento&orc=desativar&id=<?php echo $linha['idOrcamento']; ?>">Desativar</a></td>
             </tr>

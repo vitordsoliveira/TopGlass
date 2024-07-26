@@ -5,7 +5,7 @@ $Galeria = new ClassGaleria();
 $lista = $Galeria->ListarDash();
 ?>
 
-<h2 class="tituloDashboard">GaleriaS</h2>
+<h2 class="tituloDashboard">GALERIA</h2>
 
 <table class="table">
     <span class="btnDashboard">

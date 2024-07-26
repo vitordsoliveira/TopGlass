@@ -1,6 +1,6 @@
 <?php
 
-require_once('Conexao.php');
+require_once ('Conexao.php');
 
 class ClassServico
 {
@@ -26,6 +26,7 @@ class ClassServico
     public function Listar()
     {
         $sql = "SELECT 
+                    tbl_servico.idServico,
                     tbl_servico.nomeServicos,
                     tbl_servico.statusServicos,
                     tbl_tipo_servico.tipoServico AS idTipoServico,
@@ -48,15 +49,31 @@ class ClassServico
         return $lista;
     }
 
-    // CARREGAR
-    public function Carregar()
-    {
-        $conn = Conexao::LigarConexao();
-        $sql = "SELECT * FROM tbl_servico WHERE idServico = $this->idServico";
-        $stmt = $conn->prepare($sql);
 
+// CARREGAR
+public function Carregar()
+{
+    $conn = Conexao::LigarConexao();
+    $sql = "SELECT * FROM tbl_servico WHERE idServico = :idServico";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':idServico', $this->idServico, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        $this->nomeServicos = $result['nomeServicos'];
+        $this->statusServicos = $result['statusServicos'];
+        $this->idTipoServico = $result['idTipoServico'];
+        $this->descServico = $result['descServico'];
+        $this->fotoServicos = $result['fotoServicos'];
+        $this->altServicos = $result['altServicos'];
         return true;
+    } else {
+        return false;
     }
+}
+
+
 
     // INSERIR
     public function Inserir()

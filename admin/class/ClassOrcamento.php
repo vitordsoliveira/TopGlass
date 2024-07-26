@@ -14,6 +14,7 @@ class ClassOrcamento
     public $statusOrcamento;
     public $comentOrcamento;
     public $valorItens;
+    public $situacaoOrcamento;
 
     public function __construct($id = false)
     {
@@ -42,7 +43,8 @@ class ClassOrcamento
             $this->valorOrcamento = $orcamento['valorOrcamento'];
             $this->statusOrcamento = $orcamento['statusOrcamento'];
             $this->comentOrcamento = $orcamento['comentOrcamento'];
-            $this->valorItens = $orcamento['valorItens'] ?? 0; // Definido como 0 se não existir
+            $this->valorItens = $orcamento['valorItens'] ?? 0;
+            $this->situacaoOrcamento = $orcamento['situacaoOrcamento'];
         } else {
             echo 'Erro: Orçamento não encontrado';
         }
@@ -63,7 +65,8 @@ class ClassOrcamento
                     tbl_orcamento.comentOrcamento,
                     tbl_orcamento.valorOrcamento,
                     tbl_orcamento.statusOrcamento,
-                    tbl_itens.valorItens
+                    tbl_itens.valorItens,
+                    tbl_orcamento.situacaoOrcamento
                 FROM 
                     tbl_orcamento
                 INNER JOIN 
@@ -82,13 +85,13 @@ class ClassOrcamento
                     AND tbl_funcionario.statusFuncionario = 'ATIVO'
                     AND tbl_servico.statusServicos = 'ATIVO'
                 ORDER BY 
-                    tbl_orcamento.dataOrcamento DESC";
+                    tbl_orcamento.dataOrcamento DESC;";
 
         $conn = Conexao::LigarConexao();
         $stmt = $conn->query($sql);
         $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         return $lista;
+
     }
 
     // INSERIR
@@ -102,7 +105,8 @@ class ClassOrcamento
                     idFuncionario, 
                     valorOrcamento, 
                     statusOrcamento,
-                    comentOrcamento
+                    comentOrcamento,
+                    situacaoOrcamento
                 )
                  VALUES (           '$this->idCliente',
                                     '$this->idServico',
@@ -110,7 +114,8 @@ class ClassOrcamento
                                     '$this->idFuncionario',
                                     '$this->valorOrcamento',
                                     '$this->statusOrcamento',
-                                    '$this->comentOrcamento')";
+                                    '$this->comentOrcamento',
+                                    '$this->situacaoOrcamento')";
         $conn = Conexao::LigarConexao();
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -124,7 +129,8 @@ class ClassOrcamento
                                        idItens = '" . $this->idItens . "',
                                        idFuncionario = '" . $this->idFuncionario . "',
                                        statusOrcamento = '" . $this->statusOrcamento . "',
-                                       comentOrcamento = '" . $this->comentOrcamento . "'
+                                       comentOrcamento = '" . $this->comentOrcamento . "',
+                                       situacaoOrcamento = '" . $this->situacaoOrcamento . "'
                 WHERE idOrcamento = $this->idOrcamento;";
 
         $conn = Conexao::LigarConexao();

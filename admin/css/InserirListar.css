@@ -1,86 +1,109 @@
 /* ######## LISTAR ########## */
 
-.tituloDashboard{
-    font-size: 3em;
-    color: #1F3E4C;
-    text-align: center;
+.tituloDashboard {
+  font-size: 3em;
+  color: #1F3E4C;
+  text-align: center;
 }
 
-.btnDashboard a{
-    border-radius: 15px;
-    background: #2390C1;
-    color: #fff;
-    padding: .5%;
-    font-size: 1.8em;
-    width: 15%;
-    display: block;
-    margin-left: 2%;
-    transition: ease-in-out .5s;
-    margin-bottom: 1%;
-    margin-top: 1%;
+.btnDashboard a {
+  border-radius: 15px;
+  background: #2390C1;
+  color: #fff;
+  padding: .5%;
+  font-size: 1.8em;
+  width: 15%;
+  display: block;
+  margin-left: 2%;
+  transition: ease-in-out .5s;
+  margin-bottom: 1%;
+  margin-top: 1%;
 }
 
-.btnDashboard a:hover{
-    background: #1F3E4C;  
-    display: block;
-    transition: ease-in-out .5s;
+.btnDashboard a:hover {
+  background: #1F3E4C;
+  display: block;
+  transition: ease-in-out .5s;
 }
 
 .options select {
-    cursor: pointer;
-    border: 0px;
-    background: #2390C1;
-    color: #fff;
-    padding: 2% 0 2% 0;
-    font-size: 1.2em;
-    margin-right: 8%;
-    text-align: center;
-  }
-  
-  .options select:hover {
-    background-color: #1F3E4C;
-    transition: ease-in-out .5s;
-  }
- 
-  .options option {
-    background: #fff;
-    font-size: 0.9em;
-    color: #2390C1;
-  }
- 
-  .options option p:hover {
-    background: #fff;
-    font-size: 0.9em;
-  }
+  cursor: pointer;
+  border: 0px;
+  background: #2390C1;
+  color: #fff;
+  padding: 2% 0 2% 0;
+  font-size: 1.2em;
+  margin-right: 8%;
+  text-align: center;
+}
 
-  .btnEnviar{
-    margin-bottom: 15px;
-  }
+.options select:hover {
+  background-color: #1F3E4C;
+  transition: ease-in-out .5s;
+}
 
-  label p{
-    font-size: 1.2em;
-  }
+.options option {
+  background: #fff;
+  font-size: 0.9em;
+  color: #2390C1;
+}
 
-  td a{
-    color: #2390C1;
-    text-decoration: underline;
-  }
+.options option p:hover {
+  background: #fff;
+  font-size: 0.9em;
+}
 
-  td a:hover{
-    color: #1F3E4C;
-  }
+.btnEnviar {
+  margin-bottom: 15px;
+}
 
-  th p{
-    text-transform: uppercase;
-    color: #1F3E4C;
-    font-weight: 800;
-    font-size: 1.2em;
-  }
+label p {
+  font-size: 1.2em;
+}
 
-  .desativar p{
-    color: red;
-  }
+td a {
+  color: #2390C1;
+  text-decoration: underline;
+}
 
-  .ativar p{
-    color: #2390C1;
-  }
+td a:hover {
+  color: #1F3E4C;
+}
+
+th p {
+  text-transform: uppercase;
+  color: #1F3E4C;
+  font-weight: 800;
+  font-size: 1.2em;
+}
+
+.desativar p {
+  color: red;
+}
+
+.ativar p {
+  color: #2390C1;
+}
+
+/* Estilos para as bolinhas de status */
+.bolinha {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: -5px; /* Espaçamento entre a bolinha e o conteúdo da linha */
+  vertical-align: middle; /* Alinha verticalmente com o texto */
+}
+
+.bolinha-amarela {
+  background-color: yellow;
+}
+
+.bolinha-laranja {
+  background-color: orange;
+}
+
+.bolinha-verde {
+  background-color: green;
+}
+

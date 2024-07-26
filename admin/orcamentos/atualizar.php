@@ -18,6 +18,7 @@ if (isset($_POST['valorOrcamento'])) {
     $valorOrcamento = $_POST['valorOrcamento'];
     $statusOrcamento = $_POST['statusOrcamento'];
     $comentOrcamento = $_POST['comentOrcamento'];
+    $situacaoOrcamento = $_POST['situacaoOrcamento'];
 
     // Atualizar dados do orçamento
     $orcamento->idCliente = $idCliente;
@@ -25,6 +26,7 @@ if (isset($_POST['valorOrcamento'])) {
     $orcamento->valorOrcamento = $valorOrcamento;
     $orcamento->statusOrcamento = $statusOrcamento;
     $orcamento->comentOrcamento = $comentOrcamento;
+    $orcamento->situacaoOrcamento = $situacaoOrcamento;
 
     $orcamento->Atualizar();
     $cliente->Carregar();
@@ -123,7 +125,8 @@ $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
 
 if ($msg === 'success') {
     echo '<h2 class="text-success">Orçamento atualizado com sucesso!</h2>';
-
+    header('Location: index.php?p=orcamento'); // Redireciona para a página desejada
+    exit(); // Garante que o script PHP pare após o redirecionamento
 }
 
 function obterItens()
@@ -260,6 +263,23 @@ $itens = obterItens();
                         </select>
                     </div>
                 </div>
+                <div class="col-3">
+                <div class="mb-3">
+                    <label for="situacaoOrcamento" class="form-label">SITUAÇÃO</label>
+                    <select class="form-select" id="situacaoOrcamento" name="situacaoOrcamento" required>
+                        <option class="pending" value="PENDENTE" <?php echo ($orcamentoData->situacaoOrcamento == 'PENDENTE') ? 'selected' : ''; ?>>
+                            <p>PENDENTE</p>
+                        </option>
+                        <option class="done" value="FEITO" <?php echo ($orcamentoData->situacaoOrcamento == 'FEITO') ? 'selected' : ''; ?>>
+                            <p>FEITO</p>
+                        </option>
+                        <option class="paid" value="PAGO" <?php echo ($orcamentoData->situacaoOrcamento == 'PAGO') ? 'selected' : ''; ?>>
+                            <p>PAGO</p>
+                        </option>
+                    </select>
+                </div>
+</div>
+
             </div>
             <div class="mb-3">
                 <label for="comentOrcamento" class="form-label">Comentário</label>
