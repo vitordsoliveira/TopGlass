@@ -85,6 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $comentOrcamento = $_POST['comentOrcamento'];
     $cpfCliente = $_POST['cpfCliente'];
     $numeroCliente = $_POST['numeroCliente'];
+    $situacaoOrcamento = $_POST['situacaoOrcamento'];
 
     $orcamento = new ClassOrcamento();
     $orcamento->idCliente = $idCliente;
@@ -94,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $orcamento->valorOrcamento = $valorOrcamento;
     $orcamento->statusOrcamento = $statusOrcamento;
     $orcamento->comentOrcamento = $comentOrcamento;
+    $orcamento->situacaoOrcamento = $situacaoOrcamento;
 
     $orcamento->Inserir();
 
@@ -113,6 +115,7 @@ if ($msg === 'success') {
         <div class="row">
             <h3>CRIAR NOVO ORÇAMENTO</h3>
             <div class="row">
+
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="idCliente" class="form-label">Cliente:</label>
@@ -127,18 +130,21 @@ if ($msg === 'success') {
                         </select>
                     </div>
                 </div>
+
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="cpfCliente" class="form-label">CPF:</label>
                         <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" readonly>
                     </div>
                 </div>
+                
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="numeroCliente" class="form-label">Número:</label>
                         <input type="text" class="form-control" id="numeroCliente" name="numeroCliente" readonly>
                     </div>
                 </div>
+
                 <div class="col-3">
                     <label for="idFuncionario" class="form-label">Funcionário Orçamento:</label>
                     <select class="form-select" id="idFuncionario" name="idFuncionario" required>
@@ -153,6 +159,7 @@ if ($msg === 'success') {
                         ?>
                     </select>
                 </div>
+
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="statusOrcamento" class="form-label">Status:</label>
@@ -161,6 +168,7 @@ if ($msg === 'success') {
                         </select>
                     </div>
                 </div>
+
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="situacaoOrcamento" class="form-label">SITUAÇÃO</label>
@@ -173,6 +181,7 @@ if ($msg === 'success') {
                 </div>
             </div>
         </div>
+
         <div class="row">
             <?php foreach ($servicosPorTipo as $tipo => $servicos): ?>
                 <div class="col-3">
@@ -189,7 +198,9 @@ if ($msg === 'success') {
                 </div>
             <?php endforeach; ?>
         </div>
+
         <div class="row">
+
             <div class="col-3">
                 <div class="mb-3">
                     <label for="idItens" class="form-label">Itens:</label>
@@ -204,6 +215,7 @@ if ($msg === 'success') {
                     </select>
                 </div>
             </div>
+
             <div class="col-3">
                 <div class="mb-3">
                     <label for="valorItens" class="form-label">Valor do Item:</label>
@@ -217,7 +229,9 @@ if ($msg === 'success') {
                     <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" required>
                 </div>
             </div>
+
         </div>
+
         <div class="row">
             <div class="col-12">
                 <div class="mb-3">
@@ -226,11 +240,13 @@ if ($msg === 'success') {
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Criar Orçamento</button>
             </div>
         </div>
+
     </form>
 </div>
 

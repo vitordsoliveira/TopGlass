@@ -105,7 +105,7 @@ if (isset($_POST['nomeBanner'])) {
             carregar.readAsDataURL(arquivo);
 
             // Definir automaticamente o caminho do banner no campo de entrada
-            let caminhoBanner = 'img/banner' + arquivo.name;
+            let caminhoBanner = 'img/banners/' + arquivo.name;
             document.getElementById('caminhoBanner').value = caminhoBanner;
         }
     });

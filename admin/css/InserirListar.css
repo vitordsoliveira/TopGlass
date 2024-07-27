@@ -14,13 +14,31 @@
   font-size: 1.8em;
   width: 15%;
   display: block;
-  margin-left: 2%;
   transition: ease-in-out .5s;
   margin-bottom: 1%;
   margin-top: 1%;
 }
 
+.btnDashboardOrc a {
+  border-radius: 15px;
+  background: #2390C1;
+  color: #fff;
+  padding: 2.5%;
+  font-size: 1.8em;
+  width: 115%;
+  display: block;
+  transition: ease-in-out .5s;
+  margin-bottom: 10%;
+  margin-top: 1%;
+}
+
 .btnDashboard a:hover {
+  background: #1F3E4C;
+  display: block;
+  transition: ease-in-out .5s;
+}
+
+.btnDashboardOrc a:hover {
   background: #1F3E4C;
   display: block;
   transition: ease-in-out .5s;
@@ -57,19 +75,23 @@
   margin-bottom: 15px;
 }
 
+/*TAMANHO DA LETRA DA BARRA*/
 label p {
   font-size: 1.2em;
 }
 
+/*COR PADRAO*/
 td a {
   color: #2390C1;
   text-decoration: underline;
 }
 
+/*COR DO LINK AO PASSAR O MOUSE*/
 td a:hover {
   color: #1F3E4C;
 }
 
+/*COR DO TEXTO NA BARRA*/
 th p {
   text-transform: uppercase;
   color: #1F3E4C;
@@ -77,6 +99,7 @@ th p {
   font-size: 1.2em;
 }
 
+/*ATIVAR E DESATIVAR*/
 .desativar p {
   color: red;
 }
@@ -85,14 +108,14 @@ th p {
   color: #2390C1;
 }
 
-/* Estilos para as bolinhas de status */
+/* ############## BOLINHAS ############## */
 .bolinha {
   display: inline-block;
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  margin-right: -5px; /* Espaçamento entre a bolinha e o conteúdo da linha */
-  vertical-align: middle; /* Alinha verticalmente com o texto */
+  margin-right: -5px; 
+  vertical-align: middle; 
 }
 
 .bolinha-amarela {
@@ -106,4 +129,67 @@ th p {
 .bolinha-verde {
   background-color: green;
 }
+/* ###################   FILTROS   ######################## */
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.btnDashboardOrc {
+  margin-right: auto; /* Faz com que o botão fique alinhado à esquerda */
+}
+
+.filtros form {
+  display: flex;
+  align-items: center;
+  max-width: 100%; 
+  margin: 0 auto;
+}
+
+.selectStatus, .selectSituacao{
+  color: #fff;
+  background-color: #2390C1;
+  padding: 2%;
+  border: none;
+  font-size: 1em;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.selectStatus:hover, .selectSituacao:hover{
+  background: #1F3E4C;
+  transition: ease-in-out .5s;
+}
+
+.selectStatus option, .selectSituacao option {
+  color: #2390C1;
+  background-color: #fff;
+}
+
+.selectStatus, .selectSituacao {
+  flex: 1;
+  min-width: 150px;
+}
+
+.btnFiltro {
+  flex-shrink: 0;
+  padding: 2%;
+  color: #fff;
+  background-color: #1F3E4C;
+  padding: 2%;
+  border: none;
+  font-size: 1em;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.btnFiltro:hover{
+  background-color: rgba(34, 187, 34, 0.801);
+  transition: ease-in-out .5s;
+}
+
+
+
+
 

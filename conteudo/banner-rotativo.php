@@ -1,5 +1,4 @@
 <?php
-// Incluir o arquivo que contém a função Listar
 require_once ('admin/class/ClassBanner.php');
 $Banner = new ClassBanner();
 $lista = $Banner->Listar();

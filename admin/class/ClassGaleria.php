@@ -4,7 +4,6 @@ require_once ('Conexao.php');
 
 class ClassGaleria
 {
-
     // ATRIBUTOS 
     public $idGaleria;
     public $nomeGaleria;

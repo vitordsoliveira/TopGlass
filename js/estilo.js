@@ -152,7 +152,7 @@ window.onscroll = function () {
 }
 
 setTimeout(function() {
-  document.querySelector('.message').classList.add('hidden');
+  document.querySelector('.message'). classList.add('hidden');
 }, 15000);
 
 function enviarOrcamento() {

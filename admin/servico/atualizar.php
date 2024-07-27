@@ -57,9 +57,6 @@ if (isset($_GET['id'])) {
     }
 }
 
-
-
-
 function buscarServicos()
 {
     $conexao = Conexao::LigarConexao();
@@ -103,7 +100,7 @@ $tiposServicos = buscarServicos();
                         <div class="mb-3">
                             <label for="fotoServicos" class="form-label">Caminho da Foto do Serviço</label>
                             <input value="<?php echo ($Servico->fotoServicos); ?>" type="text" class="form-control"
-                                id="fotoServicos" name="fotoServicos" required readonly>
+                                id="fotoServicos" name="fotoServicos" required>
                         </div>
                     </div>
                     <div class="col-3">

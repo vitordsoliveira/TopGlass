@@ -71,12 +71,29 @@ a {
     height: auto;
 }
 
-.tituloDashboard {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+/* ############## TÍTULO FIXO NO TOPO #################### */
+.tituloDashboard h1 {
+    position: sticky;
+    top: 0; 
+    left: 50%; 
+    transform: translateX(3%); 
+    text-align: center; 
+    padding: 10px;
+    margin: 0;
+    z-index: 1;
 }
+
+.tituloDashboard h2 {
+    position: sticky;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); 
+    text-align: center; 
+    padding: 10px;
+    margin: 0;
+    z-index: 1;
+}
+
 
 .tituloDashboard h1 {
     font-size: 1.8em;
@@ -106,11 +123,11 @@ a {
     font-size: 1.7em; 
     color: #fff; 
     margin: 0;
-    white-space: nowrap; /* evita quebra de linha no login */
+    white-space: nowrap;
 }
 
 .login img {
-    width: 50px; /* largura fixa para a imagem */
+    width: 50px;
     height: auto;
     border-radius: 20px;
 }
@@ -155,12 +172,14 @@ main {
     width: 100%;
     margin: .5%;
     background: url(../img/background2.jpg);
-    background-size: cover;
-    /* Faz a imagem cobrir toda a área do .box */
-    background-position: center;
-    /* Centraliza a imagem */
-    background-repeat: no-repeat;
-    /* Evita que a imagem se repita */
+    background-size: cover; /* Faz a imagem cobrir toda a área do .box */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Não repete a imagem de fundo */
+    /* Adicionando as propriedades para a barra de rolagem */
+    height: 767px; /* Ajuste a altura conforme necessário */
+    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+    padding: 10px; /* Opcional: Adiciona um preenchimento interno */
+    box-sizing: border-box; /* Inclui o padding e a borda na largura e altura totais */
 }
 
 /* ################# RODA PÉ ################### */

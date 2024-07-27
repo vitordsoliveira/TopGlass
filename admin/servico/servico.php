@@ -5,6 +5,7 @@ $pagina = @$_GET['sr'];
 if ($pagina == null) {
 
     require_once ('listar.php');
+    
 
 }else{
 

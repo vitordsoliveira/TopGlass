@@ -51,13 +51,26 @@ class ClassOrcamento
     }
 
     // LISTAR
-    public function Listar()
+    public function Listar($status = '', $situacao = '')
     {
+        // Monta a cláusula WHERE com base nos filtros
+        $where = "WHERE tbl_orcamento.statusOrcamento = 'ATIVO'
+                  AND tbl_cliente.statusCliente = 'ATIVO'
+                  AND tbl_funcionario.statusFuncionario = 'ATIVO'
+                  AND tbl_servico.statusServicos = 'ATIVO'";
+    
+        if ($status) {
+            $where .= " AND tbl_orcamento.statusOrcamento = :status";
+        }
+    
+        if ($situacao) {
+            $where .= " AND tbl_orcamento.situacaoOrcamento = :situacao";
+        }
+    
         $sql = "SELECT 
                     tbl_orcamento.idOrcamento,
                     tbl_cliente.nomeCliente,
                     tbl_cliente.cpfCliente,
-                    tbl_cliente.numeroCliente,
                     tbl_servico.nomeServicos AS nomeServicos,
                     tbl_produto.nomeProduto,
                     DATE_FORMAT(tbl_orcamento.dataOrcamento, '%d/%m/%Y') AS dataOrcamento,
@@ -79,20 +92,26 @@ class ClassOrcamento
                     tbl_itens ON tbl_orcamento.idItens = tbl_itens.idItens
                 INNER JOIN 
                     tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
-                WHERE 
-                    tbl_orcamento.statusOrcamento = 'ATIVO'
-                    AND tbl_cliente.statusCliente = 'ATIVO'
-                    AND tbl_funcionario.statusFuncionario = 'ATIVO'
-                    AND tbl_servico.statusServicos = 'ATIVO'
+                    $where
                 ORDER BY 
                     tbl_orcamento.dataOrcamento DESC;";
-
+    
         $conn = Conexao::LigarConexao();
-        $stmt = $conn->query($sql);
+        $stmt = $conn->prepare($sql);
+    
+        // Bind dos parâmetros de filtro, se existirem
+        if ($status) {
+            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+        }
+        if ($situacao) {
+            $stmt->bindParam(':situacao', $situacao, PDO::PARAM_STR);
+        }
+    
+        $stmt->execute();
         $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
-
     }
+    
 
     // INSERIR
     public function Inserir()
@@ -124,19 +143,40 @@ class ClassOrcamento
     // ATUALIZAR
     public function Atualizar()
     {
-        $sql = "UPDATE tbl_orcamento SET idCliente      = '" . $this->idCliente . "',
-                                       idServico = '" . $this->idServico . "',
-                                       idItens = '" . $this->idItens . "',
-                                       idFuncionario = '" . $this->idFuncionario . "',
-                                       statusOrcamento = '" . $this->statusOrcamento . "',
-                                       comentOrcamento = '" . $this->comentOrcamento . "',
-                                       situacaoOrcamento = '" . $this->situacaoOrcamento . "'
-                WHERE idOrcamento = $this->idOrcamento;";
-
-        $conn = Conexao::LigarConexao();
-        $conn->exec($sql);
-
-        echo "<script>document.location='index.php?p=orcamento'</script>";
+        try {
+            $sql = "UPDATE tbl_orcamento 
+                    SET idCliente = :idCliente,
+                        idServico = :idServico,
+                        idItens = :idItens,
+                        idFuncionario = :idFuncionario,
+                        statusOrcamento = :statusOrcamento,
+                        comentOrcamento = :comentOrcamento,
+                        situacaoOrcamento = :situacaoOrcamento,
+                        valorOrcamento = :valorOrcamento
+                    WHERE idOrcamento = :idOrcamento";
+    
+            $conn = Conexao::LigarConexao();
+            $stmt = $conn->prepare($sql);
+            
+            // Bind all parameters
+            $stmt->bindParam(':idCliente', $this->idCliente, PDO::PARAM_INT);
+            $stmt->bindParam(':idServico', $this->idServico, PDO::PARAM_INT);
+            $stmt->bindParam(':idItens', $this->idItens, PDO::PARAM_INT);
+            $stmt->bindParam(':idFuncionario', $this->idFuncionario, PDO::PARAM_INT);
+            $stmt->bindParam(':statusOrcamento', $this->statusOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':comentOrcamento', $this->comentOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':situacaoOrcamento', $this->situacaoOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':valorOrcamento', $this->valorOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':idOrcamento', $this->idOrcamento, PDO::PARAM_INT);
+    
+            // Execute the query
+            $stmt->execute();
+    
+            // Redirect after successful update
+            echo "<script>document.location='index.php?p=orcamento&orc=atualizar&id={$this->idOrcamento}&msg=success'</script>";
+        } catch (PDOException $e) {
+            echo 'Erro: ' . htmlspecialchars($e->getMessage());
+        }
     }
 
     // DESATIVAR

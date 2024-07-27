@@ -4,11 +4,9 @@ if (isset($_POST['nomeServicos'])) {
     $statusServicos = 'ATIVO';
     $idTipoServico = $_POST['idTipoServico'];
     $descServico = $_POST['descServico'];
-    $fotoServicos = $_POST['fotoServicos'];
     $altServicos = $_POST['altServicos'];
 
-    // Recuperar o id
-    require_once ('class/Conexao.php');
+    require_once('class/Conexao.php');
     $conexao = Conexao::LigarConexao();
     $sql = $conexao->query('SELECT idServico FROM tbl_servico ORDER BY idServico DESC LIMIT 1');
     $resultado = $sql->fetch(PDO::FETCH_ASSOC);
@@ -23,27 +21,31 @@ if (isset($_POST['nomeServicos'])) {
 
     // Obter a extensão do arquivo e gerar o novo nome
     $extensao = pathinfo($arquivo['name'], PATHINFO_EXTENSION);
-    $nomeSrFoto = str_replace(' ', '', $nomeServicos);
-    $nomeSrFoto = strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', str_replace(' ', '', $nomeServicos)));
-    $nomeSrFoto = preg_replace('/[^a-zA-Z0-9]/', '', $nomeSrFoto);
+    $nomeSrFoto = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', iconv('UTF-8', 'ASCII//TRANSLIT', str_replace(' ', '', $nomeServicos))));
     $novoNome = $novoId . '_' . $nomeSrFoto . '.' . $extensao;
 
     // Mover a imagem
-    if (move_uploaded_file($arquivo['tmp_name'], 'img/servicos/' . $novoNome)) {
-        $fotoServico = 'img/servicos/' . $novoNome; // Ajuste para armazenar o caminho correto
-    } else {
-        throw new Exception('Nao deu pra subir essa imagem não.');
-    }
+    $caminhoImagem = 'img/servicos/' . $novoNome;
+    if (move_uploaded_file($arquivo['tmp_name'], $caminhoImagem)) {
+        // Inserir no banco de dados
+        require_once('class/ClassServico.php');
+        $Servicos = new ClassServico();
+        $Servicos->nomeServicos = $nomeServicos;
+        $Servicos->fotoServicos = $caminhoImagem; // Caminho correto para o banco de dados
+        $Servicos->altServicos = $altServicos;
+        $Servicos->statusServicos = $statusServicos;
+        $Servicos->idTipoServico = $idTipoServico;
+        $Servicos->descServico = $descServico;
+        $Servicos->Inserir();
 
-    require_once ('class/ClassServico.php');
-    $Servicos = new ClassServico();
-    $Servicos->nomeServicos = $nomeServicos;
-    $Servicos->fotoServicos = $fotoServicos;
-    $Servicos->altServicos = $altServicos;
-    $Servicos->statusServicos = $statusServicos;
-    $Servicos->idTipoServico = $idTipoServico;
-    $Servicos->descServico = $descServico;
-    $Servicos->Inserir();
+        // Passar o caminho da imagem para o frontend
+        echo "<script>
+            document.getElementById('fotoServicos').value = '" . $caminhoImagem . "';
+            document.getElementById('imgServico').src = '" . $caminhoImagem . "';
+        </script>";
+    } else {
+        throw new Exception('Não foi possível subir a imagem.');
+    }
 }
 
 function buscarServicos()

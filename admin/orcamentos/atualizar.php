@@ -1,8 +1,8 @@
 <?php
 
-require_once ('class/ClassCliente.php');
-require_once ('class/ClassOrcamento.php');
-require_once ('class/Conexao.php');
+require_once('class/ClassCliente.php');
+require_once('class/ClassOrcamento.php');
+require_once('class/Conexao.php');
 
 $id = $_GET['id'];
 $orcamento = new ClassOrcamento($id);
@@ -29,9 +29,6 @@ if (isset($_POST['valorOrcamento'])) {
     $orcamento->situacaoOrcamento = $situacaoOrcamento;
 
     $orcamento->Atualizar();
-    $cliente->Carregar();
-
-    header("Location: index.php?p=orcamento&orc=atualizar&id={$id}&msg=success");
     exit();
 }
 
@@ -48,9 +45,6 @@ $orcamentoData->idFuncionario = $orcamentoData->idFuncionario ?? '';
 $orcamentoData->valorOrcamento = $orcamentoData->valorOrcamento ?? '';
 $orcamentoData->statusOrcamento = $orcamentoData->statusOrcamento ?? '';
 $orcamentoData->comentOrcamento = $orcamentoData->comentOrcamento ?? '';
-
-// Obter dados de todos os clientes ativos
-$clientesAtivos = obterClientesAtivos();
 
 // Função para obter os dados dos clientes ativos
 function obterClientesAtivos()
@@ -69,16 +63,16 @@ function obterServicosPorTipo()
 {
     $conn = Conexao::LigarConexao();
     $sql = "SELECT 
-    tbl_servico.idServico, 
-    tbl_servico.nomeServicos, 
-    tbl_tipo_servico.tipoServico 
-FROM 
-    tbl_servico
-INNER JOIN 
-    tbl_tipo_servico ON tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico 
-WHERE 
-    tbl_servico.statusServicos = 'ATIVO' 
-    AND tbl_tipo_servico.statusServico = 'ATIVO';";
+                tbl_servico.idServico, 
+                tbl_servico.nomeServicos, 
+                tbl_tipo_servico.tipoServico 
+            FROM 
+                tbl_servico
+            INNER JOIN 
+                tbl_tipo_servico ON tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico 
+            WHERE 
+                tbl_servico.statusServicos = 'ATIVO' 
+                AND tbl_tipo_servico.statusServico = 'ATIVO'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $servicos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -141,7 +135,7 @@ function obterItens()
             INNER JOIN 
                 tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
             WHERE
-                tbl_produto.statusProduto = 'ATIVO';";
+                tbl_produto.statusProduto = 'ATIVO'";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -155,8 +149,11 @@ $itens = obterItens();
         <form action="index.php?p=orcamento&orc=atualizar&id=<?php echo $id; ?>" method="POST"
             enctype="multipart/form-data">
             <div class="row">
+
                 <h3>EDITAR ORÇAMENTO</h3>
                 <div class="row">
+
+                <!-- cliente -->
                     <div class="col-3">
                         <div class="mb-3">
                             <label for="idCliente" class="form-label">Cliente:</label>
@@ -184,8 +181,59 @@ $itens = obterItens();
                                 value="<?php echo ($cliente->numeroCliente); ?>" readonly>
                         </div>
                     </div>
+
+                <!-- funcionario-->
+                    <div class="col-3">
+                    <label for="idFuncionario" class="form-label">Funcionário Responsável</label>
+                    <select name="idFuncionario" id="idFuncionario" class="form-select" required>
+                        <option value="">Selecione o Funcionário</option>
+                        <?php
+                        $queryFuncionarios = "SELECT idFuncionario, nomeFuncionario FROM tbl_funcionario WHERE statusFuncionario = 'ATIVO'";
+                        $stmtFuncionarios = $conn->prepare($queryFuncionarios);
+                        $stmtFuncionarios->execute();
+                        while ($rowFuncionario = $stmtFuncionarios->fetch(PDO::FETCH_ASSOC)) {
+                            $selected = ($rowFuncionario['idFuncionario'] == $orcamentoData->idFuncionario) ? 'selected' : '';
+                            echo '<option value="' . ($rowFuncionario['idFuncionario']) . '" ' . $selected . '>' . ($rowFuncionario['nomeFuncionario']) . '</option>';
+                        }
+                        ?>
+                    </select>
+                    </div>
+                <!-- status -->
+                    <div class="col-3">
+                    <div class="mb-3">
+                        <label for="statusOrcamento" class="form-label">STATUS</label>
+                        <select class="form-select" id="statusOrcamento" name="statusOrcamento" required>
+                            <option value="ATIVO" <?php echo ($orcamentoData->statusOrcamento == 'ATIVO') ? 'selected' : ''; ?>>
+                                ATIVO
+                            </option>
+                            <option value="DESATIVO"
+                                <?php echo ($orcamentoData->statusOrcamento == 'DESATIVO') ? 'selected' : ''; ?>>DESATIVO
+                            </option>
+                        </select>
+                    </div>
+                    </div>
+
+                <!-- situação -->
+                    <div class="col-3">
+                <div class="mb-3">
+                    <label for="situacaoOrcamento" class="form-label">SITUAÇÃO</label>
+                    <select class="form-select" id="situacaoOrcamento" name="situacaoOrcamento" required>
+                        <option class="pending" value="PENDENTE" <?php echo ($orcamentoData->situacaoOrcamento == 'PENDENTE') ? 'selected' : ''; ?>>
+                            <p>PENDENTE</p>
+                        </option>
+                        <option class="done" value="FEITO" <?php echo ($orcamentoData->situacaoOrcamento == 'FEITO') ? 'selected' : ''; ?>>
+                            <p>FEITO</p>
+                        </option>
+                        <option class="paid" value="PAGO" <?php echo ($orcamentoData->situacaoOrcamento == 'PAGO') ? 'selected' : ''; ?>>
+                            <p>PAGO</p>
+                        </option>
+                    </select>
+                </div>
+                    </div>
+
                 </div>
             </div>
+
             <div class="row">
                 <?php foreach ($servicosPorTipo as $tipo => $servicos): ?>
                     <div class="col-3">
@@ -228,21 +276,7 @@ $itens = obterItens();
             </div>
         </div>
             <div class="row">
-                <div class="col-6">
-                    <label for="idFuncionario" class="form-label">Funcionário Responsável</label>
-                    <select name="idFuncionario" id="idFuncionario" class="form-select" required>
-                        <option value="">Selecione o Funcionário</option>
-                        <?php
-                        $queryFuncionarios = "SELECT idFuncionario, nomeFuncionario FROM tbl_funcionario WHERE statusFuncionario = 'ATIVO'";
-                        $stmtFuncionarios = $conn->prepare($queryFuncionarios);
-                        $stmtFuncionarios->execute();
-                        while ($rowFuncionario = $stmtFuncionarios->fetch(PDO::FETCH_ASSOC)) {
-                            $selected = ($rowFuncionario['idFuncionario'] == $orcamentoData->idFuncionario) ? 'selected' : '';
-                            echo '<option value="' . ($rowFuncionario['idFuncionario']) . '" ' . $selected . '>' . ($rowFuncionario['nomeFuncionario']) . '</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
+
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="valorOrcamento" class="form-label">VALOR</label>
@@ -250,41 +284,11 @@ $itens = obterItens();
                             value="<?php echo ($orcamentoData->valorOrcamento); ?>">
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="mb-3">
-                        <label for="statusOrcamento" class="form-label">STATUS</label>
-                        <select class="form-select" id="statusOrcamento" name="statusOrcamento" required>
-                            <option value="ATIVO" <?php echo ($orcamentoData->statusOrcamento == 'ATIVO') ? 'selected' : ''; ?>>
-                                ATIVO
-                            </option>
-                            <option value="DESATIVO"
-                                <?php echo ($orcamentoData->statusOrcamento == 'DESATIVO') ? 'selected' : ''; ?>>DESATIVO
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-3">
-                <div class="mb-3">
-                    <label for="situacaoOrcamento" class="form-label">SITUAÇÃO</label>
-                    <select class="form-select" id="situacaoOrcamento" name="situacaoOrcamento" required>
-                        <option class="pending" value="PENDENTE" <?php echo ($orcamentoData->situacaoOrcamento == 'PENDENTE') ? 'selected' : ''; ?>>
-                            <p>PENDENTE</p>
-                        </option>
-                        <option class="done" value="FEITO" <?php echo ($orcamentoData->situacaoOrcamento == 'FEITO') ? 'selected' : ''; ?>>
-                            <p>FEITO</p>
-                        </option>
-                        <option class="paid" value="PAGO" <?php echo ($orcamentoData->situacaoOrcamento == 'PAGO') ? 'selected' : ''; ?>>
-                            <p>PAGO</p>
-                        </option>
-                    </select>
-                </div>
-</div>
-
+                
             </div>
             <div class="mb-3">
                 <label for="comentOrcamento" class="form-label">Comentário</label>
-                <textarea name="comentOrcamento" id="comentOrcamento" class="form-control" cols="65" rows="10"
-                    placeholder="Escrever informações básicas do serviço como medidas (1.20 x 2.04) em metro do serviço, cor do serviço ou apontamentos sobre o serviço."
+                <textarea name="comentOrcamento" id="comentOrcamento" class="form-control" rows="3"
                     required><?php echo ($orcamentoData->comentOrcamento); ?></textarea>
             </div>
             <div class="btnEnviar col-2">

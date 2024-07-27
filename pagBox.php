@@ -56,14 +56,13 @@
                     <div class="textoLateral">
                         <h1>BOX</h1>
                         <p>
-                            Adicione segurança e requinte ao seu lar com nosso corrimão de vidro,oferecemos uma solução
-                            durável e moderna para escadas e varandas!<br>
-                            INFO<br>
-                            INFO<br>
-                            INFO<br>
-                            INFO<br>
-                            INFO<br>
-                            INFO<br>
+                            Desfrute de momentos relaxantes e elegantes em seu banheiro com nosso box de vidro,
+                            proporcionando um ambiente sofisticado e garantindo estilo!<br>
+                            <br>
+                            Temperado:<br>
+                            Milimetros Disponiveis:<br>
+                            Cores Disponiveis:<br>
+                            Modelo Jateado:<br>
                         </p>
                     </div>
                 </div>

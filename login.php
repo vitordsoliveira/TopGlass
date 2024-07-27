@@ -133,7 +133,7 @@ $lista = $Galeria->Listar();
                         </li>
                     </ul>
                     <div class="logar">
-                        <button onclick="LoginAdmin()" type="submit" value="ENTRAR" input="ENTRAR" text="ENTRAR">
+                        <button onclick="LoginAdmin()" type="submit" value="ENTRAR" input="ENTRAR" text="ENTRAR">ENTRAR
                     </div>
                 </div>
             </form>

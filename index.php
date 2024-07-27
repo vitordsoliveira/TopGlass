@@ -95,8 +95,9 @@ $lista = $Galeria->Listar();
 
     <link rel="stylesheet" href="css/reset.css">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
     <link rel="stylesheet" href="css/slick.css">
@@ -142,7 +143,9 @@ $lista = $Galeria->Listar();
                             <a href="#"><span><img src="img/orcamento.svg" alt="#"></span>ORÇAMENTO</a>
                         </li>
                         <li>
-                            <a href="https://www.google.com.br/maps/place/Top+Glass/@-23.5005135,-46.3947126,17z/data=!4m6!3m5!1s0x94ce63dc4928e219:0xb41341944e1c0845!8m2!3d-23.4999478!4d-46.3937148!16s%2Fg%2F11rz49br3d?entry=ttu"><span><img src="img/gps.svg" alt="#"></span>LOCALIZAÇÃO</a>
+                            <a
+                                href="https://www.google.com.br/maps/place/Top+Glass/@-23.5005135,-46.3947126,17z/data=!4m6!3m5!1s0x94ce63dc4928e219:0xb41341944e1c0845!8m2!3d-23.4999478!4d-46.3937148!16s%2Fg%2F11rz49br3d?entry=ttu"><span><img
+                                        src="img/gps.svg" alt="#"></span>LOCALIZAÇÃO</a>
                         </li>
                         <li>
                             <a href="login.php"><span><img src="img/login.svg" alt="#"></span>
@@ -184,9 +187,24 @@ $lista = $Galeria->Listar();
     <?php require_once ('conteudo/rodape.php'); ?>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <script src="js/slick.min.js"></script>
+
     <script src="js/wow.min.js"></script>
+
     <script src="js/estilo.js"></script>
+
     <script src="js/login.js"></script>
+
+    <!--js bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+
 </body>
+
 </html>

@@ -7,9 +7,11 @@ $lista = $servico->Listar();
 
 ?>
 
-<h2 class="tituloDashboard">SERVIÇOS</h2>
+
 
 <table class="table">
+
+<h2 class="tituloDashboard">SERVIÇOS</h2>
 
     <span class="btnDashboard">
         <a href="index.php?p=servico&sr=inserir"> + Cadastrar Serviço</a>
@@ -50,14 +52,15 @@ $lista = $servico->Listar();
                 <td scope="col">
                     <img src="<?php echo ($linha['fotoServicos']); ?>"
                         alt="<?php echo ($linha['nomeServicos']); ?>"
-                        style="width: 150px; height: auto;">
+                        style="width: 80px; height: auto;">
                 </td>
 
                 <td scope="col"><?php echo ($linha['nomeServicos']); ?></td>
              
                 <td scope="col"><?php echo ($linha['idTipoServico']); ?></td>
               
-                <td scope="col"><?php echo ($linha['descServico']); ?></td>
+                <td scope="col" style="width: 25%; height: auto; vertical-align: top;"><?php echo ($linha['descServico']); ?></td>
+
 
                 <td scope="col"><?php echo ($linha['fotoServicos']); ?></td>
           

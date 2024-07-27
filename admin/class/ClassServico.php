@@ -49,32 +49,83 @@ class ClassServico
         return $lista;
     }
 
+    // LISTAR V
+    public function ListarVidro()
+    {
+        $sql = "SELECT 
+    tbl_servico.idServico,
+    tbl_servico.nomeServicos,
+    tbl_servico.statusServicos,
+    tbl_tipo_servico.tipoServico AS idTipoServico,
+    tbl_servico.descServico,
+    tbl_servico.fotoServicos,
+    tbl_servico.altServicos
+FROM 
+    tbl_servico
+INNER JOIN 
+    tbl_tipo_servico ON tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico
+WHERE 
+    tbl_servico.statusServicos = 'ATIVO' AND
+    tbl_servico.idTipoServico IN (1, 2);
+";
 
-// CARREGAR
-public function Carregar()
-{
-    $conn = Conexao::LigarConexao();
-    $sql = "SELECT * FROM tbl_servico WHERE idServico = :idServico";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':idServico', $this->idServico, PDO::PARAM_INT);
-    $stmt->execute();
+        $conn = Conexao::LigarConexao();
+        $stmt = $conn->query($sql);
+        $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($result) {
-        $this->nomeServicos = $result['nomeServicos'];
-        $this->statusServicos = $result['statusServicos'];
-        $this->idTipoServico = $result['idTipoServico'];
-        $this->descServico = $result['descServico'];
-        $this->fotoServicos = $result['fotoServicos'];
-        $this->altServicos = $result['altServicos'];
-        return true;
-    } else {
-        return false;
+        return $lista;
     }
-}
 
+    // LISTAR A
+    public function ListarAluminio()
+    {
+        $sql = "SELECT 
+                    tbl_servico.idServico,
+                    tbl_servico.nomeServicos,
+                    tbl_servico.statusServicos,
+                    tbl_tipo_servico.tipoServico AS idTipoServico,
+                    tbl_servico.descServico,
+                    tbl_servico.fotoServicos,
+                    tbl_servico.altServicos
+                FROM 
+                    tbl_servico
+                INNER JOIN 
+                    tbl_tipo_servico
+                ON 
+                    tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico
+                WHERE 
+                    tbl_servico.statusServicos = 'ATIVO' and
+                       tbl_servico.idTipoServico = 3 ;";
 
+        $conn = Conexao::LigarConexao();
+        $stmt = $conn->query($sql);
+        $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        return $lista;
+    }
+
+    // CARREGAR
+    public function Carregar()
+    {
+        $conn = Conexao::LigarConexao();
+        $sql = "SELECT * FROM tbl_servico WHERE idServico = :idServico";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idServico', $this->idServico, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($result) {
+            $this->nomeServicos = $result['nomeServicos'];
+            $this->statusServicos = $result['statusServicos'];
+            $this->idTipoServico = $result['idTipoServico'];
+            $this->descServico = $result['descServico'];
+            $this->fotoServicos = $result['fotoServicos'];
+            $this->altServicos = $result['altServicos'];
+            return true;
+        } else {
+            return false;
+        }
+    }
     // INSERIR
     public function Inserir()
     {
@@ -99,7 +150,6 @@ public function Carregar()
 
         echo "<script>document.location='index.php?p=servico'</script>";
     }
-
     // ATUALIZAR
     public function Atualizar()
     {
@@ -116,7 +166,6 @@ public function Carregar()
         $conn->exec($sql);
         echo "<script>document.location='index.php?p=servico'</script>";
     }
-
     // DESATIVAR
     public function Desativar($id)
     {
