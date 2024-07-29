@@ -1,4 +1,5 @@
 <?php
+ob_start();
 
 // Importar classes do PHPMailer para o espaço de nomes global
 use PHPMailer\PHPMailer\PHPMailer;

@@ -13,7 +13,7 @@ class ClassOrcSite
     public $comentOrcamento;
     public $alturaOrcamento;
     public $larguraOrcamento;
-
+    public $dataCadOrcamento;
 
     public function __construct($id = false)
     {
@@ -44,7 +44,6 @@ class ClassOrcSite
             $this->alturaOrcamento = $orcamento['alturaOrcamento'];
             $this->larguraOrcamento = $orcamento['larguraOrcamento'];
             $this->dataCadOrcamento = $orcamento['dataCadOrcamento'];
-
         } else {
             echo 'Erro: Orçamento não encontrado';
         }
@@ -53,20 +52,21 @@ class ClassOrcSite
     // LISTAR
     public function Listar()
     {
-
-        $sql = "SELECT idServico,
-                        DATE_FORMAT(dataCadOrcamento, '%d/%m/%Y %H:%i:%s')
-                        AS dataCadOrcamentoBR,
-                        nomeCliente,
-                        emailCliente, 
-                        numeroCliente, 
-                        enderecoCliente, 
-                        comentOrcamento, 
-                        alturaOrcamento, 
-                        larguraOrcamento
-                FROM 
-                        tbl_orcamento_site;";
-
+        $sql = "SELECT 
+    idServico,
+    DATE_FORMAT(dataCadOrcamento, '%d/%m/%Y %H:%i:%s') AS dataCadOrcamentoBR,
+    nomeCliente,
+    emailCliente, 
+    numeroCliente, 
+    enderecoCliente, 
+    comentOrcamento, 
+    alturaOrcamento, 
+    larguraOrcamento
+FROM 
+    tbl_orcamento_site
+ORDER BY 
+    dataCadOrcamento DESC;
+";
         $conn = Conexao::LigarConexao();
         $stmt = $conn->prepare($sql);
         $stmt->execute();
@@ -74,27 +74,27 @@ class ClassOrcSite
         return $lista;
     }
 
-
     // INSERIR
     public function Inserir()
     {
         $sql = "INSERT INTO tbl_orcamento_site 
-            (idServico,
-            nomeCliente,
-            emailCliente,
-            numeroCliente,
-            enderecoCliente,
-            comentOrcamento,
-            alturaOrcamento,
-            larguraOrcamento)
-            VALUES (:idServico,
-            :nomeCliente,
-            :emailCliente,
-            :numeroCliente,
-            :enderecoCliente,
-            :comentOrcamento,
-            :alturaOrcamento,
-            :larguraOrcamento)";
+                    (idServico,
+                    nomeCliente,
+                    emailCliente,
+                    numeroCliente,
+                    enderecoCliente,
+                    comentOrcamento,
+                    alturaOrcamento,
+                    larguraOrcamento)
+                VALUES 
+                    (:idServico,
+                    :nomeCliente,
+                    :emailCliente,
+                    :numeroCliente,
+                    :enderecoCliente,
+                    :comentOrcamento,
+                    :alturaOrcamento,
+                    :larguraOrcamento)";
             
         $conn = Conexao::LigarConexao();
         $stmt = $conn->prepare($sql);
@@ -110,5 +110,4 @@ class ClassOrcSite
 
         return $stmt->execute();
     }
-
 }
