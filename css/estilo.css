@@ -77,28 +77,51 @@
    margin-top: 5px;
  }
 
- /*animação*/
- .barra a {
-   color: #fff;
-   text-decoration: none;
-   position: relative;
-   padding-bottom: 2px;
- }
+ /* animação */
+.barra a {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+}
 
- .barra a::after {
-   content: '';
-   position: absolute;
-   left: 0;
-   bottom: 0;
-   width: 0;
-   height: 2px;
-   background: white;
-   transition: width 0.5s;
- }
+.barra a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.5s;
+}
 
- .barra a:hover::after {
-   width: 100%;
- }
+.barra a:hover::after {
+  width: 100%;
+}
+
+/* Animação para links dentro da subServico */
+.subServico a {
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  display: inline-block;
+}
+
+.subServico a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.5s;
+}
+
+.subServico a:hover::after {
+  width: 100%;
+}
 
  /*fim animação*/
 
@@ -146,10 +169,6 @@
 
  .subServico li a {
    color: #ffffff;
- }
-
- .subServico li a:hover {
-   text-decoration: underline;
  }
 
  .menu-fixo:hover .subServico {
@@ -614,15 +633,6 @@
    margin-top: .5%;
  }
 
- .message {
-   opacity: 1;
-   transition: opacity 1s ease-in-out;
- }
-
- .message.hidden {
-   opacity: 0;
- }
-
  .orcamento p {
    color: #1F3E4C;
    font-size: 1.8em;
@@ -665,7 +675,7 @@
    margin: 20px;
  }
 
- .orcamento form .envio input {
+ .orcamento form .envio button {
    cursor: pointer;
    border: 0px;
    border-radius: 15px;
@@ -674,12 +684,12 @@
    padding: 2%;
    font-size: 1em;
    margin-left: 70%;
-   width: 32%;
+   width: 33%;
    display: block;
    transition: transform 0.5s ease-in-out;
  }
 
- .orcamento form .envio input:hover {
+ .orcamento form .envio button:hover {
    cursor: pointer;
    background: #1F3E4C;
    transform: scale(1.1);
@@ -716,6 +726,16 @@
  .inputpar {
    margin: 0px !important;
    display: flex;
+ }
+
+ .medidasOrcamento{
+  display: flex;
+ }
+
+ .medidasOrcamento div input{
+  width: 110%;
+  padding: 5% 0 5% 0;
+  border: 0px;
  }
 
  /* ############################# RODA PÉ ################################## */
