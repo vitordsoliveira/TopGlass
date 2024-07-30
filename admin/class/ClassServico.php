@@ -1,6 +1,6 @@
 <?php
 
-require_once ('Conexao.php');
+require_once('Conexao.php');
 
 class ClassServico
 {
@@ -23,7 +23,7 @@ class ClassServico
     }
 
     // LISTAR
-    public function Listar()
+    public function Listar($statusFiltro = '', $tipoFiltro = '')
     {
         $sql = "SELECT 
                     tbl_servico.idServico,
@@ -39,69 +39,43 @@ class ClassServico
                     tbl_tipo_servico
                 ON 
                     tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico
-                WHERE 
-                    tbl_servico.statusServicos = 'ATIVO';";
+                WHERE 1=1 ";
+
+        if ($statusFiltro) {
+            $sql .= "AND tbl_servico.statusServicos = :status ";
+        }
+
+        if ($tipoFiltro) {
+            $sql .= "AND tbl_tipo_servico.tipoServico = :tipo ";
+        }
 
         $conn = Conexao::LigarConexao();
-        $stmt = $conn->query($sql);
+        $stmt = $conn->prepare($sql);
+
+        if ($statusFiltro) {
+            $stmt->bindParam(':status', $statusFiltro, PDO::PARAM_STR);
+        }
+
+        if ($tipoFiltro) {
+            $stmt->bindParam(':tipo', $tipoFiltro, PDO::PARAM_STR);
+        }
+
+        $stmt->execute();
         $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $lista;
     }
 
-    // LISTAR V
+    // LISTAR VIDRO
     public function ListarVidro()
     {
-        $sql = "SELECT 
-    tbl_servico.idServico,
-    tbl_servico.nomeServicos,
-    tbl_servico.statusServicos,
-    tbl_tipo_servico.tipoServico AS idTipoServico,
-    tbl_servico.descServico,
-    tbl_servico.fotoServicos,
-    tbl_servico.altServicos
-FROM 
-    tbl_servico
-INNER JOIN 
-    tbl_tipo_servico ON tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico
-WHERE 
-    tbl_servico.statusServicos = 'ATIVO' AND
-    tbl_servico.idTipoServico IN (1, 2);
-";
-
-        $conn = Conexao::LigarConexao();
-        $stmt = $conn->query($sql);
-        $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $lista;
+        return $this->Listar('', 'VIDRO');
     }
 
-    // LISTAR A
+    // LISTAR ALUMINIO
     public function ListarAluminio()
     {
-        $sql = "SELECT 
-                    tbl_servico.idServico,
-                    tbl_servico.nomeServicos,
-                    tbl_servico.statusServicos,
-                    tbl_tipo_servico.tipoServico AS idTipoServico,
-                    tbl_servico.descServico,
-                    tbl_servico.fotoServicos,
-                    tbl_servico.altServicos
-                FROM 
-                    tbl_servico
-                INNER JOIN 
-                    tbl_tipo_servico
-                ON 
-                    tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico
-                WHERE 
-                    tbl_servico.statusServicos = 'ATIVO' and
-                       tbl_servico.idTipoServico = 3 ;";
-
-        $conn = Conexao::LigarConexao();
-        $stmt = $conn->query($sql);
-        $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $lista;
+        return $this->Listar('', 'ALUMINIO');
     }
 
     // CARREGAR
@@ -126,6 +100,7 @@ WHERE
             return false;
         }
     }
+
     // INSERIR
     public function Inserir()
     {
@@ -150,6 +125,7 @@ WHERE
 
         echo "<script>document.location='index.php?p=servico'</script>";
     }
+
     // ATUALIZAR
     public function Atualizar()
     {
@@ -166,6 +142,7 @@ WHERE
         $conn->exec($sql);
         echo "<script>document.location='index.php?p=servico'</script>";
     }
+
     // DESATIVAR
     public function Desativar($id)
     {
@@ -176,4 +153,3 @@ WHERE
         echo "<script>document.location='index.php?p=servico'</script>";
     }
 }
-

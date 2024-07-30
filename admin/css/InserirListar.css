@@ -147,7 +147,7 @@ th p {
   margin: 0 auto;
 }
 
-.selectStatus, .selectSituacao{
+.selectStatus, .selectSituacao, .selectTipo{
   color: #fff;
   background-color: #2390C1;
   padding: 2%;
@@ -157,17 +157,17 @@ th p {
   margin-bottom: 10px;
 }
 
-.selectStatus:hover, .selectSituacao:hover{
+.selectStatus:hover, .selectSituacao:hover, .selectTipo:hover{
   background: #1F3E4C;
   transition: ease-in-out .5s;
 }
 
-.selectStatus option, .selectSituacao option {
+.selectStatus option, .selectSituacao option, .selectTipo option {
   color: #2390C1;
   background-color: #fff;
 }
 
-.selectStatus, .selectSituacao {
+.selectStatus, .selectSituacao, .selectTipo {
   flex: 1;
   min-width: 150px;
 }
@@ -188,6 +188,8 @@ th p {
   background-color: rgba(34, 187, 34, 0.801);
   transition: ease-in-out .5s;
 }
+
+
 
 
 

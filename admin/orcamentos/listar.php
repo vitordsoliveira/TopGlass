@@ -60,17 +60,21 @@ $lista = $orcamento->Listar($statusFiltro, $situacaoFiltro);
     <tbody>
         <?php foreach ($lista as $linha): ?>
             <?php
-            // Define a classe da bolinha com base na situação
+            // Define a classe da bolinha e a classe da situação com base na situação
             $bolinhaClasse = '';
+            $situacaoClasse = '';
             switch ($linha['situacaoOrcamento']) {
                 case 'PENDENTE':
                     $bolinhaClasse = 'bolinha-amarela';
+                    $situacaoClasse = 'situacao-pendente';
                     break;
                 case 'FEITO':
                     $bolinhaClasse = 'bolinha-laranja';
+                    $situacaoClasse = 'situacao-feito';
                     break;
                 case 'PAGO':
                     $bolinhaClasse = 'bolinha-verde';
+                    $situacaoClasse = 'situacao-pago';
                     break;
             }
             ?>
@@ -86,7 +90,7 @@ $lista = $orcamento->Listar($statusFiltro, $situacaoFiltro);
                 <td scope="col"><?php echo($linha['valorOrcamento']); ?></td>
                 <td scope="col"><?php echo($linha['dataOrcamento']); ?></td>
                 <td scope="col"><?php echo($linha['comentOrcamento']); ?></td>
-                <td scope="col"><?php echo($linha['situacaoOrcamento']); ?></td>
+                <td scope="col" class="<?php echo $situacaoClasse; ?>"><?php echo($linha['situacaoOrcamento']); ?></td>
                 <td scope="col"><?php echo($linha['statusOrcamento']); ?></td>
                 <td><a href="index.php?p=orcamento&orc=atualizar&id=<?php echo $linha['idOrcamento']; ?>">Atualizar</a></td>
                 <td><a href="index.php?p=orcamento&orc=desativar&id=<?php echo $linha['idOrcamento']; ?>">Desativar</a></td>
