@@ -10,12 +10,12 @@
    color: #fff;
  }
 
- .h1h1{
-  width: 0;
-  height: 0;
-  color: #1F3E4C;
-  cursor: none;
-  display: none;
+ .h1h1 {
+   width: 0;
+   height: 0;
+   color: #1F3E4C;
+   cursor: none;
+   display: none;
  }
 
  body {
@@ -54,20 +54,21 @@
    padding: 3px 0;
  }
 
- .barra div img {
-   width: 30px;
+ .barra img {
+   width: 20px;
  }
 
- .barra div ul {
+ .barra ul {
    /* NAO MEXER */
    display: flex;
+   padding: 5px 0 5px 0;
  }
 
- .barra div ul li {
+ .barra li {
    margin-left: 45px;
  }
 
- .barra div ul li a {
+ .barra a {
    display: flex;
    align-items: center;
    text-align: center;
@@ -76,16 +77,60 @@
    margin-top: 5px;
  }
 
- .barra div ul li a:hover {
-   text-decoration: underline;
- }
+ /* animação */
+.barra a {
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+}
 
- .barra div ul li a span {
+.barra a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: white;
+  transition: width 0.5s;
+}
+
+.barra a:hover::after {
+  width: 100%;
+}
+
+/* Animação para links dentro da subServico */
+.subServico a {
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+  display: inline-block;
+}
+
+.subServico a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.5s;
+}
+
+.subServico a:hover::after {
+  width: 100%;
+}
+
+ /*fim animação*/
+
+ .barra span {
    margin-right: 3px;
  }
 
  .barra div nav ul li:nth-child(5) a:nth-child(1) {
-   margin-left: 240%;
+   left: 220%;
  }
 
  .menu-fixo {
@@ -93,7 +138,7 @@
    width: 100%;
    z-index: 3;
    top: 0;
-   background: rgba(31, 62, 76, 0.733);
+   background: rgba(31, 62, 76, 0.925);
    animation: fadeIn 1.2s ease-in-out;
  }
 
@@ -107,8 +152,8 @@
    display: none !important;
    position: absolute;
    background: #1F3E4C;
-   padding-right: 1%;
-   padding-bottom: 1%;
+   padding-right: 1% !important;
+   padding-bottom: 1% !important;
    border-radius: 10px;
  }
 
@@ -124,11 +169,6 @@
 
  .subServico li a {
    color: #ffffff;
-   font-size: 1.2em;
- }
-
- .subServico li a:hover {
-   text-decoration: underline;
  }
 
  .menu-fixo:hover .subServico {
@@ -228,6 +268,7 @@
    max-width: 60px;
    width: 110%;
    height: auto;
+
  }
 
  /* ########################### SERVICOS VIDROS ############################## */
@@ -278,10 +319,6 @@
    margin: 0 .2%;
  }
 
- .servicoDegradeV img {
-   width: 100%;
- }
-
  .servicoDegradeV div a::before {
    content: "";
    position: absolute;
@@ -292,23 +329,20 @@
    background: linear-gradient(to top, rgba(35, 150, 212, 0.712), transparent);
    z-index: 1;
  }
-
- .servicoDegradeV div:nth-child(8) h2{
-  left: 35%;
-  transform: translate(-30%, -50%);
- }
-
+ 
  .servicoDegradeV h2 {
-   font-size: 1.5em;
-   font-weight: 600;
-   position: absolute;
-   left: 50%;
-   top: 90%;
-   transform: translate(-50%, -50%);
-   margin: 0;
-   color: white;
-   z-index: 2;
- }
+  font-size: 1.5em;
+  font-weight: 600;
+  position: absolute;
+  left: 50%;
+  top: 90%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  color: white;
+  z-index: 2;
+  white-space: nowrap; /* Impede a quebra de linha */
+}
+
 
  .servicoDegradeV a {
    display: block;
@@ -320,16 +354,15 @@
  .servicoDegradeV a:hover {
    transform: scale(1.1);
  }
-
  .servicoDegradeV h2:hover {
    display: none;
  }
 
- .pservicoV p{
+ .pservicoV p {
    display: none;
    position: fixed;
-   z-index: 3;
-   bottom: 55px;
+   z-index: 5;
+   bottom: 30%;
    font-size: 1.2em;
    text-align: justify;
    margin: 0 20px;
@@ -418,6 +451,7 @@
    margin: 0;
    color: white;
    z-index: 2;
+   white-space: nowrap; /* Impede a quebra de linha */
  }
 
  .servicoDegradeA a {
@@ -439,7 +473,7 @@
    display: none;
    position: fixed;
    z-index: 3;
-   bottom: 55px;
+   bottom: 30%;
    font-size: 1.2em;
    text-align: justify;
    margin: 0 20px;
@@ -599,15 +633,6 @@
    margin-top: .5%;
  }
 
- .message {
-   opacity: 1;
-   transition: opacity 1s ease-in-out;
- }
-
- .message.hidden {
-   opacity: 0;
- }
-
  .orcamento p {
    color: #1F3E4C;
    font-size: 1.8em;
@@ -618,6 +643,10 @@
    font-size: 1.1em;
    text-decoration: underline;
    margin-left: 5.5%;
+ }
+
+ .orcamento a:hover {
+   color: #1F3E4C;
  }
 
  .orcamento form div:nth-child(1) div input {
@@ -636,7 +665,6 @@
    border: 0px;
    resize: none;
    font-size: 1em;
-
  }
 
  .orcamento form label p {
@@ -647,7 +675,7 @@
    margin: 20px;
  }
 
- .orcamento form .envio input {
+ .orcamento form .envio button {
    cursor: pointer;
    border: 0px;
    border-radius: 15px;
@@ -656,7 +684,17 @@
    padding: 2%;
    font-size: 1em;
    margin-left: 70%;
-   width: 32%;
+   width: 33%;
+   display: block;
+   transition: transform 0.5s ease-in-out;
+ }
+
+ .orcamento form .envio button:hover {
+   cursor: pointer;
+   background: #1F3E4C;
+   transform: scale(1.1);
+   display: block;
+   height: auto;
  }
 
  .orcamento select {
@@ -667,6 +705,11 @@
    padding: 2% 0 2% 0;
    font-size: 1.2em;
    margin-right: 8%;
+ }
+
+ .orcamento select:hover {
+   background-color: #1F3E4C;
+   transition: ease-in-out .5s;
  }
 
  .orcamento option {
@@ -683,6 +726,16 @@
  .inputpar {
    margin: 0px !important;
    display: flex;
+ }
+
+ .medidasOrcamento{
+  display: flex;
+ }
+
+ .medidasOrcamento div input{
+  width: 110%;
+  padding: 5% 0 5% 0;
+  border: 0px;
  }
 
  /* ############################# RODA PÉ ################################## */
@@ -766,10 +819,6 @@
    color: #2390C1;
  }
 
- .locserv ul li:nth-child(2) {
-   width: 66%;
- }
-
  .locserv img {
    width: 4%;
    margin-left: 5px;
@@ -790,10 +839,16 @@
    position: fixed;
    bottom: 3%;
    left: 14.2%;
+   width: 5%;
  }
 
- .wpp img {
-   width: 12.5%;
+ .wpp img{
+   display: block;
+   transition: transform 0.5s ease-in-out;
+ }
+
+ .wpp img:hover{
+   transform: scale(1.1);
  }
 
  /* ################################ LOGIN ############################ */
@@ -820,6 +875,10 @@
    text-decoration: underline;
  }
 
+ .login a:hover {
+   color: #1F3E4C;
+ }
+
  .login ul li {
    margin-top: 10px;
  }
@@ -841,7 +900,6 @@
    text-align: center;
    color: #1F3E4C;
    font-size: 4em;
-   margin-left: -17%;
    padding-top: 0;
  }
 
@@ -852,10 +910,10 @@
  }
 
  .login div div div {
-   margin: 20px 0 20px 0;
+   margin: 21.4px 0 20px 0;
  }
 
- .login form:nth-child(2) .logar input:nth-child(1) {
+ .login form:nth-child(2) .logar button:nth-child(1) {
    cursor: pointer;
    border: 0px;
    border-radius: 15px;
@@ -867,8 +925,14 @@
    margin-left: 120%;
    font-size: 1em;
    width: 60%;
+   transition: transform ease-in-out .5s;
  }
 
+ .login form:nth-child(2) .logar button:nth-child(1):hover {
+   cursor: pointer;
+   background: #1F3E4C;
+   transform: scale(1.1);
+ }
 
  /* ######################### REGISTRO ########################*/
 
@@ -949,3 +1013,27 @@
    font-size: 1.2em;
    width: 50%;
  }
+/*MENSAGEM DE ORÇAMENTO*/
+ .overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.overlay-content img {
+  max-width: 100px;
+}

@@ -33,122 +33,169 @@ a {
 
 .barraTopo {
     background: #1F3E4C;
-    padding: 5px 0 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
 }
 
-.barraTopo h1 {
-    font-size: 4.5em;
+.barraTopo .logo,
+.barraTopo .login {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    position: relative;
+    width: 5%;
+}
+
+.logo-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.circle {
+    position: absolute;
+    z-index: 1;
+    width: 210%;
+    height: auto;
+}
+
+.logoImg {
+    position: relative;
+    z-index: 2;
+    width: 210%;
+    height: auto;
+}
+
+/* ############## TÍTULO FIXO NO TOPO #################### */
+.tituloDashboard h1 {
+    position: sticky;
+    top: 0; 
+    left: 50%; 
+    transform: translateX(3%); 
+    text-align: center; 
+    padding: 10px;
+    margin: 0;
+    z-index: 1;
+}
+
+.tituloDashboard h2 {
+    position: sticky;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); 
+    text-align: center; 
+    padding: 10px;
+    margin: 0;
+    z-index: 1;
+}
+
+
+.tituloDashboard h1 {
+    font-size: 1.8em;
     color: #fff;
-    margin-left: 12%;
     font-family: "Sedan", serif;
     font-weight: 400;
     font-style: normal;
 }
 
-.barraTopo h2 {
-    font-size: 2em;
-    align-items: center;
-    margin-right: 5%;
+.login {
+    text-align: right;
 }
 
-.barraTopo ul img {
-    width: 10%;
-}
-
-.barraTopo ul {
-    display: flex;
-}
-
-.barraTopo ul li {
+.login ul {
     display: flex;
     align-items: center;
+    background: linear-gradient(to left, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
+    padding: 10px;
+    border-radius: 30px;
 }
 
-.barraTopo ul li:nth-child(1) img:nth-child(1) {
-    margin-left: 5%;
+.login li {
+    margin-left: 10px;
 }
 
-.barraTopo ul li:nth-child(1) img:nth-child(2) {
-    margin-left: -10%;
+.login p {
+    font-size: 1.7em; 
+    color: #fff; 
+    margin: 0;
+    white-space: nowrap;
 }
 
-.barraTopo a {
-    display: flex;
-    align-items: center;
-    background: linear-gradient(to right, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
-    padding: 5% 0px 5% 60%;
-    border-radius: 35px 0px 0px 35px;
-    margin-left: -80px;
-}
-
-.barraTopo a:hover{
-    background: linear-gradient(to right, rgb(1, 165, 253), rgba(35, 150, 212, 0.712));
-    transform: 25s ease-in-out;
-}
-
-.barraTopo a img {
-    width: 30%;
-}
-
-/* ####################### BARRA VERTICAL DE OPÇÕES ########################## */
-
-.home {
-    background: linear-gradient(to right, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
-    width: 10%;
-    text-align: center;
-    padding: 2% 6% 1% 3%;
-}
-
-.home h2 {
-    font-size: 3.5em;
-    margin-left: 10%;
-    color: #fff;
-}
-
-.opcoes ul li {
-    background: #1F3E4C;
-    width: 10%;
-    text-align: center;
-    padding: 2% 6% 2% 3%;
-}
-
-.opcoes a {
-    font-size: 2.5em;
-}
-
-.opcoes a:hover{
-    background: linear-gradient(to right, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
-    padding: 5% 10%;
+.login img {
+    width: 50px;
+    height: auto;
     border-radius: 20px;
-    transition: 0.1s ease-in-out;
 }
 
-.opcoes ul li:nth-child(1) a:nth-child(1){
-    margin-left: 10%;
+/* ############## MENU LATERAL #################### */
+main {
+    flex: 1;
+    display: flex;
 }
 
-.opcoes ul li:nth-child(4) a:nth-child(1){
-    margin-left: 5%;  
+.menu {
+    background-color: #1F3E4C;
+    max-width: 300px;
+    width: 50%;
 }
 
-.opcoes ul li:nth-child(6) a:nth-child(1){
-    margin-left: 5%;  
+.menu nav {
+    padding-top: 9.2%;
+    padding-bottom: 34.2%;
+}
+
+.menu nav ul li {
+    padding: 17.35px 0;
+}
+
+.menu ul li a {
+    font-size: 2.5em;
+    color: #fff;
+    border-bottom: #fff solid 2px;
+    transition: 300ms;
+}
+
+.menu ul li a:hover {
+    padding: 10px 15px 10px 15px;
+    border-radius: 25px 25px;
+    background: linear-gradient(to top, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
+    transition: 300ms;
+}
+
+/* ############## BOX DAS PAGINAS #################### */
+.box {
+    width: 100%;
+    margin: .5%;
+    background: url(../img/background2.jpg);
+    background-size: cover; /* Faz a imagem cobrir toda a área do .box */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Não repete a imagem de fundo */
+    /* Adicionando as propriedades para a barra de rolagem */
+    height: 767px; /* Ajuste a altura conforme necessário */
+    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
+    padding: 10px; /* Opcional: Adiciona um preenchimento interno */
+    box-sizing: border-box; /* Inclui o padding e a borda na largura e altura totais */
 }
 
 /* ################# RODA PÉ ################### */
 
-.rodape{
+.rodape {
     text-align: center;
     background: linear-gradient(to top, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
+    padding-bottom: .1%;
 }
 
-.rodape h2{
+.rodape h2 {
     color: #fff;
     font-size: 1.1em;
 }
 
-.rodape p{
+.rodape h3 {
     color: #fff;
+    font-size: 1.1em;
 }
-
-

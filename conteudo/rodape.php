@@ -1,4 +1,4 @@
-<footer class="wow rodape animate__animated animate__fadeInUp">
+<footer class="rodape">
     <div class="site">
 
         <div class="contato">
@@ -70,9 +70,9 @@
                     </li>
 
                     <li>
-                        <a href="">Vidros e Espelhos</a>
+                        <a href="./pagVidro.php">Vidros e Espelhos</a>
                     <li>
-                        <a href="">Esquadrias</a>
+                        <a href="./pagAluminio.php">Esquadrias</a>
                     </li>
                 </ul>
 

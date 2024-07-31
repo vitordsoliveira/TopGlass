@@ -128,38 +128,6 @@ $('.marcas span').slick({
   ]
 });
 
-$('.servicosVE').slick({
-  slidesToShow: 2,
-  slidesToScroll: 2,
-  autoplay: false,
-  autoplaySpeed: 200,
-  responsive: [
-    {
-      breakpoint: 900,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    },
-    {
-      breakpoint: 380,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-});
-
 /* WOW */
 new WOW().init();
 
@@ -184,36 +152,59 @@ window.onscroll = function () {
 }
 
 setTimeout(function() {
-  document.querySelector('.message').classList.add('hidden');
+  document.querySelector('.message'). classList.add('hidden');
 }, 15000);
 
-function enviarOrcamento() {
+/* function enviarOrcamento(event) {
+  event.preventDefault(); // Impede o envio imediato do formulário
 
+  // Coleta os valores dos campos do formulário
   let assuntos = "Site Vidracaria";
-  let nome = 'Nome: ' + document.getElementById('nome').value;
-  let num = 'Telefone: ' + document.getElementById('num').value;
-  let email = 'E=mail: ' + document.getElementById('email').value;
-  let end = 'Endereço: ' + document.getElementById('end').value;
-  let servicosV = 'Serviço de Vidro: ' + document.getElementById('servicosVidro').value;
-  let ServicosE = 'Serviço de Esquadria: ' + document.getElementById('servicosEsquadria').value;
-  let altura = 'Altura: ' + document.getElementById('altura').value;
-  let largura = 'Largura: ' + document.getElementById('largura').value;
-  let coment = 'Comentário: ' + document.getElementById('coment').value;
+  let nome = 'Nome: ' + document.getElementById('nomeCliente').value;
+  let num = 'Telefone: ' + document.getElementById('numeroCliente').value;
+  let email = 'E-mail: ' + document.getElementById('emailCliente').value;
+  let end = 'Endereço: ' + document.getElementById('enderecoCliente').value;
+  let servicosV = 'Serviço de Vidro: ' + document.getElementById('idServicoVIDRO').value;
+  let servicosE = 'Serviço de Esquadria: ' + document.getElementById('idServicoESPELHO').value;
+  let altura = 'Altura: ' + document.getElementById('alturaOrcamento').value;
+  let largura = 'Largura: ' + document.getElementById('larguraOrcamento').value;
+  let coment = 'Comentário: ' + document.getElementById('comentOrcamento').value;
 
+  // Define o número do WhatsApp e o separador de linha
   let numeroWhats = '5511985726758';
-
   let quebraDeLinha = '%0A';
 
-  var mensagem = encodeURIComponent(assunto + quebraDeLinha + nome + quebraDeLinha + email + quebraDeLinha + num + quebraDeLinha + end + quebraDeLinha + servicosV + quebraDeLinha + ServicosE + quebraDeLinha + coment);
+  // Monta a mensagem com as informações coletadas
+  var mensagem = encodeURIComponent(
+    assuntos + quebraDeLinha +
+    nome + quebraDeLinha +
+    email + quebraDeLinha +
+    num + quebraDeLinha +
+    end + quebraDeLinha +
+    servicosV + quebraDeLinha +
+    servicosE + quebraDeLinha +
+    altura + quebraDeLinha +
+    largura + quebraDeLinha +
+    coment
+  );
 
-  window.open("https://api.whatsapp.com/send?phone" + numeroWhats + '&text=' + mensagem, "_blank");
+  // Abre a janela do WhatsApp com a mensagem
+  window.open("https://api.whatsapp.com/send?phone=" + numeroWhats + '&text=' + mensagem, "_blank");
 
-  document.getElementById('nome').value ='';
-  document.getElementById('email').value ='';
-  document.getElementById('num').value ='';
-  document.getElementById('end').value ='';
-  document.getElementById('servicosVidro').value ='';
-  document.getElementById('servicosEsquadria').value ='';
-  document.getElementById('coment').value ='';
-  
-}
+  // Limpa os campos do formulário
+  document.getElementById('nomeCliente').value = '';
+  document.getElementById('emailCliente').value = '';
+  document.getElementById('numeroCliente').value = '';
+  document.getElementById('enderecoCliente').value = '';
+  document.getElementById('idServicoVIDRO').value = '';
+  document.getElementById('idServicoESPELHO').value = '';
+  document.getElementById('alturaOrcamento').value = '';
+  document.getElementById('larguraOrcamento').value = '';
+  document.getElementById('comentOrcamento').value = '';
+
+  // Submete o formulário para o servidor
+  document.getElementById('formOrcamento').submit();
+} */
+
+
+

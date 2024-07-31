@@ -78,6 +78,7 @@ if(isset($_POST['email'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top Glass</title>
+    <link rel="icon" href="img/icone.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="css/reset.css">
 
@@ -121,6 +122,8 @@ if(isset($_POST['email'])){
         </section>
 
     </main>
+
+    <?php require_once ('conteudo/wppServico.php'); ?>
 
     <!-- RODAPÉ -->
     <?php require_once ('conteudo/rodape.php'); ?>
