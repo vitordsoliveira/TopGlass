@@ -1,0 +1,15 @@
+.logoLogin img{
+  width: 20%;
+}
+
+.logoLogin{
+  display: flex;
+    justify-content: center;
+}
+
+.logoLogin h1{
+  text-align: center;
+  color: #1F3E4C;
+  font-size: 3em;
+  font-weight: 400;
+}
