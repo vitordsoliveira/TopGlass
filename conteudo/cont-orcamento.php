@@ -70,18 +70,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $success = $orcamento->Inserir();
 
     if ($success) {
-        // Limpa variáveis após o sucesso
-        $idServico = '';
-        $nomeCliente = '';
-        $emailCliente = '';
-        $numeroCliente = '';
-        $enderecoCliente = '';
-        $comentOrcamento = '';
-        $larguraOrcamento = '';
-        $alturaOrcamento = '';
-
-        // Redireciona para a mesma página sem passar dados do formulário
-        header('Location: ' . $_SERVER['PHP_SELF']);
+        // Redireciona para a mesma página com uma mensagem de sucesso
+        header('Location: ' . $_SERVER['PHP_SELF'] . '?success');
         exit();
     } else {
         // Adicione um erro de processamento ou mensagem de falha se necessário
@@ -90,6 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+// Verifica se há uma mensagem de sucesso na URL
+$successMessage = isset($_GET['success']) ? 'Orçamento enviado com sucesso!' : '';
+
 $servicosPorTipo = obterServicosPorTipo();
 ?>
 
@@ -97,6 +90,11 @@ $servicosPorTipo = obterServicosPorTipo();
 <section class="wow orcamento animate__animated animate__fadeInUp">
     <div class="site">
         <h2>FAÇA UM ORÇAMENTO SEM COMPROMISSO!</h2>
+
+        <?php if ($successMessage): ?>
+            <h3 class="msgS"><?php echo ($successMessage); ?></h3>
+        <?php endif; ?>
+
         <form id="formOrcamento" method="POST">
             <div>
                 <div>

@@ -74,10 +74,10 @@ a {
 /* ############## TÍTULO FIXO NO TOPO #################### */
 .tituloDashboard h1 {
     position: sticky;
-    top: 0; 
-    left: 50%; 
-    transform: translateX(3%); 
-    text-align: center; 
+    top: 0;
+    left: 50%;
+    transform: translateX(3%);
+    text-align: center;
     padding: 10px;
     margin: 0;
     z-index: 1;
@@ -87,8 +87,8 @@ a {
     position: sticky;
     top: 0;
     left: 50%;
-    transform: translateX(-50%); 
-    text-align: center; 
+    transform: translateX(-50%);
+    text-align: center;
     padding: 10px;
     margin: 0;
     z-index: 1;
@@ -120,8 +120,8 @@ a {
 }
 
 .login p {
-    font-size: 1.7em; 
-    color: #fff; 
+    font-size: 1.7em;
+    color: #fff;
     margin: 0;
     white-space: nowrap;
 }
@@ -149,8 +149,17 @@ main {
     padding-bottom: 34.2%;
 }
 
-.menu nav ul li {
-    padding: 17.35px 0;
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li {
+    padding: 15.35px 0;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
 }
 
 .menu ul li a {
@@ -158,28 +167,54 @@ main {
     color: #fff;
     border-bottom: #fff solid 2px;
     transition: 300ms;
+    display: flex;
+    align-items: center;
+}
+
+.menu ul li a i {
+    font-size: 1em;
+    /* Ajuste o tamanho do ícone conforme necessário */
+    margin-right: 10px;
+    /* Espaçamento entre o ícone e o texto */
+}
+
+.menu ul li:nth-child(7) a {
+    color: red;
+    border-bottom: rgb(141, 34, 34) solid 2px;
 }
 
 .menu ul li a:hover {
-    padding: 10px 15px 10px 15px;
-    border-radius: 25px 25px;
+    padding: 10px 15px;
+    border-radius: 25px;
     background: linear-gradient(to top, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
-    transition: 300ms;
+    color: white;
 }
+
+.menu ul li:nth-child(7) a:hover {
+    background: red;
+}
+
 
 /* ############## BOX DAS PAGINAS #################### */
 .box {
     width: 100%;
     margin: .5%;
     background: url(../img/background2.jpg);
-    background-size: cover; /* Faz a imagem cobrir toda a área do .box */
-    background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat; /* Não repete a imagem de fundo */
+    background-size: cover;
+    /* Faz a imagem cobrir toda a área do .box */
+    background-position: center;
+    /* Centraliza a imagem */
+    background-repeat: no-repeat;
+    /* Não repete a imagem de fundo */
     /* Adicionando as propriedades para a barra de rolagem */
-    height: 767px; /* Ajuste a altura conforme necessário */
-    overflow-y: auto; /* Adiciona a barra de rolagem vertical */
-    padding: 10px; /* Opcional: Adiciona um preenchimento interno */
-    box-sizing: border-box; /* Inclui o padding e a borda na largura e altura totais */
+    height: 767px;
+    /* Ajuste a altura conforme necessário */
+    overflow-y: auto;
+    /* Adiciona a barra de rolagem vertical */
+    padding: 10px;
+    /* Opcional: Adiciona um preenchimento interno */
+    box-sizing: border-box;
+    /* Inclui o padding e a borda na largura e altura totais */
 }
 
 /* ################# RODA PÉ ################### */

@@ -115,8 +115,15 @@ public function ListarFiltro($statusFiltro = '', $tipoFiltro = '')
         $sql .= " AND tbl_servico.statusServicos = :status";
     }
 
+    $tipoFiltrosArray = [];
     if ($tipoFiltro) {
-        $sql .= " AND tbl_tipo_servico.tipoServico IN ($tipoFiltro)";
+        $tipos = explode(',', $tipoFiltro);
+        $placeholders = [];
+        foreach ($tipos as $key => $tipo) {
+            $placeholders[] = ":tipo{$key}";
+            $tipoFiltrosArray[":tipo{$key}"] = $tipo;
+        }
+        $sql .= " AND tbl_tipo_servico.tipoServico IN (" . implode(',', $placeholders) . ")";
     }
 
     $conn = Conexao::LigarConexao();
@@ -126,11 +133,16 @@ public function ListarFiltro($statusFiltro = '', $tipoFiltro = '')
         $stmt->bindParam(':status', $statusFiltro, PDO::PARAM_STR);
     }
 
+    foreach ($tipoFiltrosArray as $placeholder => $value) {
+        $stmt->bindParam($placeholder, $value, PDO::PARAM_STR);
+    }
+
     $stmt->execute();
     $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     return $lista;
 }
+
 
     // CARREGAR
     public function Carregar()

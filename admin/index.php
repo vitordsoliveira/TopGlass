@@ -15,8 +15,8 @@ if (isset($_SESSION['idFuncionario'])) {
     $altFotoFuncionario = $funcionario->altFotoFuncionario;
 } else {
     // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
-    //header('location:https://topglass.smpsistema.com.br/admin/login.php');
-    header('location:http://localhost/topglass/admin/login.php');
+    header('location:https://topglass.smpsistema.com.br/admin/login.php');
+    //header('location:http://localhost/topglass/admin/login.php');
 
     // Interrompe a execução do script para garantir que o redirecionamento aconteça imediatamente
     exit();
@@ -30,6 +30,8 @@ if (isset($_SESSION['idFuncionario'])) {
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Glass</title>
+    <link rel="icon" href="./img/iconeDesk.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="css/reset.css">
 
@@ -49,6 +51,9 @@ if (isset($_SESSION['idFuncionario'])) {
     <link rel="stylesheet" href="css/estilo.css">
 
     <link rel="stylesheet" href="css/InserirListar.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 
 </head>
 
@@ -83,19 +88,19 @@ if (isset($_SESSION['idFuncionario'])) {
 
     </header>
     <main>
-        <div class="menu">
-            <nav>
-                <ul>
-                    <li><a href="index.php?p=dashboard">HOME</a></li>
-                    <li><a href="index.php?p=orcamento">ORÇAMENTOS</a></li>
-                    <li><a href="index.php?p=servico">SERVIÇOS</a></li>
-                    <li><a href="index.php?p=cliente">CLIENTES</a></li>
-                    <li><a href="index.php?p=galeria">GALERIA</a></li>
-                    <li><a href="index.php?p=banner">BANNERS</a></li>
-                    <li><a href="sair.php">SAIR</a></li>
-                </ul>
-            </nav>
-        </div>
+    <div class="menu">
+    <nav>
+        <ul>
+            <li><a href="index.php?p=dashboard"><i class="fas fa-home"></i> HOME</a></li>
+            <li><a href="index.php?p=orcamento"><i class="fas fa-file-invoice"></i> ORÇAMENTOS</a></li>
+            <li><a href="index.php?p=servico"><i class="fas fa-concierge-bell"></i> SERVIÇOS</a></li>
+            <li><a href="index.php?p=cliente"><i class="fas fa-user"></i> CLIENTES</a></li>
+            <li><a href="index.php?p=galeria"><i class="fas fa-images"></i> GALERIA</a></li>
+            <li><a href="index.php?p=banner"><i class="fas fa-bullhorn"></i> BANNERS</a></li>
+            <li><a href="sair.php"><i class="fas fa-sign-out-alt"></i> SAIR</a></li>
+        </ul>
+    </nav>
+</div>
 
         <div class="box">
             <?php

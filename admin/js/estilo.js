@@ -21,8 +21,8 @@ function LoginAdmin() {
             );
   
             var idFuncionario = data.idFuncionario; // Obtém o ID do funcionario da resposta
-            window.location.href = "http://localhost/topglass/admin/index.php?p=dashboard";
-            //window.location.href = "https://topglass.smpsistema.com.br/admin/index.php?p=dashboard";
+            //window.location.href = "http://localhost/topglass/admin/index.php?p=dashboard";
+            window.location.href = "https://topglass.smpsistema.com.br/admin/index.php?p=dashboard";
                // Redireciona para o dashboard do administrador
           } else {
             // Exibe uma mensagem de login inválido
