@@ -150,12 +150,12 @@ $servicosPorTipo = obterServicosPorTipo();
 
                 <div class="medidasOrcamento">
                     <div>
-                        <label for="alturaOrcamento" class="form-label"></label>
+                        <label for="alturaOrcamento" class="form-label"><p>Altura:</p></label>
                         <input type="text" id="alturaOrcamento" name="alturaOrcamento"
                             placeholder="Digite aqui a altura em metros" required>
                     </div>
                     <div>
-                        <label for="larguraOrcamento" class="form-label"></label>
+                        <label for="larguraOrcamento" class="form-label"><p>Largura:</p></label>
                         <input type="text" id="larguraOrcamento" name="larguraOrcamento"
                             placeholder="Digite aqui a largura em metros" required>
                     </div>
