@@ -13,7 +13,6 @@ if (isset($_GET['id'])) {
             $statusServicos = $_POST['statusServicos'];
             $idTipoServico = $_POST['idTipoServico'];
             $descServico = $_POST['descServico'];
-            $fotoServicos = $_POST['fotoServicos'];
             $altServicos = $_POST['altServicos'];
             // Verifica se uma nova foto do Servico foi enviada
             if (!empty($_FILES['fotoServicos']['name'])) {
@@ -29,14 +28,12 @@ if (isset($_GET['id'])) {
                 $novoNome = $id . '_' . $nomeSrFoto . '.' . $extensao;
 
                 if (move_uploaded_file($arquivo['tmp_name'], 'img/servicos/' . $novoNome)) {
-                    $fotoServicos = $novoNome;
-                    
+                    $fotoServicos = 'img/servicos/' . $novoNome; // Adiciona o caminho aqui
                 } else {
                     throw new Exception('Não foi possível mover a imagem.');
                 }
             } else {
                 $fotoServicos = $Servico->fotoServicos;
-              
             }
 
             $Servico->nomeServicos = $nomeServicos;
@@ -98,9 +95,9 @@ $tiposServicos = buscarServicos();
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
-                            <label for="fotoServicos" class="form-label">Caminho da Foto do Serviço</label>
-                            <input value="<?php echo ($Servico->fotoServicos); ?>" type="text" class="form-control"
-                                id="fotoServicos" name="fotoServicos" required>
+                            <label for="altServicos" class="form-label">Descrição da Foto do Serviço</label>
+                            <input value="<?php echo ($Servico->altServicos); ?>" type="text" class="form-control"
+                                id="altServicos" name="altServicos" required>
                         </div>
                     </div>
                     <div class="col-3">
@@ -118,13 +115,6 @@ $tiposServicos = buscarServicos();
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="altServicos" class="form-label">Descrição da Foto do Serviço</label>
-                            <input value="<?php echo ($Servico->altServicos); ?>" type="text" class="form-control"
-                                id="altServicos" name="altServicos" required>
-                        </div>
-                    </div>
                     <div class="col-3">
                         <div class="mb-3">
                             <label for="statusServicos" class="form-label">Status Serviço</label>
@@ -155,10 +145,6 @@ $tiposServicos = buscarServicos();
                 imgServico.src = e.target.result;
             }
             carregar.readAsDataURL(arquivo);
-
-            // Definir automaticamente o caminho do Servico no campo de entrada
-            let caminhoServico = 'img/servicos/' + arquivo.name;
-            document.getElementById('fotoServicos').value = caminhoServico;
         }
     });
 </script>
