@@ -111,6 +111,7 @@ $lista = $Galeria->Listar();
     <link rel="stylesheet" href="css/estilo.css">
 
     <link rel="stylesheet" href="css/responsivo.css">
+    
 </head>
 
 <body>
