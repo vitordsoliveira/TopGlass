@@ -591,3 +591,32 @@
     }
 
 }
+
+@media (max-width: 899px) {
+    /* Suas regras específicas para 899px aqui */
+}
+
+@media (max-width: 383px) {
+    /* Suas regras específicas para 383px aqui */
+}
+
+@media (max-width: 425px) {
+    /* Suas regras específicas para 425px aqui */
+}
+
+@media (max-width: 600px) {
+    /* Suas regras específicas para 600px aqui */
+}
+
+@media (max-width: 720px) {
+    /* Suas regras específicas para 720px aqui */
+}
+
+@media (max-width: 900px) {
+    /* Suas regras específicas para 900px aqui */
+}
+
+/* Remover setas do slick em todas as larguras */
+.slick-prev, .slick-next, .setaE, .setaD, .setaE2, .setaD2, .servicoDegrade .slick-next {
+    display: none !important;
+}

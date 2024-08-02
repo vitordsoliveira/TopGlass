@@ -86,7 +86,6 @@ $successMessage = isset($_GET['success']) ? 'Orçamento enviado com sucesso!' : 
 $servicosPorTipo = obterServicosPorTipo();
 ?>
 
-
 <section class="wow orcamento animate__animated animate__fadeInUp">
     <div class="site">
         <h2>FAÇA UM ORÇAMENTO SEM COMPROMISSO!</h2>
