@@ -189,6 +189,11 @@ th p {
   transition: ease-in-out .5s;
 }
 
+.img-fluid {
+  max-width: 270.312px;
+  height: auto; /* Mantém a proporção da imagem */
+}
+
 
 
 

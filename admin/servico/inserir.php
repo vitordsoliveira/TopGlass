@@ -38,11 +38,9 @@ if (isset($_POST['nomeServicos'])) {
         $Servicos->descServico = $descServico;
         $Servicos->Inserir();
 
-        // Passar o caminho da imagem para o frontend
-        echo "<script>
-            document.getElementById('fotoServicos').value = '" . $caminhoImagem . "';
-            document.getElementById('imgServico').src = '" . $caminhoImagem . "';
-        </script>";
+        // Redirecionar após o sucesso
+        header('Location: index.php?p=servico&sr=inserir&success=1');
+        exit();
     } else {
         throw new Exception('Não foi possível subir a imagem.');
     }
@@ -58,96 +56,111 @@ function buscarServicos()
 $tiposServicos = buscarServicos();
 ?>
 
-<div class="container mt-5">
-    <h2>Novo Serviço</h2>
-    <form action="index.php?p=servico&sr=inserir" method="POST" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-3">
-                <img src="img/semfoto1.jpg" class="img-fluid" alt="novo servico" id="imgServico">
-                <input type="file" class="form-control" id="fotoServico" name="fotoServico" required
-                    style="display: none;">
-            </div>
-            <div class="col-9">
-                <div class="row">
-                    <div class="col-4">
-                        <div class="mb-3">
-                            <label for="nomeServicos" class="form-label">Nome do Serviço</label>
-                            <input type="text" class="form-control" id="nomeServicos" name="nomeServicos" required
-                                style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="descServico" class="form-label">Descrição do Serviço</label>
-                            <input type="text" class="form-control" id="descServico" name="descServico" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="fotoServicos" class="form-label">Caminho da Foto do Serviço</label>
-                            <input type="text" class="form-control" id="fotoServicos" name="fotoServicos" required
-                                readonly>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="mb-3">
-                            <label for="idTipoServico" class="form-label">Tipo do Serviço</label>
-                            <select class="form-select" id="idTipoServico" name="idTipoServico" required>
-                                <option value="">Selecione o Tipo</option>
-                                <?php foreach ($tiposServicos as $serv): ?>
-                                    <option value="<?php echo $serv['idTipoServico']; ?>">
-                                        <?php echo $serv['tipoServico']; ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="altServicos" class="form-label">Descrição da Foto do Serviço</label>
-                            <input type="text" class="form-control" id="altServicos" name="altServicos" required>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="mb-3">
-                            <label for="statusServicos" class="form-label">Status Serviço</label>
-                            <input type="text" class="form-control" id="statusServicos" name="statusServicos"
-                                value="ATIVO" style="text-transform: uppercase;" readonly>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-    </form>
-</div>
-
-<script>
-    document.getElementById('imgServico').addEventListener('click', function () {
-        document.getElementById('fotoServico').click();
-    });
-
-    document.getElementById('fotoServico').addEventListener('change', function (event) {
-        let imgServico = document.getElementById("imgServico");
-        let arquivo = event.target.files[0];
-
-        if (arquivo) {
-            let carregar = new FileReader();
-
-            carregar.onload = function (e) {
-                imgServico.src = e.target.result;
-            }
-            carregar.readAsDataURL(arquivo);
-
-            // Definir automaticamente o caminho do Servico no campo de entrada
-            let caminhoServico = 'img/servicos/' + arquivo.name;
-            document.getElementById('fotoServicos').value = caminhoServico;
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Serviço</title>
+    <style>
+        .img-fluid {
+            max-width: 270.312px;
+            height: auto; /* Mantém a proporção da imagem */
         }
-    });
-</script>
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Novo Serviço</h2>
+        <form action="index.php?p=servico&sr=inserir" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-3">
+                    <img src="img/semfoto1.jpg" class="img-fluid" alt="novo servico" id="imgServico">
+                    <input type="file" class="form-control" id="fotoServico" name="fotoServico" required
+                        style="display: none;">
+                </div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="nomeServicos" class="form-label">Nome do Serviço</label>
+                                <input type="text" class="form-control" id="nomeServicos" name="nomeServicos" required
+                                    style="text-transform: uppercase;" oninput="this.value = this.value.toUpperCase()">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="descServico" class="form-label">Descrição do Serviço</label>
+                                <input type="text" class="form-control" id="descServico" name="descServico" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="fotoServicos" class="form-label">Caminho da Foto do Serviço</label>
+                                <input type="text" class="form-control" id="fotoServicos" name="fotoServicos" required
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="mb-3">
+                                <label for="idTipoServico" class="form-label">Tipo do Serviço</label>
+                                <select class="form-select" id="idTipoServico" name="idTipoServico" required>
+                                    <option value="">Selecione o Tipo</option>
+                                    <?php foreach ($tiposServicos as $serv): ?>
+                                        <option value="<?php echo $serv['idTipoServico']; ?>">
+                                            <?php echo $serv['tipoServico']; ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="mb-3">
+                                <label for="altServicos" class="form-label">Descrição da Foto do Serviço</label>
+                                <input type="text" class="form-control" id="altServicos" name="altServicos" required>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="mb-3">
+                                <label for="statusServicos" class="form-label">Status Serviço</label>
+                                <input type="text" class="form-control" id="statusServicos" name="statusServicos"
+                                    value="ATIVO" style="text-transform: uppercase;" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('imgServico').addEventListener('click', function () {
+            document.getElementById('fotoServico').click();
+        });
+
+        document.getElementById('fotoServico').addEventListener('change', function (event) {
+            let imgServico = document.getElementById("imgServico");
+            let arquivo = event.target.files[0];
+
+            if (arquivo) {
+                let carregar = new FileReader();
+
+                carregar.onload = function (e) {
+                    imgServico.src = e.target.result;
+                }
+                carregar.readAsDataURL(arquivo);
+
+                // Definir automaticamente o caminho do Servico no campo de entrada
+                let caminhoServico = 'img/servicos/' + arquivo.name;
+                document.getElementById('fotoServicos').value = caminhoServico;
+            }
+        });
+    </script>
+</body>
+</html>

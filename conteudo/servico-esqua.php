@@ -1,7 +1,7 @@
 <?php
 require_once ('admin/class/ClassServico.php');
 $Servico = new ClassServico();
-$lista = $Servico->ListarAtivo();
+$lista = $Servico->ListarAtivoAluminio();
 ?>
 
 <article class="wow servico animate__animated animate__fadeInUp">

@@ -92,6 +92,34 @@ class ClassServico
     return $lista;
 }
 
+public function ListarAtivoAluminio()
+{
+    $sql = "SELECT 
+                tbl_servico.idServico,
+                tbl_servico.nomeServicos,
+                tbl_servico.statusServicos,
+                tbl_tipo_servico.tipoServico AS idTipoServico,
+                tbl_servico.descServico,
+                tbl_servico.fotoServicos,
+                tbl_servico.altServicos
+            FROM 
+                tbl_servico
+            INNER JOIN 
+                tbl_tipo_servico
+            ON 
+                tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico
+            WHERE 
+                tbl_servico.statusServicos = 'ATIVO'
+                AND tbl_tipo_servico.tipoServico = 'ALUMINIO'"; // Adicione esta linha
+
+    $conn = Conexao::LigarConexao();
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    return $lista;
+}
+
 public function ListarFiltro($statusFiltro = '', $tipoFiltro = '')
 {
     $sql = "SELECT 
