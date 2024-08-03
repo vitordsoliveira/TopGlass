@@ -1,27 +1,35 @@
 <?php
-require_once ('class/ClassFuncionario.php');
-session_start(); // Inicia uma sessão
-$tipo = ''; // Inicializa a variável $tipo como uma string vazia
+require_once('class/ClassFuncionario.php');
+session_start();
+
+// Verifique se a ID do funcionário foi passada como parâmetro
+$idFuncionario = isset($_GET['id']) ? intval($_GET['id']) : null;
 
 // Verifica se a variável de sessão 'idFuncionario' está definida
 if (isset($_SESSION['idFuncionario'])) {
     // Define a variável $tipo como 'funcionario'
     $tipo = 'funcionario';
 
-    // Criar uma instância do ClassFuncionario e obter o nome
-    $funcionario = new ClassFuncionario($_SESSION['idFuncionario']);
-    $nomeFuncionario = $funcionario->nomeFuncionario;
-    $fotoFuncionario = $funcionario->fotoFuncionario;
-    $altFotoFuncionario = $funcionario->altFotoFuncionario;
+    // Se a ID do funcionário foi passada, use-a. Caso contrário, use a ID da sessão
+    $idFuncionario = $idFuncionario ? $idFuncionario : $_SESSION['idFuncionario'];
+
+    // Criar uma instância do ClassFuncionario e carregar o perfil
+    $funcionario = new ClassFuncionario($idFuncionario);
+    if ($funcionario->CarregarPerfil()) {
+        $nomeFuncionario = $funcionario->nomeFuncionario;
+        $fotoFuncionario = $funcionario->fotoFuncionario;
+        $altFotoFuncionario = $funcionario->altFotoFuncionario;
+    } else {
+        // Trate o caso onde o perfil não pôde ser carregado
+        echo 'Erro ao carregar o perfil do funcionário.';
+    }
 } else {
     // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
     header('location:https://topglass.smpsistema.com.br/admin/login.php');
-    //header('location:http://localhost/topglass/admin/login.php');
-
-    // Interrompe a execução do script para garantir que o redirecionamento aconteça imediatamente
     exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -75,32 +83,34 @@ if (isset($_SESSION['idFuncionario'])) {
             </div>
             <div class="login">
                 <ul>
-                    <li>
-                        <p><?php echo $nomeFuncionario; ?></p>
-                    </li>
-                    <li>
-                        <img src="<?php echo $fotoFuncionario; ?>" alt="<?php echo $altFotoFuncionario; ?>"
-                            class="perfilImg">
-                    </li>
+                    <a href="index.php?p=perfilFuncionario">
+                        <li>
+                            <p><?php echo $nomeFuncionario; ?></p>
+                        </li>
+                        <li>
+                            <img src="<?php echo $fotoFuncionario; ?>" alt="<?php echo $altFotoFuncionario; ?>"
+                                class="perfilImg">
+                        </li>
+                    </a>
                 </ul>
             </div>
         </div>
 
     </header>
     <main>
-    <div class="menu">
-    <nav>
-        <ul>
-            <li><a href="index.php?p=dashboard"><i class="fas fa-home"></i> HOME</a></li>
-            <li><a href="index.php?p=orcamento"><i class="fas fa-file-invoice"></i> ORÇAMENTOS</a></li>
-            <li><a href="index.php?p=servico"><i class="fas fa-concierge-bell"></i> SERVIÇOS</a></li>
-            <li><a href="index.php?p=cliente"><i class="fas fa-user"></i> CLIENTES</a></li>
-            <li><a href="index.php?p=galeria"><i class="fas fa-images"></i> GALERIA</a></li>
-            <li><a href="index.php?p=banner"><i class="fas fa-bullhorn"></i> BANNERS</a></li>
-            <li><a href="sair.php"><i class="fas fa-sign-out-alt"></i> SAIR</a></li>
-        </ul>
-    </nav>
-</div>
+        <div class="menu">
+            <nav>
+                <ul>
+                    <li><a href="index.php?p=dashboard"><i class="fas fa-home"></i> HOME</a></li>
+                    <li><a href="index.php?p=orcamento"><i class="fas fa-file-invoice"></i> ORÇAMENTOS</a></li>
+                    <li><a href="index.php?p=servico"><i class="fas fa-concierge-bell"></i> SERVIÇOS</a></li>
+                    <li><a href="index.php?p=cliente"><i class="fas fa-user"></i> CLIENTES</a></li>
+                    <li><a href="index.php?p=galeria"><i class="fas fa-images"></i> GALERIA</a></li>
+                    <li><a href="index.php?p=banner"><i class="fas fa-bullhorn"></i> BANNERS</a></li>
+                    <li><a href="sair.php"><i class="fas fa-sign-out-alt"></i> SAIR</a></li>
+                </ul>
+            </nav>
+        </div>
 
         <div class="box">
             <?php
@@ -110,6 +120,10 @@ if (isset($_SESSION['idFuncionario'])) {
                 case 'banner':
                     $titulo = "banner";
                     require_once ('banner/banner.php');
+                    break;
+                case 'perfilFuncionario':
+                    $titulo = "perfilFuncionario";
+                    require_once ('funcionario/perfilFuncionario.php');
                     break;
                 case 'galeria':
                     $titulo = "galeria";

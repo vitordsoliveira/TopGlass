@@ -107,7 +107,7 @@ a {
     text-align: right;
 }
 
-.login ul {
+.login ul a {
     display: flex;
     align-items: center;
     background: linear-gradient(to left, rgba(35, 150, 212, 0.712), rgb(1, 165, 253));
