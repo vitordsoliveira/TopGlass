@@ -292,6 +292,15 @@
  }
 
  /* ### IMAGENS 1200x1600 ### */
+ .servicoDegradeV img {
+  width: 300px;
+  height: auto;
+  max-height: 350px;
+  min-height: 300px;
+  object-fit: cover;
+  width: 100%;
+}
+
 
  .titulo h2 {
    color: #1F3E4C;
@@ -399,6 +408,13 @@
  }
 
  /* ### IMAGENS 1200x1600 ### */
+ .servicoDegradeA img {
+  width: 300px;
+  height: auto;
+  max-height: 350px;
+  min-height: 300px;
+  object-fit: cover;
+}
 
  .titulo h2 {
    color: #1F3E4C;

@@ -9,12 +9,12 @@ if (isset($_POST['nomeCliente'])) {
     $statusCliente = 'ATIVO';
 
     //Recuperar o id
-    require_once('class/Conexao.php');
+    require_once ('class/Conexao.php');
     $conexao = Conexao::LigarConexao();
     $sql = $conexao->query('SELECT idCliente FROM tbl_cliente ORDER BY idCliente DESC LIMIT 1');
     $resultado = $sql->fetch(PDO::FETCH_ASSOC); // Usar fetch em vez de fetchAll
 
-    if($resultado !== false && isset($resultado['idCliente'])){
+    if ($resultado !== false && isset($resultado['idCliente'])) {
         $novoId = $resultado['idCliente'] + 1;
     }
 
@@ -40,7 +40,7 @@ if (isset($_POST['nomeCliente'])) {
     <form action="index.php?p=cliente&cl=inserir" method="POST" enctype="multipart/form-data">
 
         <div class="row">
-            
+
             <div class="col-8">
 
                 <div class="mb-3">
@@ -61,7 +61,8 @@ if (isset($_POST['nomeCliente'])) {
                     <div class="col-3">
                         <div class="mb-3">
                             <label for="numeroCliente" class="form-label">Telefone Cliente:</label>
-                            <input type="tel" class="form-control" id="numeroCliente" name="numeroCliente" required>
+                            <input type="tel" class="form-control" id="numeroCliente" name="numeroCliente"
+                                placeholder="(00) 00000-0000" oninput="formatPhoneNumber(this)" required>
                         </div>
                     </div>
 
@@ -74,10 +75,12 @@ if (isset($_POST['nomeCliente'])) {
                             <input type="email" class="form-control" id="emailCliente" name="emailCliente" required>
                         </div>
                     </div>
+
                     <div class="col-4">
                         <div class="mb-3">
-                            <label for="senhaCliente" class="form-label">CPF Cliente:</label>
-                            <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" required>
+                            <label for="cpfCliente" class="form-label">CPF Cliente:</label>
+                            <input type="text" class="form-control" id="cpfCliente" name="cpfCliente"
+                                placeholder="000.000.000-00" oninput="formatCPF(this)" required>
                         </div>
                     </div>
                 </div>
@@ -88,3 +91,31 @@ if (isset($_POST['nomeCliente'])) {
         </div>
     </form>
 </div>
+
+<script>
+        function formatPhoneNumber(input) {
+            // Remove todos os caracteres não numéricos
+            let value = input.value.replace(/\D/g, '');
+
+            // Aplica a formatação
+            if (value.length <= 10) {
+                value = value.replace(/^(\d{2})(\d{0,5})?(\d{0,4})?$/, '($1) $2-$3');
+            } else {
+                value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+            }
+
+            // Atualiza o valor do input com a formatação
+            input.value = value;
+        }
+
+        function formatCPF(input) {
+            // Remove todos os caracteres não numéricos
+            let value = input.value.replace(/\D/g, '');
+
+            // Aplica a formatação
+            value = value.replace(/^(\d{3})(\d{0,3})(\d{0,3})(\d{0,2})?$/, '$1.$2.$3-$4');
+
+            // Atualiza o valor do input com a formatação
+            input.value = value;
+        }
+    </script>

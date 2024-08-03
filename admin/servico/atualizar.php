@@ -119,7 +119,7 @@ $tiposServicos = buscarServicos();
                         <div class="mb-3">
                             <label for="statusServicos" class="form-label">Status Serviço</label>
                             <input value="<?php echo ($Servico->statusServicos); ?>" type="text" class="form-control"
-                                id="statusServicos" name="statusServicos" style="text-transform: uppercase;" readonly>
+                                id="statusServicos" name="statusServicos" style="text-transform: uppercase;">
                         </div>
                     </div>
                 </div>

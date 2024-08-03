@@ -63,6 +63,7 @@ if (isset($_SESSION['idFuncionario'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
+
 </head>
 
 <body>
@@ -83,7 +84,7 @@ if (isset($_SESSION['idFuncionario'])) {
             </div>
             <div class="login">
                 <ul>
-                    <a href="index.php?p=perfilFuncionario">
+                    <a href="">
                         <li>
                             <p><?php echo $nomeFuncionario; ?></p>
                         </li>
@@ -120,10 +121,6 @@ if (isset($_SESSION['idFuncionario'])) {
                 case 'banner':
                     $titulo = "banner";
                     require_once ('banner/banner.php');
-                    break;
-                case 'perfilFuncionario':
-                    $titulo = "perfilFuncionario";
-                    require_once ('funcionario/perfilFuncionario.php');
                     break;
                 case 'galeria':
                     $titulo = "galeria";
