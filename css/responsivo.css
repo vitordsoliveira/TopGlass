@@ -453,6 +453,16 @@
 
 @media(max-width:380px) {
 
+    .registro div {
+        background: #f5f5f5;
+        text-align: center;
+    }
+
+    .nomeGrupo, .enderecoGrupo {
+        display: flex;
+        flex-direction: column;
+    }
+
     .servicoDegradeV h2 {
         font-size: 1em;
     }

@@ -1,20 +1,19 @@
 <?php
 
-require_once ('Conexao.php');
+require_once('Conexao.php');
 
 class ClassOrcamento
 {
     public $idOrcamento;
     public $idCliente;
-    public $idServicos;
     public $idServico;
-    public $idItens;
     public $idFuncionario;
     public $valorOrcamento;
     public $statusOrcamento;
+    public $dataOrcamento;
     public $comentOrcamento;
-    public $valorItens;
     public $situacaoOrcamento;
+    public $idProduto;
 
     public function __construct($id = false)
     {
@@ -38,13 +37,13 @@ class ClassOrcamento
             $this->idOrcamento = $orcamento['idOrcamento'];
             $this->idCliente = $orcamento['idCliente'];
             $this->idServico = $orcamento['idServico'];
-            $this->idItens = $orcamento['idItens'];
             $this->idFuncionario = $orcamento['idFuncionario'];
             $this->valorOrcamento = $orcamento['valorOrcamento'];
             $this->statusOrcamento = $orcamento['statusOrcamento'];
+            $this->dataOrcamento = $orcamento['dataOrcamento'];
             $this->comentOrcamento = $orcamento['comentOrcamento'];
-            $this->valorItens = $orcamento['valorItens'] ?? 0;
             $this->situacaoOrcamento = $orcamento['situacaoOrcamento'];
+            $this->idProduto = $orcamento['idProduto'];
         } else {
             echo 'Erro: Orçamento não encontrado';
         }
@@ -78,8 +77,8 @@ class ClassOrcamento
                     tbl_orcamento.comentOrcamento,
                     tbl_orcamento.valorOrcamento,
                     tbl_orcamento.statusOrcamento,
-                    tbl_itens.valorItens,
-                    tbl_orcamento.situacaoOrcamento
+                    tbl_orcamento.situacaoOrcamento,
+                    tbl_orcamento.idProduto
                 FROM 
                     tbl_orcamento
                 INNER JOIN 
@@ -88,10 +87,8 @@ class ClassOrcamento
                     tbl_funcionario ON tbl_orcamento.idFuncionario = tbl_funcionario.idFuncionario
                 INNER JOIN 
                     tbl_servico ON tbl_orcamento.idServico = tbl_servico.idServico
-                INNER JOIN 
-                    tbl_itens ON tbl_orcamento.idItens = tbl_itens.idItens
-                INNER JOIN 
-                    tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
+                LEFT JOIN 
+                    tbl_produto ON tbl_orcamento.idProduto = tbl_produto.idProduto
                     $where
                 ORDER BY 
                     tbl_orcamento.dataOrcamento DESC;";
@@ -112,32 +109,51 @@ class ClassOrcamento
         return $lista;
     }
     
-
     // INSERIR
     public function Inserir()
     {
-        $sql = "INSERT INTO tbl_orcamento 
-                (
-                    idCliente, 
-                    idServico, 
-                    idItens, 
-                    idFuncionario, 
-                    valorOrcamento, 
-                    statusOrcamento,
-                    comentOrcamento,
-                    situacaoOrcamento
-                )
-                 VALUES (           '$this->idCliente',
-                                    '$this->idServico',
-                                    '$this->idItens',
-                                    '$this->idFuncionario',
-                                    '$this->valorOrcamento',
-                                    '$this->statusOrcamento',
-                                    '$this->comentOrcamento',
-                                    '$this->situacaoOrcamento')";
-        $conn = Conexao::LigarConexao();
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
+        try {
+            $sql = "INSERT INTO tbl_orcamento 
+                    (
+                        idCliente, 
+                        idServico, 
+                        idFuncionario, 
+                        valorOrcamento, 
+                        statusOrcamento,
+                        dataOrcamento,
+                        comentOrcamento,
+                        situacaoOrcamento,
+                        idProduto
+                    )
+                    VALUES (
+                        :idCliente,
+                        :idServico,
+                        :idFuncionario,
+                        :valorOrcamento,
+                        :statusOrcamento,
+                        :dataOrcamento,
+                        :comentOrcamento,
+                        :situacaoOrcamento,
+                        :idProduto
+                    )";
+            $conn = Conexao::LigarConexao();
+            $stmt = $conn->prepare($sql);
+            
+            // Bind dos parâmetros
+            $stmt->bindParam(':idCliente', $this->idCliente, PDO::PARAM_INT);
+            $stmt->bindParam(':idServico', $this->idServico, PDO::PARAM_INT);
+            $stmt->bindParam(':idFuncionario', $this->idFuncionario, PDO::PARAM_INT);
+            $stmt->bindParam(':valorOrcamento', $this->valorOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':statusOrcamento', $this->statusOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':dataOrcamento', $this->dataOrcamento);
+            $stmt->bindParam(':comentOrcamento', $this->comentOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':situacaoOrcamento', $this->situacaoOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':idProduto', $this->idProduto, PDO::PARAM_INT);
+            
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo 'Erro: ' . htmlspecialchars($e->getMessage());
+        }
     }
 
     // ATUALIZAR
@@ -147,26 +163,28 @@ class ClassOrcamento
             $sql = "UPDATE tbl_orcamento 
                     SET idCliente = :idCliente,
                         idServico = :idServico,
-                        idItens = :idItens,
                         idFuncionario = :idFuncionario,
+                        valorOrcamento = :valorOrcamento,
                         statusOrcamento = :statusOrcamento,
+                        dataOrcamento = :dataOrcamento,
                         comentOrcamento = :comentOrcamento,
                         situacaoOrcamento = :situacaoOrcamento,
-                        valorOrcamento = :valorOrcamento
+                        idProduto = :idProduto
                     WHERE idOrcamento = :idOrcamento";
     
             $conn = Conexao::LigarConexao();
             $stmt = $conn->prepare($sql);
-            
+    
             // Bind all parameters
             $stmt->bindParam(':idCliente', $this->idCliente, PDO::PARAM_INT);
             $stmt->bindParam(':idServico', $this->idServico, PDO::PARAM_INT);
-            $stmt->bindParam(':idItens', $this->idItens, PDO::PARAM_INT);
             $stmt->bindParam(':idFuncionario', $this->idFuncionario, PDO::PARAM_INT);
+            $stmt->bindParam(':valorOrcamento', $this->valorOrcamento, PDO::PARAM_STR);
             $stmt->bindParam(':statusOrcamento', $this->statusOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':dataOrcamento', $this->dataOrcamento);
             $stmt->bindParam(':comentOrcamento', $this->comentOrcamento, PDO::PARAM_STR);
             $stmt->bindParam(':situacaoOrcamento', $this->situacaoOrcamento, PDO::PARAM_STR);
-            $stmt->bindParam(':valorOrcamento', $this->valorOrcamento, PDO::PARAM_STR);
+            $stmt->bindParam(':idProduto', $this->idProduto, PDO::PARAM_INT);
             $stmt->bindParam(':idOrcamento', $this->idOrcamento, PDO::PARAM_INT);
     
             // Execute the query
@@ -182,9 +200,10 @@ class ClassOrcamento
     // DESATIVAR
     public function Desativar($id)
     {
-        $sql = "UPDATE tbl_orcamento SET statusOrcamento = 'INATIVO' WHERE idOrcamento = '" . $this->idOrcamento . "'";
+        $sql = "UPDATE tbl_orcamento SET statusOrcamento = 'INATIVO' WHERE idOrcamento = :idOrcamento";
         $conn = Conexao::LigarConexao();
         $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idOrcamento', $id, PDO::PARAM_INT);
         $stmt->execute();
     }
 }

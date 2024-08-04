@@ -12,6 +12,7 @@ class ClassCliente
     public $numeroCliente;
     public $enderecoCliente;
     public $dataCadCliente;
+    public $dataNascimentoCliente;
     public $cpfCliente;
     public $statusCliente;
 
@@ -23,7 +24,7 @@ class ClassCliente
             $this->Carregar();
         }
     }
-   
+
     //VERIFICAR LOGIN
     public function VerificarLogin()
     {
@@ -34,16 +35,17 @@ class ClassCliente
         $conn = Conexao::LigarConexao();
         $resultado = $conn->query($sql);
         $Cliente = $resultado->fetch();
-    
+
         if ($Cliente) {
             return $Cliente['idCliente'];
         } else {
             return false;
         }
     }
-    
 
-    public function login($email, $senha) {
+
+    public function login($email, $senha)
+    {
         // Conectar ao banco de dados
         $conn = Conexao::LigarConexao();
 
@@ -64,7 +66,8 @@ class ClassCliente
         return false;
     }
 
-    public function getIdClienteByEmail($email) {
+    public function getIdClienteByEmail($email)
+    {
         // Conectar ao banco de dados
         $conn = Conexao::LigarConexao();
 
@@ -80,7 +83,7 @@ class ClassCliente
         }
         return null;
     }
-    
+
     // LISTAR
     public function Listar()
     {
@@ -156,6 +159,51 @@ class ClassCliente
 
     }
 
+    // INSERIR
+    public function Registrar()
+    {
+        try {
+            $conn = Conexao::LigarConexao();
+        
+            // Preparar a instrução SQL
+            $sql = "INSERT INTO tbl_cliente
+             (nomeCliente, 
+             emailCliente, 
+             enderecoCliente, 
+             numeroCliente, 
+             senhaCliente, 
+             cpfCliente, 
+             statusCliente) 
+                    VALUES
+                     (:nomeCliente,
+                      :emailCliente,
+                      :enderecoCliente,
+                      :numeroCliente,
+                      :senhaCliente,
+                      :cpfCliente,
+                      'ATIVO')";
+        
+            $stmt = $conn->prepare($sql);
+        
+            // Associar os parâmetros
+            $stmt->bindParam(':nomeCliente', $this->nomeCliente);
+            $stmt->bindParam(':emailCliente', $this->emailCliente);
+            $stmt->bindParam(':enderecoCliente', $this->enderecoCliente);
+            $stmt->bindParam(':numeroCliente', $this->numeroCliente);
+            $stmt->bindParam(':senhaCliente', $this->senhaCliente);
+            $stmt->bindParam(':cpfCliente', $this->cpfCliente);
+        
+            // Executar a instrução
+            $stmt->execute();
+        
+            // Redirecionar após o sucesso
+            header('Location:https://topglass.smpsistema.com.br/login.php');
+            exit;
+        } catch (PDOException $e) {
+            echo 'Erro ao registrar cliente: ' . $e->getMessage();
+        }
+    }
+    
     // ATUALIZAR
     public function Atualizar()
     {
@@ -163,6 +211,7 @@ class ClassCliente
                                        emailCliente = '" . $this->emailCliente . "',
                                        enderecoCliente = '" . $this->enderecoCliente . "',
                                        numeroCliente = '" . $this->numeroCliente . "',
+                                       senhaCliente = '" . $this->senhaCliente . "',
                                        cpfCliente = '" . $this->cpfCliente . "'
                 WHERE idCliente = $this->idCliente";
 

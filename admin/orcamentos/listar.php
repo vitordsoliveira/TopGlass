@@ -1,9 +1,11 @@
 <?php
 require_once('class/ClassOrcamento.php');
 
+// Captura os filtros da URL
 $statusFiltro = isset($_GET['status']) ? $_GET['status'] : '';
 $situacaoFiltro = isset($_GET['situacao']) ? $_GET['situacao'] : '';
 
+// Cria uma instância da classe ClassOrcamento
 $orcamento = new ClassOrcamento();
 $lista = $orcamento->Listar($statusFiltro, $situacaoFiltro);
 ?>
@@ -22,16 +24,16 @@ $lista = $orcamento->Listar($statusFiltro, $situacaoFiltro);
             <!-- Filtro de Status -->
             <select class="selectStatus" name="status">
                 <option value="">STATUS (Todos)</option>
-                <option value="ATIVO" <?php echo isset($_GET['status']) && $_GET['status'] === 'ATIVO' ? 'selected' : ''; ?>>ATIVO</option>
-                <option value="INATIVO" <?php echo isset($_GET['status']) && $_GET['status'] === 'INATIVO' ? 'selected' : ''; ?>>INATIVO</option>
+                <option value="ATIVO" <?php echo $statusFiltro === 'ATIVO' ? 'selected' : ''; ?>>ATIVO</option>
+                <option value="INATIVO" <?php echo $statusFiltro === 'INATIVO' ? 'selected' : ''; ?>>INATIVO</option>
             </select>
 
             <!-- Filtro de Situação -->
             <select class="selectSituacao" name="situacao">
                 <option value="">SITUAÇÃO (Todos)</option>
-                <option value="PENDENTE" <?php echo isset($_GET['situacao']) && $_GET['situacao'] === 'PENDENTE' ? 'selected' : ''; ?>>PENDENTE</option>
-                <option value="FEITO" <?php echo isset($_GET['situacao']) && $_GET['situacao'] === 'FEITO' ? 'selected' : ''; ?>>FEITO</option>
-                <option value="PAGO" <?php echo isset($_GET['situacao']) && $_GET['situacao'] === 'PAGO' ? 'selected' : ''; ?>>PAGO</option>
+                <option value="PENDENTE" <?php echo $situacaoFiltro === 'PENDENTE' ? 'selected' : ''; ?>>PENDENTE</option>
+                <option value="FEITO" <?php echo $situacaoFiltro === 'FEITO' ? 'selected' : ''; ?>>FEITO</option>
+                <option value="PAGO" <?php echo $situacaoFiltro === 'PAGO' ? 'selected' : ''; ?>>PAGO</option>
             </select>
 
             <button class="btnFiltro" type="submit">Filtrar</button>
@@ -82,16 +84,16 @@ $lista = $orcamento->Listar($statusFiltro, $situacaoFiltro);
                 <td>
                     <span class="bolinha <?php echo $bolinhaClasse; ?>"></span>
                 </td>
-                <td scope="col"><?php echo($linha['nomeCliente']); ?></td>
-                <td scope="col"><?php echo($linha['cpfCliente']); ?></td>
-                <td scope="col"><?php echo($linha['nomeServicos']); ?></td>
-                <td scope="col"><?php echo($linha['nomeProduto']); ?></td>
-                <td scope="col"><?php echo($linha['nomeFuncionario']); ?></td>
-                <td scope="col"><?php echo($linha['valorOrcamento']); ?></td>
-                <td scope="col"><?php echo($linha['dataOrcamento']); ?></td>
-                <td scope="col"><?php echo($linha['comentOrcamento']); ?></td>
-                <td scope="col" class="<?php echo $situacaoClasse; ?>"><?php echo($linha['situacaoOrcamento']); ?></td>
-                <td scope="col"><?php echo($linha['statusOrcamento']); ?></td>
+                <td><?php echo ($linha['nomeCliente']); ?></td>
+                <td><?php echo ($linha['cpfCliente']); ?></td>
+                <td><?php echo ($linha['nomeServicos']); ?></td>
+                <td><?php echo ($linha['nomeProduto']); ?></td>
+                <td><?php echo ($linha['nomeFuncionario']); ?></td>
+                <td><?php echo ($linha['valorOrcamento']); ?></td>
+                <td><?php echo ($linha['dataOrcamento']); ?></td>
+                <td><?php echo ($linha['comentOrcamento']); ?></td>
+                <td class="<?php echo $situacaoClasse; ?>"><?php echo ($linha['situacaoOrcamento']); ?></td>
+                <td><?php echo ($linha['statusOrcamento']); ?></td>
                 <td><a href="index.php?p=orcamento&orc=atualizar&id=<?php echo $linha['idOrcamento']; ?>">Atualizar</a></td>
                 <td><a href="index.php?p=orcamento&orc=desativar&id=<?php echo $linha['idOrcamento']; ?>">Desativar</a></td>
             </tr>

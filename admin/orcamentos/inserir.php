@@ -56,15 +56,13 @@ function obterItens()
 {
     $conn = Conexao::LigarConexao();
     $sql = "SELECT 
-                tbl_produto.idProduto, 
-                tbl_produto.nomeProduto,
-                tbl_produto.valorProduto
+                idProduto, 
+                nomeProduto,
+                valorProduto
             FROM 
-                tbl_itens 
-            INNER JOIN 
-                tbl_produto ON tbl_itens.idProduto = tbl_produto.idProduto
+                tbl_produto
             WHERE
-                tbl_produto.statusProduto = 'ATIVO';";
+                statusProduto = 'ATIVO';";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -78,19 +76,17 @@ $servicosPorTipo = obterServicosPorTipo();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idCliente = $_POST['idCliente'];
     $idServico = $_POST['idServico'];
-    $idItens = $_POST['idItens'];
+    $idProduto = $_POST['idProduto'];
     $idFuncionario = $_POST['idFuncionario'];
     $valorOrcamento = $_POST['valorOrcamento'];
     $statusOrcamento = $_POST['statusOrcamento'];
     $comentOrcamento = $_POST['comentOrcamento'];
-    $cpfCliente = $_POST['cpfCliente'];
-    $numeroCliente = $_POST['numeroCliente'];
     $situacaoOrcamento = $_POST['situacaoOrcamento'];
 
     $orcamento = new ClassOrcamento();
     $orcamento->idCliente = $idCliente;
     $orcamento->idServico = $idServico;
-    $orcamento->idItens = $idItens;
+    $orcamento->idProduto = $idProduto;
     $orcamento->idFuncionario = $idFuncionario;
     $orcamento->valorOrcamento = $valorOrcamento;
     $orcamento->statusOrcamento = $statusOrcamento;
@@ -115,7 +111,7 @@ if ($msg === 'success') {
         <div class="row">
             <h3>CRIAR NOVO ORÇAMENTO</h3>
             <div class="row">
-
+                <!-- Cliente, CPF e Número -->
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="idCliente" class="form-label">Cliente:</label>
@@ -137,7 +133,7 @@ if ($msg === 'success') {
                         <input type="text" class="form-control" id="cpfCliente" name="cpfCliente" readonly>
                     </div>
                 </div>
-                
+
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="numeroCliente" class="form-label">Número:</label>
@@ -183,6 +179,7 @@ if ($msg === 'success') {
         </div>
 
         <div class="row">
+            <!-- Serviços por Tipo -->
             <?php foreach ($servicosPorTipo as $tipo => $servicos): ?>
                 <div class="col-3">
                     <div class="mb-3">
@@ -200,11 +197,11 @@ if ($msg === 'success') {
         </div>
 
         <div class="row">
-
+            <!-- Produto e Valor -->
             <div class="col-3">
                 <div class="mb-3">
-                    <label for="idItens" class="form-label">Itens:</label>
-                    <select class="form-select" id="idItens" name="idItens" required>
+                    <label for="idProduto" class="form-label">Produto:</label>
+                    <select class="form-select" id="idProduto" name="idProduto" required>
                         <option value="">Selecione o Produto</option>
                         <?php
                         $itens = obterItens();
@@ -218,74 +215,127 @@ if ($msg === 'success') {
 
             <div class="col-3">
                 <div class="mb-3">
-                    <label for="valorItens" class="form-label">Valor do Item:</label>
-                    <input type="text" class="form-control" id="valorItens" name="valorItens" readonly>
+                    <label for="valorProduto" class="form-label">Valor do Produto:</label>
+                    <input type="text" class="form-control" id="valorProduto" name="valorProduto" readonly>
                 </div>
             </div>
+        </div>
 
+        <div class="row">
             <div class="col-3">
                 <div class="mb-3">
-                    <label for="valorOrcamento" class="form-label">Valor:</label>
+                    <label for="valorOrcamento" class="form-label">Valor Orçamento:</label>
                     <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" required>
                 </div>
             </div>
-
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="mb-3">
-                    <label for="comentOrcamento" class="form-label">Comentário:</label>
-                    <textarea class="form-control" id="comentOrcamento" name="comentOrcamento" rows="3"></textarea>
-                </div>
+        <div class="col-12">
+            <div class="mb-3">
+                <label for="comentOrcamento" class="form-label">Comentário:</label>
+                <textarea class="form-control" id="comentOrcamento" name="comentOrcamento" rows="3"></textarea>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">Criar Orçamento</button>
-            </div>
-        </div>
-
+        <button type="submit" class="btn btn-primary">Salvar Orçamento</button>
     </form>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var servicoSelects = document.querySelectorAll('.servico-select');
+document.addEventListener('DOMContentLoaded', function () {
+    var servicoSelects = document.querySelectorAll('.servico-select');
+    var clienteSelect = document.getElementById('idCliente');
+    var produtoSelect = document.getElementById('idProduto');
+    var valorProdutoInput = document.getElementById('valorProduto');
 
-        document.getElementById('idCliente').addEventListener('change', function () {
-            servicoSelects.forEach(function (select) {
-                select.disabled = false;
-            });
-
-            var selectedOption = this.options[this.selectedIndex];
-            var cpf = selectedOption.getAttribute('data-cpf');
-            var numero = selectedOption.getAttribute('data-numero');
-
-            document.getElementById('cpfCliente').value = cpf;
-            document.getElementById('numeroCliente').value = numero;
-        });
-
+    // Atualiza os campos CPF e Número do Cliente
+    clienteSelect.addEventListener('change', function () {
         servicoSelects.forEach(function (select) {
-            select.addEventListener('change', function () {
-                var selectedValue = this.value;
-                servicoSelects.forEach(function (otherSelect) {
-                    if (otherSelect !== select) {
-                        otherSelect.disabled = (selectedValue !== '');
-                        otherSelect.required = !otherSelect.disabled;
-                    }
-                });
-            });
+            select.disabled = false;
         });
 
-        var itensSelect = document.getElementById('idItens');
-        var valorItensInput = document.getElementById('valorItens');
+        var selectedOption = this.options[this.selectedIndex];
+        var cpf = selectedOption.getAttribute('data-cpf');
+        var numero = selectedOption.getAttribute('data-numero');
 
-        itensSelect.addEventListener('change', function () {
-            var selectedOption = itensSelect.options[itensSelect.selectedIndex];
-            var valorItens = selectedOption.getAttribute('data-valor');
-            valorItensInput.value = valorItens;
+        document.getElementById('cpfCliente').value = cpf;
+        document.getElementById('numeroCliente').value = numero;
+    });
+
+    // Atualiza o status dos selects de serviços
+    servicoSelects.forEach(function (select) {
+        select.addEventListener('change', function () {
+            var selectedValue = this.value;
+            servicoSelects.forEach(function (otherSelect) {
+                if (otherSelect !== select) {
+                    otherSelect.disabled = (selectedValue !== '');
+                    otherSelect.required = !otherSelect.disabled;
+                }
+            });
         });
     });
+
+    // Atualiza o valor do produto
+    if (produtoSelect && valorProdutoInput) {
+        produtoSelect.addEventListener('change', function () {
+            var selectedOption = produtoSelect.options[produtoSelect.selectedIndex];
+            var valorProduto = selectedOption.getAttribute('data-valor');
+            valorProdutoInput.value = valorProduto ? valorProduto : '';
+        });
+    }
+});
+
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var servicoSelects = document.querySelectorAll('.servico-select');
+    var clienteSelect = document.getElementById('idCliente');
+    var produtoSelect = document.getElementById('idProduto');
+    var valorProdutoInput = document.getElementById('valorProduto');
+
+    // Atualiza os campos CPF e Número do Cliente
+    clienteSelect.addEventListener('change', function () {
+        servicoSelects.forEach(function (select) {
+            select.disabled = false;
+        });
+
+        var selectedOption = this.options[this.selectedIndex];
+        var cpf = selectedOption.getAttribute('data-cpf');
+        var numero = selectedOption.getAttribute('data-numero');
+
+        document.getElementById('cpfCliente').value = cpf;
+        document.getElementById('numeroCliente').value = numero;
+    });
+
+    // Atualiza o status dos selects de serviços
+    servicoSelects.forEach(function (select) {
+        select.addEventListener('change', function () {
+            var selectedValue = this.value;
+            if (selectedValue) {
+                servicoSelects.forEach(function (otherSelect) {
+                    if (otherSelect !== select) {
+                        otherSelect.disabled = true;
+                        otherSelect.required = false;
+                    }
+                });
+            } else {
+                servicoSelects.forEach(function (otherSelect) {
+                    otherSelect.disabled = false;
+                    otherSelect.required = true;
+                });
+            }
+        });
+    });
+
+    // Atualiza o valor do produto
+    if (produtoSelect && valorProdutoInput) {
+        produtoSelect.addEventListener('change', function () {
+            var selectedOption = produtoSelect.options[produtoSelect.selectedIndex];
+            var valorProduto = selectedOption.getAttribute('data-valor');
+            valorProdutoInput.value = valorProduto ? valorProduto : '';
+        });
+    }
+});
+
 </script>

@@ -93,29 +93,29 @@ if (isset($_POST['nomeCliente'])) {
 </div>
 
 <script>
-        function formatPhoneNumber(input) {
-            // Remove todos os caracteres não numéricos
-            let value = input.value.replace(/\D/g, '');
+    function formatPhoneNumber(input) {
+        // Remove todos os caracteres não numéricos
+        let value = input.value.replace(/\D/g, '');
 
-            // Aplica a formatação
-            if (value.length <= 10) {
-                value = value.replace(/^(\d{2})(\d{0,5})?(\d{0,4})?$/, '($1) $2-$3');
-            } else {
-                value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-            }
-
-            // Atualiza o valor do input com a formatação
-            input.value = value;
+        // Aplica a formatação
+        if (value.length <= 10) {
+            value = value.replace(/^(\d{2})(\d{0,5})?(\d{0,4})?$/, '($1) $2-$3');
+        } else {
+            value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
         }
 
-        function formatCPF(input) {
-            // Remove todos os caracteres não numéricos
-            let value = input.value.replace(/\D/g, '');
+        // Atualiza o valor do input com a formatação
+        input.value = value;
+    }
 
-            // Aplica a formatação
-            value = value.replace(/^(\d{3})(\d{0,3})(\d{0,3})(\d{0,2})?$/, '$1.$2.$3-$4');
+    function formatCPF(input) {
+        // Remove todos os caracteres não numéricos
+        let value = input.value.replace(/\D/g, '');
 
-            // Atualiza o valor do input com a formatação
-            input.value = value;
-        }
-    </script>
+        // Aplica a formatação
+        value = value.replace(/^(\d{3})(\d{0,3})(\d{0,3})(\d{0,2})?$/, '$1.$2.$3-$4');
+
+        // Atualiza o valor do input com a formatação
+        input.value = value;
+    }
+</script>
