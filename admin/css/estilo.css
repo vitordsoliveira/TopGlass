@@ -115,6 +115,10 @@ a {
     border-radius: 30px;
 }
 
+.login a{
+    display: flex;
+}
+
 .login li {
     margin-left: 10px;
 }

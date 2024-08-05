@@ -1,6 +1,6 @@
 <?php
 
-require_once('Conexao.php');
+require_once ('Conexao.php');
 
 class ClassOrcamento
 {
@@ -26,29 +26,27 @@ class ClassOrcamento
     // CARREGAR
     public function Carregar()
     {
-        $sql = "SELECT * FROM tbl_orcamento WHERE idOrcamento = :idOrcamento";
-        $conn = Conexao::LigarConexao();
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':idOrcamento', $this->idOrcamento, PDO::PARAM_INT);
-        $stmt->execute();
-        $orcamento = $stmt->fetch(PDO::FETCH_ASSOC);
+        $sql = "SELECT idCliente,
+        idServico,
+        idFuncionario,
+        valorOrcamento,
+        statusOrcamento,
+        comentOrcamento,
+        situacaoOrcamento,
+        idProduto FROM tbl_orcamento WHERE idOrcamento = $this->idOrcamento;";
+        $conn = Conexao::LigarConexao();                // Estabelece a conexão com o banco de dados
+        $resultado = $conn->query($sql);                // Executa a consulta SQL
+        $orcamento = $resultado->fetch();                 // Obtém os dados do cliente da consulta
+        $this->idOrcamento = $orcamento['idOrcamento'];
+        $this->idCliente = $orcamento['idCliente'];
+        $this->idServico = $orcamento['idServico'];
+        $this->idFuncionario = $orcamento['idFuncionario'];
+        $this->valorOrcamento = $orcamento['valorOrcamento'];
+        $this->statusOrcamento = $orcamento['statusOrcamento'];
+        $this->comentOrcamento = $orcamento['comentOrcamento'];
+        $this->situacaoOrcamento = $orcamento['situacaoOrcamento'];
+        $this->idProduto = $orcamento['idProduto'];
 
-        if ($orcamento) {
-            $this->idOrcamento = $orcamento['idOrcamento'];
-            $this->idCliente = $orcamento['idCliente'];
-            $this->idServico = $orcamento['idServico'];
-            $this->idFuncionario = $orcamento['idFuncionario'];
-            $this->valorOrcamento = $orcamento['valorOrcamento'];
-            $this->statusOrcamento = $orcamento['statusOrcamento'];
-            $this->dataOrcamento = $orcamento['dataOrcamento'];
-            $this->comentOrcamento = $orcamento['comentOrcamento'];
-            $this->situacaoOrcamento = $orcamento['situacaoOrcamento'];
-            $this->idProduto = $orcamento['idProduto'];
-            return true;
-        } else {
-            echo 'Erro: Orçamento não encontrado';
-            return false;
-        }
     }
 
     // LISTAR
@@ -58,15 +56,15 @@ class ClassOrcamento
                   AND tbl_cliente.statusCliente = 'ATIVO'
                   AND tbl_funcionario.statusFuncionario = 'ATIVO'
                   AND tbl_servico.statusServicos = 'ATIVO'";
-    
+
         if ($status) {
             $where .= " AND tbl_orcamento.statusOrcamento = :status";
         }
-    
+
         if ($situacao) {
             $where .= " AND tbl_orcamento.situacaoOrcamento = :situacao";
         }
-    
+
         $sql = "SELECT 
                     tbl_orcamento.idOrcamento,
                     tbl_cliente.nomeCliente,
@@ -93,17 +91,17 @@ class ClassOrcamento
                     $where
                 ORDER BY 
                     tbl_orcamento.dataOrcamento DESC;";
-    
+
         $conn = Conexao::LigarConexao();
         $stmt = $conn->prepare($sql);
-    
+
         if ($status) {
             $stmt->bindParam(':status', $status, PDO::PARAM_STR);
         }
         if ($situacao) {
             $stmt->bindParam(':situacao', $situacao, PDO::PARAM_STR);
         }
-    
+
         $stmt->execute();
         $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lista;
@@ -136,7 +134,7 @@ class ClassOrcamento
                     )";
             $conn = Conexao::LigarConexao();
             $stmt = $conn->prepare($sql);
-            
+
             $stmt->bindParam(':idCliente', $this->idCliente, PDO::PARAM_INT);
             $stmt->bindParam(':idServico', $this->idServico, PDO::PARAM_INT);
             $stmt->bindParam(':idFuncionario', $this->idFuncionario, PDO::PARAM_INT);
@@ -145,7 +143,7 @@ class ClassOrcamento
             $stmt->bindParam(':comentOrcamento', $this->comentOrcamento, PDO::PARAM_STR);
             $stmt->bindParam(':situacaoOrcamento', $this->situacaoOrcamento, PDO::PARAM_STR);
             $stmt->bindParam(':idProduto', $this->idProduto, PDO::PARAM_INT);
-            
+
             $stmt->execute();
         } catch (PDOException $e) {
             echo 'Erro: ' . htmlspecialchars($e->getMessage());
@@ -155,7 +153,7 @@ class ClassOrcamento
     // ATUALIZAR
     public function Atualizar()
     {
-            $sql = "UPDATE tbl_orcamento 
+        $sql = "UPDATE tbl_orcamento 
                     SET idCliente = '" . $this->idCliente . "',
                         idServico = '" . $this->idServico . "',
                         idFuncionario = '" . $this->idFuncionario . "',
@@ -165,12 +163,12 @@ class ClassOrcamento
                         situacaoOrcamento = '" . $this->situacaoOrcamento . "',
                         idProduto = '" . $this->idProduto . "'
                     WHERE idOrcamento = " . $this->idOrcamento;
-    
-            $conn = Conexao::LigarConexao();
 
-            $conn->exec($sql);
-    
-            "<script>document.location='index.php?p=orcamento&orc=atualizar&id={$this->idOrcamento}&msg=success'</script>";
+        $conn = Conexao::LigarConexao();
+
+        $conn->exec($sql);
+
+        "<script>document.location='index.php?p=orcamento&orc=atualizar&id={$this->idOrcamento}&msg=success'</script>";
     }
 
     // DESATIVAR

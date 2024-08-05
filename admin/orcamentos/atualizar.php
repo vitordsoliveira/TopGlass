@@ -1,34 +1,36 @@
 <?php
 require_once('class/ClassCliente.php');
 require_once('class/ClassOrcamento.php');
-
 $id = $_GET['id'];
 $orcamento = new ClassOrcamento($id);
 
-if (isset($_POST['nomeCliente'])) {
+if (isset($_POST['valorOrcamento'])) {
     $idCliente = $_POST['idCliente'];
     $idServico = $_POST['idServico'];
-    $idProduto = $_POST['idProduto'];
     $idFuncionario = $_POST['idFuncionario'];
     $valorOrcamento = $_POST['valorOrcamento'];
     $statusOrcamento = $_POST['statusOrcamento'];
     $comentOrcamento = $_POST['comentOrcamento'];
     $situacaoOrcamento = $_POST['situacaoOrcamento'];
+    $idProduto = $_POST['idProduto'];
+    print_r('CHEGUEI ');
 
     $orcamento->idCliente = $idCliente;
     $orcamento->idServico = $idServico;
-    $orcamento->idProduto = $idProduto;
     $orcamento->idFuncionario = $idFuncionario;
     $orcamento->valorOrcamento = $valorOrcamento;
     $orcamento->statusOrcamento = $statusOrcamento;
     $orcamento->comentOrcamento = $comentOrcamento;
     $orcamento->situacaoOrcamento = $situacaoOrcamento;
+    $orcamento->idProduto = $idProduto;
+    print_r('CHEGUEI AQUI');
+
 
     $orcamento->Atualizar();
+    print_r('ATUALIZEI');
 
     header("Location: index.php?p=orcamento");
     exit();
-
 }
 
 // FUNÇÃO CLIENTES
@@ -40,10 +42,9 @@ function obterClientesAtivos()
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 $clientes = obterClientesAtivos();
-
 // FUNÇÃO SERVIÇOS
+
 function obterServicosPorTipo()
 {
     $conn = Conexao::LigarConexao();
@@ -77,6 +78,7 @@ function obterServicosPorTipo()
 
     return $servicosPorTipo;
 }
+$servicosPorTipo = obterServicosPorTipo();
 
 // FUNÇÃO ITENS
 function obterItens()
@@ -95,13 +97,11 @@ function obterItens()
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
-$servicosPorTipo = obterServicosPorTipo();
 $itens = obterItens();
 ?>
 
 <div class="container mt-5">
-    <form action="index.php?p=orcamento&orc=atualizar" method="POST" enctype="multipart/form-data">
+    <form action="index.php?p=orcamento&orc=atualizar&id=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="idOrcamento" value="<?php echo $orcamento->idOrcamento; ?>">
 
         <div class="row">
@@ -159,6 +159,7 @@ $itens = obterItens();
                         <label for="statusOrcamento" class="form-label">Status:</label>
                         <select readonly class="form-select" id="statusOrcamento" name="statusOrcamento" required>
                             <option value="ATIVO" <?php echo $orcamento->statusOrcamento == 'ATIVO' ? 'selected' : ''; ?>>ATIVO</option>
+                            <option value="DESATIVO" <?php echo $orcamento->statusOrcamento == 'DESATIVO' ? 'selected' : ''; ?>>DESATIVO</option>
                         </select>
                     </div>
                 </div>
@@ -197,45 +198,42 @@ $itens = obterItens();
         </div>
 
         <div class="row">
-            <!-- Produto e Valor -->
-            <div class="col-3">
+            <!-- Produtos -->
+            <div class="col-6">
                 <div class="mb-3">
-                    <label for="idProduto" class="form-label">Produto:</label>
+                    <label for="idProduto" class="form-label">Itens:</label>
                     <select class="form-select" id="idProduto" name="idProduto" required>
-                        <option value="">Selecione o Produto</option>
+                        <option value="">Selecione o Item</option>
                         <?php foreach ($itens as $item): ?>
                             <option value="<?php echo $item['idProduto']; ?>"
-                                data-valor="<?php echo $item['valorProduto']; ?>"
                                 <?php echo $orcamento->idProduto == $item['idProduto'] ? 'selected' : ''; ?>>
-                                <?php echo $item['nomeProduto']; ?>
+                                <?php echo $item['nomeProduto']; ?> - R$ <?php echo number_format($item['valorProduto'], 2, ',', '.'); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
             </div>
 
-            <div class="col-3">
+            <div class="col-6">
                 <div class="mb-3">
-                    <label for="valorProduto" class="form-label">Valor do Produto:</label>
-                    <input type="text" class="form-control" id="valorProduto" name="valorProduto" readonly>
+                    <label for="valorOrcamento" class="form-label">Valor Orçamento:</label>
+                    <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" value="<?php echo $orcamento->valorOrcamento; ?>" required>
                 </div>
             </div>
 
-                    <div class="col-3">
-                        <div   div class="mb-3">
-                        <label for="valorOrcamento" class="form-label">Valor Orçamento:</label>
-                        <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" value="<?php echo $orcamento->valorOrcamento; ?>" required>
-                    </div>
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="comentOrcamento" class="form-label">Comentário:</label>
+                    <textarea class="form-control" id="comentOrcamento" name="comentOrcamento" rows="3"><?php echo $orcamento->comentOrcamento; ?></textarea>
                 </div>
+            </div>
         </div>
 
-        <div class="mb-3">
-            <label for="comentOrcamento" class="form-label">Comentário:</label>
-            <textarea class="form-control" id="comentOrcamento" name="comentOrcamento" rows="3"><?php echo $orcamento->comentOrcamento; ?></textarea>
+        <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Atualizar Orçamento</button>
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Atualizar</button>
-        
     </form>
 </div>
 
