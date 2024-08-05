@@ -15,19 +15,15 @@ if (isset($_SESSION['idFuncionario'])) {
 
     // Criar uma instância do ClassFuncionario e carregar o perfil
     $funcionario = new ClassFuncionario($idFuncionario);
-    if ($funcionario->CarregarPerfil()) {
+    if ($funcionario->Carregar()) {
         $nomeFuncionario = $funcionario->nomeFuncionario;
         $fotoFuncionario = $funcionario->fotoFuncionario;
         $altFotoFuncionario = $funcionario->altFotoFuncionario;
-    } else {
-        // Trate o caso onde o perfil não pôde ser carregado
-        echo 'Erro ao carregar o perfil do funcionário.';
+    } } else {
+        // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
+        header('location:https://topglass.smpsistema.com.br/admin/login.php');
+        exit();
     }
-} else {
-    // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
-    header('location:https://topglass.smpsistema.com.br/admin/login.php');
-    exit();
-}
 ?>
 
 
