@@ -19,24 +19,19 @@ class ClassOrcamento
     {
         if ($id) {
             $this->idOrcamento = $id;
-            $this->Carregar();
+            $this-> CarregarOrcamento();
         }
     }
 
     // CARREGAR
-    public function Carregar()
+    public function CarregarOrcamento()
     {
-        $sql = "SELECT idCliente,
-        idServico,
-        idFuncionario,
-        valorOrcamento,
-        statusOrcamento,
-        comentOrcamento,
-        situacaoOrcamento,
-        idProduto FROM tbl_orcamento WHERE idOrcamento = $this->idOrcamento;";
-        $conn = Conexao::LigarConexao();                // Estabelece a conexão com o banco de dados
-        $resultado = $conn->query($sql);                // Executa a consulta SQL
-        $orcamento = $resultado->fetch();                 // Obtém os dados do cliente da consulta
+        $sql = "SELECT * FROM tbl_orcamento WHERE idOrcamento = $this->idOrcamento;";
+        
+        $conn = Conexao::LigarConexao();                
+        $resultado = $conn->query($sql);                
+        $orcamento = $resultado->fetch();  
+
         $this->idOrcamento = $orcamento['idOrcamento'];
         $this->idCliente = $orcamento['idCliente'];
         $this->idServico = $orcamento['idServico'];
@@ -52,19 +47,27 @@ class ClassOrcamento
     // LISTAR
     public function Listar($status = '', $situacao = '')
     {
-        $where = "WHERE tbl_orcamento.statusOrcamento = 'ATIVO'
-                  AND tbl_cliente.statusCliente = 'ATIVO'
+        // Inicia a cláusula WHERE com os filtros padrão
+        $where = "WHERE tbl_cliente.statusCliente = 'ATIVO'
                   AND tbl_funcionario.statusFuncionario = 'ATIVO'
                   AND tbl_servico.statusServicos = 'ATIVO'";
-
+    
+        // Adiciona o filtro para status do orçamento
         if ($status) {
-            $where .= " AND tbl_orcamento.statusOrcamento = :status";
+            // Se status for "ATIVO" ou "INATIVO", busca ambos
+            if ($status === 'ATIVO' || $status === 'INATIVO') {
+                $where .= " AND tbl_orcamento.statusOrcamento = :status";
+            }
+        } else {
+            // Por padrão, exibe apenas os orçamentos ativos
+            $where .= " AND tbl_orcamento.statusOrcamento = 'ATIVO'";
         }
-
+    
+        // Adiciona o filtro para a situação do orçamento
         if ($situacao) {
             $where .= " AND tbl_orcamento.situacaoOrcamento = :situacao";
         }
-
+    
         $sql = "SELECT 
                     tbl_orcamento.idOrcamento,
                     tbl_cliente.nomeCliente,
@@ -88,20 +91,22 @@ class ClassOrcamento
                     tbl_servico ON tbl_orcamento.idServico = tbl_servico.idServico
                 LEFT JOIN 
                     tbl_produto ON tbl_orcamento.idProduto = tbl_produto.idProduto
-                    $where
+                $where
                 ORDER BY 
                     tbl_orcamento.dataOrcamento DESC;";
-
+    
         $conn = Conexao::LigarConexao();
         $stmt = $conn->prepare($sql);
-
-        if ($status) {
+    
+        // Vincula o parâmetro do status se necessário
+        if ($status && ($status === 'ATIVO' || $status === 'INATIVO')) {
             $stmt->bindParam(':status', $status, PDO::PARAM_STR);
         }
+        // Vincula o parâmetro da situação se necessário
         if ($situacao) {
             $stmt->bindParam(':situacao', $situacao, PDO::PARAM_STR);
         }
-
+    
         $stmt->execute();
         $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lista;

@@ -2,28 +2,32 @@
 require_once('class/ClassFuncionario.php');
 session_start();
 
-// Verifique se a ID do funcionário foi passada como parâmetro
-$idFuncionario = isset($_GET['id']) ? intval($_GET['id']) : null;
-
 // Verifica se a variável de sessão 'idFuncionario' está definida
 if (isset($_SESSION['idFuncionario'])) {
     // Define a variável $tipo como 'funcionario'
     $tipo = 'funcionario';
-
-    // Se a ID do funcionário foi passada, use-a. Caso contrário, use a ID da sessão
-    $idFuncionario = $idFuncionario ? $idFuncionario : $_SESSION['idFuncionario'];
-
-    // Criar uma instância do ClassFuncionario e carregar o perfil
+    
+    // Obtém o ID do funcionário da sessão
+    $idFuncionario = $_SESSION['idFuncionario'];
+    
+    // Cria uma instância do ClassFuncionario e carrega o perfil
     $funcionario = new ClassFuncionario($idFuncionario);
+    
+    // Carrega o perfil do funcionário
     if ($funcionario->Carregar()) {
         $nomeFuncionario = $funcionario->nomeFuncionario;
         $fotoFuncionario = $funcionario->fotoFuncionario;
         $altFotoFuncionario = $funcionario->altFotoFuncionario;
-    } } else {
-        // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
-        header('location:https://topglass.smpsistema.com.br/admin/login.php');
+    } else {
+        // Se o carregamento do perfil falhar, redireciona o usuário
+        header('Location: https://topglass.smpsistema.com.br/admin/login.php');
         exit();
     }
+} else {
+    // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
+    header('Location: https://topglass.smpsistema.com.br/admin/login.php');
+    exit();
+}
 ?>
 
 

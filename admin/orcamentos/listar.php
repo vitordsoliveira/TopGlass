@@ -5,7 +5,6 @@ require_once('class/ClassOrcamento.php');
 $statusFiltro = isset($_GET['status']) ? $_GET['status'] : '';
 $situacaoFiltro = isset($_GET['situacao']) ? $_GET['situacao'] : '';
 
-// Cria uma instância da classe ClassOrcamento
 $orcamento = new ClassOrcamento();
 $lista = $orcamento->Listar($statusFiltro, $situacaoFiltro);
 ?>

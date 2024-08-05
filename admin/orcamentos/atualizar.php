@@ -157,7 +157,7 @@ $itens = obterItens();
                 <div class="col-3">
                     <div class="mb-3">
                         <label for="statusOrcamento" class="form-label">Status:</label>
-                        <select readonly class="form-select" id="statusOrcamento" name="statusOrcamento" required>
+                        <select class="form-select" id="statusOrcamento" name="statusOrcamento" required>
                             <option value="ATIVO" <?php echo $orcamento->statusOrcamento == 'ATIVO' ? 'selected' : ''; ?>>ATIVO</option>
                             <option value="DESATIVO" <?php echo $orcamento->statusOrcamento == 'DESATIVO' ? 'selected' : ''; ?>>DESATIVO</option>
                         </select>
@@ -199,7 +199,7 @@ $itens = obterItens();
 
         <div class="row">
             <!-- Produtos -->
-            <div class="col-6">
+            <div class="col-4">
                 <div class="mb-3">
                     <label for="idProduto" class="form-label">Itens:</label>
                     <select class="form-select" id="idProduto" name="idProduto" required>

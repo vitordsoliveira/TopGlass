@@ -212,7 +212,6 @@ if ($msg === 'success') {
                     </select>
                 </div>
             </div>
-
             <div class="col-3">
                 <div class="mb-3">
                     <label for="valorProduto" class="form-label">Valor do Produto:</label>

@@ -62,6 +62,7 @@
    /* NAO MEXER */
    display: flex;
    padding: 5px 0 5px 0;
+   justify-content: space-around;
  }
 
  .barra li {

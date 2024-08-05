@@ -156,7 +156,6 @@ class ClassCliente
         $conn->exec($sql);
 
         echo "<script>document.location='index.php?p=cliente'</script>";
-
     }
 
     // INSERIR

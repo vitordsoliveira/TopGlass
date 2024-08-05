@@ -29,7 +29,6 @@ class ClassFuncionario
 
         if ($funcionario) {
             return $funcionario['idFuncionario'];
-            // Adiciona um aviso ao log indicando que o código foi executado
         } else {
             return false;
         }
@@ -45,69 +44,43 @@ class ClassFuncionario
 
     public function Carregar()
     {
-        try {
             $sql = "SELECT 
-            idFuncionario, 
             nomeFuncionario, 
             fotoFuncionario, 
             altFotoFuncionario 
         FROM tbl_funcionario 
-        WHERE idFuncionario = :idFuncionario";
-
+        WHERE idFuncionario = $this->idFuncionario";
             $conn = Conexao::LigarConexao();
-            if (!$conn) {
-                throw new Exception('Erro ao conectar ao banco de dados.');
-            }
-
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':idFuncionario', $this->idFuncionario, PDO::PARAM_INT);
             $stmt->execute();
             $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($funcionario) {
-                $this->nomeFuncionario = $funcionario['nomeFuncionario'];
-                $this->fotoFuncionario = $funcionario['fotoFuncionario'];
-                $this->altFotoFuncionario = $funcionario['altFotoFuncionario'];
-                return true; // Retorna true se o perfil foi carregado com sucesso
-            } else {
-                return false; // Retorna false se não encontrou o perfil
-            }
-        } catch (PDOException $e) {
-            // Trata erros específicos do PDO
-            echo 'Erro na consulta ao banco de dados: ' . $e->getMessage();
-            return false;
-        } catch (Exception $e) {
-            // Trata outros erros
-            echo 'Erro: ' . $e->getMessage();
-            return false;
+            $this->nomeFuncionario = $funcionario['nomeFuncionario'];
+            $this->fotoFuncionario = $funcionario['fotoFuncionario'];
+            $this->altFotoFuncionario = $funcionario['altFotoFuncionario'];
         }
     }
 
-}
+        if (isset($_POST['email'])) {
+            $funcionario = new ClassFuncionario();
+            $email = $_POST['email'];
+            $senha = $_POST['senha'];
 
-if (isset($_POST['email'])) {
-    $funcionario = new ClassFuncionario();
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
+            $funcionario->emailFuncionario = $email;
+            $funcionario->senhaFuncionario = $senha;
 
-    $funcionario->emailFuncionario = $email;
-    $funcionario->senhaFuncionario = $senha;
+            if ($idFuncionario = $funcionario->VerificarLogin()) {
 
-    if ($idFuncionario = $funcionario->VerificarLogin()) {
+                session_start(); // Inicia uma sessão
+                $_SESSION['idFuncionario'] = $idFuncionario; // Define a variável de sessão 'idFuncionario' com o valor de $idFuncionario
 
-        session_start(); // Inicia uma sessão
-        $_SESSION['idFuncionario'] = $idFuncionario; // Define a variável de sessão 'idFuncionario' com o valor de $idFuncionario
+                //echo 'o ID FUNCIONARIO foi acionado e adicionado a página';
 
-        //echo 'o ID FUNCIONARIO foi acionado e adicionado a página';
+                echo json_encode(['success' => true, 'message' => 'Login OK']);
 
-        echo json_encode(['success' => true, 'message' => 'Login OK']);
-
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Login Invalido']);
-    }
-}
-
-// Verifica se o formulário foi enviado verificando se a chave 'email' está presente no array $_POST
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Login Invalido']);
+            }
+        }
 
 
 
