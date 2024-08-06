@@ -111,7 +111,7 @@ $lista = $Galeria->Listar();
     <link rel="stylesheet" href="css/estilo.css">
 
     <link rel="stylesheet" href="css/responsivo.css">
-    
+
 </head>
 
 <body>
@@ -168,6 +168,24 @@ $lista = $Galeria->Listar();
         <?php require_once ('conteudo/sobre.php'); ?>
         <?php require_once ('conteudo/titulo-vidro.php'); ?>
         <?php require_once ('conteudo/servico-vidro.php'); ?>
+
+        <div id="accessibility-wrapper" class="accessibility-wrapper">
+            <button id="accessibility-toggle" title="Acessibilidade">ACESSIBILIDADE
+                <img src="img/acessibilidade.png" alt="Acessibilidade" style="    width: 30px;
+    height: 30px;">
+            </button>
+            <div id="accessibility-btn" class="accessibility-btn">
+                <button id="increase-font" title="Aumentar Fonte">
+                    <img src="img/fonteMais.png" alt="Aumentar Fonte" style="width: 20px; height: 20px;">
+                    Aumentar Fonte
+                </button>
+                <button id="decrease-font" title="Diminuir Fonte">
+                    <img src="img/fonteMenos.png" alt="Diminuir Fonte" style="width: 20px; height: 20px;">
+                    Diminuir Fonte
+                </button>
+            </div>
+        </div>
+
         <?php require_once ('conteudo/titulo-esqua.php'); ?>
         <?php require_once ('conteudo/servico-esqua.php'); ?>
         <?php require_once ('conteudo/banner-rotativo.php'); ?>
@@ -197,8 +215,8 @@ $lista = $Galeria->Listar();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-        
-        <script src="js/orcamentos.js"></script>
+
+    <script src="js/orcamentos.js"></script>
 
 </body>
 

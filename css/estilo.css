@@ -61,7 +61,7 @@
  .barra ul {
    display: flex;
    padding: 5px 0 5px 0;
-   justify-content: space-around;
+   justify-content: space-between;
  }
 
  .barra li {
@@ -1058,4 +1058,80 @@
 
 .overlay-content img {
   max-width: 100px;
+}
+
+/* Botão de Acessibilidade */
+.accessibility-btn {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  padding: 35px;
+  z-index: 5;
+}
+
+.accessibility-btn button {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  color: #333;
+  font-size: 2.5em;
+  margin: 5px 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.accessibility-btn button img {
+  margin-right: 8px;
+}
+
+.accessibility-btn button:hover {
+  background-color: #f0f0f0;
+}
+
+.accessibility-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+#accessibility-toggle {
+  background-color:#0077ff ;
+  padding: 15px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.7em;
+  align-items: center;
+  border: 2px solid black;
+}
+
+.accessibility-btn {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.accessibility-btn button {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.accessibility-btn.show {
+  display: flex;
 }

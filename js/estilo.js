@@ -206,5 +206,47 @@ setTimeout(function() {
   document.getElementById('formOrcamento').submit();
 } */
 
+  document.addEventListener('DOMContentLoaded', function() {
+    const increaseBtn = document.getElementById('increase-font');
+    const decreaseBtn = document.getElementById('decrease-font');
+    
+    function adjustFontSize(factor) {
+        document.querySelectorAll('h1, h2, h3, h4, p').forEach(element => {
+            // Obtém o tamanho atual da fonte
+            let currentFontSize = window.getComputedStyle(element).fontSize;
+            currentFontSize = parseFloat(currentFontSize); // Converte para número
+            
+            // Ajusta o tamanho da fonte com base no fator
+            let newFontSize = currentFontSize * factor;
+            // Define o novo tamanho da fonte
+            element.style.fontSize = `${newFontSize}px`;
+        });
+    }
+
+    increaseBtn.addEventListener('click', function() {
+        adjustFontSize(1.1); // Aumenta o tamanho da fonte em 10%
+    });
+
+    decreaseBtn.addEventListener('click', function() {
+        adjustFontSize(0.9); // Diminui o tamanho da fonte em 10%
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const toggleBtn = document.getElementById('accessibility-toggle');
+  const accessibilityBtns = document.getElementById('accessibility-btn');
+
+  toggleBtn.addEventListener('click', function() {
+      if (accessibilityBtns.classList.contains('show')) {
+          accessibilityBtns.classList.remove('show');
+          setTimeout(() => {
+              accessibilityBtns.style.opacity = '0'; // Adiciona uma animação de desaparecimento
+          }, 300); // Espera o tempo da animação antes de esconder
+      } else {
+          accessibilityBtns.style.opacity = '1'; // Adiciona uma animação de aparecimento
+          accessibilityBtns.classList.add('show');
+      }
+  });
+});
 
 
