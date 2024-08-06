@@ -130,14 +130,14 @@ class ClassServico
                 ON 
                     tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico
                 WHERE 
-                    tbl_servico.statusServicos = 'ATIVO' 
-                    AND tbl_tipo_servico.tipoServico = 'VIDRO'";
-
+                    tbl_servico.statusServicos = 'ATIVO'
+                    AND tbl_tipo_servico.tipoServico IN ('VIDRO', 'ESPELHO')";
+    
         $conn = Conexao::LigarConexao();
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    
         return $lista;
     }
 
