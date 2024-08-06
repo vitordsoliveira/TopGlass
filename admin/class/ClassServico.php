@@ -25,6 +25,43 @@ class ClassServico
     // LISTAR
     public function Listar($statusFiltro = '', $tipoFiltro = '')
     {
+        // Define o filtro padrão para mostrar apenas serviços ativos
+        $statusFiltro = $statusFiltro ?: 'ATIVO';
+        
+        $sql = "SELECT 
+                    tbl_servico.idServico,
+                    tbl_servico.nomeServicos,
+                    tbl_servico.statusServicos,
+                    tbl_tipo_servico.tipoServico AS idTipoServico,
+                    tbl_servico.descServico,
+                    tbl_servico.fotoServicos,
+                    tbl_servico.altServicos
+                FROM 
+                    tbl_servico
+                INNER JOIN 
+                    tbl_tipo_servico
+                ON 
+                    tbl_servico.idTipoServico = tbl_tipo_servico.idTipoServico
+                WHERE 
+                    tbl_servico.statusServicos = :status";
+
+        // Aplica filtro de tipo, se fornecido
+        if ($tipoFiltro) {
+            $sql .= " AND tbl_tipo_servico.tipoServico IN ($tipoFiltro)";
+        }
+
+        $conn = Conexao::LigarConexao();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':status', $statusFiltro, PDO::PARAM_STR);
+
+        $stmt->execute();
+        $lista = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $lista;
+    }
+
+    public function ListarTodos($statusFiltro = '', $tipoFiltro = '')
+    {
         $sql = "SELECT 
                     tbl_servico.idServico,
                     tbl_servico.nomeServicos,
@@ -48,7 +85,14 @@ class ClassServico
 
         // Aplica filtro de tipo, se fornecido
         if ($tipoFiltro) {
-            $sql .= " AND tbl_tipo_servico.tipoServico IN ($tipoFiltro)";
+            $tipoFiltrosArray = [];
+            $tipos = explode(',', $tipoFiltro);
+            $placeholders = [];
+            foreach ($tipos as $key => $tipo) {
+                $placeholders[] = ":tipo{$key}";
+                $tipoFiltrosArray[":tipo{$key}"] = $tipo;
+            }
+            $sql .= " AND tbl_tipo_servico.tipoServico IN (" . implode(',', $placeholders) . ")";
         }
 
         $conn = Conexao::LigarConexao();
@@ -57,6 +101,10 @@ class ClassServico
         // Vincula o parâmetro de status, se fornecido
         if ($statusFiltro) {
             $stmt->bindParam(':status', $statusFiltro, PDO::PARAM_STR);
+        }
+
+        foreach ($tipoFiltrosArray as $placeholder => $value) {
+            $stmt->bindParam($placeholder, $value, PDO::PARAM_STR);
         }
 
         $stmt->execute();

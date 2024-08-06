@@ -5,7 +5,7 @@ $statusFiltro = isset($_GET['status']) ? $_GET['status'] : '';
 $tipoFiltro = isset($_GET['tipo']) ? $_GET['tipo'] : '';
 
 $servico = new ClassServico();
-$lista = $servico->ListarFiltro($statusFiltro, $tipoFiltro);
+$lista = $statusFiltro || $tipoFiltro ? $servico->ListarTodos($statusFiltro, $tipoFiltro) : $servico->Listar();
 ?>
 
 <h2 class="tituloDashboard">SERVIÇOS</h2>

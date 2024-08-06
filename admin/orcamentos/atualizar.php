@@ -1,10 +1,14 @@
 <?php
 require_once('class/ClassCliente.php');
 require_once('class/ClassOrcamento.php');
+
+// Obter o ID do orçamento a partir da URL
 $id = $_GET['id'];
 $orcamento = new ClassOrcamento($id);
 
+// Verificar se o formulário foi enviado
 if (isset($_POST['valorOrcamento'])) {
+    // Recuperar os dados enviados pelo formulário
     $idCliente = $_POST['idCliente'];
     $idServico = $_POST['idServico'];
     $idFuncionario = $_POST['idFuncionario'];
@@ -13,8 +17,8 @@ if (isset($_POST['valorOrcamento'])) {
     $comentOrcamento = $_POST['comentOrcamento'];
     $situacaoOrcamento = $_POST['situacaoOrcamento'];
     $idProduto = $_POST['idProduto'];
-    print_r('CHEGUEI ');
 
+    // Atualizar as propriedades do objeto orçamento
     $orcamento->idCliente = $idCliente;
     $orcamento->idServico = $idServico;
     $orcamento->idFuncionario = $idFuncionario;
@@ -23,19 +27,18 @@ if (isset($_POST['valorOrcamento'])) {
     $orcamento->comentOrcamento = $comentOrcamento;
     $orcamento->situacaoOrcamento = $situacaoOrcamento;
     $orcamento->idProduto = $idProduto;
-    print_r('CHEGUEI AQUI');
 
-
+    // Chamar o método de atualização do orçamento
     $orcamento->Atualizar();
     print_r('ATUALIZEI');
 
+    // Redirecionar para a página de orçamentos
     header("Location: index.php?p=orcamento");
     exit();
 }
 
-// FUNÇÃO CLIENTES
-function obterClientesAtivos()
-{
+// Função para obter clientes ativos (apenas para preenchimento do formulário)
+function obterClientesAtivos() {
     $conn = Conexao::LigarConexao();
     $sql = "SELECT idCliente, nomeCliente, cpfCliente, numeroCliente FROM tbl_cliente WHERE statusCliente = 'ATIVO'";
     $stmt = $conn->prepare($sql);
@@ -43,10 +46,9 @@ function obterClientesAtivos()
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 $clientes = obterClientesAtivos();
-// FUNÇÃO SERVIÇOS
 
-function obterServicosPorTipo()
-{
+// Função para obter serviços por tipo (apenas para preenchimento do formulário)
+function obterServicosPorTipo() {
     $conn = Conexao::LigarConexao();
     $sql = "SELECT 
                 tbl_servico.idServico, 
@@ -80,9 +82,8 @@ function obterServicosPorTipo()
 }
 $servicosPorTipo = obterServicosPorTipo();
 
-// FUNÇÃO ITENS
-function obterItens()
-{
+// Função para obter itens (apenas para preenchimento do formulário)
+function obterItens() {
     $conn = Conexao::LigarConexao();
     $sql = "SELECT 
                 idProduto, 
@@ -206,7 +207,8 @@ $itens = obterItens();
                         <option value="">Selecione o Item</option>
                         <?php foreach ($itens as $item): ?>
                             <option value="<?php echo $item['idProduto']; ?>"
-                                <?php echo $orcamento->idProduto == $item['idProduto'] ? 'selected' : ''; ?>>
+                                <?php echo $orcamento->idProduto == $item['idProduto'] ? 'selected' : ''; ?>
+                                data-valor="<?php echo $item['valorProduto']; ?>">
                                 <?php echo $item['nomeProduto']; ?> - R$ <?php echo number_format($item['valorProduto'], 2, ',', '.'); ?>
                             </option>
                         <?php endforeach; ?>
@@ -217,7 +219,7 @@ $itens = obterItens();
             <div class="col-6">
                 <div class="mb-3">
                     <label for="valorOrcamento" class="form-label">Valor Orçamento:</label>
-                    <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" value="<?php echo $orcamento->valorOrcamento; ?>" required>
+                    <input type="text" class="form-control" id="valorOrcamento" name="valorOrcamento" value="<?php echo number_format($orcamento->valorOrcamento, 2, ',', '.'); ?>" required>
                 </div>
             </div>
 
@@ -267,27 +269,33 @@ $itens = obterItens();
     });
 
     document.addEventListener('DOMContentLoaded', function () {
-        const servicoSelects = document.querySelectorAll('.servico-select');
+    const servicoSelects = document.querySelectorAll('.servico-select');
 
-        servicoSelects.forEach(select => {
-            select.addEventListener('change', function () {
-                const selectedValue = this.value;
-                if (selectedValue) {
-                    // Disable other selects
-                    servicoSelects.forEach(otherSelect => {
-                        if (otherSelect !== this) {
-                            otherSelect.disabled = true;
-                            otherSelect.removeAttribute('required');
-                        }
-                    });
-                } else {
-                    // Re-enable all selects if no service is selected
-                    servicoSelects.forEach(otherSelect => {
-                        otherSelect.disabled = false;
-                        otherSelect.setAttribute('required', true);
-                    });
+    function updateSelects() {
+        const selectedValue = Array.from(servicoSelects).find(select => select.value);
+
+        if (selectedValue) {
+            servicoSelects.forEach(select => {
+                if (select !== selectedValue) {
+                    select.disabled = true;
+                    select.removeAttribute('required');
                 }
             });
+        } else {
+            servicoSelects.forEach(select => {
+                select.disabled = false;
+                select.setAttribute('required', true);
+            });
+        }
+    }
+
+    servicoSelects.forEach(select => {
+        select.addEventListener('change', function () {
+            updateSelects();
         });
     });
+
+    // Initialize state based on the current selection
+    updateSelects();
+});
 </script>

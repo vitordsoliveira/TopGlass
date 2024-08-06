@@ -1,24 +1,28 @@
 <?php
-
 require_once('class/ClassFuncionario.php');
 session_start();
 
 // Verifica se a variável de sessão 'idFuncionario' está definida
 if (isset($_SESSION['idFuncionario'])) {
-    // Define a variável $tipo como 'funcionario'
-    $tipo = 'funcionario';
+    // Define a ID do funcionário com base na variável de sessão
+    $idFuncionario = $_SESSION['idFuncionario'];
+
     // Criar uma instância do ClassFuncionario e carregar o perfil
     $funcionario = new ClassFuncionario($idFuncionario);
     if ($funcionario->Carregar()) {
         $nomeFuncionario = $funcionario->nomeFuncionario;
         $fotoFuncionario = $funcionario->fotoFuncionario;
         $altFotoFuncionario = $funcionario->altFotoFuncionario;
-    } } else {
-        // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
-        header('location:https://topglass.smpsistema.com.br/admin/login.php');
+    } else {
+        // Redirecionar ou mostrar mensagem de erro se não conseguir carregar o funcionário
+        echo "Erro ao carregar as informações do funcionário.";
         exit();
     }
-
+} else {
+    // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
+    header('location:https://topglass.smpsistema.com.br/admin/login.php');
+    exit();
+}
 ?>
 
 
@@ -77,11 +81,10 @@ if (isset($_SESSION['idFuncionario'])) {
                 <ul>
                     <a href="">
                         <li>
-                            <p><?php echo $nomeFuncionario; ?></p>
+                        <p><?php echo($nomeFuncionario); ?></p>
                         </li>
                         <li>
-                            <img src="<?php echo $fotoFuncionario; ?>" alt="<?php echo $altFotoFuncionario; ?>"
-                                class="perfilImg">
+                        <img src="<?php echo($fotoFuncionario); ?>" alt="<?php echo($altFotoFuncionario); ?>" class="perfilImg">
                         </li>
                     </a>
                 </ul>

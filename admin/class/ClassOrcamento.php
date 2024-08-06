@@ -159,21 +159,37 @@ class ClassOrcamento
     public function Atualizar()
     {
         $sql = "UPDATE tbl_orcamento 
-                    SET idCliente = '" . $this->idCliente . "',
-                        idServico = '" . $this->idServico . "',
-                        idFuncionario = '" . $this->idFuncionario . "',
-                        valorOrcamento = '" . $this->valorOrcamento . "',
-                        statusOrcamento = '" . $this->statusOrcamento . "',
-                        comentOrcamento = '" . $this->comentOrcamento . "',
-                        situacaoOrcamento = '" . $this->situacaoOrcamento . "',
-                        idProduto = '" . $this->idProduto . "'
-                    WHERE idOrcamento = " . $this->idOrcamento;
-
+                    SET idCliente = :idCliente,
+                        idServico = :idServico,
+                        idFuncionario = :idFuncionario,
+                        valorOrcamento = :valorOrcamento,
+                        statusOrcamento = :statusOrcamento,
+                        comentOrcamento = :comentOrcamento,
+                        situacaoOrcamento = :situacaoOrcamento,
+                        idProduto = :idProduto
+                    WHERE idOrcamento = :idOrcamento";
+    
         $conn = Conexao::LigarConexao();
-
-        $conn->exec($sql);
-
-        "<script>document.location='index.php?p=orcamento&orc=atualizar&id={$this->idOrcamento}&msg=success'</script>";
+    
+        $stmt = $conn->prepare($sql);
+    
+        $stmt->bindParam(':idCliente', $this->idCliente, PDO::PARAM_INT);
+        $stmt->bindParam(':idServico', $this->idServico, PDO::PARAM_INT);
+        $stmt->bindParam(':idFuncionario', $this->idFuncionario, PDO::PARAM_INT);
+        $stmt->bindParam(':valorOrcamento', $this->valorOrcamento, PDO::PARAM_STR);
+        $stmt->bindParam(':statusOrcamento', $this->statusOrcamento, PDO::PARAM_STR);
+        $stmt->bindParam(':comentOrcamento', $this->comentOrcamento, PDO::PARAM_STR);
+        $stmt->bindParam(':situacaoOrcamento', $this->situacaoOrcamento, PDO::PARAM_STR);
+        $stmt->bindParam(':idProduto', $this->idProduto, PDO::PARAM_INT);
+        $stmt->bindParam(':idOrcamento', $this->idOrcamento, PDO::PARAM_INT);
+    
+        if ($stmt->execute()) {
+            // Redirecionar com uma mensagem de sucesso
+            echo "<script>window.location.href='index.php?p=orcamento&orc=atualizar&id={$this->idOrcamento}&msg=success';</script>";
+        } else {
+            // Redirecionar com uma mensagem de erro
+            echo "<script>window.location.href='index.php?p=orcamento&orc=atualizar&id={$this->idOrcamento}&msg=error';</script>";
+        }
     }
 
     // DESATIVAR

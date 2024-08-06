@@ -44,43 +44,50 @@ class ClassFuncionario
 
     public function Carregar()
     {
-            $sql = "SELECT 
+        $sql = "SELECT 
             nomeFuncionario, 
             fotoFuncionario, 
             altFotoFuncionario 
         FROM tbl_funcionario 
-        WHERE idFuncionario = $this->idFuncionario";
-            $conn = Conexao::LigarConexao();
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
+        WHERE idFuncionario = :idFuncionario";
+        $conn = Conexao::LigarConexao();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':idFuncionario', $this->idFuncionario, PDO::PARAM_INT);
+        $stmt->execute();
+        $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($funcionario) {
             $this->nomeFuncionario = $funcionario['nomeFuncionario'];
             $this->fotoFuncionario = $funcionario['fotoFuncionario'];
             $this->altFotoFuncionario = $funcionario['altFotoFuncionario'];
+            return true;
+        } else {
+            return false;
         }
     }
+}
 
-        if (isset($_POST['email'])) {
-            $funcionario = new ClassFuncionario();
-            $email = $_POST['email'];
-            $senha = $_POST['senha'];
+if (isset($_POST['email'])) {
+    $funcionario = new ClassFuncionario();
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
 
-            $funcionario->emailFuncionario = $email;
-            $funcionario->senhaFuncionario = $senha;
+    $funcionario->emailFuncionario = $email;
+    $funcionario->senhaFuncionario = $senha;
 
-            if ($idFuncionario = $funcionario->VerificarLogin()) {
+    if ($idFuncionario = $funcionario->VerificarLogin()) {
 
-                session_start(); // Inicia uma sessão
-                $_SESSION['idFuncionario'] = $idFuncionario; // Define a variável de sessão 'idFuncionario' com o valor de $idFuncionario
+        session_start(); // Inicia uma sessão
+        $_SESSION['idFuncionario'] = $idFuncionario; // Define a variável de sessão 'idFuncionario' com o valor de $idFuncionario
 
-                //echo 'o ID FUNCIONARIO foi acionado e adicionado a página';
+        //echo 'o ID FUNCIONARIO foi acionado e adicionado a página';
 
-                echo json_encode(['success' => true, 'message' => 'Login OK']);
+        echo json_encode(['success' => true, 'message' => 'Login OK']);
 
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Login Invalido']);
-            }
-        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Login Invalido']);
+    }
+}
 
 
 
