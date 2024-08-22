@@ -6,11 +6,10 @@ class Conexao{
     // Metodo
     public static function LigarConexao(){
 
-        // Dados de conexão com o banco de dados
-        $host       = 'smpsistema.com.br';        // Host do banco de dados (localhost)
-        $dbname     = 'u283879542_topglass';        // Nome do banco de dados   
-        $username   = 'u283879542_topglass';      // Nome de usuário do banco de dados (root)
-        $password   = 'Senac@topglass01';           // Senha do banco de dados ('')
+        $host       = 'localhost';       // Host do banco de dados (localhost)
+        $dbname     = 'db_topGlass';   // Nome do banco de dados
+        $username   = 'root';            // Nome de usuário do banco de dados (padrão para MySQL é 'root')
+        $password   = '';                // Senha do banco de dados (padrão para MySQL é '')
 
         try {
             // Cria uma nova instância de PDO

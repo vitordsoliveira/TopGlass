@@ -5,18 +5,18 @@
             <button class="fecharMenu"></button>
             <ul>
                 <li>
-                    <a href="index.php">
+                    <a href="location:http://localhost/topglass/">
                         <span>
-                            <img src="img/home.png" alt="">
+                            <img src="../img/home.png" alt="">
                         </span>HOME
                     </a>
                 </li>
 
                 <li>
-                    <a href="#"><span><img src="img/servicos.svg" alt="#"></span>SERVIÇOS+</a>
+                    <a href="#"><span><img src="../img/servicos.svg" alt="#"></span>SERVIÇOS+</a>
                     <ul class="subServico">
                         <div>
-                            <li><a href="pagBox.php">VIDROS</a></li>
+                            <li><a href="./servicos/pagBox.php">VIDROS</a></li>
                             <li><a href="pagEspelho.php">ESPELHO</a></li>
                             <li><a href="pagAluminio.php">ESQUADRIA</a></li>
                         </div>
@@ -24,7 +24,7 @@
                 </li>
 
                 <li>
-                    <a href="#"><span><img src="img/orcamento.svg" alt="#"></span>ORÇAMENTO</a>
+                    <a href="#"><span><img src="../img/orcamento.svg" alt="#"></span>ORÇAMENTO</a>
                 </li>
                 
                 <li>

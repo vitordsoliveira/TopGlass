@@ -20,7 +20,7 @@ if (isset($_SESSION['idFuncionario'])) {
     }
 } else {
     // Se 'idFuncionario' não estiver definida, redireciona o usuário para a página de login
-    header('location:https://topglass.smpsistema.com.br/admin/login.php');
+    header('location:http://localhost/topglass/admin/login.php');
     exit();
 }
 ?>
