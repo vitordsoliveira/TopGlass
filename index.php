@@ -68,9 +68,9 @@ require_once ('admin/class/ClassCliente.php');
 session_start(); // Inicia uma sessão
 $tipo = ''; // Inicializa a variável $tipo como uma string vazia
 
-// Verifica se a variável de sessão 'idFuncionario' está definida
+// Verifica se a variável de sessão 'idCliente' está definida
 if (isset($_SESSION['idCliente'])) {
-    // Define a variável $tipo como 'funcionario'
+    // Define a variável $tipo como 'idCliente'
     $tipo = 'cliente';
     // Criar uma instância do ClassFuncionario e obter o nome
     $cliente = new ClassCliente($_SESSION['idCliente']);
