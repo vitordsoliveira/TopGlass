@@ -12,28 +12,28 @@
 
                     <li>
                         <a href="">
-                            <p>Daniel Vidraçaria (11) 9 9895-8131</p>
+                            <p>Vidraçaria (11) 9 9696-8131</p>
                         </a>
                     </li>
 
                     <li>
                         <a href="">
-                            <p>Cristiano Esquadria (11) 9 8114-6907</p>
+                            <p>Esquadria (11) 9 8616-6907</p>
                         </a>
                     </li>
 
                     <li>
-                        <a href="mailto:topglassvidracaria7@gmail.com">
+                        <a href="">
                             <img src="img/email.svg" alt="">
-                            <p>topglassvidracaria7@gmail.com</p>
+                            <p>topglass@email.com</p>
                         </a>
 
                     </li>
 
                     <li>
-                        <a href="https://www.instagram.com/top_glass_vidracaria/">
+                        <a href="">
                             <img src="img/instagram.svg" alt="">
-                            <p>@top_glass_vidracaria</p>
+                            <p>@topglassvidracaria</p>
                         </a>
                     </li>
 
@@ -55,7 +55,7 @@
                     <li>
                         <a
                             href="">
-                            <p>Av. Barão de Alagoas, 439 - Itaim Paulista, São Paulo.
+                            <p>Rua Vidraçaria, 21 - Bairro
                             </p>
                         </a>
                     </li>
